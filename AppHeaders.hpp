@@ -35,6 +35,7 @@
 #include "ClubDetails.hpp"
 #include "Members.hpp"
 #include "Fixtures.hpp"
+#include "BalShtTypes.hpp"
 #include "BalSheet.hpp"
 #include "Subs.hpp"
 #include "ExpenseTypes.hpp"
