@@ -38,6 +38,10 @@ public:
 		FIXTURES,
 		BALSHEET,
 		SUBS,
+		EXPENSE_TYPES,
+		EXPENSES,
+		ACCOUNTS,
+		ACCTTRANS,
 		TEAMSELS,
 		OPPONENTS,
 		REFEREES,
@@ -59,6 +63,10 @@ public:
 	CFixtures		m_oFixtures;		// The table of club fixtures.
 	CBalSheet		m_oBalSheet;		// The table of the balance sheet.
 	CSubs			m_oSubs;			// The table of members subs.
+	CExpenseTypes	m_oExpenseTypes;	// The table of expense types.
+	CExpenses		m_oExpenses;		// The table of expenses.
+	CAccounts		m_oAccounts;		// The table of accounts.
+	CAcctTrans		m_oAcctTrans;		// The table of account transactions.
 	CTeamSels		m_oTeamSels;		// The table of team sheets.
 	COpponents		m_oOpponents;		// The table of league opponents.
 	CReferees		m_oReferees;		// The table of league referees.

@@ -28,6 +28,10 @@ CFCMDB::CFCMDB()
 	, m_oFixtures(*this)
 	, m_oBalSheet(*this)
 	, m_oSubs(*this, m_oBalSheet, m_oMembers)
+	, m_oExpenseTypes(*this)
+	, m_oExpenses(*this, m_oBalSheet, m_oExpenseTypes)
+	, m_oAccounts(*this)
+	, m_oAcctTrans(*this)
 	, m_oTeamSels(*this, m_oMembers)
 	, m_oOpponents(*this)
 	, m_oReferees(*this)
@@ -46,6 +50,10 @@ CFCMDB::CFCMDB()
 	AddTable(m_oFixtures);
 	AddTable(m_oBalSheet);
 	AddTable(m_oSubs);
+	AddTable(m_oExpenseTypes);
+	AddTable(m_oExpenses);
+	AddTable(m_oAccounts);
+	AddTable(m_oAcctTrans);
 	AddTable(m_oTeamSels);
 	AddTable(m_oOpponents);
 	AddTable(m_oReferees);
