@@ -98,7 +98,7 @@ void CFixtureDlg::OnInitDialog()
 	m_ebResult.TextLimit(CFixtures::RESULT_LEN);
 
 	// Initialise the fields.
-	m_dtpDate.SetDate(m_oFixture[CFixtures::DATE]);
+	m_dtpDate.SetDate(CDate(m_oFixture[CFixtures::DATE]));
 	m_ebResult.Text(m_oFixture[CFixtures::RESULT]);
 
 	// Locate or add type.
