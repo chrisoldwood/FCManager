@@ -25,17 +25,18 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CBalShtItemPage(CRow& oRow);
+	CBalShtItemPage(CRow& oRow, CBalShtTypes& oTypes);
 	
 protected:
 	//
 	// Members.
 	//
 	CRow&			m_oRow;
+	CBalShtTypes&	m_oTypes;
 
 	CString			m_strName;
 	CDate			m_tDate;
-	int				m_nType;
+	int				m_nTypeID;
 
 	CEditBox		m_ebName;
 	CDateTimePicker	m_dtpDate;

@@ -23,12 +23,13 @@
 *******************************************************************************
 */
 
-CBalShtItemPage::CBalShtItemPage(CRow& oRow)
+CBalShtItemPage::CBalShtItemPage(CRow& oRow, CBalShtTypes& oTypes)
 	: CPropertyPage(IDD_BALSHEET_PAGE)
 	, m_oRow(oRow)
+	, m_oTypes(oTypes)
 	, m_strName(oRow[CBalSheet::NAME])
 	, m_tDate(oRow[CBalSheet::DATE])
-	, m_nType(oRow[CBalSheet::TYPE])
+	, m_nTypeID(oRow[CBalSheet::TYPE_ID])
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_NAME,	&m_ebName )
@@ -55,14 +56,13 @@ void CBalShtItemPage::OnInitDialog()
 	m_ebName.TextLimit(CBalSheet::NAME_LEN);
 	m_dtpDate.Format("ddd' 'dd'/'MM'/'yyyy");
 
-	m_cbType.Add("Other");
-	m_cbType.Add("Match");
-	m_cbType.Add("Training");
+	for (int i = 0; i < m_oTypes.RowCount(); i++)
+		m_cbType.Add(m_oTypes[i][CBalShtTypes::NAME]);
 
 	// Initialise the fields with data.
 	m_ebName.Text(m_strName);
 	m_dtpDate.SetDate(m_tDate);
-	m_cbType.CurSel(m_nType);
+	m_cbType.CurSel(m_nTypeID-1);
 }
 
 /******************************************************************************
@@ -81,7 +81,7 @@ bool CBalShtItemPage::OnValidate()
 {
 	m_strName = m_ebName.Text();
 	m_tDate   = m_dtpDate.GetDate();
-	m_nType   = m_cbType.CurSel();
+	m_nTypeID = m_cbType.CurSel()+1;
 
 	// At least the name supplied?
 	if (m_ebName.TextLength() == 0)
@@ -107,9 +107,9 @@ bool CBalShtItemPage::OnValidate()
 
 bool CBalShtItemPage::OnOk()
 {
-	m_oRow[CBalSheet::NAME] = m_strName;
-	m_oRow[CBalSheet::DATE] = m_tDate;
-	m_oRow[CBalSheet::TYPE] = m_nType;
+	m_oRow[CBalSheet::NAME]    = m_strName;
+	m_oRow[CBalSheet::DATE]    = m_tDate;
+	m_oRow[CBalSheet::TYPE_ID] = m_nTypeID;
 
 	return true;
 }

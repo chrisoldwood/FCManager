@@ -51,6 +51,7 @@ protected:
 
 	CFCMDB&			m_oDB;
 	int				m_nItemID;
+	CBalShtTypes&	m_oItemTypes;
 	CTmpSubs		m_oTmpSubs;
 	CMembers&		m_oMembers;
 	CTmpExps		m_oTmpExps;
