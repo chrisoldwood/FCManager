@@ -39,6 +39,7 @@ protected:
 	//
 	// Members.
 	//
+	CMDB&	m_oDB;
 	
 	// The list view columns.
 	enum

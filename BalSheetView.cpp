@@ -10,16 +10,15 @@
 
 #include "AppHeaders.hpp"
 #include "BalShtItemDlg.hpp"
-#include <stdio.h>
 
 // The list view columns.
 GridColumn CBalSheetView::Columns[NUM_COLUMNS] =
 {
-	{ "Item",     150, LVCFMT_LEFT,  CBalSheet::NAME   },
-	{ "Date",     100, LVCFMT_LEFT,  CBalSheet::DATE   },
-	{ "£ Credit",  75, LVCFMT_RIGHT, CBalSheet::CREDIT },
-	{ "£ Debit",   75, LVCFMT_RIGHT, CBalSheet::DEBIT  },
-	{ "£ Balance", 75, LVCFMT_RIGHT, CBalSheet::TOTAL  }
+	{ "Item",     150, LVCFMT_LEFT,  CBalSheet::NAME         },
+	{ "Date",     100, LVCFMT_LEFT,  CBalSheet::DATE         },
+	{ "£ Credit",  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL },
+	{ "£ Debit",   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL  },
+	{ "£ Balance", 75, LVCFMT_RIGHT, CBalSheet::BALANCE      }
 };
 
 /******************************************************************************
@@ -36,13 +35,14 @@ GridColumn CBalSheetView::Columns[NUM_COLUMNS] =
 
 CBalSheetView::CBalSheetView(CFCMDoc& rDoc)
 	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB[CFCMDB::BALSHEET], NUM_COLUMNS, Columns)
+	, m_oDB(rDoc.m_oDB)
 {
 }
 
 /******************************************************************************
 ** Method:		OnAdd()
 **
-** Description:	Allows the user to add a new member.
+** Description:	Allows the user to add a new item.
 **
 ** Parameters:	None.
 **
@@ -53,15 +53,16 @@ CBalSheetView::CBalSheetView(CFCMDoc& rDoc)
 
 void CBalSheetView::OnAdd()
 {
-	// Allocate a row for the referee.
+	// Allocate a row for the item.
 	CRow& oRow = m_oTable.CreateRow();
 
-	CBalShtItemDlg Dlg(oRow, false);
+	CBalShtItemDlg Dlg(m_oDB, oRow, false);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
 		// Add to the table.
 		m_oTable.InsertRow(oRow);
+		Dlg.UpdateSubsTable();
 
 		// Add to the list view and select it.
 		int iLVItem = AddRow(oRow);
@@ -84,7 +85,7 @@ void CBalSheetView::OnAdd()
 /******************************************************************************
 ** Method:		OnEdit()
 **
-** Description:	Allows the user to edit the currently selected member.
+** Description:	Allows the user to edit the currently selected item.
 **
 ** Parameters:	None.
 **
@@ -99,17 +100,19 @@ void CBalSheetView::OnEdit()
 	int   iLVItem = m_lvGrid.SelectionMark();
 	CRow& oRow    = Row(iLVItem);
 
-	// Cannot delete the TOTALS row.
+	// Cannot edit the TOTALS row.
 	if (oRow[CBalSheet::ID].GetInt() == 1)
 	{
 		NotifyMsg("You cannot edit the 'TOTALS' item.");
 		return;
 	}
 
-	CBalShtItemDlg Dlg(oRow, true);
+	CBalShtItemDlg Dlg(m_oDB, oRow, true);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
+		Dlg.UpdateSubsTable();
+
 		// Update the list view.
 		UpdateRow(iLVItem);
 
@@ -126,7 +129,7 @@ void CBalSheetView::OnEdit()
 /******************************************************************************
 ** Method:		OnDelete()
 **
-** Description:	Allows the user to delete the currently selected member, after
+** Description:	Allows the user to delete the currently selected item, after
 **				confirmaing first.
 **
 ** Parameters:	None.
@@ -203,23 +206,34 @@ void CBalSheetView::OnPrint()
 CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 {
 	// Format money values.
-	if ( (nColumn == CREDIT) || (nColumn == DEBIT) || (nColumn == BALANCE) )
+	if (nColumn == BALANCE)
 	{
-		double dValue = oRow[nField].GetInt() / 100.0;
-		char   szValue[10];
+		return App.FormatMoney(oRow, nField);
+	}
+	else if (nColumn == CREDIT)
+	{
+		// Ignore if not applicable.
+		if (oRow[CBalSheet::CREDIT_TYPE] == CBalSheet::NONE)
+			return "";
 
-		sprintf(szValue, "%.2f", dValue);
+		return App.FormatMoney(oRow, nField);
+	}
+	else if (nColumn == DEBIT)
+	{
+		// Ignore if not applicable.
+		if (oRow[CBalSheet::DEBIT_TYPE] == CBalSheet::NONE)
+			return "";
 
-		return szValue;
+		return App.FormatMoney(oRow, nField);
 	}
 	// Format dates.
 	else if (nColumn == DATE)
 	{
-		// Only show date if not "TOTALS" row.
-		if (oRow[CBalSheet::ID].GetInt() != 1)
-			return oRow[nField].GetDate().ToString();
-		else
+		// Don't show date for "TOTALS" row.
+		if (oRow[CBalSheet::ID].GetInt() == 1)
 			return "";
+
+		return App.FormatDate(oRow, nField);
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
