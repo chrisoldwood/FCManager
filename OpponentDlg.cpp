@@ -30,7 +30,7 @@ COpponentDlg::COpponentDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oOpponentPage(oRow)
 	, m_oSecretaryPage(oRow)
 	, m_oStatsPage(oDB, oDB.m_oOppStatTypes, oDB.m_oOppStats, oRow[COpponents::ID])
-	, m_oNotesPage(oRow, CMembers::NOTES, CMembers::NOTES_LEN)
+	, m_oNotesPage(oRow, COpponents::NOTES, COpponents::NOTES_LEN)
 {
 	// Set the title.
 	m_strTitle = (m_bEditing == true) ? "Edit Opponent Details" : "Add An Opponent";
