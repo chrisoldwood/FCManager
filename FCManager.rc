@@ -739,7 +739,7 @@ BEGIN
     ID_VIEW_MEMBERS         "View the list of members"
     ID_VIEW_FIXTURES        "View the list of fixtures"
     ID_VIEW_BALANCE         "View the balance sheet"
-    ID_VIEW_TEAM_SEL        "View the team sheets"
+    ID_VIEW_TEAM_SEL        "View the list of team sheets"
     ID_VIEW_OPPONENTS       "View the list of league clubs"
     ID_VIEW_REFEREES        "View the list of referees"
 END
@@ -765,73 +765,73 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_MEMBERS_POPUP        "Members options"
-    ID_MEMBERS_ADD          "Add a new member"
-    ID_MEMBERS_EDIT         "Edit the selected members' details"
-    ID_MEMBERS_DELETE       "Delete the selected member"
-    ID_MEMBERS_PRINT        "Print the list of members"
-    ID_MEMBERS_IMPORT       "Import the members list from a file"
-    ID_MEMBERS_EXPORT       "Export the members list to a file"
+    ID_MEMBERS_ADD          "Add a new member\nAdd Member (Insert)"
+    ID_MEMBERS_EDIT         "Edit the selected members' details\nEdit Member (Enter)"
+    ID_MEMBERS_DELETE       "Delete the selected member\nDelete Member (Delete)"
+    ID_MEMBERS_PRINT        "Print the list of members\nPrint Member List (Ctrl+P)"
+    ID_MEMBERS_IMPORT       "Import the members list from a file\nImport Member List"
+    ID_MEMBERS_EXPORT       "Export the members list to a file\nExport Member List"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_FIXTURES_POPUP       "Fixtures options"
-    ID_FIXTURES_ADD         "Add a new fixture"
-    ID_FIXTURES_EDIT        "Edit the selected fixtures' details"
-    ID_FIXTURES_DELETE      "Delete the selected fixture"
-    ID_FIXTURES_PRINT       "Print the list of fixtures"
-    ID_FIXTURES_IMPORT      "Import the fixtures list from a file"
-    ID_FIXTURES_EXPORT      "Export the fixtures list to a file"
+    ID_FIXTURES_ADD         "Add a new fixture\nAdd Fixture (Insert)"
+    ID_FIXTURES_EDIT        "Edit the selected fixtures' details\nEdit Fixture (Enter)"
+    ID_FIXTURES_DELETE      "Delete the selected fixture\nDelete Fixture (Delete)"
+    ID_FIXTURES_PRINT       "Print the list of fixtures\nPrint Fixture List (Ctrl+P)"
+    ID_FIXTURES_IMPORT      "Import the fixtures list from a file\nImport Fixture List"
+    ID_FIXTURES_EXPORT      "Export the fixtures list to a file\nExport Fixture List"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_SUBS_POPUP           "Subs options"
-    ID_SUBS_PRINT           "Print the subs"
+    ID_SUBS_PRINT           "Print the subs\nPrint Subs (Ctrl+P)"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_BALSHEET_POPUP       "Balance sheet options"
-    ID_BALSHEET_ADD         "Add a new balance sheet item"
-    ID_BALSHEET_EDIT        "Edit the selected balance sheet item"
-    ID_BALSHEET_DELETE      "Delete the selected balance sheet item"
+    ID_BALSHEET_ADD         "Add a new balance sheet item\nAdd Item (Insert)"
+    ID_BALSHEET_EDIT        "Edit the selected balance sheet item\nEdit Item (Enter)"
+    ID_BALSHEET_DELETE      "Delete the selected balance sheet item\nDelete Item (Delete)"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    ID_BALSHEET_PRINT       "Print the balance sheet"
+    ID_BALSHEET_PRINT       "Print the balance sheet\nPrint Balance Sheet (Ctrl+P)"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_TEAMSEL_POPUP        "Team sheet options"
-    ID_TEAMSEL_ADD          "Add a new team sheet"
-    ID_TEAMSEL_EDIT         "Edit the selected team sheet"
-    ID_TEAMSEL_DELETE       "Delete the selected team sheet"
-    ID_TEAMSEL_PRINT        "Print the selected team sheet"
+    ID_TEAMSEL_ADD          "Add a new team sheet\nAdd Team Sheet (Insert)"
+    ID_TEAMSEL_EDIT         "Edit the selected team sheet\nEdit Team Sheet (Enter)"
+    ID_TEAMSEL_DELETE       "Delete the selected team sheet\nDelete Team Sheet (Delete)"
+    ID_TEAMSEL_PRINT        "Print the selected team sheet\nPrint Team Sheet (Ctrl+P)"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_OPPONENTS_POPUP      "Opponents options"
-    ID_OPPONENTS_ADD        "Add a new opponent"
-    ID_OPPONENTS_EDIT       "Edit the selected opponents' details"
-    ID_OPPONENTS_DELETE     "Delete the selected opponent"
-    ID_OPPONENTS_PRINT      "Print the list of opponents"
-    ID_OPPONENTS_IMPORT     "Import the opponents list from a file"
-    ID_OPPONENTS_EXPORT     "Export the opponents list to a file"
+    ID_OPPONENTS_ADD        "Add a new opponent\nAdd Opponent (Insert)"
+    ID_OPPONENTS_EDIT       "Edit the selected opponents' details\nEdit Opponent (Enter)"
+    ID_OPPONENTS_DELETE     "Delete the selected opponent\nDelete Opponent (Delete)"
+    ID_OPPONENTS_PRINT      "Print the list of opponents\nPrint Opponent List (Ctrl+P)"
+    ID_OPPONENTS_IMPORT     "Import the opponents list from a file\nImport Opponent List"
+    ID_OPPONENTS_EXPORT     "Export the opponents list to a file\nExport Opponent List"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_REFEREES_POPUP       "Referees options"
-    ID_REFEREES_ADD         "Add a new referee"
-    ID_REFEREES_EDIT        "Edit the selected referees' details"
-    ID_REFEREES_DELETE      "Delete the selected referee"
-    ID_REFEREES_PRINT       "Print the list of referees"
-    ID_REFEREES_IMPORT      "Import the referees list from a file"
-    ID_REFEREES_EXPORT      "Export the referees list to a file"
+    ID_REFEREES_ADD         "Add a new referee\nAdd Referee (Insert)"
+    ID_REFEREES_EDIT        "Edit the selected referees' details\nEdit Referee (Enter)"
+    ID_REFEREES_DELETE      "Delete the selected referee\nDelete Referee (Delete)"
+    ID_REFEREES_PRINT       "Print the list of referees\nPrint Referee List (Ctrl+P)"
+    ID_REFEREES_IMPORT      "Import the referees list from a file\nImport Referee List"
+    ID_REFEREES_EXPORT      "Export the referees list to a fileExport Referee List"
 END
 
 #endif    // English (U.K.) resources

@@ -34,14 +34,14 @@ BEGIN
 	BEGIN
 		BLOCK "040904E4"
 		BEGIN
-			VALUE "CompanyName", "Comgraphix Ltd\0"
+			VALUE "CompanyName", "FreeWare\0"
 			VALUE "FileDescription", "FCManager\0"
-			VALUE "FileVersion", "1.0\0"
+			VALUE "FileVersion", "1.0 Alpha #1\0"
 			VALUE "InternalName", "FCManager.exe\0"
 			VALUE "LegalCopyright", "(C) Chris Oldwood 2000\0"
 			VALUE "OriginalFilename", "FCManager.exe\0"
 			VALUE "ProductName", "FCManager\0"
-			VALUE "ProductVersion", "1.0\0"
+			VALUE "ProductVersion", "1.0 Alpha #1\0"
 		END
 	END
 	BLOCK "VarFileInfo"
