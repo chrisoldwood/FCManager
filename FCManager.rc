@@ -128,46 +128,46 @@ BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
         MENUITEM SEPARATOR
-        MENUITEM "Statistic Types...",          ID_OPTIONS_MISC_1
+        MENUITEM "&Statistic Types...",         ID_OPTIONS_MISC_1
     END
     POPUP "Fi&xtures"
     BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
         MENUITEM SEPARATOR
-        MENUITEM "Statistic Types...",          ID_OPTIONS_MISC_1
+        MENUITEM "&Statistic Types...",         ID_OPTIONS_MISC_1
     END
     POPUP "&Balance Sheet"
     BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
-        MENUITEM "Expense Types...",            ID_OPTIONS_MISC_1
+        MENUITEM "E&xpense Types...",           ID_OPTIONS_MISC_1
     END
     POPUP "&Accounts"
     BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
     END
@@ -176,7 +176,7 @@ BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
     END
@@ -185,28 +185,28 @@ BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
         MENUITEM SEPARATOR
-        MENUITEM "Statistic Types...",          ID_OPTIONS_MISC_1
+        MENUITEM "&Statistic Types...",         ID_OPTIONS_MISC_1
     END
     POPUP "&Referees"
     BEGIN
         MENUITEM "&Add...\tIns",                ID_OPTIONS_ADD
         MENUITEM "&Edit...\tRet",               ID_OPTIONS_EDIT
         MENUITEM "&Delete\tDel",                ID_OPTIONS_DELETE
-        MENUITEM "&Delete All",                 ID_OPTIONS_DELETEALL
+        MENUITEM "Dele&te All",                 ID_OPTIONS_DELETEALL
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
         MENUITEM SEPARATOR
-        MENUITEM "Statistic Types...",          ID_OPTIONS_MISC_1
+        MENUITEM "&Statistic Types...",         ID_OPTIONS_MISC_1
     END
 END
 
@@ -223,9 +223,9 @@ FONT 8, "MS Sans Serif"
 BEGIN
     ICON            IDR_APPICON,IDC_STATIC,15,10,20,20
     CTEXT           "F.C. Manager",IDC_STATIC,50,10,55,10
-    CTEXT           "v1.0 Alpha #1",IDC_STATIC,50,20,55,8
+    CTEXT           "v1.0 Alpha #3",IDC_STATIC,50,20,55,8
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,40,100,1
-    CTEXT           "(C) Chris Oldwood 2000",IDC_STATIC,10,50,100,10
+    CTEXT           "(C) Chris Oldwood 2000-01",IDC_STATIC,10,50,100,10
     CTEXT           "gort@cix.co.uk",IDC_STATIC,10,59,100,10
     DEFPUSHBUTTON   "OK",IDOK,35,80,50,15
 END
@@ -533,18 +533,68 @@ FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "&Name:",IDC_STATIC,5,8,25,8
     EDITTEXT        IDC_NAME,45,5,150,14,ES_AUTOHSCROLL
+    LTEXT           "Balance £",IDC_STATIC,5,28,35,8
+    EDITTEXT        IDC_BALANCE,45,25,40,14,ES_AUTOHSCROLL
     CONTROL         "&Fixed",IDC_FIXED,"Button",BS_AUTORADIOBUTTON,95,28,35,
                     8
     CONTROL         "&Transactional",IDC_VARIABLE,"Button",
                     BS_AUTORADIOBUTTON,135,28,60,8
-    EDITTEXT        IDC_BALANCE,45,25,40,14,ES_AUTOHSCROLL
-    CONTROL         "List1",IDC_TRANSACTIONS,"SysListView32",LVS_REPORT | 
+    CONTROL         "List1",IDC_TRANS,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_NOSORTHEADER | WS_BORDER | 
                     WS_TABSTOP,5,50,190,75
-    LTEXT           "Balance £",IDC_STATIC,5,28,35,8
     PUSHBUTTON      "&Add...",IDC_ADD,20,130,50,15
     PUSHBUTTON      "&Edit...",IDC_EDIT,75,130,50,15
     PUSHBUTTON      "&Delete",IDC_DEL,130,130,50,15
+END
+
+IDD_STAT_TYPES DIALOG DISCARDABLE  0, 0, 212, 121
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Statistic Types"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_TYPES,10,10,125,100,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Add...",IDC_ADD,150,10,50,14
+    PUSHBUTTON      "&Edit...",IDC_EDIT,150,30,50,14
+    PUSHBUTTON      "&Delete",IDC_DELETE,150,50,50,14
+    DEFPUSHBUTTON   "Close",IDCANCEL,150,95,50,14
+END
+
+IDD_EXPENSE_TYPES DIALOG DISCARDABLE  0, 0, 212, 121
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Expense Types"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_TYPES,10,10,125,100,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Close",IDCANCEL,150,95,50,14
+    PUSHBUTTON      "&Add...",IDC_ADD,150,10,50,14
+    PUSHBUTTON      "&Edit...",IDC_EDIT,150,30,50,14
+    PUSHBUTTON      "&Delete",IDC_DELETE,150,50,50,14
+END
+
+IDD_STAT_TYPE DIALOG DISCARDABLE  0, 0, 186, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Statistic Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Name:",IDC_STATIC,10,10,50,8
+    EDITTEXT        IDC_NAME,10,20,100,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+END
+
+IDD_EXPENSE_TYPE DIALOG DISCARDABLE  0, 0, 186, 76
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Expense Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Name:",IDC_STATIC,10,10,50,8
+    EDITTEXT        IDC_NAME,10,20,100,14,ES_AUTOHSCROLL
+    LTEXT           "Default Value:",IDC_STATIC,10,40,50,8
+    EDITTEXT        IDC_DEFAULT,10,50,50,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
 END
 
 
@@ -745,6 +795,38 @@ BEGIN
         RIGHTMARGIN, 194
         TOPMARGIN, 7
         BOTTOMMARGIN, 144
+    END
+
+    IDD_STAT_TYPES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_EXPENSE_TYPES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_STAT_TYPE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+    END
+
+    IDD_EXPENSE_TYPE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
     END
 END
 #endif    // APSTUDIO_INVOKED
