@@ -108,7 +108,7 @@ bool CRefereeDlg::OnOk()
 								   & CWhereNotEqual(CReferees::ID,   m_oReferee[CReferees::ID]));
 
 	// Referee already exists?
-	if (oRS.Size() > 0)
+	if (oRS.Count() > 0)
 	{
 		AlertMsg("A referee with that name already exists");
 		return false;

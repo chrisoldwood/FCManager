@@ -119,7 +119,7 @@ bool COpponentDlg::OnOk()
 								   & CWhereNotEqual(COpponents::ID,   m_oOpponent[COpponents::ID]));
 
 	// Club already exists?
-	if (oRS.Size() > 0)
+	if (oRS.Count() > 0)
 	{
 		AlertMsg("A club with that name already exists");
 		return false;
