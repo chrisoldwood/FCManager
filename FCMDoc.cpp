@@ -84,7 +84,7 @@ void CFCMDoc::operator <<(CStream& rStream)
 		rStream.Throw(CStreamException::E_VERSION_INVALID);
 
 	// Read the database data.
-	m_oDB << rStream;
+	m_oDB.Read(rStream);
 }
 
 /******************************************************************************
@@ -109,7 +109,7 @@ void CFCMDoc::operator >>(CStream& rStream)
 	rStream << iVersion;
 
 	// Write the database data.
-	m_oDB >> rStream;
+	m_oDB.Write(rStream);
 }
 
 /******************************************************************************

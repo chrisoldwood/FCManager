@@ -12,10 +12,38 @@
 #ifndef FCMDOC_HPP
 #define FCMDOC_HPP
 
-// General limits.
-const int MAX_CLUB_TEAMS = 3;
-const int MAX_POSITIONS  = 4;
-const int MAX_FORMATIONS = 2;
+// Teams per club.
+enum ClubTeam
+{
+	TEAM_1ST,
+	TEAM_2ND,
+	TEAM_3RD,
+
+	MAX_CLUB_TEAMS
+};
+
+// Positions.
+enum Position
+{
+	GOALKEEPER,
+	DEFENDER,
+	MIDIFIELDER,
+	ATTACKER,
+
+	MAX_POSITIONS
+};
+
+// Formations.
+enum Formation
+{
+	F_4_4_2,
+	F_5_3_2,
+
+	MAX_FORMATIONS
+};
+
+// Players per game.
+const int MAX_PLAYERS = 16;
 
 /******************************************************************************
 ** 
