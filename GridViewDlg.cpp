@@ -33,8 +33,9 @@ static char szDefExt[] = { "dat" };
 *******************************************************************************
 */
 
-CGridViewDlg::CGridViewDlg(uint iRscID, CTable& oTable, int nColumns, GridColumn* pColumns)
+CGridViewDlg::CGridViewDlg(uint iRscID, CFCMDB& oDB, CTable& oTable, int nColumns, GridColumn* pColumns)
 	: CViewDlg(iRscID)
+	, m_oDB(oDB)
 	, m_oTable(oTable)
 	, m_nColumns(nColumns)
 	, m_pColumns(pColumns)
@@ -82,13 +83,19 @@ CGridViewDlg::~CGridViewDlg()
 
 void CGridViewDlg::OnInitDialog()
 {
+	// Set the grid style.
+	m_lvGrid.GridLines(true);
+	m_lvGrid.FullRowSelect(true);
+
 	// Setup the grid columns.
 	for (int c = 0; c < m_nColumns; c++)
 		m_lvGrid.InsertColumn(c, m_pColumns[c].m_pszName, m_pColumns[c].m_nWidth, m_pColumns[c].m_nFormat);
 
 	// Fill the grid with data.
 	for (int r = 0; r < m_oTable.RowCount(); r++)
-		AddRow(m_oTable[r]);
+		AddRow(m_oTable[r], false);
+
+	SortGrid();
 
 	// Select first item by default.
 	if (m_lvGrid.ItemCount())
@@ -199,7 +206,7 @@ void CGridViewDlg::OnExport()
 /******************************************************************************
 ** Method:		OnDblClick()
 **
-** Description:	Allow the user to edit the member.
+** Description:	Edit the row.
 **
 ** Parameters:	rMsgHdr		The message details.
 **
@@ -211,7 +218,7 @@ void CGridViewDlg::OnExport()
 LRESULT CGridViewDlg::OnDblClick(NMHDR&)
 {
 	// User double-clicked an item?
-	if (m_lvGrid.SelectionMark() != -1)
+	if (m_lvGrid.IsSelection())
 		OnEdit();
 
 	return 0;
@@ -222,20 +229,19 @@ LRESULT CGridViewDlg::OnDblClick(NMHDR&)
 **
 ** Description:	Add a row to the grid.
 **
-** Parameters:	oRow	The row to add.
+** Parameters:	oRow		The row to add.
+**				bReSort		Re-sort the grid after?
 **
 ** Returns:		The grid row index.
 **
 *******************************************************************************
 */
 
-int CGridViewDlg::AddRow(CRow& oRow)
+int CGridViewDlg::AddRow(CRow& oRow, bool bReSort)
 {
-	int nGridRow = m_lvGrid.AddItem(GetCellData(0, oRow, m_pColumns[0].m_nField), &oRow, -1);
+	int nGridRow = m_lvGrid.AppendItem(GetCellData(0, oRow, m_pColumns[0].m_nField), &oRow);
 
-	UpdateRow(nGridRow);
-
-	return nGridRow;
+	return UpdateRow(nGridRow, bReSort);
 }
 
 /******************************************************************************
@@ -244,19 +250,28 @@ int CGridViewDlg::AddRow(CRow& oRow)
 ** Description:	Update a row in the grid.
 **
 ** Parameters:	nGridRow	The grid row to update.
+**				bReSort		Re-sort the grid after?
 **
-** Returns:		Nothing.
+** Returns:		The row index, if resorted.
 **
 *******************************************************************************
 */
 
-void CGridViewDlg::UpdateRow(int nGridRow)
+int CGridViewDlg::UpdateRow(int nGridRow, bool bReSort)
 {
 	CRow& oRow = Row(nGridRow);
 
 	// For all grid columns.
 	for (int i = 0; i < m_nColumns; i++)
 		m_lvGrid.ItemText(nGridRow, i, GetCellData(i, oRow, m_pColumns[i].m_nField));
+
+	if (bReSort)
+	{
+		SortGrid();
+		nGridRow = m_lvGrid.FindItem(&oRow);
+	}
+
+	return nGridRow;
 }
 
 /******************************************************************************
@@ -319,6 +334,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
 	{
+/*
 		// Create the printer DC.
 		CPrinterDC oDC(App.m_oPrinter);
 
@@ -436,7 +452,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 
 		// Done printing.
 		oDC.End();
-	}
+*/	}
 }
 
 /******************************************************************************
@@ -536,7 +552,9 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 
 		// Fill the grid with data.
 		for (int r = 0; r < m_oTable.RowCount(); r++)
-			AddRow(m_oTable[r]);
+			AddRow(m_oTable[r], false);
+
+		SortGrid();
 
 		// Select first item by default.
 		if (m_lvGrid.ItemCount())
@@ -602,4 +620,66 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 	}
 
 	return true;
+}
+
+/******************************************************************************
+** Method:		SortGrid()
+**
+** Description:	Sorts the rows in the grid.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CGridViewDlg::SortGrid()
+{
+	m_lvGrid.Sort(GridCompareRows, (LPARAM)this);
+}
+
+/******************************************************************************
+** Method:		GridCompareRows()
+**
+** Description:	ListView callback function to compare two rows.
+**
+** Parameters:	lParam1			Row 1.
+**				lParam2			Row 2.
+**				lParamSort		Dialog object.
+**
+** Returns:		As strcmp.
+**
+*******************************************************************************
+*/
+
+int CALLBACK GridCompareRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+	CGridViewDlg*	pDlg  = (CGridViewDlg*) lParamSort;
+	CRow*			pRow1 = (CRow*) lParam1;
+	CRow*			pRow2 = (CRow*) lParam2;
+
+	ASSERT(pDlg  != NULL);
+	ASSERT(pRow1 != NULL);
+	ASSERT(pRow2 != NULL);
+
+	return pDlg->CompareRows(*pRow1, *pRow2);
+}
+
+/******************************************************************************
+** Method:		CompareRows()
+**
+** Description:	View template method to compare two rows.
+**
+** Parameters:	oRow1			Row 1.
+**				oRow2			Row 2.
+**
+** Returns:		As strcmp.
+**
+*******************************************************************************
+*/
+
+int CGridViewDlg::CompareRows(CRow& oRow1, CRow& oRow2)
+{
+	return 0;
 }

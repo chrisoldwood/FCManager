@@ -25,6 +25,7 @@ struct GridColumn
 	int			m_nWidth;		// The width in pixels (screen) / percentage (printer).
 	int			m_nFormat;		// The alignment of the text.
 	int			m_nField;		// The data field.
+	bool		m_bPrint;		// Include column when printing.
 };
 
 /******************************************************************************
@@ -40,7 +41,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CGridViewDlg(uint iRscID, CTable& oTable, int nColumns, GridColumn* pColumns);
+	CGridViewDlg(uint iRscID, CFCMDB& oDB, CTable& oTable, int nColumns, GridColumn* pColumns);
 	~CGridViewDlg();
 	
 	//
@@ -63,14 +64,15 @@ public:
 	// Data methods.
 	//
 	CRow& Row(int n);
-	int   AddRow(CRow& oRow);
-	void  UpdateRow(int nGridRow);
+	int   AddRow(CRow& oRow, bool bReSort);
+	int   UpdateRow(int nGridRow, bool bReSort);
 	void  DeleteRow(int nGridRow);
 
 protected:
 	//
 	// Members.
 	//
+	CFCMDB&		m_oDB;
 	CTable&		m_oTable;
 	CListView	m_lvGrid;
 	int			m_nColumns;
@@ -86,6 +88,7 @@ protected:
 	// Overidable data methods.
 	//
 	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
+	virtual int     CompareRows(CRow& oRow1, CRow& oRow2);
 
 	//
 	// View helpers.
@@ -94,6 +97,12 @@ protected:
 	void PrintCell(CDC& oDC, CRect rcCell, const char* pszText, int nAlignment, bool bBorder);
 	bool ImportTable(uint32 iFormat, uint32 iVersion);
 	bool ExportTable(uint32 iFormat, uint32 iVersion);
+	void SortGrid();
+
+	//
+	// Friends.
+	//
+	friend int CALLBACK GridCompareRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 };
 
 /******************************************************************************
@@ -105,6 +114,8 @@ protected:
 
 inline CRow& CGridViewDlg::Row(int n)
 {
+	ASSERT((n >= 0) && (n < m_lvGrid.ItemCount()));
+
 	return *((CRow*)m_lvGrid.ItemPtr(n));
 }
 
