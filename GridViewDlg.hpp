@@ -94,7 +94,7 @@ protected:
 	// View helpers.
 	//
 	void PrintView(const CString& strViewName, int nColumns, GridColumn* pColumns);
-	void PrintCell(CDC& oDC, CRect rcCell, const char* pszText, int nAlignment, bool bBorder);
+	void PrintCell(CDC& oDC, const CRect& rcCell, const char* pszText, int nAlignment, bool bBorder);
 	bool ImportTable(uint32 iFormat, uint32 iVersion);
 	bool ExportTable(uint32 iFormat, uint32 iVersion);
 	void SortGrid();

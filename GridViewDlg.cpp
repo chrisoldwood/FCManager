@@ -331,10 +331,13 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 
 	CPrintViewDlg Dlg(strViewName);
 
+	// Setup the printable columns.
+	for (int i = 0; i < nColumns; i++)
+		Dlg.m_apColumns.Add(pColumns[i]);
+
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
 	{
-/*
 		// Create the printer DC.
 		CPrinterDC oDC(App.m_oPrinter);
 
@@ -452,7 +455,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 
 		// Done printing.
 		oDC.End();
-*/	}
+	}
 }
 
 /******************************************************************************
@@ -472,7 +475,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintCell(CDC& oDC, CRect rcCell, const char* pszText, int nAlignment, bool bBorder)
+void CGridViewDlg::PrintCell(CDC& oDC, const CRect& rcCell, const char* pszText, int nAlignment, bool bBorder)
 {
 	ASSERT( (nAlignment == LVCFMT_LEFT) || (nAlignment == LVCFMT_CENTER) || (nAlignment == LVCFMT_RIGHT) );
 
