@@ -40,6 +40,7 @@ public:
 	virtual void OnDelete();
 	virtual void OnDeleteAll();
 	virtual void OnPrint();
+	virtual void OnMiscCmd1();
 
 protected:
 	//

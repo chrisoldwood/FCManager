@@ -10,6 +10,7 @@
 
 #include "AppHeaders.hpp"
 #include "BalShtItemDlg.hpp"
+#include "ExpenseTypesDlg.hpp"
 
 // The list view columns.
 GridColumn CBalSheetView::Columns[NUM_COLUMNS] =
@@ -106,6 +107,12 @@ void CBalSheetView::OnAdd()
 		oTable.UpdateTotalsRow();
 		UpdateRow(m_lvGrid.ItemCount()-1, false);
 
+		TRefArray<CRow> aoModified;
+
+		// Update members balances.
+		m_oDB.m_oMembers.UpdateBalances(m_oDB.m_oSubs, aoModified);
+		App.View()->m_ViewsMgr.m_oMembersView.RefreshRows(aoModified);
+
 		App.m_AppCmds.UpdateUI();
 	}
 	else
@@ -158,6 +165,12 @@ void CBalSheetView::OnEdit()
 
 		oTable.UpdateTotalsRow();
 		UpdateRow(m_lvGrid.ItemCount()-1, false);
+
+		TRefArray<CRow> aoModified;
+
+		// Update members balances.
+		m_oDB.m_oMembers.UpdateBalances(m_oDB.m_oSubs, aoModified);
+		App.View()->m_ViewsMgr.m_oMembersView.RefreshRows(aoModified);
 
 		App.m_AppCmds.UpdateUI();
 	}
@@ -273,6 +286,30 @@ void CBalSheetView::OnPrint()
 	};
 
 	PrintView("Balance Sheet", NUM_PRT_COLUMNS, aColumns);
+}
+
+/******************************************************************************
+** Method:		OnMiscCmd1()
+**
+** Description:	Maintain the expense types.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CBalSheetView::OnMiscCmd1()
+{
+	// Get the stat types and those currently in use.
+	CExpenseTypes& oTypes = m_oDB.m_oExpenseTypes;
+	CExpenses&     oExps  = m_oDB.m_oExpenses;
+	CValueSet      oUsed  = oExps.SelectAll().Distinct(CExpenses::TYPE_ID);
+
+	CExpenseTypesDlg Dlg(oTypes, oUsed);
+
+	Dlg.RunModal(*this);
 }
 
 /******************************************************************************
