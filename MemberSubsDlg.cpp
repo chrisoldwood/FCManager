@@ -26,7 +26,7 @@
 *******************************************************************************
 */
 
-CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, CIntArray& oExclusions, CRow& oRow, bool bEditing)
+CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, TArray<int>& oExclusions, CRow& oRow, bool bEditing)
 	: CDialog(IDD_MEMBER_SUBS)
 	, m_oRow(oRow)
 	, m_bEditing(bEditing)

@@ -25,7 +25,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemberSubsDlg(CMembers& oMembers, CIntArray& oExclusions, CRow& oRow, bool bEditing);
+	CMemberSubsDlg(CMembers& oMembers, TArray<int>& oExclusions, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
@@ -36,14 +36,14 @@ protected:
 	//
 	// Members.
 	//
-	bool		m_bEditing;
+	bool			m_bEditing;
 
-	CComboBox	m_cbMembers;
-	CDecimalBox	m_ebFee;
-	CDecimalBox	m_ebPaid;
+	CComboBox		m_cbMembers;
+	CDecimalBox		m_ebFee;
+	CDecimalBox		m_ebPaid;
 
-	CMembers&	m_oMembers;
-	CIntArray&	m_oExclusions;
+	CMembers&		m_oMembers;
+	TArray<int>&	m_oExclusions;
 
 	//
 	// Message processors.
