@@ -301,22 +301,185 @@ CString CGridViewDlg::GetCellData(int nColumn, CRow& oRow, int nField)
 ** Description:	Prints the table associated with the view.
 **
 ** Parameters:	strViewName		The name of the view.
+**				nColumns		The number of columns to print.
+**				pColumns		The column definitions.
 **
 ** Returns:		true or false.
 **
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintView(const CString& strViewName)
+void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColumn* pColumns)
 {
+	ASSERT(nColumns >  0);
+	ASSERT(pColumns != NULL);
+
 	CPrintViewDlg Dlg(strViewName);
 
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
 	{
+		// Create the printer DC.
+		CPrinterDC oDC(App.m_oPrinter);
 
+		// Get printer attributes.
+		CRect rcRect = oDC.PrintableArea();
+		CSize dmFont = oDC.TextExtents("Wy");
 
+		// Calculate number of pages.
+		// NB: Page always includes column headers.
+		int nPageLines = rcRect.Height() / dmFont.cy;
+		int nRows      = m_lvGrid.ItemCount();
+		int nRowsPage  = nPageLines - 1;
+		int nPages     = nRows / nRowsPage;
+
+		// Doesn't end on a page?
+		if ((nRows % nRowsPage) != 0)
+			nPages++;
+
+		// Calculate column widths.
+		CIntArray	aiWidths;
+		int			nPageWidth = rcRect.Width();
+		int			nRatioWidth = 0;
+
+		for (int i = 0; i < nColumns; i++)
+			nRatioWidth += pColumns->m_nWidth;
+
+		for (i = 0; i < nColumns; i++)
+			aiWidths.Add((nPageWidth * pColumns->m_nWidth) / nRatioWidth);
+
+		// Create GDI objects.
+		CBrush	oHdrBrush(BLACK_BRUSH);
+		CPen	oRowBrush(NULL_BRUSH);
+		CPen	oRowPen(BLACK_PEN);
+
+		// Initialise DC.
+		oDC.BkMode(TRANSPARENT);
+
+		// Start printing.
+		oDC.Start(strViewName);
+
+		// For all pages.
+		for (int p = 0; p < nPages; p++)
+		{
+			oDC.StartPage();
+
+			CRect rcCell;
+
+			// Calculate first row rect.
+			CRect rcRow  = rcRect;
+			rcRow.bottom = rcRow.top + dmFont.cy;
+
+			// Use inverse video for headers.
+			oDC.Fill(rcRow, oHdrBrush);
+			oDC.TextColour(RGB(255, 255, 255));
+
+			// Initialise cell to first in row.
+			rcCell = rcRow;
+			rcCell.right  = rcRow.left;
+			rcCell.bottom = rcCell.top + dmFont.cy;
+
+			// Print column headers.
+			for (int c = 0; c < nColumns; c++)
+			{
+				// Calculate cell border.
+				rcCell.left  = rcCell.right;
+				rcCell.right = rcCell.left + aiWidths[c];
+
+				PrintCell(oDC, rcCell, pColumns[c].m_pszName, pColumns[c].m_nFormat, false);
+			}
+
+			// Calculate rows on this page.
+			int nFirstRow = p * nRowsPage;
+			int nLastRow  = nFirstRow + nRowsPage;
+
+			// Adjust rows, if last page.
+			if (nLastRow > nRows)
+				nLastRow = nRows;
+
+			// Use normal video for rows.
+			oDC.Select(oRowBrush);
+			oDC.Select(oRowPen);
+			oDC.TextColour(RGB(0, 0, 0));
+
+			// Update row rect to start of next line.
+			rcRow.top = rcRow.bottom;
+			rcRow.bottom = rcRow.top + dmFont.cy;
+
+			// For all rows on the page.
+			for (int r = nFirstRow; r < nLastRow; r++)
+			{
+				CRow& oRow = *((CRow*)m_lvGrid.ItemPtr(r));
+
+				// Initialise cell to first in row.
+				rcCell = rcRow;
+				rcCell.right  = rcRow.left;
+				rcCell.bottom = rcCell.top + dmFont.cy;
+
+				// For all columns in the row.
+				for (int c = 0; c < nColumns; c++)
+				{
+					// Calculate cell border.
+					rcCell.left  = rcCell.right;
+					rcCell.right = rcCell.left + aiWidths[c];
+
+					PrintCell(oDC, rcCell, GetCellData(c, oRow, pColumns[c].m_nField), pColumns[c].m_nFormat, true);
+				}
+
+				// Update row cell to start of next row.
+				rcRow.top = rcRow.bottom;
+				rcRow.bottom = rcRow.top + dmFont.cy;
+			}
+
+			oDC.EndPage();
+		}
+
+		// Done printing.
+		oDC.End();
 	}
+}
+
+/******************************************************************************
+** Method:		PrintCell()
+**
+** Description:	Prints a single row cell on the page, both text and border.
+**				It assumes that the DC has already been setup.
+**
+** Parameters:	oDC			The DC to draw on.
+**				rcCell		The cells bounding rect.
+**				pszText		The cell text.
+**				nAlignment	The text alignment (LVCFMT_*)
+**				bBorder		Print the cell border.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CGridViewDlg::PrintCell(CDC& oDC, CRect rcCell, const char* pszText, int nAlignment, bool bBorder)
+{
+	ASSERT( (nAlignment == LVCFMT_LEFT) || (nAlignment == LVCFMT_CENTER) || (nAlignment == LVCFMT_RIGHT) );
+
+	// Draw the cell border.
+	if (bBorder)
+		oDC.Rectangle(rcCell);
+
+	// No text to print?
+	if ( (pszText == NULL) || (*pszText == '\0') )
+		return;
+
+	// Calculate DrawText flags.
+	int nFormat = DT_SINGLELINE | DT_VCENTER;
+
+	switch (nAlignment)
+	{
+		case LVCFMT_LEFT:	nFormat |= DT_LEFT;		break;
+		case LVCFMT_CENTER:	nFormat |= DT_CENTER;	break;
+		case LVCFMT_RIGHT:	nFormat |= DT_RIGHT;	break;
+	}
+
+	// Print it.
+	oDC.DrawText(rcCell, pszText, nFormat);
 }
 
 /******************************************************************************
@@ -366,7 +529,8 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 		m_lvGrid.DeleteAllItems();
 
 		// Read the table data.
-		m_oTable << oFile;
+		m_oTable.Read(oFile);
+		m_oTable.Modified(true);
 
 		oFile.Close();
 
@@ -378,7 +542,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 		if (m_lvGrid.ItemCount())
 			m_lvGrid.Select(0);
 
-		OnUIUpdate();
+		App.m_rCmdControl.UpdateUI();
 	}
 	catch(CFileException& rException)
 	{
@@ -426,7 +590,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 		oFile << iVersion;
 
 		// Write the table data.
-		m_oTable >> oFile;
+		m_oTable.Write(oFile);
 
 		oFile.Close();
 	}

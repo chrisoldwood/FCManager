@@ -22,7 +22,7 @@
 struct GridColumn
 {
 	const char*	m_pszName;		// The name.
-	int			m_nWidth;		// The width in characters.
+	int			m_nWidth;		// The width in pixels (screen) / percentage (printer).
 	int			m_nFormat;		// The alignment of the text.
 	int			m_nField;		// The data field.
 };
@@ -90,7 +90,8 @@ protected:
 	//
 	// View helpers.
 	//
-	void PrintView(const CString& strViewName);
+	void PrintView(const CString& strViewName, int nColumns, GridColumn* pColumns);
+	void PrintCell(CDC& oDC, CRect rcCell, const char* pszText, int nAlignment, bool bBorder);
 	bool ImportTable(uint32 iFormat, uint32 iVersion);
 	bool ExportTable(uint32 iFormat, uint32 iVersion);
 };
