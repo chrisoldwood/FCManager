@@ -25,7 +25,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemberSubsDlg(CTable& oMembers, CIntArray& oExclusions, CRow& oRow, bool bEditing);
+	CMemberSubsDlg(CMembers& oMembers, CIntArray& oExclusions, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
@@ -42,7 +42,7 @@ protected:
 	CDecimalBox	m_ebFee;
 	CDecimalBox	m_ebPaid;
 
-	CTable&		m_oMembers;
+	CMembers&	m_oMembers;
 	CIntArray&	m_oExclusions;
 
 	//
@@ -50,8 +50,6 @@ protected:
 	//
 	virtual void OnInitDialog();
 	virtual bool OnOk();
-	
-//	void OnSelectMember();
 };
 
 /******************************************************************************
