@@ -87,20 +87,27 @@ BEGIN
     END
     POPUP "&View"
     BEGIN
-        MENUITEM "&Members",                    ID_VIEW_MEMBERS
-        MENUITEM "&Fixtures",                   ID_VIEW_FIXTURES
-        MENUITEM "&Balance Sheet",              ID_VIEW_BALANCE
-        MENUITEM "&Team Selector",              ID_VIEW_TEAM_SEL
-        MENUITEM "&Opponents",                  ID_VIEW_OPPONENTS
-        MENUITEM "&Referees",                   ID_VIEW_REFEREES
+        MENUITEM "&Members\tCtrl+Shift+M",      ID_VIEW_MEMBERS
+        MENUITEM "&Fixtures\tCtrl+Shift+F",     ID_VIEW_FIXTURES
+        MENUITEM "&Subs\tCtrl+Shift+S",         ID_VIEW_SUBS
+        MENUITEM "&Balance Sheet\tCtrl+Shift+B", ID_VIEW_BALANCE
+        MENUITEM "&Team Selector\tCtrl+Shift+T", ID_VIEW_TEAM_SEL
+        MENUITEM "&Opponents\tCtrl+Shift+O",    ID_VIEW_OPPONENTS
+        MENUITEM "&Referees\tCtrl+Shift+R",     ID_VIEW_REFEREES
     END
     POPUP "&Club"
     BEGIN
         MENUITEM "&Details...",                 ID_CLUB_DETAILS
+        MENUITEM SEPARATOR
+        MENUITEM "&Expenses...",                ID_CLUB_EXPENSES
     END
     POPUP "&Members"
     BEGIN
-        MENUITEM "(none)",                      ID_OPTIONS_BASE, GRAYED
+        MENUITEM "(none)",                      ID_OPTIONS_ADD, GRAYED
+    END
+    POPUP "Re&ports"
+    BEGIN
+        MENUITEM "(none)",                      ID_REPORTS_NONE
     END
     POPUP "&Help"
     BEGIN
@@ -112,47 +119,51 @@ IDR_OPTIONS_MENUS MENU DISCARDABLE
 BEGIN
     POPUP "&Members"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
     END
-    POPUP "&Fixtures"
+    POPUP "Fi&xtures"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
         MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
+    END
+    POPUP "&Subs"
+    BEGIN
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
     END
     POPUP "&Balance Sheet"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
     END
     POPUP "&Team Selector"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
     END
     POPUP "&Opponents"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
@@ -161,9 +172,9 @@ BEGIN
     END
     POPUP "&Referees"
     BEGIN
-        MENUITEM "&Add...",                     ID_OPTIONS_ADD
-        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
-        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM "&Add...\tInsert",             ID_OPTIONS_ADD
+        MENUITEM "&Edit...\tAlt+Enter",         ID_OPTIONS_EDIT
+        MENUITEM "&Delete\tDelete",             ID_OPTIONS_DELETE
         MENUITEM SEPARATOR
         MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
         MENUITEM SEPARATOR
@@ -221,8 +232,8 @@ BEGIN
     CONTROL         "Senior P&layer",IDC_SENIOR,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,20,196,57,10
     LTEXT           "Usual &Position:",IDC_STATIC,115,197,50,8
-    COMBOBOX        IDC_USUAL_POS,170,195,75,50,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_USUAL_POS,170,195,75,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
     DEFPUSHBUTTON   "OK",IDOK,205,15,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,205,32,50,14
     PUSHBUTTON      "&Notes...",IDC_NOTES,205,55,50,15
@@ -315,11 +326,33 @@ BEGIN
     PUSHBUTTON      "&Notes...",IDC_NOTES,205,55,50,15
 END
 
-IDD_TEAM_SELS DIALOGEX 0, 0, 219, 114
-STYLE WS_CHILD | WS_CLIPCHILDREN
-EXSTYLE WS_EX_CLIENTEDGE
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+IDD_TEAM_SELS DIALOG DISCARDABLE  0, 0, 402, 276
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Team Selection"
+FONT 8, "MS Sans Serif"
 BEGIN
+    CONTROL         "",IDC_PITCH,"PitchCtrl",WS_TABSTOP,105,35,230,230
+    LTEXT           "Team Filter:",IDC_STATIC,10,35,50,8
+    LISTBOX         IDC_PLAYER,10,105,80,125,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Players:",IDC_STATIC,10,95,50,8
+    LTEXT           "Formation:",IDC_FORMATION_LABEL,10,240,50,8
+    COMBOBOX        IDC_TEAM_FILTER,10,45,80,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Position Filter:",IDC_STATIC,10,65,50,8
+    COMBOBOX        IDC_POSITION_FILTER,10,75,80,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FORMATION,10,250,80,50,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "&Opponents:",IDC_STATIC,125,12,40,8
+    LTEXT           "&Date:",IDC_STATIC,10,13,25,8
+    CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,40,10,75,15
+    DEFPUSHBUTTON   "OK",IDOK,345,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,345,27,50,14
+    PUSHBUTTON      "No&tes...",IDC_NOTES,345,50,50,15
+    COMBOBOX        IDC_OPPONENT,165,10,125,50,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_CLUB_DETAILS DIALOG DISCARDABLE  0, 0, 237, 50
@@ -340,7 +373,8 @@ FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,150,10,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,150,27,50,14
-    EDITTEXT        IDC_NOTES,10,10,125,100,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NOTES,10,10,125,100,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_WANTRETURN
 END
 
 IDD_GRID_VIEW DIALOGEX 0, 0, 200, 195
@@ -353,7 +387,7 @@ BEGIN
                     WS_EX_CLIENTEDGE
 END
 
-IDD_BALSHEET_ITEM DIALOG DISCARDABLE  0, 0, 342, 212
+IDD_BALSHEET_ITEM DIALOG DISCARDABLE  0, 0, 342, 221
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "%s Balance Sheet Item"
 FONT 8, "MS Sans Serif"
@@ -364,33 +398,71 @@ BEGIN
     LTEXT           "&Date:",IDC_STATIC,20,48,25,8
     CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
                     DTS_RIGHTALIGN | WS_TABSTOP,50,45,80,15
-    GROUPBOX        "Credit Details",IDC_STATIC,10,75,155,125
+    LTEXT           "T&ype:",IDC_STATIC,150,47,25,8
+    COMBOBOX        IDC_TYPE,180,45,75,50,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Credit Details",IDC_STATIC,10,75,155,135
+    CONTROL         "No Income",IDC_NO_CREDIT,"Button",BS_AUTORADIOBUTTON,20,
+                    90,65,10
     CONTROL         "Fixed &Income:",IDC_FIXED_CREDIT,"Button",
-                    BS_AUTORADIOBUTTON,20,92,60,10
+                    BS_AUTORADIOBUTTON,20,102,60,10
     CONTROL         "Income From &Players:",IDC_VARIABLE_CREDIT,"Button",
-                    BS_AUTORADIOBUTTON,20,105,83,10
-    LTEXT           "£",IDC_STATIC,110,93,8,8
-    EDITTEXT        IDC_CREDIT,120,90,35,14,ES_RIGHT | ES_AUTOHSCROLL
-    LISTBOX         IDC_CREDITS,20,120,135,50,LBS_SORT | 
+                    BS_AUTORADIOBUTTON,20,115,83,10
+    LTEXT           "£",IDC_STATIC,110,103,8,8
+    EDITTEXT        IDC_CREDIT,120,100,35,14,ES_RIGHT | ES_AUTOHSCROLL
+    LISTBOX         IDC_CREDITS,20,130,135,50,LBS_SORT | LBS_USETABSTOPS | 
                     LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Debit Details",IDC_STATIC,175,75,155,125
+    GROUPBOX        "Debit Details",IDC_STATIC,175,75,155,135
+    CONTROL         "No Expenditure",IDC_NO_DEBIT,"Button",
+                    BS_AUTORADIOBUTTON,185,90,70,10
     CONTROL         "Fixed &Expenditure:",IDC_FIXED_DEBIT,"Button",
-                    BS_AUTORADIOBUTTON,185,92,74,10
+                    BS_AUTORADIOBUTTON,185,102,74,10
     CONTROL         "&Various Expenses",IDC_VARIABLE_DEBIT,"Button",
-                    BS_AUTORADIOBUTTON,185,106,72,10
-    LTEXT           "£",IDC_STATIC,275,93,8,8
-    EDITTEXT        IDC_DEBIT,285,90,35,14,ES_RIGHT | ES_AUTOHSCROLL
-    LISTBOX         IDC_DEBITS,185,121,135,49,LBS_SORT | 
+                    BS_AUTORADIOBUTTON,185,116,72,10
+    LTEXT           "£",IDC_STATIC,275,103,8,8
+    EDITTEXT        IDC_DEBIT,285,100,35,14,ES_RIGHT | ES_AUTOHSCROLL
+    LISTBOX         IDC_DEBITS,185,131,135,49,LBS_SORT | LBS_USETABSTOPS | 
                     LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     DEFPUSHBUTTON   "OK",IDOK,280,10,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,280,27,50,14
     PUSHBUTTON      "No&tes...",IDC_NOTES,280,50,50,15
-    PUSHBUTTON      "Add...",IDC_ADD_CREDIT,20,175,40,15
-    PUSHBUTTON      "Edit...",IDC_EDIT_CREDIT,65,175,45,15
-    PUSHBUTTON      "Delete",IDC_DEL_CREDIT,115,175,40,15
-    PUSHBUTTON      "Add...",IDC_ADD_DEBIT,185,175,40,15
-    PUSHBUTTON      "Edit...",IDC_EDIT_DEBIT,231,175,45,15
-    PUSHBUTTON      "Delete",IDC_DEL_DEBIT,281,175,40,15
+    PUSHBUTTON      "Add...",IDC_ADD_CREDIT,20,185,40,15
+    PUSHBUTTON      "Edit...",IDC_EDIT_CREDIT,65,185,45,15
+    PUSHBUTTON      "Delete",IDC_DEL_CREDIT,115,185,40,15
+    PUSHBUTTON      "Add...",IDC_ADD_DEBIT,185,185,40,15
+    PUSHBUTTON      "Edit...",IDC_EDIT_DEBIT,231,185,45,15
+    PUSHBUTTON      "Delete",IDC_DEL_DEBIT,281,185,40,15
+END
+
+IDD_MEMBER_SUBS DIALOG DISCARDABLE  0, 0, 222, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Member Subs"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Member:",IDC_STATIC,10,12,30,8
+    COMBOBOX        IDC_MEMBERS,45,10,100,50,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Fee £",IDC_STATIC,15,33,20,8
+    EDITTEXT        IDC_FEE,45,30,30,14,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "&Paid £",IDC_STATIC,85,33,20,8
+    EDITTEXT        IDC_PAID,115,30,30,14,ES_RIGHT | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,160,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,160,27,50,14
+END
+
+IDD_PRINT_VIEW DIALOG DISCARDABLE  0, 0, 307, 61
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Print %s"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,245,15,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,245,32,50,14
+    GROUPBOX        "Printer",IDC_STATIC,10,10,225,40
+    LTEXT           "Name:",IDC_STATIC,20,25,25,10
+    LTEXT           "On:",IDC_STATIC,20,35,25,8
+    LTEXT           "%s",IDC_PRINTER,45,25,125,8
+    LTEXT           "%s",IDC_PORT,45,35,125,8
+    PUSHBUTTON      "&Select...",IDC_SELECT,175,20,50,14
 END
 
 
@@ -411,8 +483,26 @@ IDR_APPACCEL ACCELERATORS DISCARDABLE
 BEGIN
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_OPTIONS_PRINT,       VIRTKEY, CONTROL, NOINVERT
     "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_OPTIONS_DELETE,      VIRTKEY, NOINVERT
     VK_F4,          ID_FILE_CLOSE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_OPTIONS_ADD,         VIRTKEY, NOINVERT
+    VK_RETURN,      ID_OPTIONS_EDIT,        VIRTKEY, ALT, NOINVERT
+    "M",            ID_VIEW_MEMBERS,        VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "F",            ID_VIEW_FIXTURES,       VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "S",            ID_VIEW_SUBS,           VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "B",            ID_VIEW_BALANCE,        VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "T",            ID_VIEW_TEAM_SEL,       VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "O",            ID_VIEW_OPPONENTS,      VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "R",            ID_VIEW_REFEREES,       VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
 END
 
 
@@ -459,9 +549,9 @@ BEGIN
     IDD_TEAM_SELS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 212
+        RIGHTMARGIN, 395
         TOPMARGIN, 7
-        BOTTOMMARGIN, 107
+        BOTTOMMARGIN, 269
     END
 
     IDD_CLUB_DETAILS, DIALOG
@@ -492,7 +582,23 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 335
         TOPMARGIN, 7
-        BOTTOMMARGIN, 205
+        BOTTOMMARGIN, 214
+    END
+
+    IDD_MEMBER_SUBS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 215
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_PRINT_VIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 300
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 54
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -575,6 +681,84 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_OPTIONS_POPUP        " "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_REPORTS_POPUP        "Reports options"
+    ID_REPORTS_NONE         "Not available yet"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MEMBERS_POPUP        "Members options"
+    ID_MEMBERS_ADD          "Add a new member"
+    ID_MEMBERS_EDIT         "Edit the selected members' details"
+    ID_MEMBERS_DELETE       "Delete the selected member"
+    ID_MEMBERS_PRINT        "Print the list of members"
+    ID_MEMBERS_IMPORT       "Import the members list from a file"
+    ID_MEMBERS_EXPORT       "Export the members list to a file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FIXTURES_POPUP       "Fixtures options"
+    ID_FIXTURES_ADD         "Add a new fixture"
+    ID_FIXTURES_EDIT        "Edit the selected fixtures' details"
+    ID_FIXTURES_DELETE      "Delete the selected fixture"
+    ID_FIXTURES_PRINT       "Print the list of fixtures"
+    ID_FIXTURES_IMPORT      "Import the fixtures list from a file"
+    ID_FIXTURES_EXPORT      "Export the fixtures list to a file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SUBS_POPUP           "Subs options"
+    ID_SUBS_PRINT           "Print the subs"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_BALSHEET_POPUP       "Balance sheet options"
+    ID_BALSHEET_ADD         "Add a new balance sheet item"
+    ID_BALSHEET_EDIT        "Edit the selected balance sheet item"
+    ID_BALSHEET_DELETE      "Delete the selected balance sheet item"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_BALSHEET_PRINT       "Print the balance sheet"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TEAMSEL_POPUP        "Team selection options"
+    ID_TEAMSEL_ADD          "Add a new team selection"
+    ID_TEAMSEL_EDIT         "Edit the selected team selection"
+    ID_TEAMSEL_DELETE       "Delete the selected team selection"
+    ID_TEAMSEL_PRINT        "Print the selected team selection"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPPONENTS_POPUP      "Opponents options"
+    ID_OPPONENTS_ADD        "Add a new opponent"
+    ID_OPPONENTS_EDIT       "Edit the selected opponents' details"
+    ID_OPPONENTS_DELETE     "Delete the selected opponent"
+    ID_OPPONENTS_PRINT      "Print the list of opponents"
+    ID_OPPONENTS_IMPORT     "Import the opponents list from a file"
+    ID_OPPONENTS_EXPORT     "Export the opponents list to a file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_REFEREES_POPUP       "Referees options"
+    ID_REFEREES_ADD         "Add a new referee"
+    ID_REFEREES_EDIT        "Edit the selected referees' details"
+    ID_REFEREES_DELETE      "Delete the selected referee"
+    ID_REFEREES_PRINT       "Print the list of referees"
+    ID_REFEREES_IMPORT      "Import the referees list from a file"
+    ID_REFEREES_EXPORT      "Export the referees list to a file"
 END
 
 #endif    // English (U.K.) resources
