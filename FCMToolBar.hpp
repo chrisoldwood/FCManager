@@ -34,6 +34,13 @@ public:
 	CCmdButton	m_NewBtn;
 	CCmdButton	m_OpenBtn;
 	CCmdButton	m_SaveBtn;
+	CCmdButton	m_AddBtn;
+	CCmdButton	m_EditBtn;
+	CCmdButton	m_DeleteBtn;
+	CCmdButton	m_PrintBtn;
+	CCmdButton	m_ImportBtn;
+	CCmdButton	m_ExportBtn;
+	CCmdButton	m_AboutBtn;
 };
 
 /******************************************************************************
