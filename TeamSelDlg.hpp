@@ -56,6 +56,7 @@ protected:
 	//
 	virtual void OnInitDialog();
 	virtual bool OnOk();
+	virtual bool OnCancel();
 	        void OnNotes();
 
 	void OnSelectTeamFilter();

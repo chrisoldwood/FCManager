@@ -46,7 +46,7 @@ CTeamSelDlg::CTeamSelDlg(CRow& oTeamSel, CTable& oMembers, bool bEditing)
 	, m_oTeamSel(oTeamSel)
 	, m_bEditing(bEditing)
 	, m_oMembers(oMembers)
-	, m_oPitch(oTeamSel, m_oMembers)
+	, m_oPitch(m_oMembers)
 	, m_nTeamFilter(0)
 	, m_nPosFilter(0)
 	, m_nFormation(0)
@@ -64,12 +64,15 @@ CTeamSelDlg::CTeamSelDlg(CRow& oTeamSel, CTable& oMembers, bool bEditing)
 	END_CTRL_TABLE
 
 	DEFINE_GRAVITY_TABLE
-		CTRLGRAV(IDC_TEAM_FILTER,     LEFT_EDGE, TOP_EDGE,    LEFT_EDGE,  TOP_EDGE)
-		CTRLGRAV(IDC_POSITION_FILTER, LEFT_EDGE, TOP_EDGE,    LEFT_EDGE,  TOP_EDGE)
-		CTRLGRAV(IDC_PLAYER,	      LEFT_EDGE, TOP_EDGE,    LEFT_EDGE,  BOTTOM_EDGE)
-		CTRLGRAV(IDC_FORMATION_LABEL, LEFT_EDGE, BOTTOM_EDGE, LEFT_EDGE,  BOTTOM_EDGE)
-		CTRLGRAV(IDC_FORMATION,       LEFT_EDGE, BOTTOM_EDGE, LEFT_EDGE,  BOTTOM_EDGE)
-		CTRLGRAV(IDC_PITCH,           LEFT_EDGE, TOP_EDGE,    RIGHT_EDGE, BOTTOM_EDGE)
+		CTRLGRAV(IDC_TEAM_FILTER,     LEFT_EDGE,  TOP_EDGE,    LEFT_EDGE,  TOP_EDGE)
+		CTRLGRAV(IDC_POSITION_FILTER, LEFT_EDGE,  TOP_EDGE,    LEFT_EDGE,  TOP_EDGE)
+		CTRLGRAV(IDC_PLAYER,	      LEFT_EDGE,  TOP_EDGE,    LEFT_EDGE,  BOTTOM_EDGE)
+		CTRLGRAV(IDC_FORMATION_LABEL, LEFT_EDGE,  BOTTOM_EDGE, LEFT_EDGE,  BOTTOM_EDGE)
+		CTRLGRAV(IDC_FORMATION,       LEFT_EDGE,  BOTTOM_EDGE, LEFT_EDGE,  BOTTOM_EDGE)
+		CTRLGRAV(IDC_PITCH,           LEFT_EDGE,  TOP_EDGE,    RIGHT_EDGE, BOTTOM_EDGE)
+		CTRLGRAV(IDOK,                RIGHT_EDGE, TOP_EDGE,    RIGHT_EDGE, TOP_EDGE)
+		CTRLGRAV(IDCANCEL,            RIGHT_EDGE, TOP_EDGE,    RIGHT_EDGE, TOP_EDGE)
+		CTRLGRAV(IDC_NOTES,           RIGHT_EDGE, TOP_EDGE,    RIGHT_EDGE, TOP_EDGE)
 	END_GRAVITY_TABLE
 
 	DEFINE_CTRLMSG_TABLE
@@ -77,6 +80,7 @@ CTeamSelDlg::CTeamSelDlg(CRow& oTeamSel, CTable& oMembers, bool bEditing)
 		CMD_CTRLMSG(IDC_POSITION_FILTER, CBN_SELCHANGE, OnSelectPosFilter)
 		CMD_CTRLMSG(IDC_PLAYER,          LBN_SELCHANGE, OnSelectPlayer)
 		CMD_CTRLMSG(IDC_FORMATION,       CBN_SELCHANGE, OnSelectFormation)
+		CMD_CTRLMSG(IDC_NOTES,           BN_CLICKED,	OnNotes)
 	END_CTRLMSG_TABLE
 }
 
@@ -96,6 +100,20 @@ void CTeamSelDlg::OnInitDialog()
 {
 	// Set the dialog title.
 	Title((m_bEditing == true) ? "Edit Team Selection" : "Add A Team Selection");
+
+	CSize dmDlg = App.m_dmTeamSelDlg;
+
+	// Resize, if last size saved.
+	if ( (dmDlg.cx > 0) && (dmDlg.cy > 0) )
+	{
+		CRect rcDlg = WindowRect();
+
+		rcDlg.right  = rcDlg.left + dmDlg.cx + 1;
+		rcDlg.bottom = rcDlg.top  + dmDlg.cy + 1;
+
+		Move(rcDlg, false);
+		Centre();
+	}
 
 	int i;
 
@@ -163,6 +181,29 @@ bool CTeamSelDlg::OnOk()
 	m_oTeamSel[CTeamSels::DATE]      = m_dtpDate.GetDate();
 	m_oTeamSel[CTeamSels::OPPONENTS] = m_cbOpponent.Text();
 	m_oTeamSel[CTeamSels::NOTES]     = m_oNotesDlg.m_strNotes;
+
+	// Save current dimensions.
+	App.m_dmTeamSelDlg = WindowRect().Size();
+
+	return true;
+}
+
+/******************************************************************************
+** Method:		OnCancel()
+**
+** Description:	Save the current dimensions.
+**
+** Parameters:	None.
+**
+** Returns:		true or false.
+**
+*******************************************************************************
+*/
+
+bool CTeamSelDlg::OnCancel()
+{
+	// Save current dimensions.
+	App.m_dmTeamSelDlg = WindowRect().Size();
 
 	return true;
 }
@@ -257,6 +298,7 @@ void CTeamSelDlg::OnSelectFormation()
 {
 	// Get the new selection.
 	m_nFormation = m_cbFormation.CurSel();
+	m_oPitch.SetFormation(static_cast<Formation>(m_nFormation));
 }
 
 /******************************************************************************
@@ -275,7 +317,7 @@ void CTeamSelDlg::RefreshPlayerList()
 {
 	// Clear current contents.
 	m_lbPlayer.Reset();
-	m_lbPlayer.CanRedraw(false);
+	m_lbPlayer.Redraw(false);
 
 	// Add members to the players listbox.
 	for (int i = 0; i < m_oMembers.RowCount(); i++)
@@ -298,6 +340,6 @@ void CTeamSelDlg::RefreshPlayerList()
 	}
 
 	// Redraw.
-	m_lbPlayer.CanRedraw(true);
+	m_lbPlayer.Redraw(true);
 	m_lbPlayer.Invalidate();
 }
