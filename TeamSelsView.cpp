@@ -9,6 +9,14 @@
 */
 
 #include "AppHeaders.hpp"
+#include "TeamSelDlg.hpp"
+
+// The list view columns.
+GridColumn CTeamSelsView::Columns[NUM_COLUMNS] =
+{
+	{ "Date",      100, LVCFMT_LEFT,  CTeamSels::DATE      },
+	{ "Opponents", 150, LVCFMT_LEFT,  CTeamSels::OPPONENTS }
+};
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -23,15 +31,15 @@
 */
 
 CTeamSelsView::CTeamSelsView(CFCMDoc& rDoc)
-	: CViewDlg(IDD_TEAM_SELS)
-	, m_rDoc(rDoc)
+	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB[CFCMDB::TEAMSELS], NUM_COLUMNS, Columns)
+	, m_oMembers(rDoc.m_oDB[CFCMDB::MEMBERS])
 {
 }
 
 /******************************************************************************
-** Method:		OnInitDialog()
+** Method:		OnAdd()
 **
-** Description:	Initialise the dialog.
+** Description:	Allows the user to add a new item.
 **
 ** Parameters:	None.
 **
@@ -40,6 +48,128 @@ CTeamSelsView::CTeamSelsView(CFCMDoc& rDoc)
 *******************************************************************************
 */
 
-void CTeamSelsView::OnInitDialog()
+void CTeamSelsView::OnAdd()
 {
+	// Allocate a row for the member.
+	CRow& oRow = m_oTable.CreateRow();
+
+	CTeamSelDlg Dlg(oRow, m_oMembers, false);
+
+	if (Dlg.RunModal(*this) == IDOK)
+	{
+		// Add to the table.
+		m_oTable.InsertRow(oRow);
+
+		// Add to the list view and select it.
+		int iLVItem = AddRow(oRow);
+		m_lvGrid.Select(iLVItem);
+
+		App.m_AppCmds.UpdateUI();
+	}
+	else
+	{
+		delete &oRow;
+	}
+}
+
+/******************************************************************************
+** Method:		OnEdit()
+**
+** Description:	Allows the user to edit the currently selected item.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CTeamSelsView::OnEdit()
+{
+	// Get the current selection.
+	int   iLVItem = m_lvGrid.SelectionMark();
+	CRow& oRow    = Row(iLVItem);
+
+	CTeamSelDlg Dlg(oRow, m_oMembers, true);
+
+	if (Dlg.RunModal(*this) == IDOK)
+	{
+		// Update the list view.
+		UpdateRow(iLVItem);
+
+		App.m_AppCmds.UpdateUI();
+	}
+}
+
+/******************************************************************************
+** Method:		OnDelete()
+**
+** Description:	Allows the user to delete the currently selected item, after
+**				confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CTeamSelsView::OnDelete()
+{
+	// Get the current selection.
+	int   iLVItem = m_lvGrid.SelectionMark();
+	CRow& oRow    = Row(iLVItem);
+
+	ASSERT(&oRow != NULL);
+
+	CString strName = App.FormatDate(oRow, CTeamSels::DATE);
+
+	// Get user to confirm action.
+	if (QueryMsg("Delete the team selection for: %s?",  strName) != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteRow(iLVItem);
+	m_oTable.DeleteRow(oRow);
+
+	App.m_AppCmds.UpdateUI();
+}
+
+/******************************************************************************
+** Method:		OnPrint()
+**
+** Description:	Print the currently selected team selection.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CTeamSelsView::OnPrint()
+{
+}
+
+/******************************************************************************
+** Method:		GetCellData()
+**
+** Description:	Gets the value for a cell.
+**
+** Parameters:	nColumn		The grid column.
+**				oRow		The table row.
+**				nField		The table row field.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+CString CTeamSelsView::GetCellData(int nColumn, CRow& oRow, int nField)
+{
+	// Format dates.
+	if (nColumn == DATE)
+		return App.FormatDate(oRow, nField);
+
+	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
 }

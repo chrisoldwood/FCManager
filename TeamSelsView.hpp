@@ -19,7 +19,7 @@
 *******************************************************************************
 */
 
-class CTeamSelsView : public CViewDlg
+class CTeamSelsView : public CGridViewDlg
 {
 public:
 	//
@@ -27,24 +27,34 @@ public:
 	//
 	CTeamSelsView(CFCMDoc& rDoc);
 	
+	//
+	// Commands.
+	//
+	virtual void OnAdd();
+	virtual void OnEdit();
+	virtual void OnDelete();
+	virtual void OnPrint();
+
 protected:
 	//
 	// Members.
 	//
-	CFCMDoc&	m_rDoc;
-	
-	//
-	// Message handlers.
-	//
-	virtual void OnInitDialog();
+	CTable&	m_oMembers;
+
+	// The grid columns.
+	enum
+	{
+		DATE,
+		OPPONENTS,
+		NUM_COLUMNS
+	};
+
+	static GridColumn Columns[NUM_COLUMNS];
 
 	//
-	// Control message handlers.
+	// Overriden data methods.
 	//
-
-	//
-	// Internal methods.
-	//
+	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
 };
 
 /******************************************************************************
