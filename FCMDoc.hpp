@@ -42,6 +42,19 @@ enum Formation
 	MAX_FORMATIONS
 };
 
+// Unavailabilty reasons.
+enum UnavailReason
+{
+	NO_REASON,
+	INJURED,
+	ON_HOLIDAY,
+	TRANSFERED,
+	RESIGNED,
+	UNCONTACTABLE,
+
+	MAX_REASONS
+};
+
 // Players per game.
 const int MAX_PLAYERS = 16;
 
