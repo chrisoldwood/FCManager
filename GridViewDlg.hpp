@@ -60,6 +60,8 @@ public:
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
+	virtual void OnMiscCmd1();
+	virtual void OnMiscCmd2();
 
 	//
 	// Data methods.
@@ -69,6 +71,7 @@ public:
 	int   UpdateRow(int nGridRow, bool bReSort);
 	void  DeleteRow(int nGridRow);
 	void  DeleteAllRows();
+	int   FindRow(CRow& oRow);
 
 protected:
 	//
@@ -119,6 +122,11 @@ inline CRow& CGridViewDlg::Row(int n)
 	ASSERT((n >= 0) && (n < m_lvGrid.ItemCount()));
 
 	return *((CRow*)m_lvGrid.ItemPtr(n));
+}
+
+inline int CGridViewDlg::FindRow(CRow& oRow)
+{
+	return m_lvGrid.FindItem(&oRow);
 }
 
 #endif //GRIDVIEWDLG_HPP

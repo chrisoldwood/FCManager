@@ -127,6 +127,8 @@ void CGridViewDlg::OnCommand(uint iCmdID)
 		case ID_OPTIONS_PRINT:		OnPrint();		break;
 		case ID_OPTIONS_IMPORT:		OnImport();		break;
 		case ID_OPTIONS_EXPORT:		OnExport();		break;
+		case ID_OPTIONS_MISC_1:		OnMiscCmd1();	break;
+		case ID_OPTIONS_MISC_2:		OnMiscCmd2();	break;
 		default:					ASSERT(false);	break;
 	}
 }
@@ -206,6 +208,16 @@ void CGridViewDlg::OnImport()
 }
 
 void CGridViewDlg::OnExport()
+{
+	ASSERT(false);
+}
+
+void CGridViewDlg::OnMiscCmd1()
+{
+	ASSERT(false);
+}
+
+void CGridViewDlg::OnMiscCmd2()
 {
 	ASSERT(false);
 }
