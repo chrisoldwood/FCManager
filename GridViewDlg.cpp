@@ -9,13 +9,14 @@
 */
 
 #include "AppHeaders.hpp"
+#include "PrintViewDlg.hpp"
 
 // The file extension for importing/exporting.
-static char szExts[] = {	"Data Files (*.DAT)\0*.DAT\0"
+static char szExts[] = {	"Data Files (*.dat)\0*.dat\0"
 							"All Files (*.*)\0*.*\0"
 							"\0\0"							};
 
-static char szDefExt[] = { "DAT" };
+static char szDefExt[] = { "dat" };
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -144,6 +145,13 @@ void CGridViewDlg::OnUIUpdate()
 	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
 	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, true);
 	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, bRows);
+
+	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
+	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_DeleteBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_PrintBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_ImportBtn.Enable(true);
+	App.m_AppWnd.m_ToolBar.m_ExportBtn.Enable(bRows);
 }
 
 /******************************************************************************
@@ -285,6 +293,30 @@ void CGridViewDlg::DeleteRow(int nGridRow)
 CString CGridViewDlg::GetCellData(int nColumn, CRow& oRow, int nField)
 {
 	return oRow[nField];
+}
+
+/******************************************************************************
+** Method:		PrintView()
+**
+** Description:	Prints the table associated with the view.
+**
+** Parameters:	strViewName		The name of the view.
+**
+** Returns:		true or false.
+**
+*******************************************************************************
+*/
+
+void CGridViewDlg::PrintView(const CString& strViewName)
+{
+	CPrintViewDlg Dlg(strViewName);
+
+	// Query for the printer and print parameters.
+	if (Dlg.RunModal(*this) == IDOK)
+	{
+
+
+	}
 }
 
 /******************************************************************************

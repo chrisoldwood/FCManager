@@ -88,8 +88,9 @@ protected:
 	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
 
 	//
-	// Persistance methods.
+	// View helpers.
 	//
+	void PrintView(const CString& strViewName);
 	bool ImportTable(uint32 iFormat, uint32 iVersion);
 	bool ExportTable(uint32 iFormat, uint32 iVersion);
 };
