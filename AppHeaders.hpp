@@ -36,13 +36,16 @@
 #include "Members.hpp"
 #include "Fixtures.hpp"
 #include "BalSheet.hpp"
+#include "Subs.hpp"
+#include "TeamSels.hpp"
 #include "Opponents.hpp"
 #include "Referees.hpp"
 #include "FCMDB.hpp"
 #include "FCMDoc.hpp"
 
-// Common dialog classes.
+// Common dialog/ctrl classes.
 #include "NotesDlg.hpp"
+#include "PitchCtrl.hpp"
 
 // App view classes.
 #include "ViewsBar.hpp"
@@ -50,6 +53,7 @@
 #include "GridViewDlg.hpp"
 #include "MembersView.hpp"
 #include "FixturesView.hpp"
+#include "SubsView.hpp"
 #include "BalSheetView.hpp"
 #include "TeamSelsView.hpp"
 #include "OpponentsView.hpp"
