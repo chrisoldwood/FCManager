@@ -225,6 +225,18 @@ void CBalSheetView::OnDelete()
 
 void CBalSheetView::OnPrint()
 {
+	enum { NUM_PRT_COLUMNS = 5 };
+
+	GridColumn aColumns[NUM_PRT_COLUMNS] =
+	{
+		{ "Item",     150, LVCFMT_LEFT,  CBalSheet::NAME,         true },
+		{ "Date",     100, LVCFMT_LEFT,  CBalSheet::DATE,         true },
+		{ "£ Credit",  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL, true },
+		{ "£ Debit",   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL,  true },
+		{ "£ Balance", 75, LVCFMT_RIGHT, CBalSheet::BALANCE,      true }
+	};
+
+	PrintView("Balance Sheet", NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************

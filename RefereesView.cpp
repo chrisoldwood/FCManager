@@ -157,14 +157,16 @@ void CRefereesView::OnDelete()
 
 void CRefereesView::OnPrint()
 {
-	GridColumn aColumns[NUM_COLUMNS] =
+	enum { NUM_PRT_COLUMNS = 3 };
+
+	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",       33, LVCFMT_LEFT, 0                          },
-		{ "Phone #1",   33, LVCFMT_LEFT, CReferees::STANDARD_PHONE  },
-		{ "Phone #2",   33, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE },
+		{ "Name",       33, LVCFMT_LEFT, 0,                          true },
+		{ "Phone #1",   33, LVCFMT_LEFT, CReferees::STANDARD_PHONE,  true },
+		{ "Phone #2",   33, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE, true },
 	};
 
-	PrintView("Referees", NUM_COLUMNS, aColumns);
+	PrintView("Referees", NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************

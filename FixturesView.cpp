@@ -161,6 +161,19 @@ void CFixturesView::OnDelete()
 
 void CFixturesView::OnPrint()
 {
+	enum { NUM_PRT_COLUMNS = 6 };
+
+	GridColumn aColumns[NUM_PRT_COLUMNS] =
+	{
+		{ "Date",       75, LVCFMT_LEFT,   CFixtures::DATE,      true },
+		{ "Type",       75, LVCFMT_LEFT,   CFixtures::TYPE,      true },
+		{ "Home Team", 150, LVCFMT_LEFT,   CFixtures::HOME_TEAM, true },
+		{ "Result",     75, LVCFMT_CENTER, CFixtures::RESULT,    true },
+		{ "Away Team", 150, LVCFMT_LEFT,   CFixtures::AWAY_TEAM, true },
+		{ "Referee",   125, LVCFMT_LEFT,   CFixtures::REFEREE,   true },
+	};
+
+	PrintView("Fixtures", NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************

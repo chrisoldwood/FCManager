@@ -188,16 +188,20 @@ void CMembersView::OnDelete()
 
 void CMembersView::OnPrint()
 {
-	GridColumn aColumns[NUM_COLUMNS] =
+	enum { NUM_PRT_COLUMNS = 7 };
+
+	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",        20, LVCFMT_LEFT, 0                         },
-		{ "Phone #1",    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE  },
-		{ "Phone #2",    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE },
-		{ "Registered",  10, LVCFMT_LEFT, CMembers::IS_REGISTERED   },
-		{ "Senior",      10, LVCFMT_LEFT, CMembers::IS_SENIOR       }
+		{ "Name",        20, LVCFMT_LEFT, 0,                         true  },
+		{ "Phone #1",    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE,  true  },
+		{ "Phone #2",    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE, true  },
+		{ "Address",     20, LVCFMT_LEFT, CMembers::POSTAL_ADDRESS,  false },
+		{ "Email",       20, LVCFMT_LEFT, CMembers::EMAIL_ADDRESS,   false },
+		{ "Registered",  10, LVCFMT_LEFT, CMembers::IS_REGISTERED,   true  },
+		{ "Senior",      10, LVCFMT_LEFT, CMembers::IS_SENIOR,       true  }
 	};
 
-	PrintView("Members", NUM_COLUMNS, aColumns);
+	PrintView("Members", NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
