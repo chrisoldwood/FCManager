@@ -26,6 +26,12 @@ public:
 	// Constructors/Destructor.
 	//
 	CMemStats(CMDB& oDB, CMemStatTypes& oTypes);
+
+	//
+	// Methods.
+	//
+	void DeleteMembersStats(int nMember);
+	void DeleteTypesStats(int nType);
 };
 
 /******************************************************************************
@@ -38,6 +44,16 @@ public:
 inline CMemStats::CMemStats(CMDB& oDB, CMemStatTypes& oTypes)
 	: CStats(oDB, "MemStats", oTypes)
 {
+}
+
+inline void CMemStats::DeleteMembersStats(int nMember)
+{
+	DeleteRows(Select(CWhereEqual(OWNER_ID, nMember)));
+}
+
+inline void CMemStats::DeleteTypesStats(int nType)
+{
+	DeleteRows(Select(CWhereEqual(TYPE_ID, nType)));
 }
 
 #endif //MEMSTATS_HPP
