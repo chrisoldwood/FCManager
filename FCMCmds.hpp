@@ -50,8 +50,11 @@ public:
 	// Data View options menu.
 	void OnDataViewCmd(uint iCmdID);
 
-	// Data View options menu.
-	void OnReportCmd(uint iCmdID);
+	// Reports menu.
+	void OnReportMembers();
+	void OnReportFixtures();
+	void OnReportOpponents();
+	void OnReportReferees();
 
 	// Debug menu.
 	void OnDebugClipboard();
@@ -80,7 +83,10 @@ public:
 	void OnUIDataViewCmds();
 
 	// Reports menu.
-	void OnUIReportCmds();
+	void OnUIReportMembers();
+	void OnUIReportFixtures();
+	void OnUIReportOpponents();
+	void OnUIReportReferees();
 
 	// Debug menu.
 	void OnUIDebugClipboard();

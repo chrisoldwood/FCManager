@@ -28,10 +28,6 @@ const int VIEW_ICONS_BASE = 3;
 const int VIEW_HINTS_BASE  = 10000;
 const int VIEW_HINTS_DELTA = 100;
 
-// The cmd ID range of the reports.
-const int ID_REPORT_FIRST = ID_REPORTS_MEMBERS;
-const int ID_REPORT_LAST  = ID_REPORTS_CUSTOM;
-
 // Range of MRU commands.
 const int ID_MRU_FIRST = ID_FILE_MRU_1;
 const int ID_MRU_LAST  = ID_FILE_MRU_4;
@@ -62,26 +58,29 @@ CFCMCmds::CFCMCmds()
 	// Define the command table.
 	DEFINE_CMD_TABLE
 		// File menu.
-		CMD_ENTRY(ID_FILE_NEW,							OnFileNew,			NULL,				 0)
-		CMD_ENTRY(ID_FILE_OPEN,							OnFileOpen,			NULL,				 1)
-		CMD_ENTRY(ID_FILE_SAVE,							OnFileSave,			OnUIFileSave,		 2)
-		CMD_ENTRY(ID_FILE_SAVEAS,						OnFileSaveAs,		OnUIFileSaveAs,		-1)
-		CMD_ENTRY(ID_FILE_CLOSE,						OnFileClose,		OnUIFileClose,		 1)
-		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,			OnFileOpenMRU,		OnUIFileOpenMRU,	-1)
-		CMD_ENTRY(ID_FILE_EXIT,							OnFileExit,			NULL,				-1)
+		CMD_ENTRY(ID_FILE_NEW,							OnFileNew,				NULL,					 0)
+		CMD_ENTRY(ID_FILE_OPEN,							OnFileOpen,				NULL,					 1)
+		CMD_ENTRY(ID_FILE_SAVE,							OnFileSave,				OnUIFileSave,			 2)
+		CMD_ENTRY(ID_FILE_SAVEAS,						OnFileSaveAs,			OnUIFileSaveAs,			-1)
+		CMD_ENTRY(ID_FILE_CLOSE,						OnFileClose,			OnUIFileClose,			 1)
+		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,			OnFileOpenMRU,			OnUIFileOpenMRU,		-1)
+		CMD_ENTRY(ID_FILE_EXIT,							OnFileExit,				NULL,					-1)
 		// View menu.
-		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,			OnViewDataView,		OnUIViewDataView,	-1)
+		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,			OnViewDataView,			OnUIViewDataView,		-1)
 		// Club menu.
-		CMD_ENTRY(ID_CLUB_DETAILS,						OnClubDetails,		OnUIClubDetails,	-1)
+		CMD_ENTRY(ID_CLUB_DETAILS,						OnClubDetails,			OnUIClubDetails,		-1)
 		// Data View menu.
-		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	OnDataViewCmd,		OnUIDataViewCmds,	-1)
+		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	OnDataViewCmd,			OnUIDataViewCmds,		-1)
 		// Report menu.
-		CMD_RANGE(ID_REPORT_FIRST, ID_REPORT_LAST,		OnReportCmd,		OnUIReportCmds,		-1)
+		CMD_ENTRY(ID_REPORTS_MEMBERS,					OnReportMembers,		OnUIReportMembers,		-1)
+		CMD_ENTRY(ID_REPORTS_FIXTURES,					OnReportFixtures,		OnUIReportFixtures,		-1)
+		CMD_ENTRY(ID_REPORTS_OPPONENTS,					OnReportOpponents,		OnUIReportOpponents,	-1)
+		CMD_ENTRY(ID_REPORTS_REFEREES,					OnReportReferees,		OnUIReportReferees,		-1)
 		// Debug menu.
-		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,	OnUIDebugClipboard,	9)
-		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,		OnUIDebugFile,	9)
+		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,		OnUIDebugClipboard,		 9)
+		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,			OnUIDebugFile,			 9)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,		NULL,				9)
+		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,			NULL,					 9)
 	END_CMD_TABLE
 }
 
@@ -320,18 +319,30 @@ void CFCMCmds::OnDataViewCmd(uint iCmdID)
 }
 
 /******************************************************************************
-** Method:		OnReportCmd()
+** Method:		OnReport*()
 **
 ** Description:	Execute a report.
 **
-** Parameters:	iCmdID		The ID of the command to execute.
+** Parameters:	None.
 **
 ** Returns:		Nothing.
 **
 *******************************************************************************
 */
 
-void CFCMCmds::OnReportCmd(uint /*iCmdID*/)
+void CFCMCmds::OnReportMembers()
+{
+}
+
+void CFCMCmds::OnReportFixtures()
+{
+}
+
+void CFCMCmds::OnReportOpponents()
+{
+}
+
+void CFCMCmds::OnReportReferees()
 {
 }
 
@@ -521,11 +532,23 @@ void CFCMCmds::OnUIDataViewCmds()
 	}
 }
 
-void CFCMCmds::OnUIReportCmds()
+void CFCMCmds::OnUIReportMembers()
 {
 	bool bDocOpen = (App.m_pDoc != NULL);
 
 	App.m_AppWnd.m_Menu.EnableItem(REPORTS_MENU_POS, bDocOpen);
+}
+
+void CFCMCmds::OnUIReportFixtures()
+{
+}
+
+void CFCMCmds::OnUIReportOpponents()
+{
+}
+
+void CFCMCmds::OnUIReportReferees()
+{
 }
 
 void CFCMCmds::OnUIDebugClipboard()
