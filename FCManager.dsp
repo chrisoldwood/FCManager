@@ -23,8 +23,8 @@ CFG=FCManager - Win32 Debug
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
-# PROP Scc_ProjName ""
-# PROP Scc_LocalPath ""
+# PROP Scc_ProjName ""$/Win32/FCManager", MAAAAAAA"
+# PROP Scc_LocalPath "."
 CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
@@ -171,6 +171,10 @@ SOURCE=.\Members.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\MemberSubsDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MembersView.cpp
 # End Source File
 # Begin Source File
@@ -191,6 +195,14 @@ SOURCE=.\OpponentsView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\PitchCtrl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PrintViewDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\RefereeDlg.cpp
 # End Source File
 # Begin Source File
@@ -200,6 +212,22 @@ SOURCE=.\Referees.cpp
 # Begin Source File
 
 SOURCE=.\RefereesView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Subs.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SubsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TeamSelDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TeamSels.cpp
 # End Source File
 # Begin Source File
 
@@ -303,6 +331,10 @@ SOURCE=.\Members.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\MemberSubsDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MembersView.hpp
 # End Source File
 # Begin Source File
@@ -323,6 +355,14 @@ SOURCE=.\OpponentsView.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\PitchCtrl.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PrintViewDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\RefereeDlg.hpp
 # End Source File
 # Begin Source File
@@ -336,6 +376,22 @@ SOURCE=.\RefereesView.hpp
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Subs.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SubsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TeamSelDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TeamSels.hpp
 # End Source File
 # Begin Source File
 
