@@ -52,14 +52,15 @@ CBalSheetView::CBalSheetView(CFCMDoc& rDoc)
 
 void CBalSheetView::OnUIUpdate()
 {
-	bool bRows = (m_oTable.RowCount() != 0);
+	bool bRows = (m_oTable.RowCount() > 1);
 
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, false);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, false);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,       true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,      bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE,    bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETEALL, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,     bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT,    false);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT,    false);
 
 	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
 	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
@@ -93,6 +94,7 @@ void CBalSheetView::OnAdd()
 		// Add to the table.
 		m_oTable.InsertRow(oRow);
 		Dlg.UpdateSubsTable();
+		Dlg.UpdateExpsTable();
 
 		// Add to the list view and select it.
 		int iLVItem = AddRow(oRow, true);
@@ -146,6 +148,7 @@ void CBalSheetView::OnEdit()
 	if (Dlg.RunModal(*this) == IDOK)
 	{
 		Dlg.UpdateSubsTable();
+		Dlg.UpdateExpsTable();
 
 		// Update the list view.
 		UpdateRow(iLVItem, true);
@@ -201,6 +204,39 @@ void CBalSheetView::OnDelete()
 	// Remove from the list view and collection.
 	DeleteRow(iLVItem);
 	m_oTable.DeleteRow(oRow);
+
+	// Update totals.
+	CBalSheet& oTable = static_cast<CBalSheet&>(m_oTable);
+
+	oTable.UpdateTotalsRow();
+	UpdateRow(m_lvGrid.ItemCount()-1, false);
+
+	App.m_AppCmds.UpdateUI();
+}
+
+/******************************************************************************
+** Method:		OnDeleteAll()
+**
+** Description:	Allows the user to delete all items, after confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CBalSheetView::OnDeleteAll()
+{
+	ASSERT(false);
+
+	// Get user to confirm action.
+	if (QueryMsg("Delete ALL items?") != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteAllRows();
+	m_oTable.Truncate();
 
 	// Update totals.
 	CBalSheet& oTable = static_cast<CBalSheet&>(m_oTable);
