@@ -89,6 +89,9 @@ void CFCMMainWnd::OnCreate(const CRect& rcClient)
 
 bool CFCMMainWnd::OnQueryClose()
 {
+	// Save windows final position.
+	App.m_rcAppWnd = Placement();
+
 	// Close the app if the file was closed.
 	return App.m_AppCmds.CloseFile();
 }
