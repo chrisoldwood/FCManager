@@ -129,7 +129,7 @@ void CGridViewDlg::OnCommand(uint iCmdID)
 		case ID_OPTIONS_EXPORT:		OnExport();		break;
 		case ID_OPTIONS_MISC_1:		OnMiscCmd1();	break;
 		case ID_OPTIONS_MISC_2:		OnMiscCmd2();	break;
-		default:					ASSERT(false);	break;
+		default:					ASSERT_FALSE();	break;
 	}
 }
 
@@ -179,47 +179,47 @@ void CGridViewDlg::OnUIUpdate()
 
 void CGridViewDlg::OnAdd()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnEdit()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnDelete()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnDeleteAll()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnPrint()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnImport()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnExport()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnMiscCmd1()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 void CGridViewDlg::OnMiscCmd2()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 }
 
 /******************************************************************************
@@ -343,7 +343,7 @@ void CGridViewDlg::DeleteAllRows()
 *******************************************************************************
 */
 
-CString CGridViewDlg::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CGridViewDlg::GetCellData(int /*nColumn*/, CRow& oRow, int nField)
 {
 	return oRow[nField];
 }
@@ -517,7 +517,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintCell(CDC& oDC, const CRect& rcCell, const char* pszText, int nAlignment, bool bBorder)
+void CGridViewDlg::PrintCell(CDC& /*oDC*/, const CRect& /*rcCell*/, const char* pszText, int nAlignment, bool /*bBorder*/)
 {
 	ASSERT( (nAlignment == LVCFMT_LEFT) || (nAlignment == LVCFMT_CENTER) || (nAlignment == LVCFMT_RIGHT) );
 
@@ -724,7 +724,7 @@ int CALLBACK GridCompareRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 *******************************************************************************
 */
 
-int CGridViewDlg::CompareRows(CRow& oRow1, CRow& oRow2)
+int CGridViewDlg::CompareRows(CRow& /*oRow1*/, CRow& /*oRow2*/)
 {
 	return 0;
 }
