@@ -12,6 +12,11 @@
 #ifndef OPPONENTDLG_HPP
 #define OPPONENTDLG_HPP
 
+#include "OpponentPage.hpp"
+#include "SecNamePage.hpp"
+#include "StatsPage.hpp"
+#include "NotesPage.hpp"
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit an opponents details.
@@ -19,43 +24,29 @@
 *******************************************************************************
 */
 
-class COpponentDlg : public CDialog
+class COpponentDlg : public CPropertySheet
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	COpponentDlg(CRow& oOpponent, bool bEditing);
+	COpponentDlg(CFCMDB& oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
 	//
-	CRow&	m_oOpponent;
+	CRow&	m_oRow;
 	
 protected:
 	//
 	// Members.
 	//
-	bool		m_bEditing;
+	bool			m_bEditing;
 
-	CEditBox	m_ebClubName;
-	CEditBox	m_ebGround;
-	CEditBox	m_ebStdColours;
-	CEditBox	m_ebAltColours;
-	CEditBox	m_ebSurname;
-	CEditBox	m_ebForename;
-	CEditBox	m_ebStdPhone;
-	CEditBox	m_ebAltPhone;
-	CEditBox	m_ebEmailAddr;
-	CEditBox	m_ebPostalAddr;
- 	CNotesDlg	m_oNotesDlg;
-
-	//
-	// Message processors.
-	//
-	virtual void OnInitDialog();
-	virtual bool OnOk();
-	        void OnNotes();
+	COpponentPage	m_oOpponentPage;
+	CSecNamePage	m_oSecretaryPage;
+	CStatsPage		m_oStatsPage;
+	CNotesPage		m_oNotesPage;
 };
 
 /******************************************************************************

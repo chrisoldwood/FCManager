@@ -12,6 +12,10 @@
 #ifndef FIXTUREDLG_HPP
 #define FIXTUREDLG_HPP
 
+#include "FixturePage.hpp"
+#include "StatsPage.hpp"
+#include "NotesPage.hpp"
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit a fixtures details.
@@ -19,18 +23,18 @@
 *******************************************************************************
 */
 
-class CFixtureDlg : public CDialog
+class CFixtureDlg : public CPropertySheet
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	CFixtureDlg(CRow& oFixture, bool bEditing);
+	CFixtureDlg(CFCMDB& oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
 	//
-	CRow&	m_oFixture;
+	CRow&	m_oRow;
 	
 protected:
 	//
@@ -38,20 +42,9 @@ protected:
 	//
 	bool		m_bEditing;
 
-	CDateTimePicker	m_dtpDate;
-	CComboBox		m_cbType;
-	CComboBox		m_cbHomeTeam;
-	CComboBox		m_cbAwayTeam;
-	CComboBox		m_cbReferee;
-	CEditBox		m_ebResult;
-	CNotesDlg	m_oNotesDlg;
-
-	//
-	// Message processors.
-	//
-	virtual void OnInitDialog();
-	virtual bool OnOk();
-	        void OnNotes();
+	CFixturePage	m_oDetailsPage;
+	CStatsPage		m_oStatsPage;
+	CNotesPage		m_oNotesPage;
 };
 
 /******************************************************************************

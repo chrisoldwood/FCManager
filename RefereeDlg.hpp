@@ -12,6 +12,10 @@
 #ifndef REFEREEDLG_HPP
 #define REFEREEDLG_HPP
 
+#include "RefNamePage.hpp"
+#include "StatsPage.hpp"
+#include "NotesPage.hpp"
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit a referees details.
@@ -19,18 +23,18 @@
 *******************************************************************************
 */
 
-class CRefereeDlg : public CDialog
+class CRefereeDlg : public CPropertySheet
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	CRefereeDlg(CRow& oReferee, bool bEditing);
+	CRefereeDlg(CFCMDB& oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
 	//
-	CRow&	m_oReferee;
+	CRow&	m_oRow;
 	
 protected:
 	//
@@ -38,20 +42,9 @@ protected:
 	//
 	bool		m_bEditing;
 
-	CEditBox	m_ebSurname;
-	CEditBox	m_ebForename;
-	CEditBox	m_ebStdPhone;
-	CEditBox	m_ebAltPhone;
-	CEditBox	m_ebEmailAddr;
-	CEditBox	m_ebPostalAddr;
-	CNotesDlg	m_oNotesDlg;
-
-	//
-	// Message processors.
-	//
-	virtual void OnInitDialog();
-	virtual bool OnOk();
-	        void OnNotes();
+	CRefNamePage	m_oNamePage;
+	CStatsPage		m_oStatsPage;
+	CNotesPage		m_oNotesPage;
 };
 
 /******************************************************************************

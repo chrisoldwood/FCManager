@@ -12,10 +12,11 @@
 #ifndef MEMBERDLG_HPP
 #define MEMBERDLG_HPP
 
-#include "NamePageDlg.hpp"
-#include "MbrStatusPageDlg.hpp"
-#include "StatsPageDlg.hpp"
-#include "NotesPageDlg.hpp"
+#include "MemNamePage.hpp"
+#include "MemStatusPage.hpp"
+#include "PaymentsPage.hpp"
+#include "StatsPage.hpp"
+#include "NotesPage.hpp"
 
 /******************************************************************************
 ** 
@@ -24,13 +25,13 @@
 *******************************************************************************
 */
 
-class CMemberDlg : public CPropertyDlg
+class CMemberDlg : public CPropertySheet
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemberDlg(CRow& oRow, bool bEditing);
+	CMemberDlg(CFCMDB& oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
@@ -41,18 +42,13 @@ protected:
 	//
 	// Members.
 	//
-	bool				m_bEditing;
+	bool			m_bEditing;
 
-	CNamePageDlg		m_oNamePage;
-	CMbrStatusPageDlg	m_oStatusPage;
-	CStatsPageDlg		m_oStatsPage;
-	CNotesPageDlg		m_oNotesPage;
-
-	//
-	// Message processors.
-	//
-	virtual void OnInitDialog();
-	virtual bool OnOk();
+	CMemNamePage	m_oNamePage;
+	CMemStatusPage	m_oStatusPage;
+	CPaymentsPage	m_oPaymentsPage;
+	CStatsPage		m_oStatsPage;
+	CNotesPage		m_oNotesPage;
 };
 
 /******************************************************************************

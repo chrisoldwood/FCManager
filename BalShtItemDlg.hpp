@@ -12,6 +12,11 @@
 #ifndef BALSHTITEMDLG_HPP
 #define BALSHTITEMDLG_HPP
 
+#include "BalShtItemPage.hpp"
+#include "IncomePage.hpp"
+#include "ExpensesPage.hpp"
+#include "NotesPage.hpp"
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit a balance sheet items details.
@@ -19,18 +24,18 @@
 *******************************************************************************
 */
 
-class CBalShtItemDlg : public CDialog
+class CBalShtItemDlg : public CPropertySheet
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	CBalShtItemDlg(CMDB& m_oDB, CRow& oItem, bool bEditing);
+	CBalShtItemDlg(CFCMDB& m_oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
 	//
-	CRow&	m_oItem;
+	CRow&	m_oRow;
 	
 	//
 	// Ancillary table methods.
@@ -44,55 +49,15 @@ protected:
 	//
 	bool			m_bEditing;
 
-	CEditBox		m_ebName;
-	CDateTimePicker	m_dtpDate;
-	CComboBox		m_cbType;
-	CRadioBtn		m_rbNoCredit;
-	CRadioBtn		m_rbFxdCredit;
-	CRadioBtn		m_rbVarCredit;
-	CListBox		m_lbCredits;
-	CDecimalBox		m_ebCredit;
-	CRadioBtn		m_rbNoDebit;
-	CRadioBtn		m_rbFxdDebit;
-	CRadioBtn		m_rbVarDebit;
-	CDecimalBox		m_ebDebit;
-	CListBox		m_lbDebits;
-	CNotesDlg		m_oNotesDlg;
-
-	CMDB&			m_oDB;
+	CFCMDB&			m_oDB;
 	int				m_nItemID;
-	CTable			m_oTmpSubs;
-	CTable&			m_oMembers;
+	CTmpSubs		m_oTmpSubs;
+	CMembers&		m_oMembers;
 
-	//
-	// Message processors.
-	//
-	virtual void OnInitDialog();
-	virtual bool OnOk();
-	
-	void OnNotes();
-	void OnNoCredit();
-	void OnFxdCredit();
-	void OnVarCredit();
-	void OnNoDebit();
-	void OnFxdDebit();
-	void OnVarDebit();
-	void OnAddCredit();
-	void OnEditCredit();
-	void OnDelCredit();
-	void OnAddDebit();
-	void OnEditDebit();
-	void OnDelDebit();
-
-	//
-	// Internal methods.
-	//
-	void RefreshCredits();
-	void RefreshDebits();
-	void UpdateCreditBtns();
-	void UpdateDebitBtns();
-	void UpdateCreditsTotal();
-	void UpdateDebitsTotal();
+	CBalShtItemPage	m_oItemPage;
+	CIncomePage		m_oIncomePage;
+	CExpensesPage	m_oExpensesPage;
+	CNotesPage		m_oNotesPage;
 };
 
 /******************************************************************************
