@@ -28,6 +28,7 @@
 #define ID_VIEW_TEAM_SEL                205
 #define ID_VIEW_OPPONENTS               206
 #define ID_VIEW_REFEREES                207
+#define ID_CLUB_FIXTURE                 230
 #define ID_CLUB_POPUP                   300
 #define ID_CLUB_DETAILS                 301
 #define ID_CLUB_EXPENSES                302
@@ -40,6 +41,9 @@
 #define ID_OPTIONS_EXPORT               406
 #define ID_REPORTS_POPUP                500
 #define ID_REPORTS_NONE                 501
+#define ID_DEBUG_POPUP                  800
+#define ID_DEBUG_DBCLIPBOARD            801
+#define ID_DEBUG_DBFILE                 802
 #define ID_HELP_POPUP                   900
 #define ID_HELP_ABOUT                   901
 #define IDC_SURNAME                     1004
@@ -48,6 +52,7 @@
 #define IDC_EMAIL_ADDRESS               1009
 #define IDC_NOTES                       1010
 #define IDC_ADD_CREDIT                  1011
+#define IDC_STATS                       1011
 #define IDC_GROUND                      1012
 #define IDC_EDIT_CREDIT                 1012
 #define IDC_STD_COLOURS                 1013
@@ -67,6 +72,7 @@
 #define IDC_USUAL_TEAM                  1024
 #define IDC_USUAL_POS                   1025
 #define IDC_CLUB_NAME                   1027
+#define IDC_SEASON                      1028
 #define IDC_STD_PHONE                   1031
 #define IDC_ALT_PHONE                   1032
 #define IDC_GRID                        1033
@@ -93,6 +99,11 @@
 #define IDC_FORMATION_LABEL             1057
 #define IDC_FORMATION                   1058
 #define IDC_OPPONENT                    1059
+#define IDC_TAB_CTRL                    1060
+#define IDC_NEW                         1063
+#define IDC_ADD                         1064
+#define IDC_EDIT                        1065
+#define IDC_DELETE                      1066
 #define IDD_ABOUT                       5000
 #define IDD_GRID_VIEW                   5001
 #define IDD_MEMBER                      5002
@@ -105,6 +116,12 @@
 #define IDD_BALSHEET_ITEM               5009
 #define IDD_MEMBER_SUBS                 5010
 #define IDD_PRINT_VIEW                  5011
+#define IDD_PROPERTY                    5012
+#define IDD_NOTES_PAGE                  5013
+#define IDD_STATS_PAGE                  5014
+#define IDD_NAME_PAGE                   5015
+#define IDD_MBR_STATUS_PAGE             5016
+#define IDD_MBRSTATUS_PAGE              5017
 #define ID_MEMBERS_POPUP                10000
 #define ID_MEMBERS_ADD                  10001
 #define ID_MEMBERS_EDIT                 10002
@@ -152,9 +169,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        219
-#define _APS_NEXT_COMMAND_VALUE         227
-#define _APS_NEXT_CONTROL_VALUE         1060
+#define _APS_NEXT_RESOURCE_VALUE        225
+#define _APS_NEXT_COMMAND_VALUE         233
+#define _APS_NEXT_CONTROL_VALUE         1064
 #define _APS_NEXT_SYMED_VALUE           200
 #endif
 #endif

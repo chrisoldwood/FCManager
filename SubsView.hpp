@@ -27,11 +27,28 @@ public:
 	//
 	CSubsView(CFCMDoc& rDoc);
 	
+	//
+	// Methods (Overriden).
+	//
+	virtual void OnSelect();
+	virtual void OnCommand(uint iCmdID);
+	virtual void OnUIUpdate();
+
+	//
+	// Commands.
+	//
+	virtual void OnPrint();
+
 protected:
 	//
 	// Members.
 	//
 	CFCMDoc&	m_rDoc;
+	CMDB&		m_oDB;
+	CTable&		m_oMembers;
+	CTable&		m_oBalSheet;
+	CTable&		m_oSubs;
+	CListView	m_lvGrid;
 	
 	//
 	// Message handlers.
@@ -45,6 +62,7 @@ protected:
 	//
 	// Internal methods.
 	//
+	void LoadGrid();
 };
 
 /******************************************************************************
