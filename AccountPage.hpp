@@ -34,8 +34,14 @@ protected:
 	CRow&			m_oRow;
 
 	CString			m_strName;
+	int				m_nType;
+	int				m_nTotal;
 
 	CEditBox		m_ebName;
+	CDecimalBox		m_ebBalance;
+	CRadioBtn		m_rbFixed;
+	CRadioBtn		m_rbVariable;
+	CListView		m_lvTrans;
 
 	//
 	// Message processors.
@@ -43,6 +49,20 @@ protected:
 	virtual void OnInitDialog();
 	virtual bool OnValidate();
 	virtual bool OnOk();
+
+	void OnFixed();
+	void OnVariable();
+	void OnAddTrans();
+	void OnEditTrans();
+	void OnDelTrans();
+	LRESULT OnDblClick(NMHDR&);
+
+	//
+	// Internal methods.
+	//
+//	void RefreshTrans();
+//	void UpdateTransBtns();
+//	void UpdateTransTotal();
 };
 
 /******************************************************************************
