@@ -152,7 +152,16 @@ void COpponentsView::OnDelete()
 
 void COpponentsView::OnPrint()
 {
-	PrintView("Opponents");
+	GridColumn aColumns[NUM_COLUMNS] =
+	{
+		{ "Name",      20, LVCFMT_LEFT, COpponents::CLUB_NAME       },
+		{ "Ground",    20, LVCFMT_LEFT, COpponents::GROUND          },
+		{ "Secretary", 20, LVCFMT_LEFT, 0                           },
+		{ "Phone #1",  20, LVCFMT_LEFT, COpponents::STANDARD_PHONE  },
+		{ "Phone #2",  20, LVCFMT_LEFT, COpponents::ALTERNATE_PHONE },
+	};
+
+	PrintView("Opponents", NUM_COLUMNS, aColumns);
 }
 
 /******************************************************************************

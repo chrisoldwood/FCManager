@@ -39,6 +39,37 @@ CMembersView::CMembersView(CFCMDoc& rDoc)
 }
 
 /******************************************************************************
+** Method:		OnUIUpdate()
+**
+** Description:	Updates the UI for the options menu.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMembersView::OnUIUpdate()
+{
+	bool bRows = (m_oTable.RowCount() != 0);
+
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, !bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, bRows);
+
+	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
+	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_DeleteBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_PrintBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_ImportBtn.Enable(!bRows);
+	App.m_AppWnd.m_ToolBar.m_ExportBtn.Enable(bRows);
+}
+
+/******************************************************************************
 ** Method:		OnAdd()
 **
 ** Description:	Allows the user to add a new member.
@@ -72,6 +103,7 @@ void CMembersView::OnAdd()
 	{
 		delete &oRow;
 	}
+
 }
 
 /******************************************************************************
@@ -150,7 +182,16 @@ void CMembersView::OnDelete()
 
 void CMembersView::OnPrint()
 {
-	PrintView("Members");
+	GridColumn aColumns[NUM_COLUMNS] =
+	{
+		{ "Name",        20, LVCFMT_LEFT, 0                         },
+		{ "Phone #1",    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE  },
+		{ "Phone #2",    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE },
+		{ "Registered",  10, LVCFMT_LEFT, CMembers::IS_REGISTERED   },
+		{ "Senior",      10, LVCFMT_LEFT, CMembers::IS_SENIOR       }
+	};
+
+	PrintView("Members", NUM_COLUMNS, aColumns);
 }
 
 /******************************************************************************

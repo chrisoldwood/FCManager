@@ -14,7 +14,7 @@
 // The list view columns.
 GridColumn CRefereesView::Columns[NUM_COLUMNS] =
 {
-	{ "Name",       150, LVCFMT_LEFT, 0                         },
+	{ "Name",       150, LVCFMT_LEFT, 0                          },
 	{ "Phone #1",   150, LVCFMT_LEFT, CReferees::STANDARD_PHONE  },
 	{ "Phone #2",   150, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE },
 };
@@ -149,7 +149,14 @@ void CRefereesView::OnDelete()
 
 void CRefereesView::OnPrint()
 {
-	PrintView("Referees");
+	GridColumn aColumns[NUM_COLUMNS] =
+	{
+		{ "Name",       33, LVCFMT_LEFT, 0                          },
+		{ "Phone #1",   33, LVCFMT_LEFT, CReferees::STANDARD_PHONE  },
+		{ "Phone #2",   33, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE },
+	};
+
+	PrintView("Referees", NUM_COLUMNS, aColumns);
 }
 
 /******************************************************************************
