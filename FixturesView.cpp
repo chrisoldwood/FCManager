@@ -10,6 +10,7 @@
 
 #include "AppHeaders.hpp"
 #include "FixtureDlg.hpp"
+#include "StatTypesDlg.hpp"
 
 // The list view columns.
 GridColumn CFixturesView::Columns[NUM_COLUMNS] =
@@ -233,6 +234,30 @@ void CFixturesView::OnImport()
 void CFixturesView::OnExport()
 {
 	ExportTable(CFixtures::FILE_FORMAT, CFixtures::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnMiscCmd1()
+**
+** Description:	Maintain the statistic types.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFixturesView::OnMiscCmd1()
+{
+	// Get the stat types and those currently in use.
+	CFixStatTypes& oTypes = m_oDB.m_oFixStatTypes;
+	CFixStats&     oStats = m_oDB.m_oFixStats;
+	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
+
+	CStatTypesDlg Dlg("Fixture", oTypes, oUsed);
+
+	Dlg.RunModal(*this);
 }
 
 /******************************************************************************

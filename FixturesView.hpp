@@ -37,6 +37,7 @@ public:
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
+	virtual void OnMiscCmd1();
 
 protected:
 	//
