@@ -49,14 +49,12 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 		CTRLGRAV(IDC_ADD,    LEFT_EDGE,  BOTTOM_EDGE, LEFT_EDGE,   BOTTOM_EDGE)
 		CTRLGRAV(IDC_EDIT,   LEFT_EDGE,  BOTTOM_EDGE, LEFT_EDGE,   BOTTOM_EDGE)
 		CTRLGRAV(IDC_DELETE, LEFT_EDGE,  BOTTOM_EDGE, LEFT_EDGE,   BOTTOM_EDGE)
-		CTRLGRAV(IDC_TYPES,  RIGHT_EDGE, BOTTOM_EDGE, RIGHT_EDGE,  BOTTOM_EDGE)
 	END_GRAVITY_TABLE
 
 	DEFINE_CTRLMSG_TABLE
 		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED, OnAdd     )
 		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED, OnEdit    )
 		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED, OnDelete  )
-		CMD_CTRLMSG(IDC_TYPES,	BN_CLICKED, OnTypes   )
 		NFY_CTRLMSG(IDC_STATS,  NM_DBLCLK,  OnDblClick)
 	END_CTRLMSG_TABLE
 
@@ -240,22 +238,6 @@ void CStatsPage::OnDelete()
 }
 
 /******************************************************************************
-** Method:		OnTypes()
-**
-** Description:	Maintain the statistic types.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
-
-void CStatsPage::OnTypes()
-{
-}
-
-/******************************************************************************
 ** Method:		OnDblClick()
 **
 ** Description:	Edit the row.
@@ -293,5 +275,4 @@ void CStatsPage::UpdateButtons()
 	Control(IDC_ADD).Enable(true);
 	Control(IDC_EDIT).Enable(bIsSelection);
 	Control(IDC_DELETE).Enable(bIsSelection);
-	Control(IDC_TYPES).Enable(false);
 }

@@ -62,7 +62,6 @@ protected:
 			void OnAdd();
 			void OnEdit();
 			void OnDelete();
-			void OnTypes();
 	     LRESULT OnDblClick(NMHDR& rMsgHdr);
 
 	//
