@@ -40,6 +40,37 @@ CBalSheetView::CBalSheetView(CFCMDoc& rDoc)
 }
 
 /******************************************************************************
+** Method:		OnUIUpdate()
+**
+** Description:	Updates the UI for the options menu.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CBalSheetView::OnUIUpdate()
+{
+	bool bRows = (m_oTable.RowCount() != 0);
+
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, false);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, false);
+
+	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
+	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_DeleteBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_PrintBtn.Enable(bRows);
+	App.m_AppWnd.m_ToolBar.m_ImportBtn.Enable(false);
+	App.m_AppWnd.m_ToolBar.m_ExportBtn.Enable(false);
+}
+
+/******************************************************************************
 ** Method:		OnAdd()
 **
 ** Description:	Allows the user to add a new item.
