@@ -53,7 +53,7 @@ void CExpenseTypeDlg::OnInitDialog()
 
 	// Initialise the controls with data.
 	m_ebName.Text(m_oRow[CExpenseTypes::NAME]);
-	m_ebDefault.Value(m_oRow[CExpenseTypes::DEFAULT].GetInt() / 100.0);
+	m_ebDefault.RealValue(m_oRow[CExpenseTypes::DEFAULT].GetInt() / 100.0);
 }
 
 /******************************************************************************
@@ -72,7 +72,7 @@ bool CExpenseTypeDlg::OnOk()
 {
 	// Get the controls data.
 	CString strName  = m_ebName.Text();
-	int     nDefault = (int) (m_ebDefault.Value() * 100.0);
+	int     nDefault = (int) (m_ebDefault.RealValue() * 100.0);
 
 	// Validate it.
 	if (strName.Length() == 0)

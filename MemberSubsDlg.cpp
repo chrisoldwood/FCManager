@@ -97,8 +97,8 @@ void CMemberSubsDlg::OnInitDialog()
 	m_cbMembers.Enable(!m_bEditing);
 
 	// Initialise the fields with data.
-	m_ebFee.Value (m_oRow[CSubs::FEE].GetInt()  / 100.0);
-	m_ebPaid.Value(m_oRow[CSubs::PAID].GetInt() / 100.0);
+	m_ebFee.RealValue (m_oRow[CSubs::FEE].GetInt()  / 100.0);
+	m_ebPaid.RealValue(m_oRow[CSubs::PAID].GetInt() / 100.0);
 }
 
 /******************************************************************************
@@ -117,8 +117,8 @@ bool CMemberSubsDlg::OnOk()
 {
 	// Fetch field data.
 	int nRow = m_cbMembers.ItemData(m_cbMembers.CurSel());
-	int nFee  = (int) (m_ebFee.Value()  * 100.0);
-	int nPaid = (int) (m_ebPaid.Value() * 100.0);
+	int nFee  = (int) (m_ebFee.RealValue()  * 100.0);
+	int nPaid = (int) (m_ebPaid.RealValue() * 100.0);
 
 	// Save member, if not editing.
 	if (!m_bEditing)

@@ -74,7 +74,7 @@ void CAccountPage::OnInitDialog()
 
 	// Initialise the fields with data.
 	m_ebName.Text(m_strName);
-	m_ebBalance.Value(m_nTotal / 100.0);
+	m_ebBalance.RealValue(m_nTotal / 100.0);
 
 	// Initialise controls.
 	switch(m_nType)
@@ -121,7 +121,7 @@ bool CAccountPage::OnValidate()
 		return false;
 	}
 
-	m_nTotal = (int) (m_ebBalance.Value() * 100.0);
+	m_nTotal = (int) (m_ebBalance.RealValue() * 100.0);
 	m_nType  = CAccounts::FIXED;
 
 	if (m_rbFixed.IsChecked())

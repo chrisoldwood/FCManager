@@ -92,7 +92,7 @@ void CExpenseItemDlg::OnInitDialog()
 
 	// Initialise the paid field.
 	if (m_bEditing)
-		m_ebPaid.Value(m_oRow[CExpenses::PAID].GetInt() / 100.0);
+		m_ebPaid.RealValue(m_oRow[CExpenses::PAID].GetInt() / 100.0);
 	else
 		OnSelectType();
 }
@@ -113,7 +113,7 @@ bool CExpenseItemDlg::OnOk()
 {
 	// Fetch field data.
 	int nRow  = m_cbTypes.ItemData(m_cbTypes.CurSel());
-	int nPaid = (int) (m_ebPaid.Value() * 100.0);
+	int nPaid = (int) (m_ebPaid.RealValue() * 100.0);
 
 	// Save type, if not editing.
 	if (!m_bEditing)
@@ -145,6 +145,6 @@ void CExpenseItemDlg::OnSelectType()
 		int nDefault = m_oTypes[nRow][CExpenseTypes::DEFAULT];
 
 		// Set the default value.
-		m_ebPaid.Value(nDefault / 100.0);
+		m_ebPaid.RealValue(nDefault / 100.0);
 	}
 }

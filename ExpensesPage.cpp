@@ -74,7 +74,7 @@ void CExpensesPage::OnInitDialog()
 	m_lvDebits.GridLines();
 
 	// Initialise the fields with data.
-	m_ebDebit.Value(m_nTotal / 100.0);
+	m_ebDebit.RealValue(m_nTotal / 100.0);
 
 	// Initialise controls.
 	switch(m_nType)
@@ -117,7 +117,7 @@ void CExpensesPage::OnInitDialog()
 
 bool CExpensesPage::OnValidate()
 {
-	m_nTotal = (int) (m_ebDebit.Value() * 100.0);
+	m_nTotal = (int) (m_ebDebit.RealValue() * 100.0);
 	m_nType  = CBalSheet::NONE;
 
 	if (m_rbFxdDebit.IsChecked())
@@ -173,7 +173,7 @@ void CExpensesPage::OnNoDebit()
 	Control(IDC_EDIT_DEBIT).Enable(false);
 	Control(IDC_DEL_DEBIT).Enable(false);
 
-	m_ebDebit.Value(0.0);
+	m_ebDebit.RealValue(0.0);
 }
 
 void CExpensesPage::OnFxdDebit()
@@ -353,5 +353,5 @@ void CExpensesPage::UpdateDebitsTotal()
 	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
 		nTotal += m_oTmpExps[i][CExpenses::PAID].GetInt();
 
-	m_ebDebit.Value(nTotal / 100.0);
+	m_ebDebit.RealValue(nTotal / 100.0);
 }

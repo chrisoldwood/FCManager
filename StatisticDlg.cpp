@@ -90,7 +90,7 @@ void CStatisticDlg::OnInitDialog()
 
 	// Initialise the fields with data.
 	m_dtpDate.SetDate(CDate(m_oRow[CTmpStats::DATE]));
-	m_ebValue.Value(m_oRow[CTmpStats::VALUE].GetDouble());
+	m_ebValue.RealValue(m_oRow[CTmpStats::VALUE].GetDouble());
 }
 
 /******************************************************************************
@@ -110,7 +110,7 @@ bool CStatisticDlg::OnOk()
 	// Fetch field data.
 	int    nRow   = m_cbTypes.ItemData(m_cbTypes.CurSel());
 	CRow&  oRow   = m_oStatTypes[nRow];
-	double dValue = m_ebValue.Value();
+	double dValue = m_ebValue.RealValue();
 
 	// Save changes.
 	m_oRow[CTmpStats::DATE]    = m_dtpDate.GetDate();

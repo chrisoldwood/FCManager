@@ -75,7 +75,7 @@ void CIncomePage::OnInitDialog()
 	m_lvCredits.GridLines();
 
 	// Initialise the fields with data.
-	m_ebCredit.Value(m_nTotal / 100.0);
+	m_ebCredit.RealValue(m_nTotal / 100.0);
 
 	// Initialise controls.
 	switch(m_nType)
@@ -118,7 +118,7 @@ void CIncomePage::OnInitDialog()
 
 bool CIncomePage::OnValidate()
 {
-	m_nTotal = (int) (m_ebCredit.Value() * 100.0);
+	m_nTotal = (int) (m_ebCredit.RealValue() * 100.0);
 	m_nType  = CBalSheet::NONE;
 
 	if (m_rbFxdCredit.IsChecked())
@@ -174,7 +174,7 @@ void CIncomePage::OnNoCredit()
 	Control(IDC_EDIT_CREDIT).Enable(false);
 	Control(IDC_DEL_CREDIT).Enable(false);
 
-	m_ebCredit.Value(0.0);
+	m_ebCredit.RealValue(0.0);
 }
 
 void CIncomePage::OnFxdCredit()
@@ -362,5 +362,5 @@ void CIncomePage::UpdateCreditsTotal()
 	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
 		nTotal += m_oTmpSubs[i][CSubs::PAID].GetInt();
 
-	m_ebCredit.Value(nTotal / 100.0);
+	m_ebCredit.RealValue(nTotal / 100.0);
 }
