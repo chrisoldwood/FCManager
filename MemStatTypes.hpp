@@ -41,12 +41,12 @@ inline CMemStatTypes::CMemStatTypes(CMDB& oDB)
 	// Add the pre-defined statistics.
 	AddPredefined("Played");
 	AddPredefined("Trained");
-	AddPredefined("Scored");
-	AddPredefined("Scored Own Goal");
-	AddPredefined("Booked");
-	AddPredefined("Dismissed");
-	AddPredefined("Substituted");
-	AddPredefined("Man of the Match");
+	AddPredefined("Goals");
+	AddPredefined("Own Goals");
+	AddPredefined("Bookings");
+	AddPredefined("Dismisals");
+	AddPredefined("Substitutions");
+	AddPredefined("Man o/t Match");
 }
 
 #endif //MEMSTATTYPES_HPP
