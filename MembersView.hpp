@@ -42,6 +42,9 @@ public:
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
+	virtual void OnMiscCmd1();
+
+	void RefreshRows(const TRefArray<CRow>& aoRows);
 
 protected:
 	//

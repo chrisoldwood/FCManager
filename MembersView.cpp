@@ -10,17 +10,18 @@
 
 #include "AppHeaders.hpp"
 #include "MemberDlg.hpp"
+#include "StatTypesDlg.hpp"
 
 // The list view columns.
 GridColumn CMembersView::Columns[NUM_COLUMNS] =
 {
-	{ "Name",       150, LVCFMT_LEFT, 0                         },
-	{ "Phone #1",   150, LVCFMT_LEFT, CMembers::STANDARD_PHONE  },
-	{ "Phone #2",   150, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE },
-	{ "Registered?", 75, LVCFMT_LEFT, CMembers::IS_REGISTERED   },
-	{ "Senior?",     75, LVCFMT_LEFT, CMembers::IS_SENIOR       },
-	{ "Available?",  75, LVCFMT_LEFT, CMembers::IS_AVAILABLE    },
-	{ "£ Balance",   75, LVCFMT_LEFT, CMembers::BALANCE         }
+	{ "Name",       150, LVCFMT_LEFT,  0                         },
+	{ "Phone #1",   150, LVCFMT_LEFT,  CMembers::STANDARD_PHONE  },
+	{ "Phone #2",   150, LVCFMT_LEFT,  CMembers::ALTERNATE_PHONE },
+	{ "Registered?", 75, LVCFMT_LEFT,  CMembers::IS_REGISTERED   },
+	{ "Senior?",     75, LVCFMT_LEFT,  CMembers::IS_SENIOR       },
+	{ "Available?",  75, LVCFMT_LEFT,  CMembers::IS_AVAILABLE    },
+	{ "£ Balance",   75, LVCFMT_RIGHT, CMembers::BALANCE         }
 };
 
 // Unavailability reasons.
@@ -172,7 +173,8 @@ void CMembersView::OnDelete()
 
 	// Get the current selection.
 	int   iLVItem = m_lvGrid.Selected();
-	CRow& oRow = Row(iLVItem);
+	CRow& oRow    = Row(iLVItem);
+	int   nID     = oRow[CMembers::ID];
 
 	CString strName = App.FormatName(oRow, CMembers::FORENAME, CMembers::SURNAME);
 
@@ -180,14 +182,14 @@ void CMembersView::OnDelete()
 	if (QueryMsg(pszMsg,  strName) != IDYES)
 		return;
 
+	// Remove any stats, income and team sheet places.
+	m_oDB.m_oMemStats.DeleteMembersStats(nID);
+//	m_oDB.m_oSubs;
+//	m_oDB.m_oTeamSels;
+
 	// Remove from the list view and collection.
 	DeleteRow(iLVItem);
 	m_oTable.DeleteRow(oRow);
-
-	// Remove any stats, income and team sheet places.
-	m_oDB.m_oMemStats.DeleteMembersStats(oRow[CMembers::ID]);
-//	m_oDB.m_oSubs;
-//	m_oDB.m_oTeamSels;
 
 	App.m_AppCmds.UpdateUI();
 }
@@ -206,9 +208,18 @@ void CMembersView::OnDelete()
 
 void CMembersView::OnDeleteAll()
 {
+//	static const char* pszMsg = "Delete the member: %s?\n\n"
+//								"This will also delete their stats, any\n"
+//								"income and their place in any team sheets.";
+
 	// Get user to confirm action.
 	if (QueryMsg("Delete ALL members?") != IDYES)
 		return;
+
+	// Remove any stats, income and team sheet places.
+//	m_oDB.m_oMemStats.DeleteMembersStats(nID);
+//	m_oDB.m_oSubs;
+//	m_oDB.m_oTeamSels;
 
 	// Remove from the list view and collection.
 	DeleteAllRows();
@@ -281,6 +292,30 @@ void CMembersView::OnImport()
 void CMembersView::OnExport()
 {
 	ExportTable(CMembers::FILE_FORMAT, CMembers::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnMiscCmd1()
+**
+** Description:	Maintain the statistic types.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMembersView::OnMiscCmd1()
+{
+	// Get the stat types and those currently in use.
+	CMemStatTypes& oTypes = m_oDB.m_oMemStatTypes;
+	CMemStats&     oStats = m_oDB.m_oMemStats;
+	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
+
+	CStatTypesDlg Dlg("Member", oTypes, oUsed);
+
+	Dlg.RunModal(*this);
 }
 
 /******************************************************************************
@@ -361,4 +396,23 @@ int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
 	nResult   = stricmp(pszValue1, pszValue2);
 
 	return nResult;
+}
+
+/******************************************************************************
+** Method:		RefreshRows()
+**
+** Description:	Refreshes the grid rows for the data rows supplied.
+**
+** Parameters:	aoRows		The data rows to refresh.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMembersView::RefreshRows(const TRefArray<CRow>& aoRows)
+{
+	// For all data rows, update grid row.
+	for (int i = 0; i < aoRows.Size(); i++)
+		UpdateRow(FindRow(aoRows[i]), false);
 }
