@@ -123,7 +123,7 @@ void CMembersView::OnDelete()
 
 	ASSERT(&oRow != NULL);
 
-	CString strName = App.MakeFullName(oRow, CMembers::FORENAME, CMembers::SURNAME);
+	CString strName = App.FormatName(oRow, CMembers::FORENAME, CMembers::SURNAME);
 
 	// Get user to confirm action.
 	if (QueryMsg("Delete the member: %s?",  strName) != IDYES)
@@ -150,6 +150,7 @@ void CMembersView::OnDelete()
 
 void CMembersView::OnPrint()
 {
+	PrintView("Members");
 }
 
 /******************************************************************************
@@ -205,7 +206,7 @@ CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
 	// Compose full name if name column.
 	if (nColumn == NAME)
 	{
-		return App.MakeFullName(oRow, CMembers::FORENAME, CMembers::SURNAME, true);
+		return App.FormatName(oRow, CMembers::FORENAME, CMembers::SURNAME, true);
 	}
 	// Change bool flags to strings.
 	else if ( (nColumn == IS_REGISTERED) || (nColumn == IS_SENIOR) )
