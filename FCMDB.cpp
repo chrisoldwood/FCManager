@@ -31,6 +31,14 @@ CFCMDB::CFCMDB()
 	, m_oTeamSels(*this, m_oMembers)
 	, m_oOpponents(*this)
 	, m_oReferees(*this)
+	, m_oMemStatTypes(*this)
+	, m_oMemStats(*this, m_oMemStatTypes)
+	, m_oFixStatTypes(*this)
+	, m_oFixStats(*this, m_oFixStatTypes)
+	, m_oOppStatTypes(*this)
+	, m_oOppStats(*this, m_oOppStatTypes)
+	, m_oRefStatTypes(*this)
+	, m_oRefStats(*this, m_oRefStatTypes)
 {
 	// Create the database schema.
 	AddTable(m_oDetails);
@@ -41,6 +49,14 @@ CFCMDB::CFCMDB()
 	AddTable(m_oTeamSels);
 	AddTable(m_oOpponents);
 	AddTable(m_oReferees);
+	AddTable(m_oMemStatTypes);
+	AddTable(m_oMemStats);
+	AddTable(m_oFixStatTypes);
+	AddTable(m_oFixStats);
+	AddTable(m_oOppStatTypes);
+	AddTable(m_oOppStats);
+	AddTable(m_oRefStatTypes);
+	AddTable(m_oRefStats);
 }
 
 /******************************************************************************
