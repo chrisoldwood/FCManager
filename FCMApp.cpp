@@ -95,7 +95,7 @@ bool CFCMApp::OnOpen()
 	// Initialise UI.
 	m_AppCmds.UpdateUI();
 
-	return true;
+	return CSDIApp::OnOpen();
 }
 
 /******************************************************************************
@@ -112,6 +112,8 @@ bool CFCMApp::OnOpen()
 
 bool CFCMApp::OnClose()
 {
+	CSDIApp::OnClose();
+
 	// Save the MRUList and defaults.
 	m_MRUList.Save(m_oIniFile);
 	SaveDefaults();
@@ -188,6 +190,28 @@ CString CFCMApp::FormatMoney(CRow& rRow, int nColumn) const
 }
 
 /******************************************************************************
+** Method:		FormatMoney()
+**
+** Description:	Helper function to format a value from pence to pounds.
+**
+** Parameters:	nAmount		The amount in pence.
+**
+** Returns:		The string.
+**
+*******************************************************************************
+*/
+
+CString CFCMApp::FormatMoney(int nAmount) const
+{
+	double dValue = nAmount / 100.0;
+	char   szValue[10];
+
+	sprintf(szValue, "%.2f", dValue);
+
+	return szValue;
+}
+
+/******************************************************************************
 ** Method:		FormatDate()
 **
 ** Description:	Helper function to format a time_t as just a date.
@@ -228,6 +252,9 @@ void CFCMApp::LoadDefaults()
 	m_rcAppWnd.top    = m_oIniFile.ReadInt("Main", "Top",    0);
 	m_rcAppWnd.right  = m_oIniFile.ReadInt("Main", "Right",  0);
 	m_rcAppWnd.bottom = m_oIniFile.ReadInt("Main", "Bottom", 0);
+
+	m_dmTeamSelDlg.cx = m_oIniFile.ReadInt("TeamDlg", "Width",  0);
+	m_dmTeamSelDlg.cy = m_oIniFile.ReadInt("TeamDlg", "Height", 0);
 }
 
 /******************************************************************************
@@ -248,4 +275,7 @@ void CFCMApp::SaveDefaults()
 	m_oIniFile.WriteInt("Main", "Top",    m_rcAppWnd.top);
 	m_oIniFile.WriteInt("Main", "Right",  m_rcAppWnd.right);
 	m_oIniFile.WriteInt("Main", "Bottom", m_rcAppWnd.bottom);
+
+	m_oIniFile.WriteInt("TeamDlg", "Width",  m_dmTeamSelDlg.cx);
+	m_oIniFile.WriteInt("TeamDlg", "Height", m_dmTeamSelDlg.cy);
 }

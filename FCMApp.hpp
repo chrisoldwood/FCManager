@@ -37,11 +37,12 @@ public:
 	//
 	// Members
 	//
-	CFCMMainWnd	m_AppWnd;
-	CFCMCmds	m_AppCmds;
-	CIniFile	m_oIniFile;
-	CPrinter	m_oPrinter;
-	CRect		m_rcAppWnd;
+	CFCMMainWnd	m_AppWnd;			// Main window.
+	CFCMCmds	m_AppCmds;			// Cmd controller.
+	CIniFile	m_oIniFile;			// Ini file.
+	CPrinter	m_oPrinter;			// Default printer.
+	CRect		m_rcAppWnd;			// Last position of main window.
+	CSize		m_dmTeamSelDlg;		// Last size of team selection dialog.
 
 	//
 	// Template methods for getting doc and view specifics.
@@ -56,6 +57,7 @@ public:
 	//
 	CString FormatName(CRow& rRow, int nForename, int nSurname, bool bReverse = false) const;
 	CString FormatMoney(CRow& rRow, int nColumn) const;
+	CString FormatMoney(int nAmount) const;
 	CString FormatDate(CRow& rRow, int nColumn) const;
 
 protected:
