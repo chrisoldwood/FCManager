@@ -37,11 +37,15 @@ protected:
 	bool		m_bIsSenior;
 	int			m_nTeam;
 	int			m_nPosition;
+	bool		m_bIsAvailable;
+	int			m_nReason;
 
 	CCheckBox	m_ckIsRegistered;
 	CCheckBox	m_ckIsSenior;
 	CComboBox	m_cbTeam;
 	CComboBox	m_cbPosition;
+	CCheckBox	m_ckIsAvailable;
+	CComboBox	m_cbReason;
 
 	//
 	// Message processors.
@@ -49,6 +53,7 @@ protected:
 	virtual void OnInitDialog();
 	virtual bool OnValidate();
 	virtual bool OnOk();
+			void OnAvailable();
 };
 
 /******************************************************************************

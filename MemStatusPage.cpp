@@ -23,6 +23,12 @@ static char* astrPositions[MAX_POSITIONS+1] =
 	"Any", "Goalkeeper", "Defender", "Midfielder", "Attacker"
 };
 
+// Unavailability reasons.
+static char* astrReasons[MAX_REASONS] =
+{
+	"(none)", "Injured", "On Holiday", "Transferred", "Resigned", "Uncontactable"
+};
+
 /******************************************************************************
 ** Method:		Constructor.
 **
@@ -42,13 +48,21 @@ CMemStatusPage::CMemStatusPage(CRow& oRow)
 	, m_bIsSenior    (oRow[CMembers::IS_SENIOR])
 	, m_nTeam        (oRow[CMembers::USUAL_TEAM])
 	, m_nPosition    (oRow[CMembers::USUAL_POSITION])
+	, m_bIsAvailable (oRow[CMembers::IS_AVAILABLE])
+	, m_nReason      (oRow[CMembers::UNAVAIL_REASON])
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_REGISTERED,	&m_ckIsRegistered)
 		CTRL(IDC_SENIOR,		&m_ckIsSenior)
 		CTRL(IDC_USUAL_TEAM,	&m_cbTeam)
 		CTRL(IDC_USUAL_POS,		&m_cbPosition)
+		CTRL(IDC_AVAILABLE,		&m_ckIsAvailable)
+		CTRL(IDC_REASON,		&m_cbReason)
 	END_CTRL_TABLE
+
+	DEFINE_CTRLMSG_TABLE
+		CMD_CTRLMSG(IDC_AVAILABLE, BN_CLICKED, OnAvailable)
+	END_CTRLMSG_TABLE
 }
 
 /******************************************************************************
@@ -65,17 +79,26 @@ CMemStatusPage::CMemStatusPage(CRow& oRow)
 
 void CMemStatusPage::OnInitDialog()
 {
+	// Fill combos.
 	for (int i = 0; i < MAX_CLUB_TEAMS+1; i++)
 		m_cbTeam.Add(astrTeams[i]);
 
 	for (int j = 0; j < MAX_POSITIONS+1; j++)
 		m_cbPosition.Add(astrPositions[j]);
 
+	for (int k = 0; k < MAX_REASONS; k++)
+		m_cbReason.Add(astrReasons[k]);
+
 	// Initialise the fields with data.
 	m_ckIsRegistered.Check(m_bIsRegistered);
 	m_ckIsSenior.Check(m_bIsSenior);
 	m_cbTeam.CurSel(m_nTeam);
 	m_cbPosition.CurSel(m_nPosition);
+	m_ckIsAvailable.Check(m_bIsAvailable);
+	m_cbReason.CurSel(m_nReason);
+
+	// Initialise control state.
+	m_cbReason.Enable(!m_bIsAvailable);
 }
 
 /******************************************************************************
@@ -96,6 +119,8 @@ bool CMemStatusPage::OnValidate()
 	m_bIsSenior     = m_ckIsSenior.IsChecked();
 	m_nTeam         = m_cbTeam.CurSel();
 	m_nPosition     = m_cbPosition.CurSel();
+	m_bIsAvailable  = m_ckIsAvailable.IsChecked();
+	m_nReason       = m_cbReason.CurSel();
 
 	return true;
 }
@@ -118,6 +143,28 @@ bool CMemStatusPage::OnOk()
 	m_oRow[CMembers::IS_SENIOR]       = m_bIsSenior;
 	m_oRow[CMembers::USUAL_TEAM]      = m_nTeam;
 	m_oRow[CMembers::USUAL_POSITION]  = m_nPosition;
+	m_oRow[CMembers::IS_AVAILABLE]    = m_bIsAvailable;
+	m_oRow[CMembers::UNAVAIL_REASON]  = (!m_bIsAvailable) ? m_nReason : NO_REASON;
 
 	return true;
+}
+
+/******************************************************************************
+** Method:		OnAvailable()
+**
+** Description:	The available checkbox has changed states.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMemStatusPage::OnAvailable()
+{
+	bool bAvailable = m_ckIsAvailable.IsChecked();
+
+	m_cbReason.Enable(!bAvailable);
+	m_cbReason.CurSel(0);
 }
