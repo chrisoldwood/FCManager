@@ -33,18 +33,21 @@ public:
 	//
 	enum
 	{
-		ID              = 0,
-		SURNAME         = 1,
-		FORENAME        = 2,
-		POSTAL_ADDRESS  = 3,
-		STANDARD_PHONE  = 4,
-		ALTERNATE_PHONE = 5,
-		EMAIL_ADDRESS   = 6,
-		IS_REGISTERED   = 7,
-		IS_SENIOR       = 8,
-		USUAL_TEAM      = 9,
-		USUAL_POSITION  = 10,
-		NOTES           = 11,
+		ID,
+		SURNAME,
+		FORENAME,
+		POSTAL_ADDRESS,
+		STANDARD_PHONE,
+		ALTERNATE_PHONE,
+		EMAIL_ADDRESS,
+		IS_REGISTERED,
+		IS_SENIOR,
+		USUAL_TEAM,
+		USUAL_POSITION,
+		IS_AVAILABLE,
+		UNAVAIL_REASON,
+		NOTES,
+		BALANCE,
 	};
 
 	//
