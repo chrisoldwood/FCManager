@@ -1,4 +1,4 @@
-F.C. Manager v1.0 Aplha #1
+F.C. Manager v1.0 Aplha #3
 ==========================
 
 (I hope to replace this with a proper Windows HelpFile in the future)

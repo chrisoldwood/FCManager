@@ -1,4 +1,4 @@
-F.C. Manager v1.0 Aplha #1
+F.C. Manager v1.0 Aplha #3
 ==========================
 
 
@@ -85,10 +85,8 @@ more user-friendly.
 
 5. Contact details.
 
-I can be reached at gort@cix.co.uk or chris.oldwood@ntlworld.com.
-A web site is planned for all my various "things"and will appear
-at http://www.cix.co.uk/~gort in the near future.
-
+EMail: gort@cix.co.uk
+Web:   http://www.cix.co.uk/~gort
 
 Chris Oldwood
-18 Jan 2001
+18 Sep 2002
