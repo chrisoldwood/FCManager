@@ -2,6 +2,7 @@
 // Microsoft Developer Studio generated include file.
 // Used by FCManager.rc
 //
+#define IDC_SELECT                      3
 #define IDR_APPICON                     10
 #define IDR_APPMENU                     11
 #define IDR_APPACCEL                    12
@@ -22,21 +23,23 @@
 #define ID_VIEW_POPUP                   200
 #define ID_VIEW_MEMBERS                 201
 #define ID_VIEW_FIXTURES                202
-#define ID_VIEW_BALANCE                 203
-#define ID_VIEW_TEAM_SEL                204
-#define ID_VIEW_OPPONENTS               205
-#define ID_VIEW_REFEREES                206
-#define IDD_BALSHEET_ITEM               215
+#define ID_VIEW_SUBS                    203
+#define ID_VIEW_BALANCE                 204
+#define ID_VIEW_TEAM_SEL                205
+#define ID_VIEW_OPPONENTS               206
+#define ID_VIEW_REFEREES                207
 #define ID_CLUB_POPUP                   300
 #define ID_CLUB_DETAILS                 301
+#define ID_CLUB_EXPENSES                302
 #define ID_OPTIONS_POPUP                400
-#define ID_OPTIONS_BASE                 401
-#define ID_OPTIONS_ADD                  402
-#define ID_OPTIONS_EDIT                 403
-#define ID_OPTIONS_DELETE               404
-#define ID_OPTIONS_PRINT                405
-#define ID_OPTIONS_IMPORT               406
-#define ID_OPTIONS_EXPORT               407
+#define ID_OPTIONS_ADD                  401
+#define ID_OPTIONS_EDIT                 402
+#define ID_OPTIONS_DELETE               403
+#define ID_OPTIONS_PRINT                404
+#define ID_OPTIONS_IMPORT               405
+#define ID_OPTIONS_EXPORT               406
+#define ID_REPORTS_POPUP                500
+#define ID_REPORTS_NONE                 501
 #define ID_HELP_POPUP                   900
 #define ID_HELP_ABOUT                   901
 #define IDC_SURNAME                     1004
@@ -68,14 +71,28 @@
 #define IDC_ALT_PHONE                   1032
 #define IDC_GRID                        1033
 #define IDC_NAME                        1034
-#define IDC_FIXED_CREDIT                1035
-#define IDC_VARIABLE_CREDIT             1036
 #define IDC_CREDIT                      1037
 #define IDC_CREDITS                     1038
-#define IDC_FIXED_DEBIT                 1039
-#define IDC_VARIABLE_DEBIT              1040
+#define IDC_PAID                        1038
 #define IDC_DEBIT                       1041
 #define IDC_DEBITS                      1042
+#define IDC_MEMBERS                     1045
+#define IDC_FEE                         1046
+#define IDC_PRINTER                     1047
+#define IDC_PORT                        1048
+#define IDC_NO_CREDIT                   1049
+#define IDC_FIXED_CREDIT                1050
+#define IDC_VARIABLE_CREDIT             1051
+#define IDC_PITCH                       1051
+#define IDC_NO_DEBIT                    1052
+#define IDC_FIXED_DEBIT                 1053
+#define IDC_PLAYER                      1053
+#define IDC_VARIABLE_DEBIT              1054
+#define IDC_TEAM_FILTER                 1055
+#define IDC_POSITION_FILTER             1056
+#define IDC_FORMATION_LABEL             1057
+#define IDC_FORMATION                   1058
+#define IDC_OPPONENT                    1059
 #define IDD_ABOUT                       5000
 #define IDD_GRID_VIEW                   5001
 #define IDD_MEMBER                      5002
@@ -85,6 +102,49 @@
 #define IDD_TEAM_SELS                   5006
 #define IDD_CLUB_DETAILS                5007
 #define IDD_NOTES                       5008
+#define IDD_BALSHEET_ITEM               5009
+#define IDD_MEMBER_SUBS                 5010
+#define IDD_PRINT_VIEW                  5011
+#define ID_MEMBERS_POPUP                10000
+#define ID_MEMBERS_ADD                  10001
+#define ID_MEMBERS_EDIT                 10002
+#define ID_MEMBERS_DELETE               10003
+#define ID_MEMBERS_PRINT                10004
+#define ID_MEMBERS_IMPORT               10005
+#define ID_MEMBERS_EXPORT               10006
+#define ID_FIXTURES_POPUP               10100
+#define ID_FIXTURES_ADD                 10101
+#define ID_FIXTURES_EDIT                10102
+#define ID_FIXTURES_DELETE              10103
+#define ID_FIXTURES_PRINT               10104
+#define ID_FIXTURES_IMPORT              10105
+#define ID_FIXTURES_EXPORT              10106
+#define ID_SUBS_POPUP                   10200
+#define ID_SUBS_PRINT                   10204
+#define ID_BALSHEET_POPUP               10300
+#define ID_BALSHEET_ADD                 10301
+#define ID_BALSHEET_EDIT                10302
+#define ID_BALSHEET_DELETE              10303
+#define ID_BALSHEET_PRINT               10304
+#define ID_TEAMSEL_POPUP                10400
+#define ID_TEAMSEL_ADD                  10401
+#define ID_TEAMSEL_EDIT                 10402
+#define ID_TEAMSEL_DELETE               10403
+#define ID_TEAMSEL_PRINT                10404
+#define ID_OPPONENTS_POPUP              10500
+#define ID_OPPONENTS_ADD                10501
+#define ID_OPPONENTS_EDIT               10502
+#define ID_OPPONENTS_DELETE             10503
+#define ID_OPPONENTS_PRINT              10504
+#define ID_OPPONENTS_IMPORT             10505
+#define ID_OPPONENTS_EXPORT             10506
+#define ID_REFEREES_POPUP               10600
+#define ID_REFEREES_ADD                 10601
+#define ID_REFEREES_EDIT                10602
+#define ID_REFEREES_DELETE              10603
+#define ID_REFEREES_PRINT               10604
+#define ID_REFEREES_IMPORT              10605
+#define ID_REFEREES_EXPORT              10606
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -92,9 +152,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        217
-#define _APS_NEXT_COMMAND_VALUE         224
-#define _APS_NEXT_CONTROL_VALUE         1044
+#define _APS_NEXT_RESOURCE_VALUE        219
+#define _APS_NEXT_COMMAND_VALUE         227
+#define _APS_NEXT_CONTROL_VALUE         1060
 #define _APS_NEXT_SYMED_VALUE           200
 #endif
 #endif
