@@ -70,9 +70,9 @@ bool CMemNamePage::OnValidate()
 	CMembers& oTable = static_cast<CMembers&>(m_oRow.Table());
 
 	// Find members with the same name but different ID.
-	CResultSet oRS = oTable.Select(CWhereEqual(CMembers::FORENAME,  m_ebForename.Text())
-								   & CWhereEqual(CMembers::SURNAME, m_ebSurname.Text())
-								   & CWhereNotEqual(CMembers::ID,   m_oRow[CMembers::ID]));
+	CResultSet oRS = oTable.Select(CWhereCmp(CMembers::FORENAME, CWhereCmp::EQUALS,     m_ebForename.Text())
+								&& CWhereCmp(CMembers::SURNAME,  CWhereCmp::EQUALS,     m_ebSurname.Text())
+								&& CWhereCmp(CMembers::ID,       CWhereCmp::NOT_EQUALS, m_oRow[CMembers::ID]));
 
 	// Member already exists?
 	if (oRS.Count() > 0)

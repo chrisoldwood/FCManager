@@ -59,7 +59,7 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 	END_CTRLMSG_TABLE
 
 	// Find the owners rows.
-	CResultSet oRS = m_oStats.Select(CWhereEqual(CStats::OWNER_ID, m_nOwnerID));
+	CResultSet oRS = m_oStats.Select(CWhereCmp(CStats::OWNER_ID, CWhereCmp::EQUALS, m_nOwnerID));
 
 	for (int i = 0; i < oRS.Count(); i++)
 	{
@@ -120,7 +120,7 @@ bool CStatsPage::OnOk()
 	if (m_oTmpStats.Modified())
 	{
 		// Delete the existing rows for this owner and group.
-		CResultSet oRS = m_oStats.Select(CWhereEqual(CStats::OWNER_ID, m_nOwnerID));
+		CResultSet oRS = m_oStats.Select(CWhereCmp(CStats::OWNER_ID, CWhereCmp::EQUALS, m_nOwnerID));
 
 		for (int i = 0; i < oRS.Count(); i++)
 			m_oStats.DeleteRow(oRS[i]);

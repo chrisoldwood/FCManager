@@ -117,7 +117,7 @@ void CMembers::UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified)
 	{
 		// Find all subs for the member.
 		CRow&		oRow = Row(i);
-		CResultSet	oRS  = oSubs.Select(CWhereEqual(CSubs::MEMBER_ID, oRow[ID]));
+		CResultSet	oRS  = oSubs.Select(CWhereCmp(CSubs::MEMBER_ID, CWhereCmp::EQUALS, oRow[ID]));
 
 		// Calculate the fees, paid and balance.
 		int nFees   = oRS.Sum(CSubs::FEE ).m_iValue;

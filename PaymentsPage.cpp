@@ -48,7 +48,7 @@ CPaymentsPage::CPaymentsPage(CFCMDB& oDB, int nMemberID)
 	END_GRAVITY_TABLE
 
 	// Find all the payments for this member.
-	CResultSet oRS = m_oDB.m_oSubs.Select(CWhereEqual(CSubs::MEMBER_ID, m_nMemberID));
+	CResultSet oRS = m_oDB.m_oSubs.Select(CWhereCmp(CSubs::MEMBER_ID, CWhereCmp::EQUALS, m_nMemberID));
 
 	for (int i = 0; i < oRS.Count(); i++)
 	{

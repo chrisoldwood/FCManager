@@ -48,12 +48,12 @@ inline CMemStats::CMemStats(CMDB& oDB, CMemStatTypes& oTypes)
 
 inline void CMemStats::DeleteMembersStats(int nMember)
 {
-	DeleteRows(Select(CWhereEqual(OWNER_ID, nMember)));
+	DeleteRows(Select(CWhereCmp(OWNER_ID, CWhereCmp::EQUALS, nMember)));
 }
 
 inline void CMemStats::DeleteTypesStats(int nType)
 {
-	DeleteRows(Select(CWhereEqual(TYPE_ID, nType)));
+	DeleteRows(Select(CWhereCmp(TYPE_ID, CWhereCmp::EQUALS, nType)));
 }
 
 #endif //MEMSTATS_HPP

@@ -95,8 +95,8 @@ bool COpponentPage::OnValidate()
 	COpponents& oTable = static_cast<COpponents&>(m_oRow.Table());
 
 	// Find clubs with the same name but different ID.
-	CResultSet oRS = oTable.Select(CWhereEqual(COpponents::CLUB_NAME, m_ebClubName.Text())
-								   & CWhereNotEqual(COpponents::ID,   m_oRow[COpponents::ID]));
+	CResultSet oRS = oTable.Select(CWhereCmp(COpponents::CLUB_NAME, CWhereCmp::EQUALS,     m_ebClubName.Text())
+								&& CWhereCmp(COpponents::ID,        CWhereCmp::NOT_EQUALS, m_oRow[COpponents::ID]));
 
 	// Club already exists?
 	if (oRS.Count() > 0)

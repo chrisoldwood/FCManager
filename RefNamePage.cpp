@@ -70,9 +70,9 @@ bool CRefNamePage::OnValidate()
 	CReferees& oTable = static_cast<CReferees&>(m_oRow.Table());
 
 	// Find referees with the same name but different ID.
-	CResultSet oRS = oTable.Select(CWhereEqual(CReferees::FORENAME,  m_ebForename.Text())
-								   & CWhereEqual(CReferees::SURNAME, m_ebSurname.Text())
-								   & CWhereNotEqual(CReferees::ID,   m_oRow[CReferees::ID]));
+	CResultSet oRS = oTable.Select(CWhereCmp(CReferees::FORENAME, CWhereCmp::EQUALS,     m_ebForename.Text())
+								&& CWhereCmp(CReferees::SURNAME,  CWhereCmp::EQUALS,     m_ebSurname.Text())
+								&& CWhereCmp(CReferees::ID,       CWhereCmp::NOT_EQUALS, m_oRow[CReferees::ID]));
 
 	// Referee already exists?
 	if (oRS.Count() > 0)
