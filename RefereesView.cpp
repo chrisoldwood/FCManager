@@ -10,6 +10,7 @@
 
 #include "AppHeaders.hpp"
 #include "RefereeDlg.hpp"
+#include "StatTypesDlg.hpp"
 
 // The list view columns.
 GridColumn CRefereesView::Columns[NUM_COLUMNS] =
@@ -226,6 +227,30 @@ void CRefereesView::OnImport()
 void CRefereesView::OnExport()
 {
 	ExportTable(CReferees::FILE_FORMAT, CReferees::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnMiscCmd1()
+**
+** Description:	Maintain the statistic types.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CRefereesView::OnMiscCmd1()
+{
+	// Get the stat types and those currently in use.
+	CRefStatTypes& oTypes = m_oDB.m_oRefStatTypes;
+	CRefStats&     oStats = m_oDB.m_oRefStats;
+	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
+
+	CStatTypesDlg Dlg("Referee", oTypes, oUsed);
+
+	Dlg.RunModal(*this);
 }
 
 /******************************************************************************
