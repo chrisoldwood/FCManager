@@ -1,7 +1,7 @@
 /******************************************************************************
 ** (C) Chris Oldwood
 **
-** MODULE:		RESOURCES.RCV
+** MODULE:		FCMANAGER.RCV
 ** COMPONENT:	The Application.
 ** DESCRIPTION:	The application version information resource.
 **
@@ -26,7 +26,7 @@ FILEFLAGS		VS_FF_DEBUG | VS_FF_PRERELEASE
 #else
 FILEFLAGS		0
 #endif
-FILEOS			VOS__WINDOWS32
+FILEOS			VOS_DOS_WINDOWS32
 FILETYPE		VFT_APP
 FILESUBTYPE		VFT_UNKNOWN
 BEGIN
@@ -34,14 +34,16 @@ BEGIN
 	BEGIN
 		BLOCK "040904E4"
 		BEGIN
-			VALUE "CompanyName",      "FreeWare\0"
-			VALUE "FileDescription",  "FCManager\0"
+			VALUE "FileDescription",  "F.C. Manager\0"
 			VALUE "FileVersion",      "1.0 Alpha #3\0"
 			VALUE "InternalName",     "FCManager.exe\0"
-			VALUE "LegalCopyright",   "(C) Chris Oldwood 2000-01\0"
+			VALUE "LegalCopyright",   "(C) Chris Oldwood 2000-02\0"
 			VALUE "OriginalFilename", "FCManager.exe\0"
 			VALUE "ProductName",      "FCManager\0"
 			VALUE "ProductVersion",   "1.0 Alpha #3\0"
+#ifdef _DEBUG
+			VALUE "Comments",         "Debug Build\0"
+#endif
 		END
 	END
 	BLOCK "VarFileInfo"

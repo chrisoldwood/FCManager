@@ -126,6 +126,9 @@
 #define IDC_TRANS                       1074
 #define IDC_DEL                         1075
 #define IDC_TYPES                       1078
+#define IDC_WEBSITE                     1083
+#define IDC_EMAIL                       1084
+#define IDC_VERSION                     1085
 #define IDD_ABOUT                       5000
 #define IDD_GRID_VIEW                   5001
 #define IDD_FIXTURE_PAGE                5003
