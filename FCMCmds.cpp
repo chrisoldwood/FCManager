@@ -29,8 +29,8 @@ const int VIEW_HINTS_BASE  = 10000;
 const int VIEW_HINTS_DELTA = 100;
 
 // The cmd ID range of the reports.
-const int ID_REPORT_FIRST = ID_REPORTS_NONE;
-const int ID_REPORT_LAST  = ID_REPORTS_NONE;
+const int ID_REPORT_FIRST = ID_REPORTS_MEMBERS;
+const int ID_REPORT_LAST  = ID_REPORTS_CUSTOM;
 
 // Range of MRU commands.
 const int ID_MRU_FIRST = ID_FILE_MRU_1;
@@ -294,7 +294,7 @@ void CFCMCmds::OnClubDetails()
 {
 	ASSERT(App.Doc() != NULL);
 
-	CClubDetailsDlg Dlg(App.Doc()->m_oDB [CFCMDB::DETAILS][0]);
+	CClubDetailsDlg Dlg(App.Doc()->m_oDB.m_oDetails[0]);
 
 	if (Dlg.RunModal(App.m_rMainWnd) == IDOK)
 		UpdateUI();
@@ -663,9 +663,9 @@ void CFCMCmds::SetFocus()
 	if (App.m_pDoc != NULL)
 	{
 		CFCMView* pView = App.View();
-		ASSERT(pView != NULL);
 
-		// Get the current view.
-		pView->m_ViewsMgr.SetFocus();
+		// Pass focus to view, if created.
+		if (pView != NULL)
+			pView->m_ViewsMgr.SetFocus();
 	}
 }
