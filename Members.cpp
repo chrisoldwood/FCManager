@@ -93,3 +93,43 @@ CRow& CMembers::CreateRow()
 	
 	return oRow;
 }
+
+/******************************************************************************
+** Method:		UpdateBalances()
+**
+** Description:	Updates the balances for all members, if changed.
+**
+** Parameters:	oSubs		The members subs table.
+**				aoModified	The vector used to return to the rows modified.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMembers::UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified)
+{
+	// Clear the output vector.	
+	aoModified.RemoveAll();
+
+	// For all members.
+	for (int i = 0; i < RowCount(); i++)
+	{
+		// Find all subs for the member.
+		CRow&		oRow = Row(i);
+		CResultSet	oRS  = oSubs.Select(CWhereEqual(CSubs::MEMBER_ID, oRow[ID]));
+
+		// Calculate the fees, paid and balance.
+		int nFees   = oRS.Sum(CSubs::FEE ).m_iValue;
+		int nPaid   = oRS.Sum(CSubs::PAID).m_iValue;
+		int nNewBal = nPaid - nFees;
+		int nCurBal = oRow[BALANCE];
+
+		// Modified?
+		if (nNewBal != nCurBal)
+		{
+			oRow[BALANCE] = nNewBal;
+			aoModified.Add(oRow);
+		}
+	}
+}

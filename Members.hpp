@@ -12,6 +12,9 @@
 #ifndef MEMBERS_HPP
 #define MEMBERS_HPP
 
+// Forward declarations.
+class CSubs;
+
 /******************************************************************************
 ** 
 ** The table used to store the club members.
@@ -71,6 +74,11 @@ public:
 		FILE_FORMAT  = 0x4D4D4346,		// "FCMM"
 		FILE_VERSION = 0x00000A01,		// Alpha #1
 	};
+
+	//
+	// Methods.
+	//
+	void UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified);
 
 	//
 	// Methods (overriden).
