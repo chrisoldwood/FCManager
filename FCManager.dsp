@@ -131,6 +131,10 @@ SOURCE=.\BalShtItemPage.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\BalShtTypes.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ClubDetails.cpp
 # End Source File
 # Begin Source File
@@ -151,7 +155,15 @@ SOURCE=.\ExpensesPage.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ExpenseTypeDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ExpenseTypes.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpenseTypesDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -307,7 +319,15 @@ SOURCE=.\StatsPage.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\StatTypeDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StatTypes.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatTypesDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -403,6 +423,10 @@ SOURCE=.\BalShtItemPage.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\BalShtTypes.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ClubDetails.hpp
 # End Source File
 # Begin Source File
@@ -423,7 +447,15 @@ SOURCE=.\ExpensesPage.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ExpenseTypeDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ExpenseTypes.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpenseTypesDlg.hpp
 # End Source File
 # Begin Source File
 
@@ -611,7 +643,15 @@ SOURCE=.\StatsPage.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\StatTypeDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StatTypes.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatTypesDlg.hpp
 # End Source File
 # Begin Source File
 
