@@ -1,9 +1,5 @@
 - Printing support (cell margins, column sizes etc).
 
-- Expense types dialog.
-
-- Stat types dialog.
-
 - Pitch control (other formations 4-3-3).
 
 - Team selection dialog.
@@ -12,16 +8,8 @@
 
 - All Reports (stats, income, expenses).
 
-- Sort out names of fixed stats (No fixed stats?)
-
 - Icons + dialog layouts.
 
 - Import/Export to other formats.
 
-- Graphs?
-
 - Accounts dialogs + transaction table def.
-
-- More balance sheet item types (fixed or variable - reports)
-
-- Update balance column for members.
