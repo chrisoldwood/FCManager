@@ -50,6 +50,13 @@ public:
 	// Data View options menu.
 	void OnDataViewCmd(uint iCmdID);
 
+	// Data View options menu.
+	void OnReportCmd(uint iCmdID);
+
+	// Debug menu.
+	void OnDebugClipboard();
+	void OnDebugFile();
+
 	// Help menu.
 	void OnHelpAbout();
 
@@ -72,24 +79,38 @@ public:
 	// Data View options menu.
 	void OnUIDataViewCmds();
 
+	// Reports menu.
+	void OnUIReportCmds();
+
+	// Debug menu.
+	void OnUIDebugClipboard();
+	void OnUIDebugFile();
+
 	// Help menu.
 
 	//
-	// Internal commands.
+	// View management.
 	//
 	void SelectView(DataView eView);
+	void SetFocus();
 
 	//
 	// Command property methods.
 	//
 	virtual int CmdBmpIndex(uint iCmdID) const;
-	virtual int CmdHint(uint iCmdID) const;
-	virtual int CmdToolTip(uint iCmdID) const;
+	virtual int CmdHintID(uint iCmdID) const;
+	virtual int CmdToolTipID(uint iCmdID) const;
 
 protected:
 	//
 	// Members.
 	//
+
+	//
+	// Template methods..
+	//
+	virtual void OnFileCreated(CSDIDoc& oDoc);
+	virtual void OnFileOpened(CSDIDoc& oDoc);
 };
 
 /******************************************************************************

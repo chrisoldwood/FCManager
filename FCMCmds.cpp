@@ -12,7 +12,7 @@
 #include "AboutDlg.hpp"
 #include "ClubDetailsDlg.hpp"
 
-// The cmd ID of the first view.
+// The cmd ID range of the views.
 const int ID_VIEW_FIRST = ID_VIEW_MEMBERS;
 const int ID_VIEW_LAST  = ID_VIEW_REFEREES;
 
@@ -28,6 +28,10 @@ const int VIEW_ICONS_BASE = 3;
 const int VIEW_HINTS_BASE  = 10000;
 const int VIEW_HINTS_DELTA = 100;
 
+// The cmd ID range of the reports.
+const int ID_REPORT_FIRST = ID_REPORTS_NONE;
+const int ID_REPORT_LAST  = ID_REPORTS_NONE;
+
 // Range of MRU commands.
 const int ID_MRU_FIRST = ID_FILE_MRU_1;
 const int ID_MRU_LAST  = ID_FILE_MRU_4;
@@ -37,7 +41,9 @@ const int FILE_MENU_POS    = 0;
 const int VIEW_MENU_POS    = 1;
 const int CLUB_MENU_POS    = 2;
 const int OPTIONS_MENU_POS = 3;
-const int HELP_MENU_POS    = 4;
+const int REPORTS_MENU_POS = 4;
+const int DEBUG_MENU_POS   = 5;
+const int HELP_MENU_POS    = 6;
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -56,21 +62,26 @@ CFCMCmds::CFCMCmds()
 	// Define the command table.
 	DEFINE_CMD_TABLE
 		// File menu.
-		CMD_ENTRY(ID_FILE_NEW,					OnFileNew,			NULL,				 0)
-		CMD_ENTRY(ID_FILE_OPEN,					OnFileOpen,			NULL,				 1)
-		CMD_ENTRY(ID_FILE_SAVE,					OnFileSave,			OnUIFileSave,		 2)
-		CMD_ENTRY(ID_FILE_SAVEAS,				OnFileSaveAs,		OnUIFileSaveAs,		-1)
-		CMD_ENTRY(ID_FILE_CLOSE,				OnFileClose,		OnUIFileClose,		 1)
-		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,	OnFileOpenMRU,		OnUIFileOpenMRU,	-1)
-		CMD_ENTRY(ID_FILE_EXIT,					OnFileExit,			NULL,				-1)
+		CMD_ENTRY(ID_FILE_NEW,							OnFileNew,			NULL,				 0)
+		CMD_ENTRY(ID_FILE_OPEN,							OnFileOpen,			NULL,				 1)
+		CMD_ENTRY(ID_FILE_SAVE,							OnFileSave,			OnUIFileSave,		 2)
+		CMD_ENTRY(ID_FILE_SAVEAS,						OnFileSaveAs,		OnUIFileSaveAs,		-1)
+		CMD_ENTRY(ID_FILE_CLOSE,						OnFileClose,		OnUIFileClose,		 1)
+		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,			OnFileOpenMRU,		OnUIFileOpenMRU,	-1)
+		CMD_ENTRY(ID_FILE_EXIT,							OnFileExit,			NULL,				-1)
 		// View menu.
-		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,	OnViewDataView,		OnUIViewDataView,	-1)
+		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,			OnViewDataView,		OnUIViewDataView,	-1)
 		// Club menu.
-		CMD_ENTRY(ID_CLUB_DETAILS,				OnClubDetails,		OnUIClubDetails,	-1)
+		CMD_ENTRY(ID_CLUB_DETAILS,						OnClubDetails,		OnUIClubDetails,	-1)
 		// Data View menu.
 		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	OnDataViewCmd,		OnUIDataViewCmds,	-1)
+		// Report menu.
+		CMD_RANGE(ID_REPORT_FIRST, ID_REPORT_LAST,		OnReportCmd,		OnUIReportCmds,		-1)
+		// Debug menu.
+		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,	OnUIDebugClipboard,	9)
+		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,		OnUIDebugFile,	9)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,				OnHelpAbout,		NULL,				9)
+		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,		NULL,				9)
 	END_CMD_TABLE
 }
 
@@ -104,11 +115,25 @@ CFCMCmds::~CFCMCmds()
 
 void CFCMCmds::OnFileNew()
 {
-	if (NewFile())
-	{
-		// Select a default view.
-		SelectView(MEMBERS_VIEW);
-	}
+	NewFile();
+}
+
+/******************************************************************************
+** Method:		OnFileCreated()
+**
+** Description:	New file created.
+**
+** Parameters:	oDoc	The doc affected.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::OnFileCreated(CSDIDoc& oDoc)
+{
+	OnFileOpened(oDoc);
+	OnClubDetails();
 }
 
 /******************************************************************************
@@ -125,11 +150,25 @@ void CFCMCmds::OnFileNew()
 
 void CFCMCmds::OnFileOpen()
 {
-	if (OpenFile())
-	{
-		// Select a default view.
-		SelectView(MEMBERS_VIEW);
-	}
+	OpenFile();
+}
+
+/******************************************************************************
+** Method:		OnFileOpened()
+**
+** Description:	File opened.
+**
+** Parameters:	oDoc	The doc affected.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::OnFileOpened(CSDIDoc&)
+{
+	// Select a default view.
+	SelectView(MEMBERS_VIEW);
 }
 
 /******************************************************************************
@@ -258,8 +297,7 @@ void CFCMCmds::OnClubDetails()
 	CClubDetailsDlg Dlg(App.Doc()->m_oDB [CFCMDB::DETAILS][0]);
 
 	if (Dlg.RunModal(App.m_rMainWnd) == IDOK)
-	{
-	}
+		UpdateUI();
 }
 
 /******************************************************************************
@@ -279,6 +317,107 @@ void CFCMCmds::OnDataViewCmd(uint iCmdID)
 	ASSERT(App.View() != NULL);
 
 	App.View()->m_ViewsMgr.OnCommand(iCmdID);
+}
+
+/******************************************************************************
+** Method:		OnReportCmd()
+**
+** Description:	Execute a report.
+**
+** Parameters:	iCmdID		The ID of the command to execute.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::OnReportCmd(uint /*iCmdID*/)
+{
+}
+
+/******************************************************************************
+** Method:		OnDebugClipboard()
+**
+** Description:	Dump the database to the clipboard.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::OnDebugClipboard()
+{
+	try
+	{
+		CClipboard oStream;
+
+		oStream.Open(CStream::WriteOnly, CF_TEXT);
+
+		App.Doc()->m_oDB.Dump(oStream);
+
+		oStream.Close();
+	}
+	catch(CStreamException& e)
+	{
+		// Notify user.
+		App.m_AppWnd.AlertMsg(e.ErrorText());
+	}
+}
+
+/******************************************************************************
+** Method:		OnDebugFile()
+**
+** Description:	Dump the database to a text file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::OnDebugFile()
+{
+	CPath strPath;
+
+	// The file extensions.
+	static char szExts[]   = {	"Text Files (*.txt)\0*.txt\0"
+								"All Files (*.*)\0*.*\0"
+								"\0\0"							};
+	static char szDefExt[] = {	"txt"							};
+
+
+	// Get the output filename.
+	if (strPath.Select(App.m_AppWnd, CPath::SaveFile, szExts, szDefExt))
+	{
+		try
+		{
+			CFile oStream;
+
+			oStream.Create(strPath);
+
+			App.Doc()->m_oDB.Dump(oStream);
+/*
+			CResultSet oRS = App.Doc()->m_oDB.m_oMembers.SelectAll();
+
+			CSortColumns oCols;
+
+			oCols.Add(1, CSortColumns::ASC);
+			oCols.Add(2, CSortColumns::DESC);
+
+			oRS.OrderBy(oCols);
+			oRS.Dump(oStream);
+  */
+			oStream.Close();
+		}
+		catch(CStreamException& e)
+		{
+			// Notify user.
+			App.m_AppWnd.AlertMsg(e.ErrorText());
+		}
+	}
 }
 
 /******************************************************************************
@@ -382,6 +521,24 @@ void CFCMCmds::OnUIDataViewCmds()
 	}
 }
 
+void CFCMCmds::OnUIReportCmds()
+{
+	bool bDocOpen = (App.m_pDoc != NULL);
+
+	App.m_AppWnd.m_Menu.EnableItem(REPORTS_MENU_POS, bDocOpen);
+}
+
+void CFCMCmds::OnUIDebugClipboard()
+{
+	bool bDocOpen = (App.m_pDoc != NULL);
+
+	App.m_AppWnd.m_Menu.EnableItem(DEBUG_MENU_POS, bDocOpen);
+}
+
+void CFCMCmds::OnUIDebugFile()
+{
+}
+
 /******************************************************************************
 ** Method:		SelectView()
 **
@@ -440,10 +597,9 @@ int CFCMCmds::CmdBmpIndex(uint iCmdID) const
 }
 
 /******************************************************************************
-** Method:		CmdHint()
+** Method:		CmdHintID()
 **
 ** Description:	Get the commands' hint resource ID.
-**				By default the hint resurce ID is the same as the command ID.
 **
 ** Parameters:	iCmdID		The command.
 **
@@ -452,7 +608,7 @@ int CFCMCmds::CmdBmpIndex(uint iCmdID) const
 *******************************************************************************
 */
 
-int CFCMCmds::CmdHint(uint iCmdID) const
+int CFCMCmds::CmdHintID(uint iCmdID) const
 {
 	// Is view based command?
 	if ( (iCmdID >= ID_VIEW_POPUP_CMD) && (iCmdID <= ID_VIEW_LAST_CMD) )
@@ -468,14 +624,14 @@ int CFCMCmds::CmdHint(uint iCmdID) const
 		}
 	}
 
-	return CCmdControl::CmdHint(iCmdID);
+	return CCmdControl::CmdHintID(iCmdID);
 }
 
 /******************************************************************************
-** Method:		CmdToolTip()
+** Method:		CmdToolTipID()
 **
-** Description:	Get the commands' tool tip resource ID.
-**				By default the tool tip resurce ID is the same as the command ID.
+** Description:	Get the commands' tool tip resource ID. This is the same as the
+**				hint resource ID.
 **
 ** Parameters:	iCmdID		The command.
 **
@@ -484,7 +640,32 @@ int CFCMCmds::CmdHint(uint iCmdID) const
 *******************************************************************************
 */
 
-int CFCMCmds::CmdToolTip(uint iCmdID) const
+int CFCMCmds::CmdToolTipID(uint iCmdID) const
 {
-	return CCmdControl::CmdToolTip(iCmdID);
+	return CFCMCmds::CmdHintID(iCmdID);
+}
+
+/******************************************************************************
+** Method:		SetFocus()
+**
+** Description:	Sets the focus to the current view.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMCmds::SetFocus()
+{
+	// Doc loaded?
+	if (App.m_pDoc != NULL)
+	{
+		CFCMView* pView = App.View();
+		ASSERT(pView != NULL);
+
+		// Get the current view.
+		pView->m_ViewsMgr.SetFocus();
+	}
 }
