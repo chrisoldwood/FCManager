@@ -54,12 +54,24 @@ public:
 	//
 	// Methods.
 	//
-	DataView CurrentView() const;
-	void     SelectView(DataView eView);
-	void     SetFocus();
+	CViewDlg& View(DataView eView) const;
+	DataView  CurrentView() const;
+	void      SelectView(DataView eView);
+	void      SetFocus();
 
 	void     OnCommand(uint iCmdID);
 	void     OnUIUpdate();
+
+	//
+	// View member.
+	//
+	CMembersView	m_oMembersView;					// Members data view.
+	CFixturesView	m_oFixturesView;				// Fixtures data view.
+	CBalSheetView	m_oBalSheetView;				// Balance sheet data view.
+	CAccountsView	m_oAccountsView;				// Accounts view.
+	CTeamSelsView	m_oTeamSelsView;				// Team selector data view.
+	COpponentsView	m_oOpponentsView;				// Opponents data view.
+	CRefereesView	m_oRefereesView;				// Referees data view.
 
 protected:
 	//
@@ -68,13 +80,6 @@ protected:
 	CViewsBar		m_oViewsBar;					// The views selector bar.
 	DataView		m_eCurrView;					// Current view.
 	CViewDlg*		m_pDataViews[NUM_DATAVIEWS];	// Array of views.
-	CMembersView	m_oMembersView;					// Members data view.
-	CFixturesView	m_oFixturesView;				// Fixtures data view.
-	CBalSheetView	m_oBalSheetView;				// Balance sheet data view.
-	CAccountsView	m_oAccountsView;				// Accounts view.
-	CTeamSelsView	m_oTeamSelsView;				// Team selector data view.
-	COpponentsView	m_oOpponentsView;				// Opponents data view.
-	CRefereesView	m_oRefereesView;				// Referees data view.
 	CFrameMenu		m_oOptionsMenus;				// Options popup menus.
 
 	// Child window ID.
@@ -97,6 +102,13 @@ protected:
 **
 *******************************************************************************
 */
+
+inline CViewDlg& CViewsMgr::View(DataView eView) const
+{
+	ASSERT((eView >= 0) && (eView < NUM_DATAVIEWS));
+
+	return *m_pDataViews[eView];
+}
 
 inline DataView CViewsMgr::CurrentView() const
 {
