@@ -77,10 +77,10 @@ CFCMCmds::CFCMCmds()
 		CMD_ENTRY(ID_REPORTS_OPPONENTS,					OnReportOpponents,		OnUIReportOpponents,	-1)
 		CMD_ENTRY(ID_REPORTS_REFEREES,					OnReportReferees,		OnUIReportReferees,		-1)
 		// Debug menu.
-		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,		OnUIDebugClipboard,		 9)
-		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,			OnUIDebugFile,			 9)
+		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,		OnUIDebugClipboard,		-1)
+		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,			OnUIDebugFile,			-1)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,			NULL,					 9)
+		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,			NULL,					10)
 	END_CMD_TABLE
 }
 
