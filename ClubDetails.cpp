@@ -9,6 +9,7 @@
 */
 
 #include "AppHeaders.hpp"
+#include <stdio.h>
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -66,10 +67,18 @@ CClubDetails::~CClubDetails()
 
 CRow& CClubDetails::CreateRow()
 {
+	// Create current season.
+	CDate tToday = CDate::Current();
+	int   nYear  = (tToday.Month() > 6) ? tToday.Year() : (tToday.Year()-1);
+	char  szSeason[10];
+
+	sprintf(szSeason, "%04d/%02d", nYear, ((nYear+1) % 10));
+
+	// Create and initialise row.
 	CRow& oRow = CTable::CreateRow();
 
 	oRow[NAME]   = "Your Club F.C.";
-	oRow[SEASON] = "2000/01";
+	oRow[SEASON] = szSeason;
 	oRow[LEAGUE] = "Your League";
 	
 	return oRow;
