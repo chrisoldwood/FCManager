@@ -38,7 +38,7 @@ CIncomePage::CIncomePage(CRow& oRow, CTmpSubs& oTmpSubs, CMembers& oMembers)
 		CTRL(IDC_FIXED_CREDIT,		&m_rbFxdCredit)
 		CTRL(IDC_VARIABLE_CREDIT,	&m_rbVarCredit)
 		CTRL(IDC_CREDIT,			&m_ebCredit   )
-		CTRL(IDC_CREDITS,			&m_lbCredits  )
+		CTRL(IDC_CREDITS,			&m_lvCredits  )
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
@@ -48,7 +48,7 @@ CIncomePage::CIncomePage(CRow& oRow, CTmpSubs& oTmpSubs, CMembers& oMembers)
 		CMD_CTRLMSG(IDC_ADD_CREDIT,			BN_CLICKED, OnAddCredit )
 		CMD_CTRLMSG(IDC_EDIT_CREDIT,		BN_CLICKED, OnEditCredit)
 		CMD_CTRLMSG(IDC_DEL_CREDIT,			BN_CLICKED, OnDelCredit )
-		CMD_CTRLMSG(IDC_CREDITS,			LBN_DBLCLK, OnEditCredit)
+		NFY_CTRLMSG(IDC_CREDITS,			NM_DBLCLK,  OnDblClick )
 	END_CTRLMSG_TABLE
 }
 
@@ -67,11 +67,12 @@ CIncomePage::CIncomePage(CRow& oRow, CTmpSubs& oTmpSubs, CMembers& oMembers)
 void CIncomePage::OnInitDialog()
 {
 	// Initialise the controls.
-	enum { NUM_TABSTOPS = 2 };
+	m_lvCredits.InsertColumn(0, "Name",   125);
+	m_lvCredits.InsertColumn(1, "£ Fee",   50);
+	m_lvCredits.InsertColumn(2, "£ Paid",  50);
 
-	int aiTabStops[NUM_TABSTOPS] = { 75, 105 };
-
-	m_lbCredits.SetTabStops(NUM_TABSTOPS, aiTabStops);
+	m_lvCredits.FullRowSelect();
+	m_lvCredits.GridLines();
 
 	// Initialise the fields with data.
 	m_ebCredit.Value(m_nTotal / 100.0);
@@ -99,7 +100,7 @@ void CIncomePage::OnInitDialog()
 			break;
 	}
 
-	// Load the credits/debits listboxes.
+	// Load the credits/debits ListViews.
 	RefreshCredits();
 }
 
@@ -167,7 +168,7 @@ bool CIncomePage::OnOk()
 void CIncomePage::OnNoCredit()
 {
 	m_ebCredit.Enable(false);
-	m_lbCredits.Enable(false);
+	m_lvCredits.Enable(false);
 
 	Control(IDC_ADD_CREDIT).Enable(false);
 	Control(IDC_EDIT_CREDIT).Enable(false);
@@ -179,7 +180,7 @@ void CIncomePage::OnNoCredit()
 void CIncomePage::OnFxdCredit()
 {
 	m_ebCredit.Enable(true);
-	m_lbCredits.Enable(false);
+	m_lvCredits.Enable(false);
 
 	Control(IDC_ADD_CREDIT).Enable(false);
 	Control(IDC_EDIT_CREDIT).Enable(false);
@@ -189,9 +190,9 @@ void CIncomePage::OnFxdCredit()
 void CIncomePage::OnVarCredit()
 {
 	m_ebCredit.Enable(false);
-	m_lbCredits.Enable(true);
+	m_lvCredits.Enable(true);
 
-	m_lbCredits.CurSel(0);
+	m_lvCredits.Select(0);
 	UpdateCreditBtns();
 	UpdateCreditsTotal();
 }
@@ -214,8 +215,8 @@ void CIncomePage::OnVarCredit()
 void CIncomePage::OnAddCredit()
 {
 	// Allocate a new Subs table row.
-	CRow&     oRow = m_oTmpSubs.CreateRow();
-	CIntArray oExclusions;
+	CRow&       oRow = m_oTmpSubs.CreateRow();
+	TArray<int> oExclusions;
 
 	// Create a list of members to exclude.
 	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
@@ -239,8 +240,8 @@ void CIncomePage::OnAddCredit()
 void CIncomePage::OnEditCredit()
 {
 	// Get subs row.
-	CRow&     oRow = m_oTmpSubs[m_lbCredits.ItemData(m_lbCredits.CurSel())];
-	CIntArray oExclusions;
+	CRow&       oRow = m_oTmpSubs[m_lvCredits.ItemData(m_lvCredits.Selected())];
+	TArray<int> oExclusions;
 
 	CMemberSubsDlg Dlg(m_oMembers, oExclusions, oRow, true);
 
@@ -254,17 +255,26 @@ void CIncomePage::OnEditCredit()
 void CIncomePage::OnDelCredit()
 {
 	// Delete subs row.
-	m_oTmpSubs.DeleteRow(m_lbCredits.ItemData(m_lbCredits.CurSel()));
+	m_oTmpSubs.DeleteRow(m_lvCredits.ItemData(m_lvCredits.Selected()));
 
 	RefreshCredits();
 	UpdateCreditBtns();
 	UpdateCreditsTotal();
 }
 
+LRESULT CIncomePage::OnDblClick(NMHDR&)
+{
+	// User double-clicked an item?
+	if (m_lvCredits.IsSelection())
+		OnEditCredit();
+
+	return 0;
+}
+
 /******************************************************************************
 ** Methods:		RefreshCredits()
 **
-** Description:	Reloads the credits listbox.
+** Description:	Reloads the credits ListView.
 **
 ** Parameters:	None.
 **
@@ -276,11 +286,11 @@ void CIncomePage::OnDelCredit()
 void CIncomePage::RefreshCredits()
 {
 	// Save old selection.
-	int nSel = m_lbCredits.CurSel();
+	int nSel = m_lvCredits.Selected();
 
-	// Clear listbox.
-	m_lbCredits.Redraw(false);
-	m_lbCredits.Reset();
+	// Clear ListView.
+	m_lvCredits.Redraw(false);
+	m_lvCredits.DeleteAllItems();
 
 	// For all subs rows.
 	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
@@ -291,25 +301,23 @@ void CIncomePage::RefreshCredits()
 		CRow* pMember = m_oMembers.SelectRow(CMembers::ID, oSubs[CSubs::MEMBER_ID]);
 		ASSERT(pMember != NULL);
 
-		// Create listbox fields.
+		// Create ListView fields.
 		CString strName = App.FormatName(*pMember, CMembers::FORENAME, CMembers::SURNAME, true);
 		CString strFee  = App.FormatMoney(oSubs, CSubs::FEE);
 		CString strPaid = App.FormatMoney(oSubs, CSubs::PAID);
-		CString strItem;
 
-		strItem.Format("%s\t£ %s\t£ %s", strName, strFee, strPaid);
-
-		// Add the the listbox.
-		int n = m_lbCredits.Add(strItem);
-		m_lbCredits.ItemData(n, i);
+		// Add the the ListView.
+		int n = m_lvCredits.AppendItem(strName, i, 0);
+		m_lvCredits.ItemText(n, 1, strFee);
+		m_lvCredits.ItemText(n, 2, strPaid);
 	}
 
 	// Restore old selection.
-	m_lbCredits.RestoreSel(nSel);
+	m_lvCredits.RestoreSel(nSel);
 
 	// Redraw.
-	m_lbCredits.Redraw(true);
-	m_lbCredits.Invalidate();
+	m_lvCredits.Redraw(true);
+	m_lvCredits.Invalidate();
 }
 
 /******************************************************************************

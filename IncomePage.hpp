@@ -14,7 +14,7 @@
 
 /******************************************************************************
 ** 
-** This dialog is used to enter/edit a balance sheet items details.
+** This dialog is used to enter/edit balance sheet item income details.
 **
 *******************************************************************************
 */
@@ -42,7 +42,7 @@ protected:
 	CRadioBtn		m_rbFxdCredit;
 	CRadioBtn		m_rbVarCredit;
 	CDecimalBox		m_ebCredit;
-	CListBox		m_lbCredits;
+	CListView		m_lvCredits;
 
 	//
 	// Message processors.
@@ -57,6 +57,7 @@ protected:
 	void OnAddCredit();
 	void OnEditCredit();
 	void OnDelCredit();
+	LRESULT OnDblClick(NMHDR&);
 
 	//
 	// Internal methods.
