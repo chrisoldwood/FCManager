@@ -40,12 +40,25 @@
 #include "TeamSels.hpp"
 #include "Opponents.hpp"
 #include "Referees.hpp"
+#include "StatTypes.hpp"
+#include "Stats.hpp"
+#include "MemStatTypes.hpp"
+#include "MemStats.hpp"
+#include "FixStatTypes.hpp"
+#include "FixStats.hpp"
+#include "OppStatTypes.hpp"
+#include "OppStats.hpp"
+#include "RefStatTypes.hpp"
+#include "RefStats.hpp"
+#include "TmpSubs.hpp"
+#include "TmpStats.hpp"
 #include "FCMDB.hpp"
 #include "FCMDoc.hpp"
 
 // Common dialog/ctrl classes.
 #include "NotesDlg.hpp"
 #include "PitchCtrl.hpp"
+#include "TableGrid.hpp"
 
 // App view classes.
 #include "ViewsBar.hpp"
