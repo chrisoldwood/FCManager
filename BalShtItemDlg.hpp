@@ -41,7 +41,7 @@ public:
 	// Ancillary table methods.
 	//
 	void UpdateSubsTable();
-	void UpdateExpensesTable();
+	void UpdateExpsTable();
 
 protected:
 	//
@@ -53,6 +53,8 @@ protected:
 	int				m_nItemID;
 	CTmpSubs		m_oTmpSubs;
 	CMembers&		m_oMembers;
+	CTmpExps		m_oTmpExps;
+	CExpenseTypes&	m_oExpTypes;
 
 	CBalShtItemPage	m_oItemPage;
 	CIncomePage		m_oIncomePage;
