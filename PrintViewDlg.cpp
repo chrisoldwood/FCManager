@@ -41,6 +41,23 @@ CPrintViewDlg::CPrintViewDlg(const CString& strViewName)
 }
 
 /******************************************************************************
+** Method:		Destructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+CPrintViewDlg::~CPrintViewDlg()
+{
+	m_aoColumns.DeleteAll();
+}
+
+/******************************************************************************
 ** Method:		OnInitDialog()
 **
 ** Description:	Initialise the dialog.
@@ -68,10 +85,10 @@ void CPrintViewDlg::OnInitDialog()
 	m_lvColumns.InsertColumn(0, "Column Name", 100);
 
 	// Add the columns.
-	for (int i = 0; i < m_apColumns.Size(); i++)
+	for (int i = 0; i < m_aoColumns.Size(); i++)
 	{
-		m_lvColumns.AppendItem(m_apColumns[i].m_pszName);
-		m_lvColumns.ItemCheck(i, m_apColumns[i].m_bPrint);
+		m_lvColumns.AppendItem(m_aoColumns[i].m_pszName);
+		m_lvColumns.ItemCheck(i, m_aoColumns[i].m_bShow);
 	}
 
 	m_lvColumns.Select(0);
@@ -106,7 +123,11 @@ bool CPrintViewDlg::OnOk()
 	// Count how many columns to print.
 	for (int i = 0; i < nColumns; i++)
 	{
-		if (m_lvColumns.IsItemChecked(i))
+		bool bChecked = m_lvColumns.IsItemChecked(i);
+
+		m_aoColumns[i].m_bShow = bChecked;
+
+		if (bChecked)
 			nChecked++;
 	}
 
@@ -115,6 +136,13 @@ bool CPrintViewDlg::OnOk()
 	{
 		AlertMsg("You must include at least one column.");
 		return false;
+	}
+
+	// Remove unselected columns.
+	for (i = m_aoColumns.Size()-1; i >= 0; i--)
+	{
+		if (!m_aoColumns[i].m_bShow)
+			m_aoColumns.Delete(i);
 	}
 
 	return true;
@@ -180,6 +208,9 @@ void CPrintViewDlg::OnMoveUp()
 	m_lvColumns.InsertItem(nSel-1, strItem, lData, -1);
 	m_lvColumns.ItemCheck(nSel-1, bChecked);
 	m_lvColumns.Select(nSel-1);
+
+	// Swap array items.
+	m_aoColumns.Swap(nSel, nSel-1);
 }
 
 void CPrintViewDlg::OnMoveDown()
@@ -204,4 +235,7 @@ void CPrintViewDlg::OnMoveDown()
 	m_lvColumns.InsertItem(nSel+1, strItem, lData, -1);
 	m_lvColumns.ItemCheck(nSel+1, bChecked);
 	m_lvColumns.Select(nSel+1);
+
+	// Swap array items.
+	m_aoColumns.Swap(nSel, nSel+1);
 }

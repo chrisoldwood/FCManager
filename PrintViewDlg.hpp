@@ -26,11 +26,12 @@ public:
 	// Constructors/Destructor.
 	//
 	CPrintViewDlg(const CString& strViewName);
+	~CPrintViewDlg();
 	
 	//
 	// Members.
 	//
-	TPtrArray<GridColumn>	m_apColumns;
+	TRefArray<GridColumn>	m_aoColumns;
 
 protected:
 	//
