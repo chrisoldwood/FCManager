@@ -28,6 +28,7 @@ CClubDetailsDlg::CClubDetailsDlg(CRow& oDetails) : CDialog(IDD_CLUB_DETAILS)
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_CLUB_NAME,	&m_ebName)
+		CTRL(IDC_SEASON,	&m_ebSeason)
 	END_CTRL_TABLE
 }
 
@@ -48,6 +49,9 @@ void CClubDetailsDlg::OnInitDialog()
 	// Initialise the controls.
 	m_ebName.Text(m_oDetails[CClubDetails::NAME]);
 	m_ebName.TextLimit(CClubDetails::NAME_LEN);
+
+	m_ebSeason.Text("00/01");
+	m_ebSeason.TextLimit(10);
 }
 
 /******************************************************************************

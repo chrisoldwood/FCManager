@@ -163,6 +163,10 @@ SOURCE=.\GridViewDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\MbrStatusPageDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MemberDlg.cpp
 # End Source File
 # Begin Source File
@@ -179,7 +183,15 @@ SOURCE=.\MembersView.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\NamePageDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\NotesDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\NotesPageDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -212,6 +224,10 @@ SOURCE=.\Referees.cpp
 # Begin Source File
 
 SOURCE=.\RefereesView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatsPageDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -323,6 +339,10 @@ SOURCE=.\GridViewDlg.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\MbrStatusPageDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MemberDlg.hpp
 # End Source File
 # Begin Source File
@@ -339,7 +359,15 @@ SOURCE=.\MembersView.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\NamePageDlg.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\NotesDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\NotesPageDlg.hpp
 # End Source File
 # Begin Source File
 
@@ -376,6 +404,10 @@ SOURCE=.\RefereesView.hpp
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatsPageDlg.hpp
 # End Source File
 # Begin Source File
 

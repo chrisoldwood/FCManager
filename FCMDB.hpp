@@ -43,7 +43,6 @@ public:
 		REFEREES,
 	};
 
-protected:
 	//
 	// Tables.
 	//

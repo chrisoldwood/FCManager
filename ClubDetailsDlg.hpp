@@ -37,6 +37,7 @@ protected:
 	// Members.
 	//
 	CEditBox	m_ebName;
+	CEditBox	m_ebSeason;
 	
 	//
 	// Message handlers.
