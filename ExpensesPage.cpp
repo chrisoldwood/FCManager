@@ -10,6 +10,7 @@
 
 #include "AppHeaders.hpp"
 #include "ExpensesPage.hpp"
+#include "ExpenseItemDlg.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -23,9 +24,11 @@
 *******************************************************************************
 */
 
-CExpensesPage::CExpensesPage(CRow& oRow)
+CExpensesPage::CExpensesPage(CRow& oRow, CTmpExps& oTmpExps, CExpenseTypes& oTypes)
 	: CPropertyPage(IDD_EXPENSES_PAGE)
 	, m_oRow(oRow)
+	, m_oTmpExps(oTmpExps)
+	, m_oTypes(oTypes)
 	, m_nType(oRow[CBalSheet::DEBIT_TYPE])
 	, m_nTotal(oRow[CBalSheet::DEBIT_TOTAL])
 	, m_ebDebit(false, 6, 2)
@@ -35,7 +38,7 @@ CExpensesPage::CExpensesPage(CRow& oRow)
 		CTRL(IDC_FIXED_DEBIT,		&m_rbFxdDebit)
 		CTRL(IDC_VARIABLE_DEBIT,	&m_rbVarDebit)
 		CTRL(IDC_DEBIT,				&m_ebDebit   )
-		CTRL(IDC_DEBITS,			&m_lbDebits  )
+		CTRL(IDC_DEBITS,			&m_lvDebits  )
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
@@ -45,7 +48,7 @@ CExpensesPage::CExpensesPage(CRow& oRow)
 		CMD_CTRLMSG(IDC_ADD_DEBIT,			BN_CLICKED, OnAddDebit )
 		CMD_CTRLMSG(IDC_EDIT_DEBIT,			BN_CLICKED, OnEditDebit)
 		CMD_CTRLMSG(IDC_DEL_DEBIT,			BN_CLICKED, OnDelDebit )
-		CMD_CTRLMSG(IDC_DEBITS,				LBN_DBLCLK, OnEditDebit)
+		NFY_CTRLMSG(IDC_DEBITS,				NM_DBLCLK,  OnDblClick )
 	END_CTRLMSG_TABLE
 }
 
@@ -64,11 +67,11 @@ CExpensesPage::CExpensesPage(CRow& oRow)
 void CExpensesPage::OnInitDialog()
 {
 	// Initialise the controls.
-	enum { NUM_TABSTOPS = 2 };
+	m_lvDebits.InsertColumn(0, "Item",   125);
+	m_lvDebits.InsertColumn(1, "£ Paid",  50);
 
-	int aiTabStops[NUM_TABSTOPS] = { 75, 105 };
-
-	m_lbDebits.SetTabStops(NUM_TABSTOPS, aiTabStops);
+	m_lvDebits.FullRowSelect();
+	m_lvDebits.GridLines();
 
 	// Initialise the fields with data.
 	m_ebDebit.Value(m_nTotal / 100.0);
@@ -96,7 +99,7 @@ void CExpensesPage::OnInitDialog()
 			break;
 	}
 
-	// Load the credits/debits listboxes.
+	// Load the credits/debits ListViews.
 	RefreshDebits();
 }
 
@@ -164,7 +167,7 @@ bool CExpensesPage::OnOk()
 void CExpensesPage::OnNoDebit()
 {
 	m_ebDebit.Enable(false);
-	m_lbDebits.Enable(false);
+	m_lvDebits.Enable(false);
 
 	Control(IDC_ADD_DEBIT).Enable(false);
 	Control(IDC_EDIT_DEBIT).Enable(false);
@@ -176,7 +179,7 @@ void CExpensesPage::OnNoDebit()
 void CExpensesPage::OnFxdDebit()
 {
 	m_ebDebit.Enable(true);
-	m_lbDebits.Enable(false);
+	m_lvDebits.Enable(false);
 
 	Control(IDC_ADD_DEBIT).Enable(false);
 	Control(IDC_EDIT_DEBIT).Enable(false);
@@ -186,10 +189,11 @@ void CExpensesPage::OnFxdDebit()
 void CExpensesPage::OnVarDebit()
 {
 	m_ebDebit.Enable(false);
-	m_lbDebits.Enable(true);
+	m_lvDebits.Enable(true);
 
-	m_lbDebits.CurSel(0);
+	m_lvDebits.Select(0);
 	UpdateDebitBtns();
+	UpdateDebitsTotal();
 }
 
 /******************************************************************************
@@ -209,20 +213,61 @@ void CExpensesPage::OnVarDebit()
 
 void CExpensesPage::OnAddDebit()
 {
+	// Allocate a new Expenses table row.
+	CRow& oRow = m_oTmpExps.CreateRow();
+
+	CExpenseItemDlg Dlg(m_oTypes, oRow, false);
+
+	if (Dlg.RunModal(*this) == IDOK)
+	{
+		m_oTmpExps.InsertRow(oRow);
+		RefreshDebits();
+		UpdateDebitBtns();
+		UpdateDebitsTotal();
+	}
+	else
+	{
+		delete &oRow;
+	}
 }
 
 void CExpensesPage::OnEditDebit()
 {
+	// Get expenses row.
+	CRow& oRow = m_oTmpExps[m_lvDebits.ItemData(m_lvDebits.Selected())];
+
+	CExpenseItemDlg Dlg(m_oTypes, oRow, true);
+
+	if (Dlg.RunModal(*this) == IDOK)
+	{
+		RefreshDebits();
+		UpdateDebitsTotal();
+	}
 }
 
 void CExpensesPage::OnDelDebit()
 {
+	// Delete expenses row.
+	m_oTmpExps.DeleteRow(m_lvDebits.ItemData(m_lvDebits.Selected()));
+
+	RefreshDebits();
+	UpdateDebitBtns();
+	UpdateDebitsTotal();
+}
+
+LRESULT CExpensesPage::OnDblClick(NMHDR&)
+{
+	// User double-clicked an item?
+	if (m_lvDebits.IsSelection())
+		OnEditDebit();
+
+	return 0;
 }
 
 /******************************************************************************
 ** Methods:		RefreshDebits()
 **
-** Description:	Reloads the appropriate listbox.
+** Description:	Reloads the appropriate ListView.
 **
 ** Parameters:	None.
 **
@@ -233,6 +278,37 @@ void CExpensesPage::OnDelDebit()
 
 void CExpensesPage::RefreshDebits()
 {
+	// Save old selection.
+	int nSel = m_lvDebits.Selected();
+
+	// Clear ListView.
+	m_lvDebits.Redraw(false);
+	m_lvDebits.DeleteAllItems();
+
+	// For all subs rows.
+	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
+	{
+		CRow& oExps = m_oTmpExps[i];
+
+		// Find the types entry.
+		CRow* pType = m_oTypes.SelectRow(CExpenseTypes::ID, oExps[CExpenses::TYPE_ID]);
+		ASSERT(pType != NULL);
+
+		// Create ListView fields.
+		CString strName = (*pType)[CExpenseTypes::NAME];
+		CString strPaid = App.FormatMoney(oExps, CExpenses::PAID);
+
+		// Add the the ListView.
+		int n = m_lvDebits.AppendItem(strName, i, 0);
+		m_lvDebits.ItemText(n, 1, strPaid);
+	}
+
+	// Restore old selection.
+	m_lvDebits.RestoreSel(nSel);
+
+	// Redraw.
+	m_lvDebits.Redraw(true);
+	m_lvDebits.Invalidate();
 }
 
 /******************************************************************************
@@ -249,9 +325,12 @@ void CExpensesPage::RefreshDebits()
 
 void CExpensesPage::UpdateDebitBtns()
 {
-	Control(IDC_ADD_DEBIT).Enable(false);
-	Control(IDC_EDIT_DEBIT).Enable(false);
-	Control(IDC_DEL_DEBIT).Enable(false);
+	bool bExpsRows = (m_oTmpExps.RowCount() > 0);
+	bool bExpsLeft = true;
+
+	Control(IDC_ADD_DEBIT).Enable(bExpsLeft);
+	Control(IDC_EDIT_DEBIT).Enable(bExpsRows);
+	Control(IDC_DEL_DEBIT).Enable(bExpsRows);
 }
 
 /******************************************************************************
@@ -268,4 +347,10 @@ void CExpensesPage::UpdateDebitBtns()
 
 void CExpensesPage::UpdateDebitsTotal()
 {
+	int nTotal = 0;
+
+	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
+		nTotal += m_oTmpExps[i][CExpenses::PAID].GetInt();
+
+	m_ebDebit.Value(nTotal / 100.0);
 }

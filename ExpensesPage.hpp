@@ -14,7 +14,7 @@
 
 /******************************************************************************
 ** 
-** This dialog is used to enter/edit a balance sheet items details.
+** This dialog is used to enter/edit balance sheet item expense details.
 **
 *******************************************************************************
 */
@@ -25,13 +25,15 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CExpensesPage(CRow& oRow);
+	CExpensesPage(CRow& oRow, CTmpExps& oTmpExps, CExpenseTypes& oTypes);
 	
 protected:
 	//
 	// Members.
 	//
 	CRow&			m_oRow;
+	CTmpExps&		m_oTmpExps;
+	CExpenseTypes&	m_oTypes;
 
 	int				m_nType;
 	int				m_nTotal;
@@ -40,7 +42,7 @@ protected:
 	CRadioBtn		m_rbFxdDebit;
 	CRadioBtn		m_rbVarDebit;
 	CDecimalBox		m_ebDebit;
-	CListBox		m_lbDebits;
+	CListView		m_lvDebits;
 
 	//
 	// Message processors.
@@ -55,6 +57,7 @@ protected:
 	void OnAddDebit();
 	void OnEditDebit();
 	void OnDelDebit();
+	LRESULT OnDblClick(NMHDR&);
 
 	//
 	// Internal methods.
