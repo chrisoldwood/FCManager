@@ -10,6 +10,7 @@
 
 #include "AppHeaders.hpp"
 #include "OpponentDlg.hpp"
+#include "StatTypesDlg.hpp"
 
 // The list view columns.
 GridColumn COpponentsView::Columns[NUM_COLUMNS] =
@@ -230,6 +231,30 @@ void COpponentsView::OnImport()
 void COpponentsView::OnExport()
 {
 	ExportTable(COpponents::FILE_FORMAT, COpponents::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnMiscCmd1()
+**
+** Description:	Maintain the statistic types.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void COpponentsView::OnMiscCmd1()
+{
+	// Get the stat types and those currently in use.
+	COppStatTypes& oTypes = m_oDB.m_oOppStatTypes;
+	COppStats&     oStats = m_oDB.m_oOppStats;
+	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
+
+	CStatTypesDlg Dlg("Opponent", oTypes, oUsed);
+
+	Dlg.RunModal(*this);
 }
 
 /******************************************************************************
