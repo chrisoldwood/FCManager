@@ -48,9 +48,9 @@ protected:
 		DATE,
 		TYPE,
 		HOME_TEAM,
+		RESULT,
 		AWAY_TEAM,
 		REFEREE,
-		RESULT,
 		NUM_COLUMNS
 	};
 

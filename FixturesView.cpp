@@ -17,9 +17,9 @@ GridColumn CFixturesView::Columns[NUM_COLUMNS] =
 	{ "Date",       75, LVCFMT_LEFT, CFixtures::DATE      },
 	{ "Type",       75, LVCFMT_LEFT, CFixtures::TYPE      },
 	{ "Home Team", 150, LVCFMT_LEFT, CFixtures::HOME_TEAM },
+	{ "Result",     75, LVCFMT_LEFT, CFixtures::RESULT    },
 	{ "Away Team", 150, LVCFMT_LEFT, CFixtures::AWAY_TEAM },
 	{ "Referee",   125, LVCFMT_LEFT, CFixtures::REFEREE   },
-	{ "Result",     75, LVCFMT_LEFT, CFixtures::RESULT    }
 };
 
 /******************************************************************************
