@@ -22,20 +22,20 @@
 *******************************************************************************
 */
 
-CBalSheet::CBalSheet(CMDB& oDB)
+CBalSheet::CBalSheet(CMDB& oDB, CBalShtTypes& oTypes)
 	: CTable(oDB, "BalanceSheet")
 {
 	// Create the table schema.
-	AddColumn("ID",          MDCT_IDENTITY, 0,         CColumn::IDENTITY);	// ID
-	AddColumn("Name",        MDCT_FXDSTR,   NAME_LEN,  CColumn::DEFAULTS);	// NAME
-	AddColumn("Date",        MDCT_DATETIME, 0,         CColumn::DEFAULTS);	// DATE
-	AddColumn("Type",        MDCT_INT,      0,         CColumn::DEFAULTS);	// TYPE
-	AddColumn("CreditType",  MDCT_INT,		0,         CColumn::DEFAULTS);	// CREDIT_TYPE
-	AddColumn("CreditTotal", MDCT_INT,	    0,         CColumn::DEFAULTS);	// CREDIT_TOTAL
-	AddColumn("DebitType",   MDCT_INT,		0,         CColumn::DEFAULTS);	// DEBIT_TYPE
-	AddColumn("DebitTotal",  MDCT_INT,      0,         CColumn::DEFAULTS);	// DEBIT_TOTAL
-	AddColumn("Balance",     MDCT_INT,      0,         CColumn::DEFAULTS);	// BALANCE
-	AddColumn("Notes",       MDCT_VARSTR,   NOTES_LEN, CColumn::DEFAULTS);	// NOTES
+	AddColumn("ID",          MDCT_IDENTITY, 0,					CColumn::IDENTITY);
+	AddColumn("Name",        MDCT_FXDSTR,   NAME_LEN,			CColumn::DEFAULTS);
+	AddColumn("Date",        MDCT_DATETIME, 0,					CColumn::DEFAULTS);
+	AddColumn("TypeID",      oTypes,		CBalShtTypes::ID,	CColumn::FOREIGNKEY);
+	AddColumn("CreditType",  MDCT_INT,		0,					CColumn::DEFAULTS);
+	AddColumn("CreditTotal", MDCT_INT,	    0,					CColumn::DEFAULTS);
+	AddColumn("DebitType",   MDCT_INT,		0,					CColumn::DEFAULTS);
+	AddColumn("DebitTotal",  MDCT_INT,      0,					CColumn::DEFAULTS);
+	AddColumn("Balance",     MDCT_INT,      0,					CColumn::DEFAULTS);
+	AddColumn("Notes",       MDCT_VARSTR,   NOTES_LEN,			CColumn::DEFAULTS);
 
 	// Add the "TOTAL" row.
 	CRow& oRow = CreateRow();
@@ -83,7 +83,7 @@ CRow& CBalSheet::CreateRow()
 //	oRow[ID]            = 0;
 	oRow[NAME]          = "";
 	oRow[DATE]          = time(NULL);
-	oRow[TYPE]          = OTHER;
+	oRow[TYPE_ID]       = CBalShtTypes::OTHER;
 	oRow[CREDIT_TYPE]   = NONE;
 	oRow[CREDIT_TOTAL]  = 0;
 	oRow[DEBIT_TYPE]    = NONE;

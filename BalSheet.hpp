@@ -25,7 +25,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CBalSheet(CMDB& oDB);
+	CBalSheet(CMDB& oDB, CBalShtTypes& oTypes);
 	~CBalSheet();
 	
 	//
@@ -36,7 +36,7 @@ public:
 		ID,
 		NAME,
 		DATE,
-		TYPE,
+		TYPE_ID,
 		CREDIT_TYPE,
 		CREDIT_TOTAL,
 		DEBIT_TYPE,
@@ -52,16 +52,6 @@ public:
 	{
 		NAME_LEN  =  50,
 		NOTES_LEN = 512,
-	};
-
-	//
-	// Item types.
-	//
-	enum
-	{
-		OTHER,
-		MATCH,
-		TRAINING,
 	};
 
 	//
