@@ -345,7 +345,7 @@ void CGridViewDlg::DeleteAllRows()
 
 CString CGridViewDlg::GetCellData(int /*nColumn*/, CRow& oRow, int nField)
 {
-	return oRow[nField];
+	return oRow[nField].GetString();
 }
 
 /******************************************************************************
