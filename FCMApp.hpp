@@ -39,7 +39,9 @@ public:
 	//
 	CFCMMainWnd	m_AppWnd;
 	CFCMCmds	m_AppCmds;
-	CIniFile	m_IniFile;
+	CIniFile	m_oIniFile;
+	CPrinter	m_oPrinter;
+	CRect		m_rcAppWnd;
 
 	//
 	// Template methods for getting doc and view specifics.
@@ -52,7 +54,9 @@ public:
 	//
 	// Misc helper functions.
 	//
-	CString MakeFullName(CRow& rRow, int nForename, int nSurname, bool bReverse = false);
+	CString FormatName(CRow& rRow, int nForename, int nSurname, bool bReverse = false) const;
+	CString FormatMoney(CRow& rRow, int nColumn) const;
+	CString FormatDate(CRow& rRow, int nColumn) const;
 
 protected:
 	//
@@ -64,6 +68,12 @@ protected:
 	//
 	virtual	bool OnOpen();
 	virtual	bool OnClose();
+
+	//
+	// Internal methods.
+	//
+	void LoadDefaults();
+	void SaveDefaults();
 };
 
 /******************************************************************************
@@ -105,7 +115,7 @@ inline CView* CFCMApp::CreateView(CDoc& rDoc) const
 
 inline const char* CFCMApp::FileExts() const
 {
-	static char szExts[] = {	"F.C. Manager Files (*.FCM)\0*.FCM\0"
+	static char szExts[] = {	"F.C. Manager Files (*.fcm)\0*.fcm\0"
 								"All Files (*.*)\0*.*\0"
 								"\0\0"							};
 
@@ -114,7 +124,7 @@ inline const char* CFCMApp::FileExts() const
 
 inline const char* CFCMApp::DefFileExt() const
 {
-	static char szDefExt[] = { "FCM" };
+	static char szDefExt[] = { "fcm" };
 
 	return szDefExt;
 }

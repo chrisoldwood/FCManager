@@ -9,6 +9,7 @@
 */
 
 #include "AppHeaders.hpp"
+#include <stdio.h>
 
 /******************************************************************************
 **
@@ -74,17 +75,21 @@ bool CFCMApp::OnOpen()
 	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
 
 	// Set the .INI file path.
-	m_IniFile.m_Path  = CPath::AppDir();
-	m_IniFile.m_Path += "FCManager.ini";
+	m_oIniFile.m_strPath  = CPath::AppDir();
+	m_oIniFile.m_strPath += "FCManager.ini";
 
-	// Load the MRUList.
-	m_MRUList.Load(m_IniFile);
+	// Load the MRUList and default settings.
+	m_MRUList.Load(m_oIniFile);
+	LoadDefaults();
 
 	// Create the main window.
 	if (!m_AppWnd.Create())
 		return false;
 
 	// Show it.
+	if ( (m_iCmdShow == SW_SHOWNORMAL) && (m_rcAppWnd.Empty() == false) )
+		m_AppWnd.Move(m_rcAppWnd);
+
 	m_AppWnd.Show(m_iCmdShow);
 
 	// Initialise UI.
@@ -107,16 +112,17 @@ bool CFCMApp::OnOpen()
 
 bool CFCMApp::OnClose()
 {
-	// Save the MRUList.
-	m_MRUList.Save(m_IniFile);
+	// Save the MRUList and defaults.
+	m_MRUList.Save(m_oIniFile);
+	SaveDefaults();
 
 	return true;
 }
 
 /******************************************************************************
-** Method:		MakeFullName()
+** Method:		FormatName()
 **
-** Description:	Helper function to create a persons full name from two columns
+** Description:	Helper function to format a persons full name from two columns
 **				in a row.
 **
 ** Parameters:	rRow		The row data.
@@ -124,12 +130,12 @@ bool CFCMApp::OnClose()
 **				nSurname	The column containing the Surname.
 **				bReverse	Supply surname then forename?
 **
-** Returns:		true or false.
+** Returns:		The string.
 **
 *******************************************************************************
 */
 
-CString CFCMApp::MakeFullName(CRow& rRow, int nForename, int nSurname, bool bReverse)
+CString CFCMApp::FormatName(CRow& rRow, int nForename, int nSurname, bool bReverse) const
 {
 	const char* pszForename = rRow[nForename];
 	const char* pszSurname  = rRow[nSurname];
@@ -156,4 +162,90 @@ CString CFCMApp::MakeFullName(CRow& rRow, int nForename, int nSurname, bool bRev
 	}
 
 	return strFullName;
+}
+
+/******************************************************************************
+** Method:		FormatMoney()
+**
+** Description:	Helper function to format a value from pence to pounds.
+**
+** Parameters:	rRow		The row data.
+**				nColumn		The column containing the value.
+**
+** Returns:		The string.
+**
+*******************************************************************************
+*/
+
+CString CFCMApp::FormatMoney(CRow& rRow, int nColumn) const
+{
+	double dValue = rRow[nColumn].GetInt() / 100.0;
+	char   szValue[10];
+
+	sprintf(szValue, "%.2f", dValue);
+
+	return szValue;
+}
+
+/******************************************************************************
+** Method:		FormatDate()
+**
+** Description:	Helper function to format a time_t as just a date.
+**
+** Parameters:	rRow		The row data.
+**				nColumn		The column containing the value.
+**
+** Returns:		The string.
+**
+*******************************************************************************
+*/
+
+CString CFCMApp::FormatDate(CRow& rRow, int nColumn) const
+{
+	char  szDate[20];
+
+	time_t tDate = rRow[nColumn];
+
+	strftime(szDate, sizeof(szDate), "%d/%m/%y", localtime(&tDate));
+
+	return szDate;
+}
+/******************************************************************************
+** Method:		LoadDefaults()
+**
+** Description:	Load the default settings.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMApp::LoadDefaults()
+{
+	m_rcAppWnd.left   = m_oIniFile.ReadInt("Main", "Left",   0);
+	m_rcAppWnd.top    = m_oIniFile.ReadInt("Main", "Top",    0);
+	m_rcAppWnd.right  = m_oIniFile.ReadInt("Main", "Right",  0);
+	m_rcAppWnd.bottom = m_oIniFile.ReadInt("Main", "Bottom", 0);
+}
+
+/******************************************************************************
+** Method:		SaveDefaults()
+**
+** Description:	Save the default settings.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMApp::SaveDefaults()
+{
+	m_oIniFile.WriteInt("Main", "Left",   m_rcAppWnd.left);
+	m_oIniFile.WriteInt("Main", "Top",    m_rcAppWnd.top);
+	m_oIniFile.WriteInt("Main", "Right",  m_rcAppWnd.right);
+	m_oIniFile.WriteInt("Main", "Bottom", m_rcAppWnd.bottom);
 }
