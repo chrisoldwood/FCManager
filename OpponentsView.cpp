@@ -152,6 +152,41 @@ void COpponentsView::OnDelete()
 
 void COpponentsView::OnPrint()
 {
+	PrintView("Opponents");
+}
+
+/******************************************************************************
+** Method:		OnImport()
+**
+** Description:	Import the opponents table from a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void COpponentsView::OnImport()
+{
+	ImportTable(COpponents::FILE_FORMAT, COpponents::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnExport()
+**
+** Description:	Export the opponents table to a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void COpponentsView::OnExport()
+{
+	ExportTable(COpponents::FILE_FORMAT, COpponents::FILE_VERSION);
 }
 
 /******************************************************************************
@@ -173,7 +208,7 @@ CString COpponentsView::GetCellData(int nColumn, CRow& oRow, int nField)
 	// Compose full name if name column.
 	if (nColumn == SECRETARY)
 	{
-		return App.MakeFullName(oRow, COpponents::FORENAME, COpponents::SURNAME, true);
+		return App.FormatName(oRow, COpponents::FORENAME, COpponents::SURNAME, true);
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);

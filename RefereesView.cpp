@@ -122,7 +122,7 @@ void CRefereesView::OnDelete()
 
 	ASSERT(&oRow != NULL);
 
-	CString strName = App.MakeFullName(oRow, CReferees::FORENAME, CReferees::SURNAME);
+	CString strName = App.FormatName(oRow, CReferees::FORENAME, CReferees::SURNAME);
 
 	// Get user to confirm action.
 	if (QueryMsg("Delete the referee: %s?",  strName) != IDYES)
@@ -149,6 +149,41 @@ void CRefereesView::OnDelete()
 
 void CRefereesView::OnPrint()
 {
+	PrintView("Referees");
+}
+
+/******************************************************************************
+** Method:		OnImport()
+**
+** Description:	Import the referees table from a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CRefereesView::OnImport()
+{
+	ImportTable(CReferees::FILE_FORMAT, CReferees::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnExport()
+**
+** Description:	Export the referees table to a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CRefereesView::OnExport()
+{
+	ExportTable(CReferees::FILE_FORMAT, CReferees::FILE_VERSION);
 }
 
 /******************************************************************************
@@ -170,7 +205,7 @@ CString CRefereesView::GetCellData(int nColumn, CRow& oRow, int nField)
 	// Compose full name if name column.
 	if (nColumn == NAME)
 	{
-		return App.MakeFullName(oRow, CReferees::FORENAME, CReferees::SURNAME, true);
+		return App.FormatName(oRow, CReferees::FORENAME, CReferees::SURNAME, true);
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
