@@ -26,16 +26,12 @@ CClubDetails::CClubDetails(CMDB& oDB)
 	: CTable(oDB, "ClubDetails")
 {
 	// Create the table schema.
-	AddColumn("Name", MDT_FXDSTR,	NAME_LEN);		// NAME
+	AddColumn("Name", MDCT_FXDSTR, NAME_LEN, CColumn::DEFAULTS);	// NAME
 
 	// Add the single row.
 	CRow& oRow = CreateRow();
 
-	InsertRow(oRow);
-
-	// Reset modified flags.
-	oRow.Status(CRow::ORIGINAL);
-	m_bInserted = false;
+	InsertRow(oRow, false);
 }
 
 /******************************************************************************
