@@ -122,7 +122,7 @@ void CTeamSelsView::OnEdit()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	CTeamSelDlg Dlg(m_oDB, oRow, true);
@@ -156,7 +156,7 @@ void CTeamSelsView::OnDelete()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	ASSERT(&oRow != NULL);

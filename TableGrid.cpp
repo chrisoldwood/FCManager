@@ -231,7 +231,7 @@ int CTableGrid::UpdateRow(int nRow, bool bReSort, bool bSelect)
 void CTableGrid::DeleteRow(int nRow)
 {
 	// Is selected row?
-	bool bSelected = (Selected() == nRow);
+	bool bSelected = (Selection() == nRow);
 
 	DeleteItem(nRow);
 

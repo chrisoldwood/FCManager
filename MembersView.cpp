@@ -135,7 +135,7 @@ void CMembersView::OnEdit()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	CMemberDlg Dlg(m_oDB, oRow, true);
@@ -172,7 +172,7 @@ void CMembersView::OnDelete()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 	int   nID     = oRow[CMembers::ID];
 

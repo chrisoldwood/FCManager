@@ -234,7 +234,7 @@ void CExpensesPage::OnAddDebit()
 void CExpensesPage::OnEditDebit()
 {
 	// Get expenses row.
-	CRow& oRow = m_oTmpExps[m_lvDebits.ItemData(m_lvDebits.Selected())];
+	CRow& oRow = m_oTmpExps[m_lvDebits.ItemData(m_lvDebits.Selection())];
 
 	CExpenseItemDlg Dlg(m_oTypes, oRow, true);
 
@@ -248,7 +248,7 @@ void CExpensesPage::OnEditDebit()
 void CExpensesPage::OnDelDebit()
 {
 	// Delete expenses row.
-	m_oTmpExps.DeleteRow(m_lvDebits.ItemData(m_lvDebits.Selected()));
+	m_oTmpExps.DeleteRow(m_lvDebits.ItemData(m_lvDebits.Selection()));
 
 	RefreshDebits();
 	UpdateDebitBtns();
@@ -279,7 +279,7 @@ LRESULT CExpensesPage::OnDblClick(NMHDR&)
 void CExpensesPage::RefreshDebits()
 {
 	// Save old selection.
-	int nSel = m_lvDebits.Selected();
+	int nSel = m_lvDebits.Selection();
 
 	// Clear ListView.
 	m_lvDebits.Redraw(false);

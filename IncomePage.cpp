@@ -240,7 +240,7 @@ void CIncomePage::OnAddCredit()
 void CIncomePage::OnEditCredit()
 {
 	// Get subs row.
-	CRow&       oRow = m_oTmpSubs[m_lvCredits.ItemData(m_lvCredits.Selected())];
+	CRow&       oRow = m_oTmpSubs[m_lvCredits.ItemData(m_lvCredits.Selection())];
 	TArray<int> oExclusions;
 
 	CMemberSubsDlg Dlg(m_oMembers, oExclusions, oRow, true);
@@ -255,7 +255,7 @@ void CIncomePage::OnEditCredit()
 void CIncomePage::OnDelCredit()
 {
 	// Delete subs row.
-	m_oTmpSubs.DeleteRow(m_lvCredits.ItemData(m_lvCredits.Selected()));
+	m_oTmpSubs.DeleteRow(m_lvCredits.ItemData(m_lvCredits.Selection()));
 
 	RefreshCredits();
 	UpdateCreditBtns();
@@ -286,7 +286,7 @@ LRESULT CIncomePage::OnDblClick(NMHDR&)
 void CIncomePage::RefreshCredits()
 {
 	// Save old selection.
-	int nSel = m_lvCredits.Selected();
+	int nSel = m_lvCredits.Selection();
 
 	// Clear ListView.
 	m_lvCredits.Redraw(false);

@@ -127,7 +127,7 @@ void CAccountsView::OnEdit()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	// Cannot edit the TOTAL row.
@@ -175,7 +175,7 @@ void CAccountsView::OnDelete()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	ASSERT(&oRow != NULL);

@@ -92,7 +92,7 @@ void CRefereesView::OnEdit()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	CRefereeDlg Dlg(m_oDB, oRow, true);
@@ -126,7 +126,7 @@ void CRefereesView::OnDelete()
 		return;
 
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.Selected();
+	int   iLVItem = m_lvGrid.Selection();
 	CRow& oRow    = Row(iLVItem);
 
 	ASSERT(&oRow != NULL);

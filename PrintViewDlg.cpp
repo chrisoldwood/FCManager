@@ -192,7 +192,7 @@ void CPrintViewDlg::OnMoveUp()
 	if (!m_lvColumns.IsSelection())
 		return;
 
-	int nSel = m_lvColumns.Selected();
+	int nSel = m_lvColumns.Selection();
 
 	// If first, can't move up.
 	if (nSel <= 0)
@@ -219,7 +219,7 @@ void CPrintViewDlg::OnMoveDown()
 	if (!m_lvColumns.IsSelection())
 		return;
 
-	int nSel = m_lvColumns.Selected();
+	int nSel = m_lvColumns.Selection();
 
 	// If last, can't move down.
 	if (nSel >= (m_lvColumns.ItemCount() - 1))

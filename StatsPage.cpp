@@ -199,7 +199,7 @@ void CStatsPage::OnEdit()
 	if (m_lvGrid.IsSelection() == false)
 		return;
 
-	int   nRow = m_lvGrid.Selected();
+	int   nRow = m_lvGrid.Selection();
 	CRow& oRow = m_lvGrid.Row(nRow);
 
 	// Show the edit statistic dialog.
@@ -232,7 +232,7 @@ void CStatsPage::OnDelete()
 		return;
 
 	// Delete selected row.
-	m_lvGrid.DeleteRow(m_lvGrid.Selected());
+	m_lvGrid.DeleteRow(m_lvGrid.Selection());
 
 	UpdateButtons();
 }
