@@ -15,9 +15,9 @@
 // The list view columns.
 CTableGrid::Column CStatsPage::Columns[NUM_COLUMNS] =
 {
-	{ "Date",      100, LVCFMT_LEFT,  CTmpStats::DATE  },
-	{ "Statistic", 100, LVCFMT_LEFT,  CTmpStats::NAME  },
-	{ "Value",      75, LVCFMT_RIGHT, CTmpStats::VALUE }
+	{ "Date",       75, LVCFMT_LEFT,  CTmpStats::DATE  },
+	{ "Statistic", 150, LVCFMT_LEFT,  CTmpStats::NAME  },
+	{ "Value",      50, LVCFMT_RIGHT, CTmpStats::VALUE }
 };
 
 /******************************************************************************
