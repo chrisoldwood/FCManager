@@ -30,7 +30,7 @@ CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, CIntArray& oExclusions, CRow&
 	: CDialog(IDD_MEMBER_SUBS)
 	, m_oRow(oRow)
 	, m_bEditing(bEditing)
-	, m_ebFee(false, 6, 2)
+	, m_ebFee(true, 2, 2)
 	, m_ebPaid(false, 6, 2)
 	, m_oMembers(oMembers)
 	, m_oExclusions(oExclusions)
