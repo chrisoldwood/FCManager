@@ -44,7 +44,6 @@ protected:
 	//
 	// Members.
 	//
-	CTable&	m_oMembers;
 
 	// The grid columns.
 	enum
@@ -60,6 +59,7 @@ protected:
 	// Overriden data methods.
 	//
 	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
+	virtual int     CompareRows(CRow& oRow1, CRow& oRow2);
 };
 
 /******************************************************************************

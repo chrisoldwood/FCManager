@@ -31,8 +31,7 @@ GridColumn CTeamSelsView::Columns[NUM_COLUMNS] =
 */
 
 CTeamSelsView::CTeamSelsView(CFCMDoc& rDoc)
-	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB[CFCMDB::TEAMSELS], NUM_COLUMNS, Columns)
-	, m_oMembers(rDoc.m_oDB[CFCMDB::MEMBERS])
+	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB, rDoc.m_oDB.m_oTeamSels, NUM_COLUMNS, Columns)
 {
 }
 
@@ -84,7 +83,7 @@ void CTeamSelsView::OnAdd()
 	// Allocate a row for the member.
 	CRow& oRow = m_oTable.CreateRow();
 
-	CTeamSelDlg Dlg(oRow, m_oMembers, false);
+	CTeamSelDlg Dlg(m_oDB, oRow, false);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
@@ -92,7 +91,7 @@ void CTeamSelsView::OnAdd()
 		m_oTable.InsertRow(oRow);
 
 		// Add to the list view and select it.
-		int iLVItem = AddRow(oRow);
+		int iLVItem = AddRow(oRow, true);
 		m_lvGrid.Select(iLVItem);
 
 		App.m_AppCmds.UpdateUI();
@@ -117,16 +116,20 @@ void CTeamSelsView::OnAdd()
 
 void CTeamSelsView::OnEdit()
 {
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
+
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
+	int   iLVItem = m_lvGrid.Selected();
 	CRow& oRow    = Row(iLVItem);
 
-	CTeamSelDlg Dlg(oRow, m_oMembers, true);
+	CTeamSelDlg Dlg(m_oDB, oRow, true);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
 		// Update the list view.
-		UpdateRow(iLVItem);
+		UpdateRow(iLVItem, true);
 
 		App.m_AppCmds.UpdateUI();
 	}
@@ -147,8 +150,12 @@ void CTeamSelsView::OnEdit()
 
 void CTeamSelsView::OnDelete()
 {
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
+
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
+	int   iLVItem = m_lvGrid.Selected();
 	CRow& oRow    = Row(iLVItem);
 
 	ASSERT(&oRow != NULL);
@@ -203,4 +210,25 @@ CString CTeamSelsView::GetCellData(int nColumn, CRow& oRow, int nField)
 		return App.FormatDate(oRow, nField);
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
+}
+
+/******************************************************************************
+** Method:		CompareRows()
+**
+** Description:	Compare the two rows.
+**
+** Parameters:	oRow1			Row 1.
+**				oRow2			Row 2.
+**
+** Returns:		As strcmp.
+**
+*******************************************************************************
+*/
+
+int CTeamSelsView::CompareRows(CRow& oRow1, CRow& oRow2)
+{
+	time_t tValue1 = oRow1[CTeamSels::DATE];
+	time_t tValue2 = oRow2[CTeamSels::DATE];
+
+	return (tValue1 - tValue2);
 }

@@ -34,8 +34,7 @@ GridColumn CBalSheetView::Columns[NUM_COLUMNS] =
 */
 
 CBalSheetView::CBalSheetView(CFCMDoc& rDoc)
-	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB[CFCMDB::BALSHEET], NUM_COLUMNS, Columns)
-	, m_oDB(rDoc.m_oDB)
+	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB, rDoc.m_oDB.m_oBalSheet, NUM_COLUMNS, Columns)
 {
 }
 
@@ -96,14 +95,14 @@ void CBalSheetView::OnAdd()
 		Dlg.UpdateSubsTable();
 
 		// Add to the list view and select it.
-		int iLVItem = AddRow(oRow);
+		int iLVItem = AddRow(oRow, true);
 		m_lvGrid.Select(iLVItem);
 
 		// Update totals.
 		CBalSheet& oTable = static_cast<CBalSheet&>(m_oTable);
 
 		oTable.UpdateTotalsRow();
-		UpdateRow(m_lvGrid.ItemCount()-1);
+		UpdateRow(m_lvGrid.ItemCount()-1, false);
 
 		App.m_AppCmds.UpdateUI();
 	}
@@ -127,14 +126,18 @@ void CBalSheetView::OnAdd()
 
 void CBalSheetView::OnEdit()
 {
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
+
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
+	int   iLVItem = m_lvGrid.Selected();
 	CRow& oRow    = Row(iLVItem);
 
-	// Cannot edit the TOTALS row.
+	// Cannot edit the TOTAL row.
 	if (oRow[CBalSheet::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot edit the 'TOTALS' item.");
+		NotifyMsg("You cannot edit the 'TOTAL' item.");
 		return;
 	}
 
@@ -145,13 +148,13 @@ void CBalSheetView::OnEdit()
 		Dlg.UpdateSubsTable();
 
 		// Update the list view.
-		UpdateRow(iLVItem);
+		UpdateRow(iLVItem, true);
 
 		// Update totals.
 		CBalSheet& oTable = static_cast<CBalSheet&>(m_oTable);
 
 		oTable.UpdateTotalsRow();
-		UpdateRow(m_lvGrid.ItemCount()-1);
+		UpdateRow(m_lvGrid.ItemCount()-1, false);
 
 		App.m_AppCmds.UpdateUI();
 	}
@@ -172,16 +175,20 @@ void CBalSheetView::OnEdit()
 
 void CBalSheetView::OnDelete()
 {
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
+
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
+	int   iLVItem = m_lvGrid.Selected();
 	CRow& oRow    = Row(iLVItem);
 
 	ASSERT(&oRow != NULL);
 
-	// Cannot delete the TOTALS row.
+	// Cannot delete the TOTAL row.
 	if (oRow[CBalSheet::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot delete the 'TOTALS' item.");
+		NotifyMsg("You cannot delete the 'TOTAL' item.");
 		return;
 	}
 
@@ -199,7 +206,7 @@ void CBalSheetView::OnDelete()
 	CBalSheet& oTable = static_cast<CBalSheet&>(m_oTable);
 
 	oTable.UpdateTotalsRow();
-	UpdateRow(m_lvGrid.ItemCount()-1);
+	UpdateRow(m_lvGrid.ItemCount()-1, false);
 
 	App.m_AppCmds.UpdateUI();
 }
@@ -260,7 +267,7 @@ CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 	// Format dates.
 	else if (nColumn == DATE)
 	{
-		// Don't show date for "TOTALS" row.
+		// Don't show date for "TOTAL" row.
 		if (oRow[CBalSheet::ID].GetInt() == 1)
 			return "";
 
@@ -268,4 +275,25 @@ CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
+}
+
+/******************************************************************************
+** Method:		CompareRows()
+**
+** Description:	Compare the two rows.
+**
+** Parameters:	oRow1			Row 1.
+**				oRow2			Row 2.
+**
+** Returns:		As strcmp.
+**
+*******************************************************************************
+*/
+
+int CBalSheetView::CompareRows(CRow& oRow1, CRow& oRow2)
+{
+	time_t tValue1 = oRow1[CBalSheet::DATE];
+	time_t tValue2 = oRow2[CBalSheet::DATE];
+
+	return (tValue1 - tValue2);
 }

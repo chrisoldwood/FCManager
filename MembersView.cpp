@@ -34,7 +34,7 @@ GridColumn CMembersView::Columns[NUM_COLUMNS] =
 */
 
 CMembersView::CMembersView(CFCMDoc& rDoc)
-	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB[CFCMDB::MEMBERS], NUM_COLUMNS, Columns)
+	: CGridViewDlg(IDD_GRID_VIEW, rDoc.m_oDB, rDoc.m_oDB.m_oMembers, NUM_COLUMNS, Columns)
 {
 }
 
@@ -86,7 +86,7 @@ void CMembersView::OnAdd()
 	// Allocate a row for the member.
 	CRow& oRow = m_oTable.CreateRow();
 
-	CMemberDlg Dlg(oRow, false);
+	CMemberDlg Dlg(m_oDB, oRow, false);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
@@ -94,7 +94,7 @@ void CMembersView::OnAdd()
 		m_oTable.InsertRow(oRow);
 
 		// Add to the list view and select it.
-		int iLVItem = AddRow(oRow);
+		int iLVItem = AddRow(oRow, true);
 		m_lvGrid.Select(iLVItem);
 
 		App.m_AppCmds.UpdateUI();
@@ -120,16 +120,20 @@ void CMembersView::OnAdd()
 
 void CMembersView::OnEdit()
 {
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
+
 	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
+	int   iLVItem = m_lvGrid.Selected();
 	CRow& oRow    = Row(iLVItem);
 
-	CMemberDlg Dlg(oRow, true);
+	CMemberDlg Dlg(m_oDB, oRow, true);
 
 	if (Dlg.RunModal(*this) == IDOK)
 	{
 		// Update the list view.
-		UpdateRow(iLVItem);
+		UpdateRow(iLVItem, true);
 
 		App.m_AppCmds.UpdateUI();
 	}
@@ -149,11 +153,13 @@ void CMembersView::OnEdit()
 
 void CMembersView::OnDelete()
 {
-	// Get the current selection.
-	int   iLVItem = m_lvGrid.SelectionMark();
-	CRow& oRow    = Row(iLVItem);
+	// Ignore if no selection.
+	if (!m_lvGrid.IsSelection())
+		return;
 
-	ASSERT(&oRow != NULL);
+	// Get the current selection.
+	int   iLVItem = m_lvGrid.Selected();
+	CRow& oRow = Row(iLVItem);
 
 	CString strName = App.FormatName(oRow, CMembers::FORENAME, CMembers::SURNAME);
 
@@ -258,4 +264,40 @@ CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
+}
+
+/******************************************************************************
+** Method:		CompareRows()
+**
+** Description:	Compare the two rows.
+**
+** Parameters:	oRow1			Row 1.
+**				oRow2			Row 2.
+**
+** Returns:		As strcmp.
+**
+*******************************************************************************
+*/
+
+int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
+{
+	const char* pszValue1;
+	const char* pszValue2;
+	int			nResult;
+
+	// First compare surnames.
+	pszValue1 = oRow1[CMembers::SURNAME];
+	pszValue2 = oRow2[CMembers::SURNAME];
+	nResult   = stricmp(pszValue1, pszValue2);
+
+	// Not equal?
+	if (nResult != 0)
+		return nResult;
+
+	// If equal, compare forenames.
+	pszValue1 = oRow1[CMembers::FORENAME];
+	pszValue2 = oRow2[CMembers::FORENAME];
+	nResult   = stricmp(pszValue1, pszValue2);
+
+	return nResult;
 }

@@ -60,6 +60,7 @@ protected:
 	// Overidable data methods.
 	//
 	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
+	virtual int     CompareRows(CRow& oRow1, CRow& oRow2);
 };
 
 /******************************************************************************
