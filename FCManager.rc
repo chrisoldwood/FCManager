@@ -1,0 +1,595 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "Resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "WclRsc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "Resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""WclRsc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "#include ""FCManager.rcv""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_APPICON             ICON    DISCARDABLE     "Icon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_APPMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New...\tCtrl+N",             ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVEAS
+        MENUITEM "&Close\tCtrl+F4",             ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "&1.",                         ID_FILE_MRU_1
+        MENUITEM "&2.",                         ID_FILE_MRU_2
+        MENUITEM "&3.",                         ID_FILE_MRU_3
+        MENUITEM "&4.",                         ID_FILE_MRU_4
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               ID_FILE_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Members",                    ID_VIEW_MEMBERS
+        MENUITEM "&Fixtures",                   ID_VIEW_FIXTURES
+        MENUITEM "&Balance Sheet",              ID_VIEW_BALANCE
+        MENUITEM "&Team Selector",              ID_VIEW_TEAM_SEL
+        MENUITEM "&Opponents",                  ID_VIEW_OPPONENTS
+        MENUITEM "&Referees",                   ID_VIEW_REFEREES
+    END
+    POPUP "&Club"
+    BEGIN
+        MENUITEM "&Details...",                 ID_CLUB_DETAILS
+    END
+    POPUP "&Members"
+    BEGIN
+        MENUITEM "(none)",                      ID_OPTIONS_BASE, GRAYED
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About F.C. Manager",         ID_HELP_ABOUT
+    END
+END
+
+IDR_OPTIONS_MENUS MENU DISCARDABLE 
+BEGIN
+    POPUP "&Members"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
+        MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
+    END
+    POPUP "&Fixtures"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
+        MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
+    END
+    POPUP "&Balance Sheet"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+    END
+    POPUP "&Team Selector"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+    END
+    POPUP "&Opponents"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
+        MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
+    END
+    POPUP "&Referees"
+    BEGIN
+        MENUITEM "&Add...",                     ID_OPTIONS_ADD
+        MENUITEM "&Edit...",                    ID_OPTIONS_EDIT
+        MENUITEM "&Delete",                     ID_OPTIONS_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_OPTIONS_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Import...",                  ID_OPTIONS_IMPORT
+        MENUITEM "E&xport...",                  ID_OPTIONS_EXPORT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOG DISCARDABLE  0, 0, 123, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About F.C. Manager"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_APPICON,IDC_STATIC,15,10,20,20
+    CTEXT           "F.C. Manager",IDC_STATIC,50,10,55,10
+    CTEXT           "v1.0 Alpha #1",IDC_STATIC,50,20,55,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,40,100,1
+    CTEXT           "(C) Chris Oldwood 2000",IDC_STATIC,10,50,100,10
+    CTEXT           "gort@cix.co.uk",IDC_STATIC,10,59,100,10
+    DEFPUSHBUTTON   "OK",IDOK,35,80,50,15
+END
+
+IDD_MEMBER DIALOG DISCARDABLE  0, 0, 267, 232
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Member"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Name",IDC_STATIC,10,10,130,60
+    LTEXT           "&Surname:",IDC_STATIC,20,28,35,8
+    EDITTEXT        IDC_SURNAME,55,25,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Forename:",IDC_STATIC,20,48,35,8
+    EDITTEXT        IDC_FORENAME,55,45,75,14,ES_AUTOHSCROLL
+    GROUPBOX        "Contact Details",IDC_STATIC,10,75,245,80
+    LTEXT           "Phone #&1:",IDC_STATIC,20,93,35,8
+    EDITTEXT        IDC_STD_PHONE,55,90,75,14,ES_AUTOHSCROLL
+    LTEXT           "Phone #&2:",IDC_STATIC,20,113,35,8
+    EDITTEXT        IDC_ALT_PHONE,55,110,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Email:",IDC_STATIC,20,133,35,8
+    EDITTEXT        IDC_EMAIL_ADDRESS,55,130,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Address:",IDC_STATIC,140,90,28,8
+    EDITTEXT        IDC_POSTAL_ADDRESS,170,90,75,55,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN
+    GROUPBOX        "Player Details",IDC_STATIC,10,160,245,60
+    CONTROL         "&Registered With F.A.",IDC_REGISTERED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,20,176,81,10
+    LTEXT           "Usual &Team:",IDC_STATIC,115,177,50,8
+    COMBOBOX        IDC_USUAL_TEAM,170,175,75,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Senior P&layer",IDC_SENIOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,196,57,10
+    LTEXT           "Usual &Position:",IDC_STATIC,115,197,50,8
+    COMBOBOX        IDC_USUAL_POS,170,195,75,50,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,205,15,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,32,50,14
+    PUSHBUTTON      "&Notes...",IDC_NOTES,205,55,50,15
+END
+
+IDD_FIXTURE DIALOG DISCARDABLE  0, 0, 257, 137
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Fixture"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Date:",IDC_STATIC,10,13,45,8
+    CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,55,10,75,15
+    LTEXT           "&Type:",IDC_STATIC,10,32,45,8
+    COMBOBOX        IDC_TYPE,55,30,75,50,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Home Team:",IDC_STATIC,10,52,45,8
+    COMBOBOX        IDC_HOME_TEAM,55,50,125,50,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Away Team:",IDC_STATIC,10,72,45,8
+    COMBOBOX        IDC_AWAY_TEAM,55,70,125,50,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Re&feree:",IDC_STATIC,10,92,45,8
+    COMBOBOX        IDC_REFEREE,55,90,125,50,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Result:",IDC_STATIC,10,113,45,8
+    EDITTEXT        IDC_RESULT,55,110,125,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,195,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,195,27,50,14
+    PUSHBUTTON      "&Notes...",IDC_NOTES,195,50,50,14
+END
+
+IDD_OPPONENT DIALOG DISCARDABLE  0, 0, 267, 247
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Opponent"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Club Details",IDC_STATIC,10,10,170,100
+    LTEXT           "&Name:",IDC_STATIC,20,28,35,8
+    EDITTEXT        IDC_CLUB_NAME,55,25,115,14,ES_AUTOHSCROLL
+    LTEXT           "&Pitch:",IDC_STATIC,20,48,35,8
+    EDITTEXT        IDC_GROUND,55,45,115,14,ES_AUTOHSCROLL
+    LTEXT           "&Colours:",IDC_STATIC,20,68,35,8
+    EDITTEXT        IDC_STD_COLOURS,55,65,75,14,ES_AUTOHSCROLL
+    LTEXT           "(Standard)",IDC_STATIC,135,68,40,8
+    LTEXT           "C&olours:",IDC_STATIC,20,88,35,8
+    EDITTEXT        IDC_ALT_COLOURS,55,85,75,14,ES_AUTOHSCROLL
+    LTEXT           "(Alternate)",IDC_STATIC,135,88,40,8
+    GROUPBOX        "Contact Details",IDC_STATIC,10,115,245,120
+    LTEXT           "&Surname:",IDC_STATIC,20,133,35,8
+    EDITTEXT        IDC_SURNAME,55,130,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Forename:",IDC_STATIC,20,153,35,8
+    EDITTEXT        IDC_FORENAME,55,150,75,14,ES_AUTOHSCROLL
+    LTEXT           "Phone #&1:",IDC_STATIC,20,173,35,8
+    EDITTEXT        IDC_STD_PHONE,55,170,75,14,ES_AUTOHSCROLL
+    LTEXT           "Phone #&2:",IDC_STATIC,20,193,35,8
+    EDITTEXT        IDC_ALT_PHONE,55,190,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Email:",IDC_STATIC,20,213,35,8
+    EDITTEXT        IDC_EMAIL_ADDRESS,55,210,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Address:",IDC_STATIC,140,170,28,8
+    EDITTEXT        IDC_POSTAL_ADDRESS,170,170,75,55,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN
+    DEFPUSHBUTTON   "OK",IDOK,205,15,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,32,50,14
+    PUSHBUTTON      "No&tes...",IDC_NOTES,205,55,50,15
+END
+
+IDD_REFEREE DIALOG DISCARDABLE  0, 0, 267, 167
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Referee"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Name",IDC_STATIC,10,10,130,60
+    LTEXT           "&Surname:",IDC_STATIC,20,28,35,8
+    EDITTEXT        IDC_SURNAME,55,25,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Forename:",IDC_STATIC,20,48,35,8
+    EDITTEXT        IDC_FORENAME,55,45,75,14,ES_AUTOHSCROLL
+    GROUPBOX        "Contact Details",IDC_STATIC,10,75,245,80
+    LTEXT           "Phone #&1:",IDC_STATIC,20,93,35,8
+    EDITTEXT        IDC_STD_PHONE,55,90,75,14,ES_AUTOHSCROLL
+    LTEXT           "Phone #&2:",IDC_STATIC,20,113,35,8
+    EDITTEXT        IDC_ALT_PHONE,55,110,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Email:",IDC_STATIC,20,133,35,8
+    EDITTEXT        IDC_EMAIL_ADDRESS,55,130,75,14,ES_AUTOHSCROLL
+    LTEXT           "&Address:",IDC_STATIC,140,90,28,8
+    EDITTEXT        IDC_POSTAL_ADDRESS,170,90,75,55,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN
+    DEFPUSHBUTTON   "OK",IDOK,205,15,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,32,50,14
+    PUSHBUTTON      "&Notes...",IDC_NOTES,205,55,50,15
+END
+
+IDD_TEAM_SELS DIALOGEX 0, 0, 219, 114
+STYLE WS_CHILD | WS_CLIPCHILDREN
+EXSTYLE WS_EX_CLIENTEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+IDD_CLUB_DETAILS DIALOG DISCARDABLE  0, 0, 237, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Club Details"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Name:",IDC_STATIC,10,13,22,8
+    EDITTEXT        IDC_CLUB_NAME,45,10,115,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,175,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,175,27,50,14
+END
+
+IDD_NOTES DIALOG DISCARDABLE  0, 0, 212, 122
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Additional Notes"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,150,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,150,27,50,14
+    EDITTEXT        IDC_NOTES,10,10,125,100,ES_AUTOHSCROLL
+END
+
+IDD_GRID_VIEW DIALOGEX 0, 0, 200, 195
+STYLE WS_CHILD | WS_CLIPCHILDREN
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDC_GRID,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,0,0,200,195,
+                    WS_EX_CLIENTEDGE
+END
+
+IDD_BALSHEET_ITEM DIALOG DISCARDABLE  0, 0, 342, 212
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "%s Balance Sheet Item"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item Details",IDC_STATIC,10,10,255,60
+    LTEXT           "&Name:",IDC_STATIC,20,28,25,8
+    EDITTEXT        IDC_NAME,50,25,205,14,ES_AUTOHSCROLL
+    LTEXT           "&Date:",IDC_STATIC,20,48,25,8
+    CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,50,45,80,15
+    GROUPBOX        "Credit Details",IDC_STATIC,10,75,155,125
+    CONTROL         "Fixed &Income:",IDC_FIXED_CREDIT,"Button",
+                    BS_AUTORADIOBUTTON,20,92,60,10
+    CONTROL         "Income From &Players:",IDC_VARIABLE_CREDIT,"Button",
+                    BS_AUTORADIOBUTTON,20,105,83,10
+    LTEXT           "£",IDC_STATIC,110,93,8,8
+    EDITTEXT        IDC_CREDIT,120,90,35,14,ES_RIGHT | ES_AUTOHSCROLL
+    LISTBOX         IDC_CREDITS,20,120,135,50,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Debit Details",IDC_STATIC,175,75,155,125
+    CONTROL         "Fixed &Expenditure:",IDC_FIXED_DEBIT,"Button",
+                    BS_AUTORADIOBUTTON,185,92,74,10
+    CONTROL         "&Various Expenses",IDC_VARIABLE_DEBIT,"Button",
+                    BS_AUTORADIOBUTTON,185,106,72,10
+    LTEXT           "£",IDC_STATIC,275,93,8,8
+    EDITTEXT        IDC_DEBIT,285,90,35,14,ES_RIGHT | ES_AUTOHSCROLL
+    LISTBOX         IDC_DEBITS,185,121,135,49,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,280,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,280,27,50,14
+    PUSHBUTTON      "No&tes...",IDC_NOTES,280,50,50,15
+    PUSHBUTTON      "Add...",IDC_ADD_CREDIT,20,175,40,15
+    PUSHBUTTON      "Edit...",IDC_EDIT_CREDIT,65,175,45,15
+    PUSHBUTTON      "Delete",IDC_DEL_CREDIT,115,175,40,15
+    PUSHBUTTON      "Add...",IDC_ADD_DEBIT,185,175,40,15
+    PUSHBUTTON      "Edit...",IDC_EDIT_DEBIT,231,175,45,15
+    PUSHBUTTON      "Delete",IDC_DEL_DEBIT,281,175,40,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_APPTOOLBAR          BITMAP  DISCARDABLE     "TOOLBAR.BMP"
+IDB_VIEWS               BITMAP  DISCARDABLE     "views.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_APPACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_FILE_CLOSE,          VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_MEMBER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 260
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 225
+    END
+
+    IDD_FIXTURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 250
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_OPPONENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 260
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 240
+    END
+
+    IDD_REFEREE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 260
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_TEAM_SELS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 212
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_CLUB_DETAILS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 230
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+    END
+
+    IDD_NOTES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 115
+    END
+
+    IDD_GRID_VIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 174
+    END
+
+    IDD_BALSHEET_ITEM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 335
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 205
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_RESTORE         "Restore the window size and position."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_MOVE            "Move the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_SIZE            "Resize the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_MINIMIZE        "Minimize the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_MAXIMIZE        "Maximize the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_CLOSE           "Close the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYS_SWITCH          "Switch to another application"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_POPUP           "File options"
+    ID_FILE_NEW             "Create a new file"
+    ID_FILE_OPEN            "Open an existing file"
+    ID_FILE_SAVE            "Save the current file"
+    ID_FILE_SAVEAS          "Save the current file with a new name"
+    ID_FILE_CLOSE           "Close the current file"
+    ID_FILE_EXIT            "Exit F.C. Manager"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_HELP_POPUP           "Help options"
+    ID_HELP_ABOUT           "Show F.C. Manager version"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_POPUP           "View options"
+    ID_VIEW_MEMBERS         "View the list of members"
+    ID_VIEW_FIXTURES        "View the list of fixtures"
+    ID_VIEW_BALANCE         "View the balance sheet"
+    ID_VIEW_TEAM_SEL        "View the team selections"
+    ID_VIEW_OPPONENTS       "View the list of league clubs"
+    ID_VIEW_REFEREES        "View the list of referees"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CLUB_POPUP           "Club options"
+    ID_CLUB_DETAILS         "Edit the clubs details"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPTIONS_POPUP        " "
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#include "FCManager.rcv"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

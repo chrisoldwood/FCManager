@@ -1,0 +1,13 @@
+- File format/version checking.
+
+- Change notes and address fields to MDT_STRING when supported.
+
+- Add import/export code now to save retyping.
+
+- If imported mark doc as modified.
+
+- Add hints for options menu.
+
+- Printing support.
+
+- Add a view for subs.
