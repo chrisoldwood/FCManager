@@ -27,6 +27,27 @@ CViewDlg::CViewDlg(uint iRscID) : CDialog(iRscID)
 }
 
 /******************************************************************************
+** Method:		OnSelect()
+**				OnDeselect()
+**
+** Description:	Default implementations of view selection template methods.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CViewDlg::OnSelect()
+{
+}
+
+void CViewDlg::OnDeselect()
+{
+}
+
+/******************************************************************************
 ** Method:		OnCommand()
 **
 ** Description:	Default command handler.

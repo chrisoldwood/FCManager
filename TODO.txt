@@ -1,3 +1,21 @@
-- If imported mark doc as modified.
+- Print column sizes.
 
-- Printing support.
+- Print cell margins.
+
+- Player availability.
+
+- Player statistics / statistics types.
+
+- Fixture statistics.
+
+- Expense types table.
+
+- Balance sheet item expenses.
+
+- Club season db column.
+
+- Pitch control (other formations 4-3-3).
+
+- Team selection dialog.
+
+- Subs editing / better control.

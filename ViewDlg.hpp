@@ -30,6 +30,9 @@ public:
 	//
 	// Methods.
 	//
+	virtual void OnSelect();
+	virtual void OnDeselect();
+
 	virtual void OnCommand(uint iCmdID);
 	virtual void OnUIUpdate();
 
