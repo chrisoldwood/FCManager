@@ -17,8 +17,16 @@ GridColumn CMembersView::Columns[NUM_COLUMNS] =
 	{ "Name",       150, LVCFMT_LEFT, 0                         },
 	{ "Phone #1",   150, LVCFMT_LEFT, CMembers::STANDARD_PHONE  },
 	{ "Phone #2",   150, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE },
-	{ "Registered",  75, LVCFMT_LEFT, CMembers::IS_REGISTERED   },
-	{ "Senior",      75, LVCFMT_LEFT, CMembers::IS_SENIOR       }
+	{ "Registered?", 75, LVCFMT_LEFT, CMembers::IS_REGISTERED   },
+	{ "Senior?",     75, LVCFMT_LEFT, CMembers::IS_SENIOR       },
+	{ "Available?",  75, LVCFMT_LEFT, CMembers::IS_AVAILABLE    },
+	{ "£ Balance",   75, LVCFMT_LEFT, CMembers::BALANCE         }
+};
+
+// Unavailability reasons.
+static char* astrReasons[MAX_REASONS] =
+{
+	"Unavailable", "Injured", "On Holiday", "Transferred", "Resigned", "Uncontactable"
 };
 
 /******************************************************************************
@@ -54,12 +62,13 @@ void CMembersView::OnUIUpdate()
 {
 	bool bRows = (m_oTable.RowCount() != 0);
 
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, !bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,       true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,      bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE,    bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETEALL, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,     bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT,    !bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT,    bRows);
 
 	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
 	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
@@ -153,6 +162,10 @@ void CMembersView::OnEdit()
 
 void CMembersView::OnDelete()
 {
+	static const char* pszMsg = "Delete the member: %s?\n\n"
+								"This will also delete their stats, any\n"
+								"income and their place in any team sheets.";
+
 	// Ignore if no selection.
 	if (!m_lvGrid.IsSelection())
 		return;
@@ -164,12 +177,42 @@ void CMembersView::OnDelete()
 	CString strName = App.FormatName(oRow, CMembers::FORENAME, CMembers::SURNAME);
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the member: %s?",  strName) != IDYES)
+	if (QueryMsg(pszMsg,  strName) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
 	DeleteRow(iLVItem);
 	m_oTable.DeleteRow(oRow);
+
+	// Remove any stats, income and team sheet places.
+	m_oDB.m_oMemStats.DeleteMembersStats(oRow[CMembers::ID]);
+//	m_oDB.m_oSubs;
+//	m_oDB.m_oTeamSels;
+
+	App.m_AppCmds.UpdateUI();
+}
+
+/******************************************************************************
+** Method:		OnDeleteAll()
+**
+** Description:	Allows the user to delete all items, after confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CMembersView::OnDeleteAll()
+{
+	// Get user to confirm action.
+	if (QueryMsg("Delete ALL members?") != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteAllRows();
+	m_oTable.Truncate();
 
 	App.m_AppCmds.UpdateUI();
 }
@@ -192,13 +235,15 @@ void CMembersView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",        20, LVCFMT_LEFT, 0,                         true  },
+		{ "Name",        30, LVCFMT_LEFT, 0,                         true  },
 		{ "Phone #1",    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE,  true  },
 		{ "Phone #2",    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE, true  },
-		{ "Address",     20, LVCFMT_LEFT, CMembers::POSTAL_ADDRESS,  false },
-		{ "Email",       20, LVCFMT_LEFT, CMembers::EMAIL_ADDRESS,   false },
-		{ "Registered",  10, LVCFMT_LEFT, CMembers::IS_REGISTERED,   true  },
-		{ "Senior",      10, LVCFMT_LEFT, CMembers::IS_SENIOR,       true  }
+//		{ "Address",     20, LVCFMT_LEFT, CMembers::POSTAL_ADDRESS,  false },
+//		{ "Email",       20, LVCFMT_LEFT, CMembers::EMAIL_ADDRESS,   false },
+		{ "Registered?", 10, LVCFMT_LEFT, CMembers::IS_REGISTERED,   true  },
+		{ "Senior?",     10, LVCFMT_LEFT, CMembers::IS_SENIOR,       true  },
+		{ "Available?",  10, LVCFMT_LEFT, CMembers::IS_AVAILABLE,    true  },
+	    { "£ Balance",   10, LVCFMT_LEFT, CMembers::BALANCE,         true  }
 	};
 
 	PrintView("Members", NUM_PRT_COLUMNS, aColumns);
@@ -265,6 +310,18 @@ CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
 		bool bFlag = oRow[nField];
 
 		return (bFlag == true) ? "Yes" : "No";
+	}
+	// Set availability.
+	else if (nColumn == IS_AVAILABLE)
+	{
+		bool bFlag = oRow[nField];
+
+		return (bFlag == true) ? "Yes" : astrReasons[oRow[CMembers::UNAVAIL_REASON].GetInt()];
+	}
+	// Balance.
+	else if (nColumn == BALANCE)
+	{
+		return App.FormatMoney(oRow, CMembers::BALANCE);
 	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);

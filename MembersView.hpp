@@ -38,6 +38,7 @@ public:
 	virtual void OnAdd();
 	virtual void OnEdit();
 	virtual void OnDelete();
+	virtual void OnDeleteAll();
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
@@ -55,6 +56,9 @@ protected:
 		PHONE_TWO,
 		IS_REGISTERED,
 		IS_SENIOR,
+		IS_AVAILABLE,
+		BALANCE,
+
 		NUM_COLUMNS
 	};
 
