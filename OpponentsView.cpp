@@ -145,6 +145,30 @@ void COpponentsView::OnDelete()
 	App.m_AppCmds.UpdateUI();
 }
 
+/******************************************************************************
+** Method:		OnDeleteAll()
+**
+** Description:	Allows the user to delete all items, after confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void COpponentsView::OnDeleteAll()
+{
+	// Get user to confirm action.
+	if (QueryMsg("Delete ALL opponents?") != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteAllRows();
+	m_oTable.Truncate();
+
+	App.m_AppCmds.UpdateUI();
+}
 
 /******************************************************************************
 ** Method:		OnPrint()

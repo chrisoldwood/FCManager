@@ -144,6 +144,31 @@ void CRefereesView::OnDelete()
 }
 
 /******************************************************************************
+** Method:		OnDeleteAll()
+**
+** Description:	Allows the user to delete all items, after confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CRefereesView::OnDeleteAll()
+{
+	// Get user to confirm action.
+	if (QueryMsg("Delete ALL referees?") != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteAllRows();
+	m_oTable.Truncate();
+
+	App.m_AppCmds.UpdateUI();
+}
+
+/******************************************************************************
 ** Method:		OnPrint()
 **
 ** Description:	Print the list of members.

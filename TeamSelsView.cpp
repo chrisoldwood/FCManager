@@ -51,12 +51,13 @@ void CTeamSelsView::OnUIUpdate()
 {
 	bool bRows = (m_oTable.RowCount() != 0);
 
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, false);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, false);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,       true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,      bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE,    bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETEALL, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,     bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT,    false);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT,    false);
 
 	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
 	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
@@ -169,6 +170,31 @@ void CTeamSelsView::OnDelete()
 	// Remove from the list view and collection.
 	DeleteRow(iLVItem);
 	m_oTable.DeleteRow(oRow);
+
+	App.m_AppCmds.UpdateUI();
+}
+
+/******************************************************************************
+** Method:		OnDeleteAll()
+**
+** Description:	Allows the user to delete all items, after confirmaing first.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CTeamSelsView::OnDeleteAll()
+{
+	// Get user to confirm action.
+	if (QueryMsg("Delete ALL team selections?") != IDYES)
+		return;
+
+	// Remove from the list view and collection.
+	DeleteAllRows();
+	m_oTable.Truncate();
 
 	App.m_AppCmds.UpdateUI();
 }

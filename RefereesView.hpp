@@ -33,6 +33,7 @@ public:
 	virtual void OnAdd();
 	virtual void OnEdit();
 	virtual void OnDelete();
+	virtual void OnDeleteAll();
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
