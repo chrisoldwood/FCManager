@@ -59,6 +59,7 @@ public:
 	CString FormatMoney(CRow& rRow, int nColumn) const;
 	CString FormatMoney(int nAmount) const;
 	CString FormatDate(CRow& rRow, int nColumn) const;
+	CString FormatDecimal(CRow& rRow, int nColumn, int nDecDigits) const;
 
 protected:
 	//

@@ -234,6 +234,31 @@ CString CFCMApp::FormatDate(CRow& rRow, int nColumn) const
 
 	return szDate;
 }
+
+/******************************************************************************
+** Method:		FormatDecimal()
+**
+** Description:	Helper function to format a double as a value.
+**
+** Parameters:	rRow		The row data.
+**				nColumn		The column containing the value.
+**				nDecDigits	The number of decimal places.
+**
+** Returns:		The string.
+**
+*******************************************************************************
+*/
+
+CString CFCMApp::FormatDecimal(CRow& rRow, int nColumn, int nDecDigits) const
+{
+	double dValue = rRow[nColumn].GetDouble();
+	char   szValue[10];
+
+	sprintf(szValue, "%.*f", nDecDigits, dValue);
+
+	return szValue;
+}
+
 /******************************************************************************
 ** Method:		LoadDefaults()
 **
