@@ -100,7 +100,7 @@ bool CFCMApp::OnOpen()
 		return false;
 
 	// Show it.
-	if (ShowNormal() && !m_rcLastPos.Empty())
+	if (ShowNormal() && !m_rcAppWnd.Empty())
 		m_AppWnd.Move(m_rcAppWnd);
 
 	m_AppWnd.Show(m_iCmdShow);
