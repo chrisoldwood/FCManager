@@ -453,7 +453,7 @@ void CBalShtItemDlg::RefreshCredits()
 	int nSel = m_lbCredits.CurSel();
 
 	// Clear listbox.
-	m_lbCredits.CanRedraw(false);
+	m_lbCredits.Redraw(false);
 	m_lbCredits.Reset();
 
 	// For all subs rows.
@@ -482,7 +482,7 @@ void CBalShtItemDlg::RefreshCredits()
 	m_lbCredits.RestoreSel(nSel);
 
 	// Redraw.
-	m_lbCredits.CanRedraw(true);
+	m_lbCredits.Redraw(true);
 	m_lbCredits.Invalidate();
 }
 
