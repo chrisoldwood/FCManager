@@ -34,6 +34,8 @@ public:
 	virtual void OnEdit();
 	virtual void OnDelete();
 	virtual void OnPrint();
+	virtual void OnImport();
+	virtual void OnExport();
 
 protected:
 	//

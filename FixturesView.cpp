@@ -156,6 +156,40 @@ void CFixturesView::OnPrint()
 }
 
 /******************************************************************************
+** Method:		OnImport()
+**
+** Description:	Import the fixtures table from a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFixturesView::OnImport()
+{
+	ImportTable(CFixtures::FILE_FORMAT, CFixtures::FILE_VERSION);
+}
+
+/******************************************************************************
+** Method:		OnExport()
+**
+** Description:	Export the fixtures table to a file.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFixturesView::OnExport()
+{
+	ExportTable(CFixtures::FILE_FORMAT, CFixtures::FILE_VERSION);
+}
+
+/******************************************************************************
 ** Method:		GetCellData()
 **
 ** Description:	Gets the value for a cell.
@@ -172,7 +206,14 @@ void CFixturesView::OnPrint()
 CString CFixturesView::GetCellData(int nColumn, CRow& oRow, int nField)
 {
 	if (nColumn == DATE)
-		return oRow[CFixtures::DATE].GetDate().ToString();
+	{
+		char   szDate[20] = { 0 };
+		time_t tDate = oRow[CFixtures::DATE];
+
+		strftime(szDate, sizeof(szDate), "%d/%m/%y", localtime(&tDate));
+
+		return szDate;
+	}
 
 	return CGridViewDlg::GetCellData(nColumn, oRow, nField);
 }
