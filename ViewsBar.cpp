@@ -185,7 +185,7 @@ LRESULT CViewsBar::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	// Decode message.
 	switch(iMsg)
 	{
-		// Key pressed.
+		// Draw window background.
 		case WM_ERASEBKGND:
 			{
 				// Construct a device from the HDC.
@@ -194,10 +194,9 @@ LRESULT CViewsBar::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 				DC.Fill(ClientRect(), oBkBrush);
 
-				// Ignore message.
-				m_bMsgHandled = true;
-				m_lMsgResult  = 1;
-
+				// Don't forward to base class.
+				MsgHandled(true);
+				MsgResult(1);
 				return 0;
 			}
 			break;
