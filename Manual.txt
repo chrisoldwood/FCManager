@@ -1,0 +1,142 @@
+F.C. Manager v1.0 Aplha #1
+==========================
+
+(I hope to replace this with a proper Windows HelpFile in the future)
+
+1. Introduction.
+
+This is a tool I have written to help me look after the affairs of the Sunday
+league football club that I am secretary and treasurer for. I have used both
+Access and Excel in the past to do the job but wanted to write a more specific
+tool which anyone could use and which did not rely on those technologies, so
+here it is.
+
+The tool allows you to keep track of players, fixtures and monetary matters.
+You can also hold the details of opponents and referees to aid with the entering
+of fixtures and to allow one copy of these deatils to be shared among many
+clubs.
+
+
+2. Basic concepts.
+
+The tool is presented in a similar fashion to Outlook; the left hand sidebar
+hosts icons to access the main views - Members, Fixtures, Balance Sheet,
+Accounts, Team Sheets, Opponents and Referees. Each of these views shows a
+list of the items in it, presented in a table. You can also select a view
+using the View menu.
+
+When selecting a view the 4th dropdown menu changes its name to that of the
+view selected and provides access to the options available for it. They are
+nearly all the same, add, edit, delete, delete all, print, import and
+export.
+
+Each view is basically a list of items of that type, and displays a number
+of properties associated with it, e.g. for Members, the view lists all
+members sorted by name and alongside details such as their phone number,
+availablility and senior status.
+
+
+3. The views.
+
+Each view generally has a similar set of actions associated with it, they should
+be pretty self-explanatory:-
+
+Add        - Adds a new item of that type.
+Edit       - Allows editing of the properties for the item.
+Delete     - Deletes an item any associated information related to it.
+Delete All - Deletes all items of the given type and associated information.
+Print      - Prints the list of items.
+Import     - Allows importing of the items from another file format.
+Export     - Allows exportng of the items to another file format.
+
+When adding or entering an item the fields are nearly always displayed in a
+tabbed dialog. Each page provides access to the items properties or in some
+cases provides addtional information derived from elsewhere. Many pages are
+used in more than one place because similar functionality is provided, these
+pages are:-
+
+Name & Address:
+	On this page you can provide a persons name (either full or partially by
+just filling in the first name field), Address, 2 phone numbers (e.g. home,
+work, mobile) and an email address.
+
+Notes:
+	A single field where you can enter up to 512 characters of additional
+information.
+
+Statistics:
+	This page can be used to associate arbitrary stats with an item, e.g. for
+a member you can track the number of games played, goals scored, bookings etc;
+for an opponent or referee you might want to record the marks you awarded them
+after a game.
+
+
+3.1 Members.
+
+This is the list of all members (both players and others) who are associated
+with the club. Each member has a number of basic properties such as name,
+address, statistics and notes. Additionally you can also set the following:-
+
+Registered With F.A. - Helps you separate players from other members.
+Senior Player        - Helps you highlight experienced players.
+Available            - Highlights players which are unavailable to play, e.g.
+                       because they are injured or been transfered, one of
+                       the predefined reasons can be selected.
+Usual Team           - Allows you to associate the player with a specific team.
+Usual Position       - Allows you to assign the player to a specific position.
+                       These last two are used by the filters when creating a
+                       team sheet for a game.
+
+There is also a Payments page which gives a summary of all the fees/payments a
+member has made.
+
+
+3.2 Fixtures.
+
+This is the list of all fixtures that the club is involved in. You can record
+the date, type (friendly, league, cup, etc), teams, referee and result. The
+team and referee drop lists are populated from the names stored in the opponents
+and referees views, they also allow editing in case you need to append suffixes
+such as "Reserves" or in case you need to enter a non-standard team such as in
+cup games or friendlies where you play teams outside the league.
+You also have the standard stats and notes properties.
+
+
+3.3 Balance Sheet.
+
+
+3.4 Accounts.
+
+
+3.5 Team Sheets.
+
+
+3.6 Opponents.
+
+
+3.7 Referees.
+
+
+4.0 Club Menu.
+
+Currently there is only a single option which allows you to enter the basic
+club details such as its name, the current deason and which league it is
+playing in.
+
+
+5.0 Reports Menu.
+
+From here you can run a number of reports which summarises the information
+contained in various views, such as the statistics and income/expenditure.
+The reports can be viewed on screen and printed.
+
+
+6.0 Debug Menu.
+
+Ignore this, it is used by me to diagnose problems during development.
+
+
+7.0 Help Menu.
+
+This gives access to the about box which shows the version number and copyright
+information.

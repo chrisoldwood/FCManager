@@ -1,64 +1,61 @@
 /******************************************************************************
 ** (C) Chris Oldwood
 **
-** MODULE:		SUBSVIEW.HPP
+** MODULE:		EXPENSETYPES.HPP
 ** COMPONENT:	The Application.
-** DESCRIPTION:	The CSubsView class declaration.
+** DESCRIPTION:	The CExpenseTypes class declaration.
 **
 *******************************************************************************
 */
 
 // Check for previous inclusion
-#ifndef SUBSVIEW_HPP
-#define SUBSVIEW_HPP
+#ifndef EXPENSETYPES_HPP
+#define EXPENSETYPES_HPP
 
 /******************************************************************************
 ** 
-** This is the data view used to display and edit the members subs.
+** This table is used to store the type of expenses defined.
 **
 *******************************************************************************
 */
 
-class CSubsView : public CViewDlg
+class CExpenseTypes : public CTable
 {
 public:
 	//
 	// Constructors/Destructor.
 	//
-	CSubsView(CFCMDoc& rDoc);
+	CExpenseTypes(CMDB& oDB);
+	~CExpenseTypes();
 	
 	//
-	// Methods (Overriden).
+	// Column indices.
 	//
-	virtual void OnSelect();
-	virtual void OnCommand(uint iCmdID);
-	virtual void OnUIUpdate();
+	enum
+	{
+		ID,
+		NAME,
+		DEFAULT,
+	};
 
 	//
-	// Commands.
+	// Column lengths.
 	//
-	virtual void OnPrint();
+	enum
+	{
+		NAME_LEN = 50,
+	};
+
+	//
+	// Methods (overriden).
+	//
+	virtual CRow& CreateRow();
 
 protected:
 	//
-	// Members.
-	//
-	CFCMDB&		m_oDB;
-	CListView	m_lvGrid;
-	
-	//
-	// Message handlers.
-	//
-	virtual void OnInitDialog();
-
-	//
-	// Control message handlers.
-	//
-
-	//
 	// Internal methods.
 	//
-	void LoadGrid();
+	void AddPredefined(const char* pszName, int nDefault);
 };
 
 /******************************************************************************
@@ -68,4 +65,4 @@ protected:
 *******************************************************************************
 */
 
-#endif //SUBSVIEW_HPP
+#endif //EXPENSETYPES_HPP
