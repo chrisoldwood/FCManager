@@ -16,7 +16,7 @@ const int NUM_VIEWS = 7;
 // The list of views.
 static const char* apszViewNames[NUM_VIEWS] = 
 {
-	"Members", "Fixtures", "Subs", "Balance Sheet", "Team Selector", "Opponents", "Referees"
+	"Members", "Fixtures", "Subs", "Balance Sheet", "Team Sheets", "Opponents", "Referees"
 };
 
 /******************************************************************************

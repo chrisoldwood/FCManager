@@ -4,18 +4,28 @@
 
 - Player availability.
 
-- Player statistics / statistics types.
-
-- Fixture statistics.
-
 - Expense types table.
 
 - Balance sheet item expenses.
 
-- Club season db column.
+- ClubDetails season & league name.
 
 - Pitch control (other formations 4-3-3).
 
 - Team selection dialog.
 
 - Subs editing / better control.
+
+- Change subs to use std grid dialog.
+
+- Change "subs" name to payments.
+
+- Tooltips for option buttons.
+
+- Fix deletion of members etc. if used elsewhere.
+
+- Save stats out with tables.
+
+- Members report.
+
+- Sort out names of fixed stats.
