@@ -25,11 +25,7 @@
 
 CSubsView::CSubsView(CFCMDoc& rDoc)
 	: CViewDlg(IDD_GRID_VIEW)
-	, m_rDoc(rDoc)
 	, m_oDB(rDoc.m_oDB)
-	, m_oMembers(rDoc.m_oDB[CFCMDB::MEMBERS])
-	, m_oBalSheet(rDoc.m_oDB[CFCMDB::BALSHEET])
-	, m_oSubs(rDoc.m_oDB[CFCMDB::SUBS])
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_GRID, &m_lvGrid)
@@ -54,6 +50,9 @@ CSubsView::CSubsView(CFCMDoc& rDoc)
 
 void CSubsView::OnInitDialog()
 {
+	// Set the grid style.
+	m_lvGrid.GridLines(true);
+	m_lvGrid.FullRowSelect(true);
 }
 
 /******************************************************************************
@@ -147,9 +146,9 @@ void CSubsView::LoadGrid()
 	m_lvGrid.InsertColumn(0, "Name", 150, LVCFMT_LEFT);
 
 	// Add the balance sheet items.
-	for (int r = 0, c = 1; r < m_oBalSheet.RowCount(); r++)
+	for (int r = 0, c = 1; r < m_oDB.m_oBalSheet.RowCount(); r++)
 	{
-		CRow& oRow = m_oBalSheet[r];
+		CRow& oRow = m_oDB.m_oBalSheet[r];
 
 		// Income from members?
 		if (oRow[CBalSheet::CREDIT_TYPE] == CBalSheet::VARIABLE)
@@ -165,23 +164,23 @@ void CSubsView::LoadGrid()
 	m_lvGrid.InsertColumn(c, "£ Balance", 75, LVCFMT_RIGHT);
 
 	// Add the members.
-	for (int i = 0; i < m_oMembers.RowCount(); i++)
+	for (int i = 0; i < m_oDB.m_oMembers.RowCount(); i++)
 	{
-		CRow& oMemberRow = m_oMembers[i];
+		CRow& oMemberRow = m_oDB.m_oMembers[i];
 		int   nBalance   = 0;
 
 		// Create the grid row.
-		int nGridRow = m_lvGrid.AddItem(App.FormatName(oMemberRow, CMembers::FORENAME, CMembers::SURNAME, true), &oMemberRow, -1);
+		int nGridRow = m_lvGrid.AppendItem(App.FormatName(oMemberRow, CMembers::FORENAME, CMembers::SURNAME, true), &oMemberRow);
 
-		for (int j = 0, c = 1; j < m_oBalSheet.RowCount(); j++)
+		for (int j = 0, c = 1; j < m_oDB.m_oBalSheet.RowCount(); j++)
 		{
-			CRow& oBalShtRow = m_oBalSheet[j];
+			CRow& oBalShtRow = m_oDB.m_oBalSheet[j];
 
 			// Income from members?
 			if (oBalShtRow[CBalSheet::CREDIT_TYPE] == CBalSheet::VARIABLE)
 			{
 				// Look for a payment.
-				CResultSet oRS = m_oSubs.Select(CWhereEqual(CSubs::MEMBER_ID, oMemberRow[CMembers::ID])
+				CResultSet oRS = m_oDB.m_oSubs.Select(CWhereEqual(CSubs::MEMBER_ID, oMemberRow[CMembers::ID])
 												& CWhereEqual(CSubs::ITEM_ID, oBalShtRow[CBalSheet::ID]));
 
 				ASSERT(oRS.Count() <= 1);

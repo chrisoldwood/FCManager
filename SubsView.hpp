@@ -43,11 +43,7 @@ protected:
 	//
 	// Members.
 	//
-	CFCMDoc&	m_rDoc;
-	CMDB&		m_oDB;
-	CTable&		m_oMembers;
-	CTable&		m_oBalSheet;
-	CTable&		m_oSubs;
+	CFCMDB&		m_oDB;
 	CListView	m_lvGrid;
 	
 	//
