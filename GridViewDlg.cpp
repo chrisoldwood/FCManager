@@ -402,7 +402,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 		for (int i = 0; i < Dlg.m_aoColumns.Size(); i++)
 			nRatioWidth += Dlg.m_aoColumns[i].m_nWidth;
 
-		for (i = 0; i < Dlg.m_aoColumns.Size(); i++)
+		for (int i = 0; i < Dlg.m_aoColumns.Size(); i++)
 			aiWidths.Add((nPageWidth * Dlg.m_aoColumns[i].m_nWidth) / nRatioWidth);
 
 		// Create GDI objects.
@@ -439,7 +439,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 			// Print column headers.
 			for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
 			{
-				GridColumn& oColumn = Dlg.m_aoColumns[i];
+				GridColumn& oColumn = Dlg.m_aoColumns[c];
 
 				// Calculate cell border.
 				rcCell.left  = rcCell.right;
@@ -478,7 +478,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 				// For all columns in the row.
 				for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
 				{
-					GridColumn& oColumn = Dlg.m_aoColumns[i];
+					GridColumn& oColumn = Dlg.m_aoColumns[c];
 
 					// Calculate cell border.
 					rcCell.left  = rcCell.right;
@@ -580,10 +580,10 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 
 		// Check the format and version.
 		if (iFileFormat != iFormat)
-			throw CFileException(CStreamException::E_FORMAT_INVALID, oFile);
+			throw CFileException(CStreamException::E_FORMAT_INVALID, oPath);
 
 		if (iFileVersion != iVersion)
-			throw CFileException(CStreamException::E_VERSION_INVALID, oFile);
+			throw CFileException(CStreamException::E_VERSION_INVALID, oPath);
 
 		// Truncate the table and view.
 		m_oTable.Truncate();

@@ -126,7 +126,7 @@ bool CStatsPage::OnOk()
 			m_oStats.DeleteRow(oRS[i]);
 
 		// Copy the rows back from the tmp table.
-		for (i = 0; i < m_oTmpStats.RowCount(); i++)
+		for (int i = 0; i < m_oTmpStats.RowCount(); i++)
 		{
 			CRow& oCurRow = m_oTmpStats[i];
 			CRow& oCpyRow = m_oStats.CreateRow();

@@ -79,7 +79,7 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 		CResultSet oExpsRS = oExpsTable.Select(CWhereCmp(CExpenses::ITEM_ID, CWhereCmp::EQUALS, m_nItemID));
 
 		// Copy to temporary table.
-		for (i = 0; i < oExpsRS.Count(); i++)
+		for (int i = 0; i < oExpsRS.Count(); i++)
 		{
 			CRow& oOrig = oExpsRS[i];
 			CRow& oCopy = m_oTmpExps.CreateRow();

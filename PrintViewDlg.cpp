@@ -139,7 +139,7 @@ bool CPrintViewDlg::OnOk()
 	}
 
 	// Remove unselected columns.
-	for (i = m_aoColumns.Size()-1; i >= 0; i--)
+	for (int i = m_aoColumns.Size()-1; i >= 0; i--)
 	{
 		if (!m_aoColumns[i].m_bShow)
 			m_aoColumns.Delete(i);
