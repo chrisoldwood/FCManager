@@ -10,10 +10,13 @@
 
 #include "AppHeaders.hpp"
 
+// The number of views.
+const int NUM_VIEWS = 7;
+
 // The list of views.
-static const char* apszViewNames[] = 
+static const char* apszViewNames[NUM_VIEWS] = 
 {
-	"Members", "Fixtures", "Balance Sheet", "Team Selector", "Opponents", "Referees"
+	"Members", "Fixtures", "Subs", "Balance Sheet", "Team Selector", "Opponents", "Referees"
 };
 
 /******************************************************************************
@@ -100,12 +103,8 @@ void CViewsBar::OnCreate(const CRect& rcClient)
 	ItemHeight(0, m_bmpIcons.Size().cy + FontSize.cy + (2*BORDER));
 
 	// Add the view choices.
-	Add(apszViewNames[0]);
-	Add(apszViewNames[1]);
-	Add(apszViewNames[2]);
-	Add(apszViewNames[3]);
-	Add(apszViewNames[4]);
-	Add(apszViewNames[5]);
+	for (int i = 0; i < NUM_VIEWS; i++)
+		Add(apszViewNames[i]);
 }
 
 /******************************************************************************

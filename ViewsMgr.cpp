@@ -27,6 +27,7 @@ CViewsMgr::CViewsMgr(CFCMDoc& rDoc)
 	, m_eCurrView(NO_VIEW)
 	, m_oMembersView(rDoc)
 	, m_oFixturesView(rDoc)
+	, m_oSubsView(rDoc)
 	, m_oBalSheetView(rDoc)
 	, m_oTeamSelsView(rDoc)
 	, m_oOpponentsView(rDoc)
@@ -35,6 +36,7 @@ CViewsMgr::CViewsMgr(CFCMDoc& rDoc)
 	// Initialise the array of data views.
 	m_pDataViews[MEMBERS_VIEW]   = &m_oMembersView;
 	m_pDataViews[FIXTURES_VIEW]  = &m_oFixturesView;
+	m_pDataViews[SUBS_VIEW]      = &m_oSubsView;
 	m_pDataViews[BALANCE_VIEW]   = &m_oBalSheetView;
 	m_pDataViews[TEAM_SELS_VIEW] = &m_oTeamSelsView;
 	m_pDataViews[OPPONENTS_VIEW] = &m_oOpponentsView;
