@@ -72,7 +72,7 @@ void CFCMMainWnd::OnCreate(const CRect& rcClient)
 	StatusBar(&m_StatusBar);
 
 	// Call base class.
-	CFrameWnd::OnCreate(rcClient);
+	CSDIFrame::OnCreate(rcClient);
 }
 
 /******************************************************************************
@@ -94,4 +94,22 @@ bool CFCMMainWnd::OnQueryClose()
 
 	// Close the app if the file was closed.
 	return App.m_AppCmds.CloseFile();
+}
+
+/******************************************************************************
+** Method:		OnActivate()
+**
+** Description:	Main window (de)activated, pass focus onto view.
+**
+** Parameters:	bActivating		Activating or deactivating?
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CFCMMainWnd::OnActivate(bool bActivating)
+{
+	if (bActivating)
+		App.m_AppCmds.SetFocus();
 }
