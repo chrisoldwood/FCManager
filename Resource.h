@@ -30,6 +30,8 @@
 #define ID_VIEW_TEAM_SEL                205
 #define ID_VIEW_OPPONENTS               206
 #define ID_VIEW_REFEREES                207
+#define IDD_STAT_TYPES                  230
+#define IDD_STAT_TYPE                   231
 #define ID_CLUB_POPUP                   300
 #define ID_CLUB_DETAILS                 301
 #define ID_OPTIONS_POPUP                400
@@ -86,6 +88,7 @@
 #define IDC_ALT_PHONE                   1032
 #define IDC_GRID                        1033
 #define IDC_NAME                        1034
+#define IDC_DEFAULT                     1035
 #define IDC_CREDIT                      1037
 #define IDC_CREDITS                     1038
 #define IDC_PAID                        1038
@@ -120,7 +123,9 @@
 #define IDC_VARIABLE                    1072
 #define IDC_BALANCE                     1073
 #define IDC_TRANSACTIONS                1074
+#define IDC_TRANS                       1074
 #define IDC_DEL                         1075
+#define IDC_TYPES                       1078
 #define IDD_ABOUT                       5000
 #define IDD_GRID_VIEW                   5001
 #define IDD_FIXTURE_PAGE                5003
@@ -141,6 +146,8 @@
 #define IDD_STATISTIC                   5020
 #define IDD_EXPENSE_ITEM                5021
 #define IDD_ACCOUNT_PAGE                5022
+#define IDD_EXPENSE_TYPES               5023
+#define IDD_EXPENSE_TYPE                5024
 #define ID_MEMBERS_POPUP                10000
 #define ID_MEMBERS_ADD                  10001
 #define ID_MEMBERS_EDIT                 10002
@@ -203,9 +210,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        230
+#define _APS_NEXT_RESOURCE_VALUE        232
 #define _APS_NEXT_COMMAND_VALUE         238
-#define _APS_NEXT_CONTROL_VALUE         1077
+#define _APS_NEXT_CONTROL_VALUE         1080
 #define _APS_NEXT_SYMED_VALUE           200
 #endif
 #endif

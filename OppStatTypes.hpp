@@ -39,7 +39,6 @@ inline COppStatTypes::COppStatTypes(CMDB& oDB)
 	: CStatTypes(oDB, "OppStatTypes")
 {
 	// Add the pre-defined statistics.
-	AddPredefined("Marks");
 }
 
 #endif //OPPSTATTYPES_HPP

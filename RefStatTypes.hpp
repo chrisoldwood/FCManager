@@ -39,7 +39,6 @@ inline CRefStatTypes::CRefStatTypes(CMDB& oDB)
 	: CStatTypes(oDB, "RefStatTypes")
 {
 	// Add the pre-defined statistics.
-	AddPredefined("Marks");
 }
 
 #endif //REFSTATTYPES_HPP
