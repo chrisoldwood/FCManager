@@ -55,7 +55,7 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 		CTable& oSubsTable = m_oDB.m_oSubs;
 
 		// Fetch the current subs for the item.
-		CResultSet oSubsRS = oSubsTable.Select(CWhereEqual(CSubs::ITEM_ID, m_nItemID));
+		CResultSet oSubsRS = oSubsTable.Select(CWhereCmp(CSubs::ITEM_ID, CWhereCmp::EQUALS, m_nItemID));
 
 		// Copy to temporary table.
 		for (int i = 0; i < oSubsRS.Count(); i++)
@@ -76,7 +76,7 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 		CTable& oExpsTable = m_oDB.m_oExpenses;
 
 		// Fetch the current expenses for the item.
-		CResultSet oExpsRS = oExpsTable.Select(CWhereEqual(CExpenses::ITEM_ID, m_nItemID));
+		CResultSet oExpsRS = oExpsTable.Select(CWhereCmp(CExpenses::ITEM_ID, CWhereCmp::EQUALS, m_nItemID));
 
 		// Copy to temporary table.
 		for (i = 0; i < oExpsRS.Count(); i++)
@@ -121,7 +121,7 @@ void CBalShtItemDlg::UpdateSubsTable()
 	if (m_bEditing)
 	{
 		// Fetch the current subs for the item.
-		CResultSet oRS = oSubs.Select(CWhereEqual(CSubs::ITEM_ID, nItemID));
+		CResultSet oRS = oSubs.Select(CWhereCmp(CSubs::ITEM_ID, CWhereCmp::EQUALS, nItemID));
 
 		// Delete all rows for the item.
 		for (int i = 0; i < oRS.Count(); i++)
@@ -156,7 +156,7 @@ void CBalShtItemDlg::UpdateExpsTable()
 	if (m_bEditing)
 	{
 		// Fetch the current expenses for the item.
-		CResultSet oRS = oExps.Select(CWhereEqual(CExpenses::ITEM_ID, nItemID));
+		CResultSet oRS = oExps.Select(CWhereCmp(CExpenses::ITEM_ID, CWhereCmp::EQUALS, nItemID));
 
 		// Delete all rows for the item.
 		for (int i = 0; i < oRS.Count(); i++)
