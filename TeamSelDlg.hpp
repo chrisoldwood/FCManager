@@ -25,20 +25,21 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CTeamSelDlg(CRow& oTeamSel, CTable& oMembers, bool bEditing);
+	CTeamSelDlg(CFCMDB& oDB, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
 	//
-	CRow&	m_oTeamSel;
+	CRow&	m_oRow;
 	
 protected:
 	//
 	// Members.
 	//
+	CFCMDB&			m_oDB;
+
 	bool			m_bEditing;
 
-	CTable&			m_oMembers;
 	CDateTimePicker	m_dtpDate;
 	CComboBox		m_cbOpponent;
 	CComboBox		m_cbTeamFilter;

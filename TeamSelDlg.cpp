@@ -41,12 +41,12 @@ static char* astrFormations[MAX_FORMATIONS] =
 *******************************************************************************
 */
 
-CTeamSelDlg::CTeamSelDlg(CRow& oTeamSel, CTable& oMembers, bool bEditing)
+CTeamSelDlg::CTeamSelDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	: CDialog(IDD_TEAM_SELS)
-	, m_oTeamSel(oTeamSel)
+	, m_oDB(oDB)
+	, m_oRow(oRow)
 	, m_bEditing(bEditing)
-	, m_oMembers(oMembers)
-	, m_oPitch(m_oMembers)
+	, m_oPitch(oDB.m_oMembers)
 	, m_nTeamFilter(0)
 	, m_nPosFilter(0)
 	, m_nFormation(0)
@@ -118,7 +118,7 @@ void CTeamSelDlg::OnInitDialog()
 	int i;
 
 	// Fill the opponents combo.
-	CTable& oOpponents = App.Doc()->m_oDB[CFCMDB::OPPONENTS];
+	CTable& oOpponents = App.Doc()->m_oDB.m_oOpponents;
 
 	for (i = 0; i < oOpponents.RowCount(); i++)
 		m_cbOpponent.Add(oOpponents[i][COpponents::CLUB_NAME]);
@@ -140,10 +140,10 @@ void CTeamSelDlg::OnInitDialog()
 	m_cbOpponent.TextLimit(CTeamSels::OPPONENTS_LEN);
 
 	// Initialise the fields.
-	m_dtpDate.SetDate(CDate(m_oTeamSel[CTeamSels::DATE]));
+	m_dtpDate.SetDate(CDate(m_oRow[CTeamSels::DATE]));
 
 	// Locate or add opponents.
-	const char* pszOpponents = m_oTeamSel[CTeamSels::OPPONENTS];
+	const char* pszOpponents = m_oRow[CTeamSels::OPPONENTS];
 	int         nOpponents   = m_cbOpponent.FindExact(pszOpponents);
 	
 	if (nOpponents == LB_ERR)
@@ -160,7 +160,7 @@ void CTeamSelDlg::OnInitDialog()
 	RefreshPlayerList();
 
 	// Initialise the notes dialog.
-	m_oNotesDlg.m_strNotes  = m_oTeamSel[CTeamSels::NOTES];
+	m_oNotesDlg.m_strNotes  = m_oRow[CTeamSels::NOTES];
 	m_oNotesDlg.m_nNotesLen = CTeamSels::NOTES_LEN;
 }
 
@@ -178,9 +178,9 @@ void CTeamSelDlg::OnInitDialog()
 
 bool CTeamSelDlg::OnOk()
 {
-	m_oTeamSel[CTeamSels::DATE]      = m_dtpDate.GetDate();
-	m_oTeamSel[CTeamSels::OPPONENTS] = m_cbOpponent.Text();
-	m_oTeamSel[CTeamSels::NOTES]     = m_oNotesDlg.m_strNotes;
+	m_oRow[CTeamSels::DATE]      = m_dtpDate.GetDate();
+	m_oRow[CTeamSels::OPPONENTS] = m_cbOpponent.Text();
+	m_oRow[CTeamSels::NOTES]     = m_oNotesDlg.m_strNotes;
 
 	// Save current dimensions.
 	App.m_dmTeamSelDlg = WindowRect().Size();
@@ -320,9 +320,9 @@ void CTeamSelDlg::RefreshPlayerList()
 	m_lbPlayer.Redraw(false);
 
 	// Add members to the players listbox.
-	for (int i = 0; i < m_oMembers.RowCount(); i++)
+	for (int i = 0; i < m_oDB.m_oMembers.RowCount(); i++)
 	{
-		CRow& oRow  = m_oMembers[i];
+		CRow& oRow  = m_oDB.m_oMembers[i];
 		int   nTeam = oRow[CMembers::USUAL_TEAM];
 		int   nPos  = oRow[CMembers::USUAL_POSITION];
 
