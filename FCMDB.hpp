@@ -37,6 +37,8 @@ public:
 		MEMBERS,
 		FIXTURES,
 		BALSHEET,
+		SUBS,
+		TEAMSELS,
 		OPPONENTS,
 		REFEREES,
 	};
@@ -49,6 +51,8 @@ protected:
 	CMembers		m_oMembers;		// The list of club members.
 	CFixtures		m_oFixtures;	// The list of club fixtures.
 	CBalSheet		m_oBalSheet;	// The balance sheet.
+	CSubs			m_oSubs;		// The members subs.
+	CTeamSels		m_oTeamSels;	// The team selections.
 	COpponents		m_oOpponents;	// The list of league opponents.
 	CReferees		m_oReferees;	// The list of league referees.
 };

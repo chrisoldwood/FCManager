@@ -27,6 +27,8 @@ CFCMDB::CFCMDB()
 	, m_oMembers(*this)
 	, m_oFixtures(*this)
 	, m_oBalSheet(*this)
+	, m_oSubs(*this, m_oBalSheet, m_oMembers)
+	, m_oTeamSels(*this, m_oMembers)
 	, m_oOpponents(*this)
 	, m_oReferees(*this)
 {
@@ -35,6 +37,8 @@ CFCMDB::CFCMDB()
 	AddTable(m_oMembers);
 	AddTable(m_oFixtures);
 	AddTable(m_oBalSheet);
+	AddTable(m_oSubs);
+	AddTable(m_oTeamSels);
 	AddTable(m_oOpponents);
 	AddTable(m_oReferees);
 }
