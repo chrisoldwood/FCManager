@@ -299,8 +299,9 @@ void CExpensesPage::RefreshDebits()
 		CString strPaid = App.FormatMoney(oExps, CExpenses::PAID);
 
 		// Add the the ListView.
-		int n = m_lvDebits.AppendItem(strName, i, 0);
+		int n = m_lvDebits.AppendItem(strName);
 		m_lvDebits.ItemText(n, 1, strPaid);
+		m_lvDebits.ItemData(n, i);
 	}
 
 	// Restore old selection.

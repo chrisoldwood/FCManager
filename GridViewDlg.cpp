@@ -258,7 +258,9 @@ LRESULT CGridViewDlg::OnDblClick(NMHDR&)
 
 int CGridViewDlg::AddRow(CRow& oRow, bool bReSort)
 {
-	int nGridRow = m_lvGrid.AppendItem(GetCellData(0, oRow, m_pColumns[0].m_nField), &oRow);
+	int nGridRow = m_lvGrid.AppendItem(GetCellData(0, oRow, m_pColumns[0].m_nField));
+
+	m_lvGrid.ItemPtr(nGridRow, &oRow);
 
 	return UpdateRow(nGridRow, bReSort);
 }

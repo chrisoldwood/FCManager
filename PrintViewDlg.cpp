@@ -205,7 +205,8 @@ void CPrintViewDlg::OnMoveUp()
 
 	// Delete and re-add.
 	m_lvColumns.DeleteItem(nSel);
-	m_lvColumns.InsertItem(nSel-1, strItem, lData, -1);
+	m_lvColumns.InsertItem(nSel-1, strItem);
+	m_lvColumns.ItemData(nSel-1, lData);
 	m_lvColumns.ItemCheck(nSel-1, bChecked);
 	m_lvColumns.Select(nSel-1);
 
@@ -232,7 +233,8 @@ void CPrintViewDlg::OnMoveDown()
 
 	// Delete and re-add.
 	m_lvColumns.DeleteItem(nSel);
-	m_lvColumns.InsertItem(nSel+1, strItem, lData, -1);
+	m_lvColumns.InsertItem(nSel+1, strItem);
+	m_lvColumns.ItemData(nSel+1, lData);
 	m_lvColumns.ItemCheck(nSel+1, bChecked);
 	m_lvColumns.Select(nSel+1);
 

@@ -175,7 +175,9 @@ void CTableGrid::AddRows(CResultSet& oRS, bool bReSort, int nSel)
 
 int CTableGrid::AddRow(CRow& oRow, bool bReSort, bool bSelect)
 {
-	int nRow = AppendItem(FieldValue(0, oRow), &oRow);
+	int nRow = AppendItem(FieldValue(0, oRow));
+
+	ItemPtr(nRow, &oRow);
 
 	return UpdateRow(nRow, bReSort, bSelect);
 }

@@ -307,9 +307,10 @@ void CIncomePage::RefreshCredits()
 		CString strPaid = App.FormatMoney(oSubs, CSubs::PAID);
 
 		// Add the the ListView.
-		int n = m_lvCredits.AppendItem(strName, i, 0);
+		int n = m_lvCredits.AppendItem(strName);
 		m_lvCredits.ItemText(n, 1, strFee);
 		m_lvCredits.ItemText(n, 2, strPaid);
+		m_lvCredits.ItemData(n, i);
 	}
 
 	// Restore old selection.
