@@ -25,22 +25,21 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CPitchCtrl(CRow& oRow, CTable& oMembers);
+	CPitchCtrl(CTable& oMembers);
 	~CPitchCtrl();
-	
-	// Player formations.
-	enum Formation
-	{
-		F_4_4_2,
-		F_5_3_2,
-		NUM_FORMATIONS,
-	};
+
+	//
+	// Methods.
+	//
+	void SetFormation(Formation eFormation);
+	void SetPlayer(int nPos, int nID);
 
 protected:
 	//
 	// Members.
 	//
-	CRow&		m_oRow;
+	int			m_aiPlayers[MAX_PLAYERS];
+	CString		m_astrPlayers[MAX_PLAYERS];
 	CTable&		m_oMembers;
 	CBrush		m_oBkBrush;
 	Formation	m_eFormation;
@@ -72,5 +71,11 @@ protected:
 **
 *******************************************************************************
 */
+
+inline void CPitchCtrl::SetFormation(Formation eFormation)
+{
+	m_eFormation = eFormation;
+	Invalidate();
+}
 
 #endif //PITCHCTRL_HPP

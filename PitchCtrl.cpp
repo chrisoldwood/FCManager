@@ -42,34 +42,39 @@ const int YARD18_BOX_Y = 25;
 const int PENALTY_ARC_X = 30;
 const int PENALTY_ARC_Y = 25;
 
-const int NUM_PLAYERS = 16;
-
 // Player formations.
-static int g_aiFormations[CPitchCtrl::NUM_FORMATIONS][NUM_PLAYERS][2] = 
+static int g_aiFormations[MAX_FORMATIONS][MAX_PLAYERS][2] = 
 {
 //
 //                    4-4-2
 //
-//    GK          LB          CB          CB
-{ { 50,  6},  { 20, 25},  { 40, 25},  { 60, 25},
-//    RB          LM          CM          CM
-  { 80, 25},  { 20, 50},  { 40, 50},  { 60, 50},
-//    RM          IL          IR          S1
-  { 80, 50},  { 33, 70},  { 66, 70},  { 16, 95},
-//    S2          S3          S4          S5
-  { 32, 95},  { 48, 95},  { 66, 95},  { 82, 95} },
+//   GK    
+{ {50,  6},
+//   LB        CB        CB        RB
+  {20, 25}, {40, 25}, {60, 25}, {80, 25},
+//   LM        CM        CM        RM
+  {20, 50}, {40, 50}, {60, 50}, {80, 50},  
+//   IL        IR
+  {33, 70}, {66, 70}, 
+//   S1        S2        S3        S4        S5
+  {16, 95}, {32, 95}, {48, 95}, {66, 95}, {82, 95}
+},
 
 //
 //                    5-3-2
 //
-//    GK          LB          CB          CB
-{ { 50,  6},  { 20, 25},  { 40, 25},  { 60, 25},
-//    RB          LM          CM          CM
-  { 80, 25},  { 20, 50},  { 40, 50},  { 60, 50},
-//    RM          IL          IR          S1
-  { 80, 50},  { 33, 70},  { 66, 70},  { 20, 90},
-//    S2          S3          S4          S5
-  { 40, 90},  { 60, 90},  { 80, 90},  { 90, 90} }
+//   GK
+{ {50,  6},
+//   LB        CB        CB        CB        RB
+  {17, 25}, {33, 25}, {50, 25}, {67, 25}, {83, 25},
+//   LM        CM        RM
+  {25, 50}, {50, 50}, {75, 50},  
+//   IL        IR
+  {33, 70}, {66, 70}, 
+//   S1        S2        S3        S4        S5
+  {16, 95}, {32, 95}, {48, 95}, {66, 95}, {82, 95}
+}
+//
 };
 
 
@@ -85,12 +90,14 @@ static int g_aiFormations[CPitchCtrl::NUM_FORMATIONS][NUM_PLAYERS][2] =
 *******************************************************************************
 */
 
-CPitchCtrl::CPitchCtrl(CRow& oRow, CTable& oMembers)
-	: m_oRow(oRow)
-	, m_oMembers(oMembers)
+CPitchCtrl::CPitchCtrl(CTable& oMembers)
+	: m_oMembers(oMembers)
 	, m_oBkBrush(RGB(0, 127, 0))
 	, m_eFormation(F_4_4_2)
 {
+	// Initialise players array.
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		m_aiPlayers[i] = -1;
 }
 
 /******************************************************************************
@@ -347,7 +354,7 @@ void CPitchCtrl::DrawPlayers(CDC& rDC, const CRect& rcPitch)
 {
 	CSize dmPitch = rcPitch.Size();
 
-	for (int i = 0; i < NUM_PLAYERS; i++)
+	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
 		// Calculate players centrepoint.
 		CPoint ptCentre;
@@ -363,4 +370,47 @@ void CPitchCtrl::DrawPlayers(CDC& rDC, const CRect& rcPitch)
 		// Draw it.
 		rDC.Rectangle(rcPlayer);
 	}
+}
+
+/******************************************************************************
+** Method:		SetPlayer()
+**
+** Description:	Sets the player for a given position.
+**
+** Parameters:	nPos	The position.
+**				nID		The member ID.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CPitchCtrl::SetPlayer(int nPos, int nID)
+{
+	ASSERT((nPos >= 0) && (nPos < MAX_PLAYERS));
+	ASSERT(nID >= -1);
+
+	// Setting player to member?
+	if (nID != -1)
+	{
+		// Save the member ID.
+		m_aiPlayers[nPos] = nID;
+
+		// Find the members details.
+		CRow* pRow = m_oMembers.SelectRow(CMembers::ID, nID);
+
+		ASSERT(pRow != NULL);
+
+		// Save the member name.
+		m_astrPlayers[nPos] = App.FormatName(*pRow, CMembers::FORENAME, CMembers::SURNAME, false);
+	}
+	// Clearing player.
+	else
+	{
+		m_aiPlayers[nPos]   = nID;
+		m_astrPlayers[nPos] = "";
+	}
+
+	// Repaint.
+	Invalidate();
 }
