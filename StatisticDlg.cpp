@@ -33,7 +33,7 @@ CStatisticDlg::CStatisticDlg(CStatTypes& oStatTypes, CRow& oRow, bool bEditing)
 	, m_oStatTypes(oStatTypes)
 {
 	DEFINE_CTRL_TABLE
-		CTRL(IDC_DATE,		&m_dtpDate)
+		CTRL(IDC_DATE,			&m_dtpDate)
 		CTRL(IDC_STATISTICS,	&m_cbTypes)
 		CTRL(IDC_VALUE,			&m_ebValue)
 	END_CTRL_TABLE
