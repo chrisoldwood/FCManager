@@ -107,11 +107,19 @@ SOURCE=.\BalShtItemDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\BalShtItemPage.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ClubDetails.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\ClubDetailsDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpensesPage.cpp
 # End Source File
 # Begin Source File
 
@@ -151,6 +159,10 @@ SOURCE=.\FixtureDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FixturePage.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Fixtures.cpp
 # End Source File
 # Begin Source File
@@ -163,7 +175,7 @@ SOURCE=.\GridViewDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\MbrStatusPageDlg.cpp
+SOURCE=.\IncomePage.cpp
 # End Source File
 # Begin Source File
 
@@ -183,7 +195,15 @@ SOURCE=.\MembersView.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\NamePageDlg.cpp
+SOURCE=.\MemNamePage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemStatusPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\NamePage.cpp
 # End Source File
 # Begin Source File
 
@@ -191,11 +211,15 @@ SOURCE=.\NotesDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\NotesPageDlg.cpp
+SOURCE=.\NotesPage.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\OpponentDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OpponentPage.cpp
 # End Source File
 # Begin Source File
 
@@ -204,6 +228,10 @@ SOURCE=.\Opponents.cpp
 # Begin Source File
 
 SOURCE=.\OpponentsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PaymentsPage.cpp
 # End Source File
 # Begin Source File
 
@@ -227,7 +255,27 @@ SOURCE=.\RefereesView.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\StatsPageDlg.cpp
+SOURCE=.\RefNamePage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SecNamePage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatisticDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stats.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatsPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatTypes.cpp
 # End Source File
 # Begin Source File
 
@@ -236,6 +284,10 @@ SOURCE=.\Subs.cpp
 # Begin Source File
 
 SOURCE=.\SubsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TableGrid.cpp
 # End Source File
 # Begin Source File
 
@@ -248,6 +300,14 @@ SOURCE=.\TeamSels.cpp
 # Begin Source File
 
 SOURCE=.\TeamSelsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpStats.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpSubs.cpp
 # End Source File
 # Begin Source File
 
@@ -287,11 +347,19 @@ SOURCE=.\BalShtItemDlg.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\BalShtItemPage.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ClubDetails.hpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\ClubDetailsDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpensesPage.hpp
 # End Source File
 # Begin Source File
 
@@ -323,7 +391,19 @@ SOURCE=.\FCMView.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FixStats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FixStatTypes.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\FixtureDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FixturePage.hpp
 # End Source File
 # Begin Source File
 
@@ -339,7 +419,7 @@ SOURCE=.\GridViewDlg.hpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\MbrStatusPageDlg.hpp
+SOURCE=.\IncomePage.hpp
 # End Source File
 # Begin Source File
 
@@ -359,7 +439,23 @@ SOURCE=.\MembersView.hpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\NamePageDlg.hpp
+SOURCE=.\MemNamePage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemStats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemStatTypes.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MemStatusPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\NamePage.hpp
 # End Source File
 # Begin Source File
 
@@ -367,11 +463,15 @@ SOURCE=.\NotesDlg.hpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\NotesPageDlg.hpp
+SOURCE=.\NotesPage.hpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\OpponentDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OpponentPage.hpp
 # End Source File
 # Begin Source File
 
@@ -380,6 +480,18 @@ SOURCE=.\Opponents.hpp
 # Begin Source File
 
 SOURCE=.\OpponentsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OppStats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\OppStatTypes.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PaymentsPage.hpp
 # End Source File
 # Begin Source File
 
@@ -403,11 +515,39 @@ SOURCE=.\RefereesView.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\RefNamePage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\RefStats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\RefStatTypes.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Resource.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\StatsPageDlg.hpp
+SOURCE=.\SecNamePage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatisticDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Stats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatsPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StatTypes.hpp
 # End Source File
 # Begin Source File
 
@@ -416,6 +556,10 @@ SOURCE=.\Subs.hpp
 # Begin Source File
 
 SOURCE=.\SubsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TableGrid.hpp
 # End Source File
 # Begin Source File
 
@@ -428,6 +572,14 @@ SOURCE=.\TeamSels.hpp
 # Begin Source File
 
 SOURCE=.\TeamSelsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpStats.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpSubs.hpp
 # End Source File
 # Begin Source File
 
