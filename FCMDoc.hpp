@@ -15,6 +15,7 @@
 // General limits.
 const int MAX_CLUB_TEAMS = 3;
 const int MAX_POSITIONS  = 4;
+const int MAX_FORMATIONS = 2;
 
 /******************************************************************************
 ** 
