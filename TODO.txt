@@ -1,29 +1,27 @@
-- Print column sizes.
+- Printing support (cell margins, column sizes etc).
 
-- Print cell margins.
+- Expense types dialog.
 
-- Player availability.
-
-- Expense types table.
-
-- Balance sheet item expenses.
-
-- ClubDetails season & league name.
+- Stat types dialog.
 
 - Pitch control (other formations 4-3-3).
 
 - Team selection dialog.
 
-- Subs editing / better control.
-
-- Change subs to use std grid dialog.
-
-- Change "subs" name to payments.
-
 - Fix deletion of members etc. if used elsewhere.
 
-- Save stats out with exports tables.
+- All Reports (stats, income, expenses).
 
-- Members report.
+- Sort out names of fixed stats (No fixed stats?)
 
-- Sort out names of fixed stats.
+- Icons + dialog layouts.
+
+- Import/Export to other formats.
+
+- Graphs?
+
+- Accounts dialogs + transaction table def.
+
+- More balance sheet item types (fixed or variable - reports)
+
+- Update balance column for members.
