@@ -95,6 +95,26 @@ SOURCE=.\AboutDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AccountDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AccountPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Accounts.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AccountsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AcctTrans.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\BalSheet.cpp
 # End Source File
 # Begin Source File
@@ -119,7 +139,19 @@ SOURCE=.\ClubDetailsDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ExpenseItemDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Expenses.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ExpensesPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpenseTypes.cpp
 # End Source File
 # Begin Source File
 
@@ -283,10 +315,6 @@ SOURCE=.\Subs.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SubsView.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\TableGrid.cpp
 # End Source File
 # Begin Source File
@@ -300,6 +328,10 @@ SOURCE=.\TeamSels.cpp
 # Begin Source File
 
 SOURCE=.\TeamSelsView.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpExps.cpp
 # End Source File
 # Begin Source File
 
@@ -331,6 +363,26 @@ SOURCE=.\AboutDlg.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\AccountDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AccountPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Accounts.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AccountsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\AcctTrans.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\AppHeaders.hpp
 # End Source File
 # Begin Source File
@@ -359,7 +411,19 @@ SOURCE=.\ClubDetailsDlg.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ExpenseItemDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Expenses.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ExpensesPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ExpenseTypes.hpp
 # End Source File
 # Begin Source File
 
@@ -555,10 +619,6 @@ SOURCE=.\Subs.hpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\SubsView.hpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\TableGrid.hpp
 # End Source File
 # Begin Source File
@@ -572,6 +632,10 @@ SOURCE=.\TeamSels.hpp
 # Begin Source File
 
 SOURCE=.\TeamSelsView.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\TmpExps.hpp
 # End Source File
 # Begin Source File
 
@@ -614,6 +678,10 @@ SOURCE=.\Toolbar.bmp
 SOURCE=.\views.bmp
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\Manual.txt
+# End Source File
 # Begin Source File
 
 SOURCE=.\ReadMe.txt
