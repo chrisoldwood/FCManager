@@ -76,7 +76,7 @@ CViewsMgr::~CViewsMgr()
 *******************************************************************************
 */
 
-void CViewsMgr::OnCreate(const CRect& rcClient)
+void CViewsMgr::OnCreate(const CRect& /*rcClient*/)
 {
 	// Create the data view bar
 	m_oViewsBar.Create(*this, IDC_VIEW_BAR, CRect(0, 0, 0, 0));

@@ -90,7 +90,7 @@ void CAccountPage::OnInitDialog()
 			break;
 
 		default:
-			ASSERT(false);
+			ASSERT_FALSE();
 			break;
 	}
 

@@ -241,7 +241,7 @@ void CBalSheetView::OnDelete()
 
 void CBalSheetView::OnDeleteAll()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 
 	// Get user to confirm action.
 	if (QueryMsg("Delete ALL items?") != IDYES)

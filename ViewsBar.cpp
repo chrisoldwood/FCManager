@@ -88,7 +88,7 @@ void CViewsBar::GetCreateParams(WNDCREATE& rParams)
 *******************************************************************************
 */
 
-void CViewsBar::OnCreate(const CRect& rcClient)
+void CViewsBar::OnCreate(const CRect& /*rcClient*/)
 {
 	// Load the icons bitmap.
 	m_bmpIcons.LoadRsc(IDB_VIEWS, RGB(255,0,255));
@@ -119,7 +119,7 @@ void CViewsBar::OnCreate(const CRect& rcClient)
 *******************************************************************************
 */
 
-void CViewsBar::OnDrawItem(uint iID, uint iAction, uint iState, CDC& rDC,
+void CViewsBar::OnDrawItem(uint /*iID*/, uint iAction, uint iState, CDC& rDC,
 							uint iItem, const CRect& rcItem)
 {
 	// Repaint or Selection change?

@@ -220,7 +220,7 @@ void CAccountsView::OnDelete()
 
 void CAccountsView::OnDeleteAll()
 {
-	ASSERT(false);
+	ASSERT_FALSE();
 
 	// Get user to confirm action.
 	if (QueryMsg("Delete ALL items?") != IDYES)

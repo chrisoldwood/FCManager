@@ -96,7 +96,7 @@ void CIncomePage::OnInitDialog()
 			break;
 
 		default:
-			ASSERT(false);
+			ASSERT_FALSE();
 			break;
 	}
 

@@ -22,7 +22,8 @@
 *******************************************************************************
 */
 
-CViewDlg::CViewDlg(uint iRscID) : CDialog(iRscID)
+CViewDlg::CViewDlg(uint iRscID)
+	: CDialog(iRscID)
 {
 }
 
@@ -59,7 +60,7 @@ void CViewDlg::OnDeselect()
 *******************************************************************************
 */
 
-void CViewDlg::OnCommand(uint iCmdID)
+void CViewDlg::OnCommand(uint /*iCmdID*/)
 {
 }
 
