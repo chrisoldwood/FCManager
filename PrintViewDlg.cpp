@@ -30,10 +30,13 @@ CPrintViewDlg::CPrintViewDlg(const CString& strViewName)
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_PRINTER,	&m_txtPrinter)
 		CTRL(IDC_PORT,		&m_txtPort)
+		CTRL(IDC_COLUMNS,	&m_lvColumns)
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_SELECT,	BN_CLICKED,	OnSelect)
+		CMD_CTRLMSG(IDC_SELECT,		BN_CLICKED,	OnSelect  )
+		CMD_CTRLMSG(IDC_MOVE_UP,	BN_CLICKED,	OnMoveUp  )
+		CMD_CTRLMSG(IDC_MOVE_DOWN,	BN_CLICKED,	OnMoveDown)
 	END_CTRLMSG_TABLE
 }
 
@@ -60,6 +63,18 @@ void CPrintViewDlg::OnInitDialog()
 	// Show printer details.
 	m_txtPrinter.Text(App.m_oPrinter.m_strName);
 	m_txtPort.Text(App.m_oPrinter.m_strPort);
+
+	// Add the single column.
+	m_lvColumns.InsertColumn(0, "Column Name", 100);
+
+	// Add the columns.
+	m_lvColumns.AppendItem("Name");
+	m_lvColumns.AppendItem("Phone #1");
+	m_lvColumns.AppendItem("Phone #2");
+	m_lvColumns.AppendItem("Registered?");
+	m_lvColumns.AppendItem("Senior?");
+
+	m_lvColumns.Select(0);
 }
 
 /******************************************************************************
@@ -82,6 +97,23 @@ bool CPrintViewDlg::OnOk()
 	  || (App.m_oPrinter.m_strPort   == "") )
 	{
 		AlertMsg("You must select a printer.");
+		return false;
+	}
+
+	int nColumns = m_lvColumns.ItemCount();
+	int nChecked = 0;
+
+	// Count how many columns to print.
+	for (int i = 0; i < nColumns; i++)
+	{
+		if (m_lvColumns.IsItemChecked(i))
+			nChecked++;
+	}
+
+	// Must have at least 1.
+	if (nChecked < 1)
+	{
+		AlertMsg("You must include at least one column.");
 		return false;
 	}
 
@@ -111,4 +143,65 @@ void CPrintViewDlg::OnSelect()
 		m_txtPrinter.Text(App.m_oPrinter.m_strName);
 		m_txtPort.Text(App.m_oPrinter.m_strPort);
 	}
+}
+
+/******************************************************************************
+** Methods:		OnMoveUp()
+**				OnMoveDown()
+**
+** Description:	Move the column up or down the ordering in the list view.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CPrintViewDlg::OnMoveUp()
+{
+	// Ignore if no selection.
+	if (!m_lvColumns.IsSelection())
+		return;
+
+	int nSel = m_lvColumns.Selected();
+
+	// If first, can't move up.
+	if (nSel <= 0)
+		return;
+
+	// Get the item details.
+	CString strItem  = m_lvColumns.ItemText(nSel, 0);
+	LPARAM  lData    = m_lvColumns.ItemData(nSel);
+	bool	bChecked = m_lvColumns.IsItemChecked(nSel);
+
+	// Delete and re-add.
+	m_lvColumns.DeleteItem(nSel);
+	m_lvColumns.InsertItem(nSel-1, strItem, lData, -1);
+	m_lvColumns.ItemCheck(nSel-1, bChecked);
+	m_lvColumns.Select(nSel-1);
+}
+
+void CPrintViewDlg::OnMoveDown()
+{
+	// Ignore if no selection.
+	if (!m_lvColumns.IsSelection())
+		return;
+
+	int nSel = m_lvColumns.Selected();
+
+	// If last, can't move down.
+	if (nSel >= (m_lvColumns.ItemCount() - 1))
+		return;
+
+	// Get the item details.
+	CString strItem  = m_lvColumns.ItemText(nSel, 0);
+	LPARAM  lData    = m_lvColumns.ItemData(nSel);
+	bool	bChecked = m_lvColumns.IsItemChecked(nSel);
+
+	// Delete and re-add.
+	m_lvColumns.DeleteItem(nSel);
+	m_lvColumns.InsertItem(nSel+1, strItem, lData, -1);
+	m_lvColumns.ItemCheck(nSel+1, bChecked);
+	m_lvColumns.Select(nSel+1);
 }

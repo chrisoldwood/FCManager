@@ -31,10 +31,12 @@ protected:
 	//
 	// Members.
 	//
-	CString	m_strViewName;
-	CLabel	m_txtPrinter;
-	CLabel	m_txtPort;
-	
+	CString			m_strViewName;
+	CLabel			m_txtPrinter;
+	CLabel			m_txtPort;
+
+	CCheckBoxList	m_lvColumns;
+
 	//
 	// Message processors.
 	//
@@ -45,6 +47,8 @@ protected:
 	// Control message processors.
 	//
 	void OnSelect();
+	void OnMoveUp();
+	void OnMoveDown();
 };
 
 /******************************************************************************
