@@ -57,7 +57,7 @@ public:
 		POSTAL_LEN   = 100,
 		PHONE_LEN    =  30,
 		EMAIL_LEN    =  50,
-		NOTES_LEN    = 100,
+		NOTES_LEN    = 512,
 	};
 
 	//
@@ -65,7 +65,7 @@ public:
 	//
 	enum
 	{
-		FILE_FORMAT  = 0x00000000,		// "MEMT"
+		FILE_FORMAT  = 0x4D4D4346,		// "FCMM"
 		FILE_VERSION = 0x00000A01,		// Alpha #1
 	};
 
