@@ -25,7 +25,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CPitchCtrl(CTable& oMembers);
+	CPitchCtrl(CMembers& oMembers);
 	~CPitchCtrl();
 
 	//
@@ -40,7 +40,7 @@ protected:
 	//
 	int			m_aiPlayers[MAX_PLAYERS];
 	CString		m_astrPlayers[MAX_PLAYERS];
-	CTable&		m_oMembers;
+	CMembers&	m_oMembers;
 	CBrush		m_oBkBrush;
 	Formation	m_eFormation;
 

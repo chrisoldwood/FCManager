@@ -90,7 +90,7 @@ static int g_aiFormations[MAX_FORMATIONS][MAX_PLAYERS][2] =
 *******************************************************************************
 */
 
-CPitchCtrl::CPitchCtrl(CTable& oMembers)
+CPitchCtrl::CPitchCtrl(CMembers& oMembers)
 	: m_oMembers(oMembers)
 	, m_oBkBrush(RGB(0, 127, 0))
 	, m_eFormation(F_4_4_2)
