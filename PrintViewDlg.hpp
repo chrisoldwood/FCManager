@@ -27,6 +27,11 @@ public:
 	//
 	CPrintViewDlg(const CString& strViewName);
 	
+	//
+	// Members.
+	//
+	TPtrArray<GridColumn>	m_apColumns;
+
 protected:
 	//
 	// Members.

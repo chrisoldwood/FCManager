@@ -14,10 +14,10 @@
 // The list view columns.
 CTableGrid::Column CPaymentsPage::Columns[NUM_COLUMNS] =
 {
-	{ "Date",  100, LVCFMT_LEFT,  CTmpSubs::ITEM_DATE },
-	{ "Item",  100, LVCFMT_LEFT,  CTmpSubs::ITEM_NAME },
-	{ "£ Fee",  75, LVCFMT_RIGHT, CTmpSubs::FEE       },
-	{ "£ Paid", 75, LVCFMT_RIGHT, CTmpSubs::PAID      }
+	{ "Date",   75, LVCFMT_LEFT,  CTmpSubs::ITEM_DATE },
+	{ "Item",  175, LVCFMT_LEFT,  CTmpSubs::ITEM_NAME },
+	{ "£ Fee",  50, LVCFMT_RIGHT, CTmpSubs::FEE       },
+	{ "£ Paid", 50, LVCFMT_RIGHT, CTmpSubs::PAID      }
 };
 
 /******************************************************************************

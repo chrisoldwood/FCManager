@@ -68,11 +68,11 @@ void CPrintViewDlg::OnInitDialog()
 	m_lvColumns.InsertColumn(0, "Column Name", 100);
 
 	// Add the columns.
-	m_lvColumns.AppendItem("Name");
-	m_lvColumns.AppendItem("Phone #1");
-	m_lvColumns.AppendItem("Phone #2");
-	m_lvColumns.AppendItem("Registered?");
-	m_lvColumns.AppendItem("Senior?");
+	for (int i = 0; i < m_apColumns.Size(); i++)
+	{
+		m_lvColumns.AppendItem(m_apColumns[i].m_pszName);
+		m_lvColumns.ItemCheck(i, m_apColumns[i].m_bPrint);
+	}
 
 	m_lvColumns.Select(0);
 }
