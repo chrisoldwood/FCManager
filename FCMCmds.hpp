@@ -79,6 +79,13 @@ public:
 	//
 	void SelectView(DataView eView);
 
+	//
+	// Command property methods.
+	//
+	virtual int CmdBmpIndex(uint iCmdID) const;
+	virtual int CmdHint(uint iCmdID) const;
+	virtual int CmdToolTip(uint iCmdID) const;
+
 protected:
 	//
 	// Members.

@@ -17,8 +17,16 @@ const int ID_VIEW_FIRST = ID_VIEW_MEMBERS;
 const int ID_VIEW_LAST  = ID_VIEW_REFEREES;
 
 // Range of data view commands.
-const int ID_DATAVIEW_FIRST = ID_OPTIONS_BASE;
-const int ID_DATAVIEW_LAST  = ID_OPTIONS_BASE + 90;
+const int ID_VIEW_POPUP_CMD = ID_OPTIONS_POPUP;
+const int ID_VIEW_FIRST_CMD = ID_OPTIONS_POPUP + 1;
+const int ID_VIEW_LAST_CMD  = ID_OPTIONS_POPUP + 90;
+
+// Start index of view specific icons.
+const int VIEW_ICONS_BASE = 3;
+
+// View specific hints offsets.
+const int VIEW_HINTS_BASE  = 10000;
+const int VIEW_HINTS_DELTA = 100;
 
 // Range of MRU commands.
 const int ID_MRU_FIRST = ID_FILE_MRU_1;
@@ -60,9 +68,9 @@ CFCMCmds::CFCMCmds()
 		// Club menu.
 		CMD_ENTRY(ID_CLUB_DETAILS,				OnClubDetails,		OnUIClubDetails,	-1)
 		// Data View menu.
-		CMD_RANGE(ID_DATAVIEW_FIRST, ID_DATAVIEW_LAST,	OnDataViewCmd,		OnUIDataViewCmds,	-1)
+		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	OnDataViewCmd,		OnUIDataViewCmds,	-1)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,				OnHelpAbout,		NULL,				-1)
+		CMD_ENTRY(ID_HELP_ABOUT,				OnHelpAbout,		NULL,				9)
 	END_CMD_TABLE
 }
 
@@ -338,11 +346,7 @@ void CFCMCmds::OnUIViewDataView()
 
 	App.m_AppWnd.m_Menu.EnableItem(VIEW_MENU_POS, bDocOpen);
 
-	if (bDocOpen)
-	{
-		App.View()->m_ViewsMgr.OnUIUpdate();
-	}
-	else
+	if (!bDocOpen)
 	{
 		for (int i = ID_VIEW_FIRST; i <= ID_VIEW_LAST; i++)
 			App.m_AppWnd.m_Menu.CheckCmd(i, false);
@@ -361,6 +365,21 @@ void CFCMCmds::OnUIDataViewCmds()
 	bool bDocOpen = (App.m_pDoc != NULL);
 
 	App.m_AppWnd.m_Menu.EnableItem(OPTIONS_MENU_POS, bDocOpen);
+
+
+	if (bDocOpen)
+	{
+		App.View()->m_ViewsMgr.OnUIUpdate();
+	}
+	else
+	{
+		App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(false);
+		App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(false);
+		App.m_AppWnd.m_ToolBar.m_DeleteBtn.Enable(false);
+		App.m_AppWnd.m_ToolBar.m_PrintBtn.Enable(false);
+		App.m_AppWnd.m_ToolBar.m_ImportBtn.Enable(false);
+		App.m_AppWnd.m_ToolBar.m_ExportBtn.Enable(false);
+	}
 }
 
 /******************************************************************************
@@ -396,4 +415,76 @@ void CFCMCmds::SelectView(DataView eNewView)
 
 	// Switch the view dialogs.
 	pView->m_ViewsMgr.SelectView(eNewView);
+}
+
+/******************************************************************************
+** Method:		CmdBmpIndex()
+**
+** Description:	Get the commands' bitmap index.
+**
+** Parameters:	iCmdID		The command.
+**
+** Returns:		The index or -1 if there isn't one.
+**
+*******************************************************************************
+*/
+
+int CFCMCmds::CmdBmpIndex(uint iCmdID) const
+{
+	// Is view based command?
+	if ( (iCmdID >= ID_VIEW_FIRST_CMD) && (iCmdID <= ID_VIEW_LAST_CMD) )
+		return (iCmdID - ID_VIEW_FIRST_CMD) + VIEW_ICONS_BASE;
+
+	// Pass to base class.
+	return CCmdControl::CmdBmpIndex(iCmdID);
+}
+
+/******************************************************************************
+** Method:		CmdHint()
+**
+** Description:	Get the commands' hint resource ID.
+**				By default the hint resurce ID is the same as the command ID.
+**
+** Parameters:	iCmdID		The command.
+**
+** Returns:		The hint resource ID.
+**
+*******************************************************************************
+*/
+
+int CFCMCmds::CmdHint(uint iCmdID) const
+{
+	// Is view based command?
+	if ( (iCmdID >= ID_VIEW_POPUP_CMD) && (iCmdID <= ID_VIEW_LAST_CMD) )
+	{
+		CFCMView* pView = App.View();
+
+		if (pView != NULL)
+		{
+			// Get the current view.
+			int nCurView = pView->m_ViewsMgr.CurrentView();
+
+			return (nCurView * VIEW_HINTS_DELTA) + (iCmdID - ID_VIEW_POPUP_CMD) + VIEW_HINTS_BASE;
+		}
+	}
+
+	return CCmdControl::CmdHint(iCmdID);
+}
+
+/******************************************************************************
+** Method:		CmdToolTip()
+**
+** Description:	Get the commands' tool tip resource ID.
+**				By default the tool tip resurce ID is the same as the command ID.
+**
+** Parameters:	iCmdID		The command.
+**
+** Returns:		The tool tip resource ID.
+**
+*******************************************************************************
+*/
+
+int CFCMCmds::CmdToolTip(uint iCmdID) const
+{
+	return CCmdControl::CmdToolTip(iCmdID);
 }
