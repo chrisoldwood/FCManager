@@ -28,6 +28,11 @@ public:
 	CTeamSelsView(CFCMDoc& rDoc);
 	
 	//
+	// Methods (Overriden from base class).
+	//
+	virtual void OnUIUpdate();
+
+	//
 	// Commands.
 	//
 	virtual void OnAdd();
