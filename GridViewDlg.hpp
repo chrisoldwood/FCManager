@@ -25,7 +25,7 @@ struct GridColumn
 	int			m_nWidth;		// The width in pixels (screen) / percentage (printer).
 	int			m_nFormat;		// The alignment of the text.
 	int			m_nField;		// The data field.
-	bool		m_bPrint;		// Include column when printing.
+	bool		m_bShow;		// Display column.
 };
 
 /******************************************************************************
@@ -56,6 +56,7 @@ public:
 	virtual void OnAdd();
 	virtual void OnEdit();
 	virtual void OnDelete();
+	virtual void OnDeleteAll();
 	virtual void OnPrint();
 	virtual void OnImport();
 	virtual void OnExport();
@@ -67,6 +68,7 @@ public:
 	int   AddRow(CRow& oRow, bool bReSort);
 	int   UpdateRow(int nGridRow, bool bReSort);
 	void  DeleteRow(int nGridRow);
+	void  DeleteAllRows();
 
 protected:
 	//

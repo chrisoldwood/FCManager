@@ -120,13 +120,14 @@ void CGridViewDlg::OnCommand(uint iCmdID)
 {
 	switch (iCmdID)
 	{
-		case ID_OPTIONS_ADD:	OnAdd();		break;
-		case ID_OPTIONS_EDIT:	OnEdit();		break;
-		case ID_OPTIONS_DELETE:	OnDelete();		break;
-		case ID_OPTIONS_PRINT:	OnPrint();		break;
-		case ID_OPTIONS_IMPORT:	OnImport();		break;
-		case ID_OPTIONS_EXPORT:	OnExport();		break;
-		default:				ASSERT(false);	break;
+		case ID_OPTIONS_ADD:		OnAdd();		break;
+		case ID_OPTIONS_EDIT:		OnEdit();		break;
+		case ID_OPTIONS_DELETE:		OnDelete();		break;
+		case ID_OPTIONS_DELETEALL:	OnDeleteAll();	break;
+		case ID_OPTIONS_PRINT:		OnPrint();		break;
+		case ID_OPTIONS_IMPORT:		OnImport();		break;
+		case ID_OPTIONS_EXPORT:		OnExport();		break;
+		default:					ASSERT(false);	break;
 	}
 }
 
@@ -146,12 +147,13 @@ void CGridViewDlg::OnUIUpdate()
 {
 	bool bRows = (m_oTable.RowCount() != 0);
 
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,    true);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,   bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE, bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,  bRows);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT, true);
-	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_ADD,       true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EDIT,      bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETE,    bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_DELETEALL, bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_PRINT,     bRows);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_IMPORT,    true);
+	App.m_AppWnd.m_Menu.EnableCmd(ID_OPTIONS_EXPORT,    bRows);
 
 	App.m_AppWnd.m_ToolBar.m_AddBtn.Enable(true);
 	App.m_AppWnd.m_ToolBar.m_EditBtn.Enable(bRows);
@@ -184,6 +186,11 @@ void CGridViewDlg::OnEdit()
 }
 
 void CGridViewDlg::OnDelete()
+{
+	ASSERT(false);
+}
+
+void CGridViewDlg::OnDeleteAll()
 {
 	ASSERT(false);
 }
@@ -292,6 +299,23 @@ void CGridViewDlg::DeleteRow(int nGridRow)
 }
 
 /******************************************************************************
+** Method:		DeleteAllRows()
+**
+** Description:	Delete all rows from the grid.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CGridViewDlg::DeleteAllRows()
+{
+	m_lvGrid.DeleteAllItems();
+}
+
+/******************************************************************************
 ** Method:		GetCellData()
 **
 ** Description:	Gets the value for a cell.
@@ -324,16 +348,16 @@ CString CGridViewDlg::GetCellData(int nColumn, CRow& oRow, int nField)
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColumn* pColumns)
+void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColumn* pColumnsX)
 {
-	ASSERT(nColumns >  0);
-	ASSERT(pColumns != NULL);
+	ASSERT(nColumnsX >  0);
+	ASSERT(pColumnsX != NULL);
 
 	CPrintViewDlg Dlg(strViewName);
 
 	// Setup the printable columns.
-	for (int i = 0; i < nColumns; i++)
-		Dlg.m_apColumns.Add(pColumns[i]);
+	for (int i = 0; i < nColumnsX; i++)
+		Dlg.m_aoColumns.Add(new GridColumn(pColumnsX[i]));
 
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
@@ -357,15 +381,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 			nPages++;
 
 		// Calculate column widths.
-		CIntArray	aiWidths;
+		TArray<int>	aiWidths;
 		int			nPageWidth = rcRect.Width();
 		int			nRatioWidth = 0;
 
-		for (int i = 0; i < nColumns; i++)
-			nRatioWidth += pColumns->m_nWidth;
+		for (int i = 0; i < Dlg.m_aoColumns.Size(); i++)
+			nRatioWidth += Dlg.m_aoColumns[i].m_nWidth;
 
-		for (i = 0; i < nColumns; i++)
-			aiWidths.Add((nPageWidth * pColumns->m_nWidth) / nRatioWidth);
+		for (i = 0; i < Dlg.m_aoColumns.Size(); i++)
+			aiWidths.Add((nPageWidth * Dlg.m_aoColumns[i].m_nWidth) / nRatioWidth);
 
 		// Create GDI objects.
 		CBrush	oHdrBrush(BLACK_BRUSH);
@@ -373,15 +397,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 		CPen	oRowPen(BLACK_PEN);
 
 		// Initialise DC.
-		oDC.BkMode(TRANSPARENT);
+//		oDC.BkMode(TRANSPARENT);
 
 		// Start printing.
-		oDC.Start(strViewName);
+//		oDC.Start(strViewName);
 
 		// For all pages.
 		for (int p = 0; p < nPages; p++)
 		{
-			oDC.StartPage();
+//			oDC.StartPage();
 
 			CRect rcCell;
 
@@ -390,8 +414,8 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 			rcRow.bottom = rcRow.top + dmFont.cy;
 
 			// Use inverse video for headers.
-			oDC.Fill(rcRow, oHdrBrush);
-			oDC.TextColour(RGB(255, 255, 255));
+//			oDC.Fill(rcRow, oHdrBrush);
+//			oDC.TextColour(RGB(255, 255, 255));
 
 			// Initialise cell to first in row.
 			rcCell = rcRow;
@@ -399,13 +423,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 			rcCell.bottom = rcCell.top + dmFont.cy;
 
 			// Print column headers.
-			for (int c = 0; c < nColumns; c++)
+			for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
 			{
+				GridColumn& oColumn = Dlg.m_aoColumns[i];
+
 				// Calculate cell border.
 				rcCell.left  = rcCell.right;
 				rcCell.right = rcCell.left + aiWidths[c];
 
-				PrintCell(oDC, rcCell, pColumns[c].m_pszName, pColumns[c].m_nFormat, false);
+				PrintCell(oDC, rcCell, oColumn.m_pszName, oColumn.m_nFormat, false);
 			}
 
 			// Calculate rows on this page.
@@ -417,9 +443,9 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 				nLastRow = nRows;
 
 			// Use normal video for rows.
-			oDC.Select(oRowBrush);
-			oDC.Select(oRowPen);
-			oDC.TextColour(RGB(0, 0, 0));
+//			oDC.Select(oRowBrush);
+//			oDC.Select(oRowPen);
+//			oDC.TextColour(RGB(0, 0, 0));
 
 			// Update row rect to start of next line.
 			rcRow.top = rcRow.bottom;
@@ -436,13 +462,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 				rcCell.bottom = rcCell.top + dmFont.cy;
 
 				// For all columns in the row.
-				for (int c = 0; c < nColumns; c++)
+				for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
 				{
+					GridColumn& oColumn = Dlg.m_aoColumns[i];
+
 					// Calculate cell border.
 					rcCell.left  = rcCell.right;
 					rcCell.right = rcCell.left + aiWidths[c];
 
-					PrintCell(oDC, rcCell, GetCellData(c, oRow, pColumns[c].m_nField), pColumns[c].m_nFormat, true);
+					PrintCell(oDC, rcCell, GetCellData(c, oRow, oColumn.m_nField), oColumn.m_nFormat, true);
 				}
 
 				// Update row cell to start of next row.
@@ -450,11 +478,11 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumns, GridColum
 				rcRow.bottom = rcRow.top + dmFont.cy;
 			}
 
-			oDC.EndPage();
+//			oDC.EndPage();
 		}
 
 		// Done printing.
-		oDC.End();
+//		oDC.End();
 	}
 }
 
@@ -480,8 +508,8 @@ void CGridViewDlg::PrintCell(CDC& oDC, const CRect& rcCell, const char* pszText,
 	ASSERT( (nAlignment == LVCFMT_LEFT) || (nAlignment == LVCFMT_CENTER) || (nAlignment == LVCFMT_RIGHT) );
 
 	// Draw the cell border.
-	if (bBorder)
-		oDC.Rectangle(rcCell);
+//	if (bBorder)
+//		oDC.Rectangle(rcCell);
 
 	// No text to print?
 	if ( (pszText == NULL) || (*pszText == '\0') )
@@ -498,7 +526,7 @@ void CGridViewDlg::PrintCell(CDC& oDC, const CRect& rcCell, const char* pszText,
 	}
 
 	// Print it.
-	oDC.DrawText(rcCell, pszText, nFormat);
+//	oDC.DrawText(rcCell, pszText, nFormat);
 }
 
 /******************************************************************************
