@@ -56,7 +56,7 @@ CFCMView::~CFCMView()
 *******************************************************************************
 */
 
-void CFCMView::OnCreate(const CRect& rcClient)
+void CFCMView::OnCreate(const CRect& /*rcClient*/)
 {
 	// Create the split window that fills the view.
 	m_ViewsMgr.Create(*this, IDC_VIEWS_MGR, ClientRect());
@@ -75,7 +75,7 @@ void CFCMView::OnCreate(const CRect& rcClient)
 *******************************************************************************
 */
 
-void CFCMView::OnResize(int iFlag, const CSize& rNewSize)
+void CFCMView::OnResize(int /*iFlag*/, const CSize& /*rNewSize*/)
 {
 	m_ViewsMgr.Move(ClientRect());
 }
