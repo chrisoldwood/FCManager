@@ -108,7 +108,10 @@ void CViewsMgr::SelectView(DataView eNewView)
 
 	// Hide the old view, if one.
 	if (m_eCurrView != NO_VIEW)
+	{
+		m_pDataViews[m_eCurrView]->OnDeselect();
 		m_pDataViews[m_eCurrView]->Show(SW_HIDE);
+	}
 
 	m_eCurrView = eNewView;
 
@@ -127,7 +130,9 @@ void CViewsMgr::SelectView(DataView eNewView)
 	App.m_AppWnd.DrawMenuBar();
 
 	// Update the UI.
+	m_pDataViews[m_eCurrView]->OnSelect();
 	m_pDataViews[m_eCurrView]->OnUIUpdate();
+	m_pDataViews[m_eCurrView]->Focus();
 }
 
 /******************************************************************************
@@ -145,4 +150,21 @@ void CViewsMgr::SelectView(DataView eNewView)
 void CViewsMgr::OnSelectView()
 {
 	App.m_AppCmds.SelectView((DataView)m_oViewsBar.CurSel());
+}
+
+/******************************************************************************
+** Method:		SetFocus()
+**
+** Description:	Sets the focus to the current view.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CViewsMgr::SetFocus()
+{
+	m_pDataViews[m_eCurrView]->Focus();
 }

@@ -56,6 +56,7 @@ public:
 	//
 	DataView CurrentView() const;
 	void     SelectView(DataView eView);
+	void     SetFocus();
 
 	void     OnCommand(uint iCmdID);
 	void     OnUIUpdate();
