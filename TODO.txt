@@ -20,11 +20,9 @@
 
 - Change "subs" name to payments.
 
-- Tooltips for option buttons.
-
 - Fix deletion of members etc. if used elsewhere.
 
-- Save stats out with tables.
+- Save stats out with exports tables.
 
 - Members report.
 
