@@ -26,14 +26,14 @@ CReferees::CReferees(CMDB& oDB)
 	: CTable(oDB, "Referees")
 {
 	// Create the table schema.
-	AddColumn("ID",         MDT_IDENTITY,	0);				// ID             
-	AddColumn("Surname",    MDT_FXDSTR,		SURNAME_LEN);	// SURNAME        
-	AddColumn("Forename",   MDT_FXDSTR,		FORENAME_LEN);	// FORENAME       
-	AddColumn("PostalAddr", MDT_FXDSTR,		POSTAL_LEN);	// POSTAL_ADDRESS 
-	AddColumn("StdPhone",   MDT_FXDSTR,		PHONE_LEN);		// STANDARD_PHONE 
-	AddColumn("AltPhone",   MDT_FXDSTR,		PHONE_LEN);		// ALTERNATE_PHONE
-	AddColumn("EmailAddr",  MDT_FXDSTR,		EMAIL_LEN);		// EMAIL_ADDRESS  
-	AddColumn("Notes",      MDT_FXDSTR,		NOTES_LEN);		// NOTES           
+	AddColumn("ID",         MDCT_IDENTITY,	0);				// ID             
+	AddColumn("Surname",    MDCT_FXDSTR,		SURNAME_LEN);	// SURNAME        
+	AddColumn("Forename",   MDCT_FXDSTR,		FORENAME_LEN);	// FORENAME       
+	AddColumn("PostalAddr", MDCT_VARSTR,		POSTAL_LEN);	// POSTAL_ADDRESS 
+	AddColumn("StdPhone",   MDCT_FXDSTR,		PHONE_LEN);		// STANDARD_PHONE 
+	AddColumn("AltPhone",   MDCT_FXDSTR,		PHONE_LEN);		// ALTERNATE_PHONE
+	AddColumn("EmailAddr",  MDCT_FXDSTR,		EMAIL_LEN);		// EMAIL_ADDRESS  
+	AddColumn("Notes",      MDCT_VARSTR,		NOTES_LEN);		// NOTES           
 
 	// Add the indexes.
 }
