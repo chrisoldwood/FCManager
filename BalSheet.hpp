@@ -33,13 +33,16 @@ public:
 	//
 	enum
 	{
-		ID     = 0,
-		NAME   = 1,
-		DATE   = 2,
-		CREDIT = 3,
-		DEBIT  = 4,
-		TOTAL  = 5,
-		NOTES  = 6,
+		ID,
+		NAME,
+		DATE,
+		TYPE,
+		CREDIT_TYPE,
+		CREDIT_TOTAL,
+		DEBIT_TYPE,
+		DEBIT_TOTAL,
+		BALANCE,
+		NOTES,
 	};
 
 	//
@@ -47,8 +50,28 @@ public:
 	//
 	enum
 	{
-		NAME_LEN  =  20,
-		NOTES_LEN = 100,
+		NAME_LEN  =  50,
+		NOTES_LEN = 512,
+	};
+
+	//
+	// Item types.
+	//
+	enum
+	{
+		OTHER,
+		MATCH,
+		TRAINING,
+	};
+
+	//
+	// Credit/Debit types.
+	//
+	enum
+	{
+		NONE,
+		FIXED,
+		VARIABLE,
 	};
 
 	//

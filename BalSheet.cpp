@@ -26,24 +26,23 @@ CBalSheet::CBalSheet(CMDB& oDB)
 	: CTable(oDB, "BalanceSheet")
 {
 	// Create the table schema.
-	AddColumn("ID",     MDT_IDENTITY, 0);				// ID
-	AddColumn("Name",   MDT_FXDSTR,   NAME_LEN);		// NAME
-	AddColumn("Date",   MDT_DATE,     0);				// DATE
-	AddColumn("Credit", MDT_INT,	  0);				// CREDIT
-	AddColumn("Debit",  MDT_INT,      0);				// DEBIT
-	AddColumn("Total",  MDT_INT,      0);				// TOTAL
-	AddColumn("Notes",  MDT_FXDSTR,   NOTES_LEN);		// NOTES
+	AddColumn("ID",          MDCT_IDENTITY, 0,         CColumn::IDENTITY);	// ID
+	AddColumn("Name",        MDCT_FXDSTR,   NAME_LEN,  CColumn::DEFAULTS);	// NAME
+	AddColumn("Date",        MDCT_DATETIME, 0,         CColumn::DEFAULTS);	// DATE
+	AddColumn("Type",        MDCT_INT,      0,         CColumn::DEFAULTS);	// TYPE
+	AddColumn("CreditType",  MDCT_INT,		0,         CColumn::DEFAULTS);	// CREDIT_TYPE
+	AddColumn("CreditTotal", MDCT_INT,	    0,         CColumn::DEFAULTS);	// CREDIT_TOTAL
+	AddColumn("DebitType",   MDCT_INT,		0,         CColumn::DEFAULTS);	// DEBIT_TYPE
+	AddColumn("DebitTotal",  MDCT_INT,      0,         CColumn::DEFAULTS);	// DEBIT_TOTAL
+	AddColumn("Balance",     MDCT_INT,      0,         CColumn::DEFAULTS);	// BALANCE
+	AddColumn("Notes",       MDCT_VARSTR,   NOTES_LEN, CColumn::DEFAULTS);	// NOTES
 
 	// Add the "TOTAL" row.
 	CRow& oRow = CreateRow();
 
 	oRow[NAME] = "TOTALS";
 
-	InsertRow(oRow);
-
-	// Reset modified flags.
-	oRow.Status(CRow::ORIGINAL);
-	m_bInserted = false;
+	InsertRow(oRow, false);
 }
 
 /******************************************************************************
@@ -78,13 +77,16 @@ CRow& CBalSheet::CreateRow()
 {
 	CRow& oRow = CTable::CreateRow();
 
-//	oRow[ID    ] = 0;
-	oRow[NAME  ] = "";
-	oRow[DATE  ] = CDate::Current();
-	oRow[CREDIT] = 0;
-	oRow[DEBIT ] = 0;
-	oRow[TOTAL ] = 0;
-	oRow[NOTES ] = "";
+//	oRow[ID]            = 0;
+	oRow[NAME]          = "";
+	oRow[DATE]          = time(NULL);
+	oRow[TYPE]          = OTHER;
+	oRow[CREDIT_TYPE]   = NONE;
+	oRow[CREDIT_TOTAL]  = 0;
+	oRow[DEBIT_TYPE]    = NONE;
+	oRow[DEBIT_TOTAL]   = 0;
+	oRow[BALANCE]       = 0;
+	oRow[NOTES]         = "";
 	
 	return oRow;
 }
@@ -120,16 +122,16 @@ void CBalSheet::UpdateTotalsRow()
 			continue;
 		}
 
-		nCredit += oRow[CREDIT].GetInt();
-		nDebit  += oRow[DEBIT].GetInt();
-		nTotal  += oRow[TOTAL].GetInt();
+		nCredit += oRow[CREDIT_TOTAL].GetInt();
+		nDebit  += oRow[DEBIT_TOTAL].GetInt();
+		nTotal  += oRow[BALANCE].GetInt();
 	}
 
 	ASSERT(pTotals != NULL);
 	ASSERT((nCredit - nDebit) == nTotal);
 
 	// Save totals.
-	pTotals->Field(CREDIT) = nCredit;
-	pTotals->Field(DEBIT)  = nDebit;
-	pTotals->Field(TOTAL)  = nTotal;
+	pTotals->Field(CREDIT_TOTAL) = nCredit;
+	pTotals->Field(DEBIT_TOTAL)  = nDebit;
+	pTotals->Field(BALANCE)      = nTotal;
 }
