@@ -567,7 +567,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 		CFile oFile;
 
 		// Open, read and close.
-		oFile.Open(oPath, CStream::ReadOnly);
+		oFile.Open(oPath, GENERIC_READ);
 
 		uint32	iFileFormat;
 		uint32  iFileVersion;

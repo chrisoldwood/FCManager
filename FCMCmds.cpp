@@ -364,7 +364,7 @@ void CFCMCmds::OnDebugClipboard()
 	{
 		CClipboard oStream;
 
-		oStream.Open(CStream::WriteOnly, CF_TEXT);
+		oStream.Open(GENERIC_WRITE, CF_TEXT);
 
 		App.Doc()->m_oDB.Dump(oStream);
 
