@@ -26,17 +26,17 @@ CFixtures::CFixtures(CMDB& oDB)
 	: CTable(oDB, "Fixtures")
 {
 	// Create the table schema.
-	AddColumn("ID",            MDT_IDENTITY,	0);				// ID
-	AddColumn("Date",          MDT_DATE,		0);				// DATE
-	AddColumn("Type",          MDT_FXDSTR,		TYPE_LEN);		// TYPE
-	AddColumn("HomeTeam",      MDT_FXDSTR,		TEAM_LEN);		// HOME_TEAM
-	AddColumn("AwayTeam",      MDT_FXDSTR,		TEAM_LEN);		// AWAY_TEAM
-	AddColumn("Referee",       MDT_FXDSTR,		NAME_LEN);		// REFEREE
-	AddColumn("Result",        MDT_FXDSTR,		RESULT_LEN);	// RESULT
-	AddColumn("PitchCfmd",     MDT_BOOL,		0);				// PITCH_CFMD
-	AddColumn("OpponentsCfmd", MDT_BOOL,		0);				// OPPONENTS_CFMD
-	AddColumn("RefereeCfmd",   MDT_BOOL,		0);				// REFEREE_CFMD
-	AddColumn("Notes",         MDT_FXDSTR,		NOTES_LEN);		// NOTES
+	AddColumn("ID",            MDCT_IDENTITY,	0,          CColumn::IDENTITY);		// ID
+	AddColumn("Date",          MDCT_DATETIME,	0,          CColumn::DEFAULTS);		// DATE
+	AddColumn("Type",          MDCT_FXDSTR,		TYPE_LEN,   CColumn::DEFAULTS);		// TYPE
+	AddColumn("HomeTeam",      MDCT_FXDSTR,		TEAM_LEN,   CColumn::DEFAULTS);		// HOME_TEAM
+	AddColumn("AwayTeam",      MDCT_FXDSTR,		TEAM_LEN,   CColumn::DEFAULTS);		// AWAY_TEAM
+	AddColumn("Referee",       MDCT_FXDSTR,		NAME_LEN,   CColumn::DEFAULTS);		// REFEREE
+	AddColumn("Result",        MDCT_FXDSTR,		RESULT_LEN, CColumn::DEFAULTS);		// RESULT
+	AddColumn("PitchCfmd",     MDCT_BOOL,		0,          CColumn::DEFAULTS);		// PITCH_CFMD
+	AddColumn("OpponentsCfmd", MDCT_BOOL,		0,          CColumn::DEFAULTS);		// OPPONENTS_CFMD
+	AddColumn("RefereeCfmd",   MDCT_BOOL,		0,          CColumn::DEFAULTS);		// REFEREE_CFMD
+	AddColumn("Notes",         MDCT_VARSTR,		NOTES_LEN,  CColumn::DEFAULTS);		// NOTES
 
 	// Add the indexes.
 }

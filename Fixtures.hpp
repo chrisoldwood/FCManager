@@ -55,7 +55,16 @@ public:
 		TEAM_LEN   =  50,
 		NAME_LEN   =  50,
 		RESULT_LEN =  30,
-		NOTES_LEN  = 100,
+		NOTES_LEN  = 512,
+	};
+
+	//
+	// Persistance data.
+	//
+	enum
+	{
+		FILE_FORMAT  = 0x584D4346,		// "FCMX"
+		FILE_VERSION = 0x00000A01,		// Alpha #1
 	};
 
 	//
