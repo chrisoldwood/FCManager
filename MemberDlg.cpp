@@ -35,7 +35,8 @@ static char* astrPositions[MAX_POSITIONS+1] =
 *******************************************************************************
 */
 
-CMemberDlg::CMemberDlg(CRow& oMember, bool bEditing) : CDialog(IDD_MEMBER)
+CMemberDlg::CMemberDlg(CRow& oMember, bool bEditing)
+	: CDialog(IDD_MEMBER)
 	, m_oMember(oMember)
 	, m_bEditing(bEditing)
 {
@@ -134,7 +135,7 @@ bool CMemberDlg::OnOk()
 								   & CWhereNotEqual(CMembers::ID,   m_oMember[CMembers::ID]));
 
 	// Member already exists?
-	if (oRS.Size() > 0)
+	if (oRS.Count() > 0)
 	{
 		AlertMsg("A member with that name already exists");
 		return false;
