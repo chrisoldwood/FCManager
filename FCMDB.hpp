@@ -36,6 +36,7 @@ public:
 		DETAILS,
 		MEMBERS,
 		FIXTURES,
+		BALSHEET_TYPES,
 		BALSHEET,
 		SUBS,
 		EXPENSE_TYPES,
@@ -61,6 +62,7 @@ public:
 	CClubDetails	m_oDetails;			// The clubs basic details.
 	CMembers		m_oMembers;			// The table of club members.
 	CFixtures		m_oFixtures;		// The table of club fixtures.
+	CBalShtTypes 	m_oBalShtTypes;		// The table of the balance sheet item types.
 	CBalSheet		m_oBalSheet;		// The table of the balance sheet.
 	CSubs			m_oSubs;			// The table of members subs.
 	CExpenseTypes	m_oExpenseTypes;	// The table of expense types.
