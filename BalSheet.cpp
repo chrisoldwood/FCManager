@@ -40,7 +40,10 @@ CBalSheet::CBalSheet(CMDB& oDB)
 	// Add the "TOTAL" row.
 	CRow& oRow = CreateRow();
 
-	oRow[NAME] = "TOTALS";
+	oRow[NAME]        = "TOTAL";
+	oRow[DATE]        = CDate::Max();
+	oRow[CREDIT_TYPE] = FIXED;
+	oRow[DEBIT_TYPE]  = FIXED;
 
 	InsertRow(oRow, false);
 }
