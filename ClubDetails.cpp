@@ -26,7 +26,9 @@ CClubDetails::CClubDetails(CMDB& oDB)
 	: CTable(oDB, "ClubDetails")
 {
 	// Create the table schema.
-	AddColumn("Name", MDCT_FXDSTR, NAME_LEN, CColumn::DEFAULTS);	// NAME
+	AddColumn("Name",   MDCT_FXDSTR, NAME_LEN,   CColumn::DEFAULTS);
+	AddColumn("Season", MDCT_FXDSTR, SEASON_LEN, CColumn::DEFAULTS);
+	AddColumn("League", MDCT_FXDSTR, LEAGUE_LEN, CColumn::DEFAULTS);
 
 	// Add the single row.
 	CRow& oRow = CreateRow();
@@ -66,7 +68,9 @@ CRow& CClubDetails::CreateRow()
 {
 	CRow& oRow = CTable::CreateRow();
 
-	oRow[NAME] = "Your Club F.C.";
+	oRow[NAME]   = "Your Club F.C.";
+	oRow[SEASON] = "2000/01";
+	oRow[LEAGUE] = "Your League";
 	
 	return oRow;
 }

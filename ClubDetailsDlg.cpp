@@ -27,8 +27,9 @@ CClubDetailsDlg::CClubDetailsDlg(CRow& oDetails) : CDialog(IDD_CLUB_DETAILS)
 	, m_oDetails(oDetails)
 {
 	DEFINE_CTRL_TABLE
-		CTRL(IDC_CLUB_NAME,	&m_ebName)
-		CTRL(IDC_SEASON,	&m_ebSeason)
+		CTRL(IDC_CLUB_NAME,		&m_ebName)
+		CTRL(IDC_SEASON,		&m_ebSeason)
+		CTRL(IDC_LEAGUE_NAME,	&m_ebLeague)
 	END_CTRL_TABLE
 }
 
@@ -50,8 +51,11 @@ void CClubDetailsDlg::OnInitDialog()
 	m_ebName.Text(m_oDetails[CClubDetails::NAME]);
 	m_ebName.TextLimit(CClubDetails::NAME_LEN);
 
-	m_ebSeason.Text("00/01");
-	m_ebSeason.TextLimit(10);
+	m_ebSeason.Text(m_oDetails[CClubDetails::SEASON]);
+	m_ebSeason.TextLimit(CClubDetails::SEASON_LEN);
+
+	m_ebLeague.Text(m_oDetails[CClubDetails::LEAGUE]);
+	m_ebLeague.TextLimit(CClubDetails::LEAGUE_LEN);
 }
 
 /******************************************************************************
@@ -69,7 +73,9 @@ void CClubDetailsDlg::OnInitDialog()
 bool CClubDetailsDlg::OnOk()
 {
 	// Fetch data from the controls.
-	m_oDetails[CClubDetails::NAME] = m_ebName.Text();
+	m_oDetails[CClubDetails::NAME]   = m_ebName.Text();
+	m_oDetails[CClubDetails::SEASON] = m_ebSeason.Text();
+	m_oDetails[CClubDetails::LEAGUE] = m_ebLeague.Text();
 
 	return true;
 }

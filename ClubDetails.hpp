@@ -34,7 +34,9 @@ public:
 	//
 	enum
 	{
-		NAME = 0,
+		NAME,
+		SEASON,
+		LEAGUE,
 	};
 
 	//
@@ -42,7 +44,9 @@ public:
 	//
 	enum
 	{
-		NAME_LEN = 50,
+		NAME_LEN   = 50,
+		SEASON_LEN = 10,
+		LEAGUE_LEN = 50,
 	};
 
 	//

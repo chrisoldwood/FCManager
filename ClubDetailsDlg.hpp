@@ -38,6 +38,7 @@ protected:
 	//
 	CEditBox	m_ebName;
 	CEditBox	m_ebSeason;
+	CEditBox	m_ebLeague;
 	
 	//
 	// Message handlers.
