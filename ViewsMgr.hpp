@@ -24,8 +24,8 @@ enum DataView
 	NO_VIEW        = -1,	// No data view.
 	MEMBERS_VIEW   = 0,		// Club members.
 	FIXTURES_VIEW  = 1,		// Team fixtures.
-	SUBS_VIEW      = 2,		// Members subs.
-	BALANCE_VIEW   = 3,		// Balance sheet.
+	BALANCE_VIEW   = 2,		// Balance sheet.
+	ACCOUNTS_VIEW  = 3,		// Accounts.
 	TEAM_SELS_VIEW = 4,		// Team selections.
 	OPPONENTS_VIEW = 5,		// League opponents.
 	REFEREES_VIEW  = 6,		// League referees
@@ -70,8 +70,8 @@ protected:
 	CViewDlg*		m_pDataViews[NUM_DATAVIEWS];	// Array of views.
 	CMembersView	m_oMembersView;					// Members data view.
 	CFixturesView	m_oFixturesView;				// Fixtures data view.
-	CSubsView		m_oSubsView;					// Members subs view.
 	CBalSheetView	m_oBalSheetView;				// Balance sheet data view.
+	CAccountsView	m_oAccountsView;				// Accounts view.
 	CTeamSelsView	m_oTeamSelsView;				// Team selector data view.
 	COpponentsView	m_oOpponentsView;				// Opponents data view.
 	CRefereesView	m_oRefereesView;				// Referees data view.
