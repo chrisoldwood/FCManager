@@ -178,7 +178,7 @@ void CTeamSelDlg::OnInitDialog()
 
 bool CTeamSelDlg::OnOk()
 {
-	m_oRow[CTeamSels::DATE]      = m_dtpDate.GetDate();
+	m_oRow[CTeamSels::DATE]      = m_dtpDate.GetDate().GetDateInSecs();
 	m_oRow[CTeamSels::OPPONENTS] = m_cbOpponent.Text();
 	m_oRow[CTeamSels::NOTES]     = m_oNotesDlg.m_strNotes;
 

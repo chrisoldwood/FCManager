@@ -74,7 +74,7 @@ CRow& CFixtures::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID            ] = 0;
-	oRow[DATE          ] = CDate::Current();
+	oRow[DATE          ] = CDate::Current().GetDateInSecs();
 	oRow[TYPE          ] = "";
 	oRow[HOME_TEAM     ] = "";
 	oRow[AWAY_TEAM     ] = "";

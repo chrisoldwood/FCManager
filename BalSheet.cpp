@@ -41,7 +41,7 @@ CBalSheet::CBalSheet(CMDB& oDB, CBalShtTypes& oTypes)
 	CRow& oRow = CreateRow();
 
 	oRow[NAME]        = "TOTAL";
-	oRow[DATE]        = CDate::Max();
+	oRow[DATE]        = CDate::Max().GetDateInSecs();
 	oRow[CREDIT_TYPE] = FIXED;
 	oRow[DEBIT_TYPE]  = FIXED;
 

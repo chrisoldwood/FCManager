@@ -108,7 +108,7 @@ bool CBalShtItemPage::OnValidate()
 bool CBalShtItemPage::OnOk()
 {
 	m_oRow[CBalSheet::NAME]    = m_strName;
-	m_oRow[CBalSheet::DATE]    = m_tDate;
+	m_oRow[CBalSheet::DATE]    = m_tDate.GetDateInSecs();
 	m_oRow[CBalSheet::TYPE_ID] = m_nTypeID;
 
 	return true;

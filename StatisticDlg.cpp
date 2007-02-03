@@ -113,7 +113,7 @@ bool CStatisticDlg::OnOk()
 	double dValue = m_ebValue.RealValue();
 
 	// Save changes.
-	m_oRow[CTmpStats::DATE]    = m_dtpDate.GetDate();
+	m_oRow[CTmpStats::DATE]    = m_dtpDate.GetDate().GetDateInSecs();
 	m_oRow[CTmpStats::TYPE_ID] = oRow[CStatTypes::ID];
 	m_oRow[CTmpStats::VALUE]   = dValue;
 	m_oRow[CTmpStats::NAME]    = oRow[CStatTypes::NAME];

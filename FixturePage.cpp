@@ -146,7 +146,7 @@ void CFixturePage::OnInitDialog()
 
 bool CFixturePage::OnOk()
 {
-	m_oRow[CFixtures::DATE]      = m_dtpDate.GetDate();
+	m_oRow[CFixtures::DATE]      = m_dtpDate.GetDate().GetDateInSecs();
 	m_oRow[CFixtures::TYPE]      = m_cbType.Text();
 	m_oRow[CFixtures::HOME_TEAM] = m_cbHomeTeam.Text();
 	m_oRow[CFixtures::AWAY_TEAM] = m_cbAwayTeam.Text();
