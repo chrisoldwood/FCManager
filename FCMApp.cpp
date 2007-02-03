@@ -88,8 +88,7 @@ bool CFCMApp::OnOpen()
 	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
 
 	// Set the .INI file path.
-	m_oIniFile.m_strPath  = CPath::ApplicationDir();
-	m_oIniFile.m_strPath += "FCManager.ini";
+	m_oIniFile.m_strPath = CPath::ApplicationDir() / "FCManager.ini";
 
 	// Load the MRUList and default settings.
 	m_MRUList.Load(m_oIniFile);
