@@ -47,7 +47,7 @@ const char* CFCMApp::VERSION = "v1.0 Alpha #3";
 */
 
 CFCMApp::CFCMApp()
-	: CSDIApp(m_AppWnd, m_AppCmds)
+	: CSDIApp(m_AppWnd, m_AppCmds, ID_FILE_MRU_4-ID_FILE_MRU_1+1)
 {
 }
 
