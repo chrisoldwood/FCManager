@@ -19,8 +19,9 @@
 *******************************************************************************
 */
 
-#include "wcl.hpp"		// Windows C++ library core headers.
-#include "MDBL.hpp"		// Memory Database library core headers.
+#include <Core/Common.hpp>		// Core library common headers.
+#include <WCL/wcl.hpp>			// Windows C++ library.
+#include <MDBL/mdbl.hpp>		// Memory Database library.
 
 /******************************************************************************
 **
