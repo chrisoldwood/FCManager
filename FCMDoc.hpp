@@ -79,8 +79,8 @@ public:
 	//
 	virtual bool Modified() const;
 
-	virtual void operator <<(CStream& rStream);
-	virtual void operator >>(CStream& rStream);
+	virtual void Read (WCL::IInputStream&  rStream);
+	virtual void Write(WCL::IOutputStream& rStream);
 
 	//
 	// Members.

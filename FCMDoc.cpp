@@ -56,9 +56,9 @@ CFCMDoc::~CFCMDoc()
 }
 
 /******************************************************************************
-** Method:		operator <<()
+** Method:		Read()
 **
-** Description:	Operator to read the data from a stream.
+** Description:	Read the data from a stream.
 **
 ** Parameters:	rStream		The stream to read from.
 **
@@ -67,7 +67,7 @@ CFCMDoc::~CFCMDoc()
 *******************************************************************************
 */
 
-void CFCMDoc::operator <<(CStream& rStream)
+void CFCMDoc::Read(WCL::IInputStream& rStream)
 {
 	uint32	iFormat;
 	uint16  iVersion;
@@ -88,9 +88,9 @@ void CFCMDoc::operator <<(CStream& rStream)
 }
 
 /******************************************************************************
-** Method:		operator >>()
+** Method:		Write()
 **
-** Description:	Operator to write the data to a stream.
+** Description:	Write the data to a stream.
 **
 ** Parameters:	rStream		The stream to write to.
 **
@@ -99,7 +99,7 @@ void CFCMDoc::operator <<(CStream& rStream)
 *******************************************************************************
 */
 
-void CFCMDoc::operator >>(CStream& rStream)
+void CFCMDoc::Write(WCL::IOutputStream& rStream)
 {
 	uint32	iFormat  = FILE_FORMAT;
 	uint16  iVersion = FILE_VERSION;
