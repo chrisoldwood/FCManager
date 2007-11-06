@@ -12,6 +12,18 @@
 #ifndef FCMAPP_HPP
 #define FCMAPP_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/SDIApp.hpp>
+#include "FCMMainWnd.hpp"
+#include "FCMCmds.hpp"
+#include "FCMView.hpp"
+#include "FCMDoc.hpp"
+#include <WCL/IniFile.hpp>
+#include <WCL/Printer.hpp>
+
 /******************************************************************************
 ** 
 ** The application class.

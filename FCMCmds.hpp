@@ -12,6 +12,13 @@
 #ifndef FCMCMDS_HPP
 #define FCMCMDS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/SDICmds.hpp>
+#include "ViewsMgr.hpp"
+
 /******************************************************************************
 ** 
 ** Application command controller.

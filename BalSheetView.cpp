@@ -8,9 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "BalSheetView.hpp"
 #include "BalShtItemDlg.hpp"
 #include "ExpenseTypesDlg.hpp"
+#include "FCMApp.hpp"
+#include <MDBL/ValueSet.hpp>
 
 // The list view columns.
 GridColumn CBalSheetView::Columns[NUM_COLUMNS] =

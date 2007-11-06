@@ -12,6 +12,11 @@
 #ifndef OPPONENTDLG_HPP
 #define OPPONENTDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "OpponentPage.hpp"
 #include "SecNamePage.hpp"
 #include "StatsPage.hpp"

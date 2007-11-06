@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "AccountsView.hpp"
 #include "AccountDlg.hpp"
+#include "FCMApp.hpp"
 
 // The list view columns.
 GridColumn CAccountsView::Columns[NUM_COLUMNS] =

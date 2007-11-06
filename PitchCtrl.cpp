@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "PitchCtrl.hpp"
+#include <WCL/DC.hpp>
+#include "FCMApp.hpp"
 
 //
 // Ratios (%) for sizing the various pitch markings.

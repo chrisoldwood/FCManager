@@ -8,9 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "StatsPage.hpp"
 #include "StatisticDlg.hpp"
+#include "FCMDB.hpp"
 
 // The list view columns.
 CTableGrid::Column CStatsPage::Columns[NUM_COLUMNS] =

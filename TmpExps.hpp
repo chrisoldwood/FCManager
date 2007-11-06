@@ -12,6 +12,15 @@
 #ifndef TMPEXPS_HPP
 #define TMPEXPS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
+// Forward declarations.
+class CExpenseTypes;
+
 /******************************************************************************
 ** 
 ** This is a temporay table for holding the expenses during editing.

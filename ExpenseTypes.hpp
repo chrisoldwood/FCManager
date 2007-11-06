@@ -12,6 +12,12 @@
 #ifndef EXPENSETYPES_HPP
 #define EXPENSETYPES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
 /******************************************************************************
 ** 
 ** This table is used to store the type of expenses defined.

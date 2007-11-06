@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "TmpSubs.hpp"
+#include "Members.hpp"
+#include "BalSheet.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

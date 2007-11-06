@@ -12,6 +12,17 @@
 #ifndef PITCHCTRL_HPP
 #define PITCHCTRL_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CtrlWnd.hpp>
+#include "FCMDoc.hpp"
+#include <WCL/Brush.hpp>
+
+// Forward declarations.
+class CMembers;
+
 /******************************************************************************
 ** 
 ** This custom control is used to display a pitch and players.

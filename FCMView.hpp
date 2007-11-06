@@ -12,6 +12,13 @@
 #ifndef FCMVIEW_HPP
 #define FCMVIEW_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/View.hpp>
+#include "ViewsMgr.hpp"
+
 /******************************************************************************
 ** 
 ** This is the main view class.

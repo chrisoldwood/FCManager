@@ -12,6 +12,13 @@
 #ifndef ACCOUNTSVIEW_HPP
 #define ACCOUNTSVIEW_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "GridViewDlg.hpp"
+
 /******************************************************************************
 ** 
 ** This is the data view used to display and edit the clubs accounts.

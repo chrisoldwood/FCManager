@@ -8,9 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "MembersView.hpp"
 #include "MemberDlg.hpp"
 #include "StatTypesDlg.hpp"
+#include "FCMApp.hpp"
+#include <MDBL/ValueSet.hpp>
 
 // The list view columns.
 GridColumn CMembersView::Columns[NUM_COLUMNS] =

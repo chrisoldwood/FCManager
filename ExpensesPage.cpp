@@ -8,9 +8,14 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "ExpensesPage.hpp"
 #include "ExpenseItemDlg.hpp"
+#include "BalSheet.hpp"
+#include "TmpExps.hpp"
+#include "ExpenseTypes.hpp"
+#include "Expenses.hpp"
+#include "FCMApp.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

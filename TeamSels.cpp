@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "TeamSels.hpp"
+#include "Members.hpp"
+#include <time.h>
 
 /******************************************************************************
 ** Method:		Constructor.

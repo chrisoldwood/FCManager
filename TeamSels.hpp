@@ -12,6 +12,15 @@
 #ifndef TEAMSELS_HPP
 #define TEAMSELS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
+// Forward declarations.
+class CMembers;
+
 /******************************************************************************
 ** 
 ** The table used to store the team selections.

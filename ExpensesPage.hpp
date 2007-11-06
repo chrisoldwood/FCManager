@@ -12,6 +12,16 @@
 #ifndef EXPENSESPAGE_HPP
 #define EXPENSESPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CTmpExps;
+class CExpenseTypes;
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit balance sheet item expense details.

@@ -12,6 +12,16 @@
 #ifndef FCMMAINWND_HPP
 #define FCMMAINWND_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/SDIFrame.hpp>
+#include <WCL/FrameMenu.hpp>
+#include "FCMToolBar.hpp"
+#include <WCL/StatusBar.hpp>
+#include <WCL/Accel.hpp>
+
 /******************************************************************************
 **
 ** This is the the applications main window.

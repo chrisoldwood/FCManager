@@ -12,6 +12,13 @@
 #ifndef TEAMSELSVIEW_HPP
 #define TEAMSELSVIEW_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "GridViewDlg.hpp"
+
 /******************************************************************************
 ** 
 ** This is the data view used to display and edit team selections.

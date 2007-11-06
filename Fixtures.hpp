@@ -12,6 +12,12 @@
 #ifndef FIXTURES_HPP
 #define FIXTURES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
 /******************************************************************************
 ** 
 ** The table used to store the clubs fixtures.

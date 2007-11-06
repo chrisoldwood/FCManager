@@ -12,6 +12,12 @@
 #ifndef BALSHTTYPES_HPP
 #define BALSHTTYPES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
 /******************************************************************************
 ** 
 ** This is the table used to store the balance sheet item types.

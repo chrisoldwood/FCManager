@@ -8,7 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "Members.hpp"
+#include <MDBL/ResultSet.hpp>
+#include <MDBL/WhereCmp.hpp>
+#include "Subs.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

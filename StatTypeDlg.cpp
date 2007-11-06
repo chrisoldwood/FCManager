@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "StatTypeDlg.hpp"
+#include "StatTypes.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

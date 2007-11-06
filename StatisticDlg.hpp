@@ -12,6 +12,15 @@
 #ifndef STATISTICDLG_HPP
 #define STATISTICDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declaration.
+class CStatTypes;
+
 /******************************************************************************
 ** 
 ** This dialog is used to add/edit a members statistics.

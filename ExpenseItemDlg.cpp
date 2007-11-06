@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "ExpenseItemDlg.hpp"
+#include "ExpenseTypes.hpp"
+#include "Expenses.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

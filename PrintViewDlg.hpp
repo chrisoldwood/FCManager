@@ -12,6 +12,16 @@
 #ifndef PRINTVIEWDLG_HPP
 #define PRINTVIEWDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include <Legacy/TArray.hpp>
+
+// Forward declarations.
+struct GridColumn;
+
 /******************************************************************************
 ** 
 ** This is used when printing a view.

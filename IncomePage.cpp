@@ -8,9 +8,14 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "IncomePage.hpp"
 #include "MemberSubsDlg.hpp"
+#include "BalSheet.hpp"
+#include "TmpSubs.hpp"
+#include "Subs.hpp"
+#include "Members.hpp"
+#include "FCMApp.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

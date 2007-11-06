@@ -8,7 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "ClubDetails.hpp"
+#include <WCL/Date.hpp>
 #include <stdio.h>
 
 /******************************************************************************

@@ -12,6 +12,12 @@
 #ifndef ACCOUNTPAGE_HPP
 #define ACCOUNTPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit an accounts details.

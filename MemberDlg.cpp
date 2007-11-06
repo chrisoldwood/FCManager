@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "MemberDlg.hpp"
+#include "Members.hpp"
+#include "FCMDB.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

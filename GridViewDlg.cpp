@@ -8,8 +8,13 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "GridViewDlg.hpp"
 #include "PrintViewDlg.hpp"
+#include "FCMApp.hpp"
+#include <WCL/PrinterDC.hpp>
+#include <WCL/File.hpp>
+#include <WCL/FileException.hpp>
 
 // The file extension for importing/exporting.
 static char szExts[] = {	"Data Files (*.dat)\0*.dat\0"

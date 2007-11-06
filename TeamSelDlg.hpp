@@ -12,6 +12,14 @@
 #ifndef TEAMSELDLG_HPP
 #define TEAMSELDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "PitchCtrl.hpp"
+#include "NotesDlg.hpp"
+
 /******************************************************************************
 ** 
 ** This dialog is used to edit the team selection.

@@ -8,7 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "FCMDoc.hpp"
+#include <WCL/IInputStream.hpp>
+#include <WCL/IOutputStream.hpp>
+#include <WCL/StreamException.hpp>
 
 /******************************************************************************
 **

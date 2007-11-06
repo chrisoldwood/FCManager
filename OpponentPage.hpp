@@ -12,6 +12,12 @@
 #ifndef OPPONENTPAGE_HPP
 #define OPPONENTPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit an opponents club details.

@@ -8,7 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "BalSheet.hpp"
+#include "BalShtTypes.hpp"
+#include <time.h>
+#include <WCL/Date.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

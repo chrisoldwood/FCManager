@@ -12,6 +12,14 @@
 #ifndef MEMBERSVIEW_HPP
 #define MEMBERSVIEW_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "GridViewDlg.hpp"
+#include <Legacy/TArray.hpp>
+
 /******************************************************************************
 ** 
 ** This is the data view used to display the club members.

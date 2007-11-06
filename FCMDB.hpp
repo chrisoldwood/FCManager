@@ -12,6 +12,33 @@
 #ifndef FCMDB_HPP
 #define FCMDB_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/MDB.hpp>
+#include "ClubDetails.hpp"		
+#include "Members.hpp"
+#include "Fixtures.hpp"
+#include "BalShtTypes.hpp"
+#include "BalSheet.hpp"
+#include "Subs.hpp"
+#include "ExpenseTypes.hpp"
+#include "Expenses.hpp"
+#include "Accounts.hpp"
+#include "AcctTrans.hpp"
+#include "TeamSels.hpp"
+#include "Opponents.hpp"
+#include "Referees.hpp"
+#include "MemStatTypes.hpp"
+#include "MemStats.hpp"
+#include "FixStatTypes.hpp"
+#include "FixStats.hpp"
+#include "OppStatTypes.hpp"
+#include "OppStats.hpp"
+#include "RefStatTypes.hpp"
+#include "RefStats.hpp"
+
 /******************************************************************************
 ** 
 ** This is the database for the application.

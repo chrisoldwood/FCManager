@@ -12,6 +12,10 @@
 #ifndef OPPSTATTYPES_HPP
 #define OPPSTATTYPES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 /******************************************************************************
 ** 
 ** This is the table used to store all opponents statistic types.

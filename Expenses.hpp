@@ -12,6 +12,16 @@
 #ifndef EXPENSES_HPP
 #define EXPENSES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
+// Forward declarations.
+class CBalSheet;
+class CExpenseTypes;
+
 /******************************************************************************
 ** 
 ** This table is used to store the expenses for a balance sheet item.

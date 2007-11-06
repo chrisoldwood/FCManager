@@ -8,7 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "Fixtures.hpp"
+#include <WCL/Date.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

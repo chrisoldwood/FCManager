@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "RefereeDlg.hpp"
+#include "FCMDB.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

@@ -12,6 +12,16 @@
 #ifndef MEMBERSUBSDLG_HPP
 #define MEMBERSUBSDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CMembers;
+template<typename T> class TArray;
+
 /******************************************************************************
 ** 
 ** This dialog is used to add/edit a members subs.

@@ -12,6 +12,24 @@
 #ifndef VIEWSMGR_HPP
 #define VIEWSMGR_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/SplitWnd.hpp>
+#include "MembersView.hpp"
+#include "FixturesView.hpp"
+#include "BalSheetView.hpp"
+#include "AccountsView.hpp"
+#include "TeamSelsView.hpp"
+#include "OpponentsView.hpp"
+#include "RefereesView.hpp"
+#include "ViewsBar.hpp"
+#include <WCL/FrameMenu.hpp>
+
+// Forward declarations.
+class CViewDlg;
+
 /******************************************************************************
 **
 ** The list of data views.

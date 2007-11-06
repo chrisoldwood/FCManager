@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "TeamSelsView.hpp"
 #include "TeamSelDlg.hpp"
+#include "FCMApp.hpp"
 
 // The list view columns.
 GridColumn CTeamSelsView::Columns[NUM_COLUMNS] =

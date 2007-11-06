@@ -12,6 +12,12 @@
 #ifndef MEMSTATUSPAGE_HPP
 #define MEMSTATUSPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** This is the property page used to display the members status.

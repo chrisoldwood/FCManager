@@ -12,6 +12,12 @@
 #ifndef MEMSTATTYPES_HPP
 #define MEMSTATTYPES_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include "StatTypes.hpp"
+
 /******************************************************************************
 ** 
 ** This is the table used to store all member statistic types.

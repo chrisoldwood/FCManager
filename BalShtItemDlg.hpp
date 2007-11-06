@@ -12,10 +12,17 @@
 #ifndef BALSHTITEMDLG_HPP
 #define BALSHTITEMDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "BalShtItemPage.hpp"
 #include "IncomePage.hpp"
 #include "ExpensesPage.hpp"
 #include "NotesPage.hpp"
+#include "TmpSubs.hpp"
+#include "TmpExps.hpp"
 
 /******************************************************************************
 ** 

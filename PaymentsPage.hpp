@@ -12,6 +12,14 @@
 #ifndef PAYMENTSPAGE_HPP
 #define PAYMENTSPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "TableGrid.hpp"
+#include "TmpSubs.hpp"
+
 /******************************************************************************
 ** 
 ** This is the property page used to display the members payments.

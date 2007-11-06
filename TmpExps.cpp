@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "TmpExps.hpp"
+#include "ExpenseTypes.hpp"
+#include "BalSheet.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

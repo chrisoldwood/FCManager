@@ -12,6 +12,12 @@
 #ifndef STATTYPEDLG_HPP
 #define STATTYPEDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** This dialog is used to add/edit a statistic type.

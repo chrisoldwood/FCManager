@@ -12,6 +12,13 @@
 #ifndef FCMTOOLBAR_HPP
 #define FCMTOOLBAR_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/ToolBar.hpp>
+#include <WCL/CmdBtn.hpp>
+
 /******************************************************************************
 ** 
 ** This is the applications toolbar.

@@ -12,6 +12,18 @@
 #ifndef STATSPAGE_HPP
 #define STATSPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "TmpStats.hpp"
+#include "TableGrid.hpp"
+
+// Forward declarations.
+class CStatTypes;
+class CStats;
+
 /******************************************************************************
 ** 
 ** This is base class for property pages used to display stats.

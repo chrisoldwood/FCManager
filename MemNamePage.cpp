@@ -8,8 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "MemNamePage.hpp"
+#include "Members.hpp"
+#include <MDBL/ResultSet.hpp>
+#include <MDBL/WhereCmp.hpp>
+#include <MDBL/WhereExp.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

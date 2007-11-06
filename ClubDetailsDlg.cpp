@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "ClubDetailsDlg.hpp"
+#include "ClubDetails.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

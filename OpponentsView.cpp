@@ -8,9 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "OpponentsView.hpp"
 #include "OpponentDlg.hpp"
 #include "StatTypesDlg.hpp"
+#include "FCMApp.hpp"
+#include <MDBL/ValueSet.hpp>
 
 // The list view columns.
 GridColumn COpponentsView::Columns[NUM_COLUMNS] =

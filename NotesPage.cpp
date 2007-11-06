@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "NotesPage.hpp"
+#include <MDBL/Row.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

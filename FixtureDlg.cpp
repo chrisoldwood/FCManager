@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "FixtureDlg.hpp"
+#include "FCMDB.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

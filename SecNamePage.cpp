@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "SecNamePage.hpp"
+#include "Opponents.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

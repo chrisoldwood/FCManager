@@ -8,7 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "FCMView.hpp"
+#include "FCMDoc.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "TableGrid.hpp"
+#include <MDBL/Table.hpp>
+#include <MDBL/ResultSet.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "AccountPage.hpp"
+#include "Accounts.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

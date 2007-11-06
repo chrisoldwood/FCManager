@@ -12,6 +12,10 @@
 #ifndef FIXSTATS_HPP
 #define FIXSTATS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 /******************************************************************************
 ** 
 ** This is the table used to store all fixture statistics.

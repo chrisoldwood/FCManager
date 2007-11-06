@@ -8,9 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "RefereesView.hpp"
 #include "RefereeDlg.hpp"
 #include "StatTypesDlg.hpp"
+#include "FCMApp.hpp"
+#include <MDBL/ValueSet.hpp>
 
 // The list view columns.
 GridColumn CRefereesView::Columns[NUM_COLUMNS] =

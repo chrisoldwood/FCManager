@@ -12,6 +12,12 @@
 #ifndef EXPENSETYPEDLG_HPP
 #define EXPENSETYPEDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** This dialog is used to add/edit an expense type.

@@ -12,6 +12,10 @@
 #ifndef REFSTATS_HPP
 #define REFSTATS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 /******************************************************************************
 ** 
 ** This is the table used to store all referee statistics.

@@ -8,8 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "StatisticDlg.hpp"
+#include "StatTypes.hpp"
+#include "TmpStats.hpp"
+#include <time.h>
 
 /******************************************************************************
 ** Method:		Constructor.

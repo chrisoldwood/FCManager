@@ -12,6 +12,14 @@
 #ifndef MEMSTATS_HPP
 #define MEMSTATS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include "Stats.hpp"
+#include <MDBL/WhereCmp.hpp>
+#include <MDBL/ResultSet.hpp>
+
 /******************************************************************************
 ** 
 ** This is the table used to store all members statistics.

@@ -8,9 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "ExpenseTypesDlg.hpp"
 #include "ExpenseTypeDlg.hpp"
+#include "ExpenseTypes.hpp"
+#include <MDBL/ValueSet.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

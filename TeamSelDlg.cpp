@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "TeamSelDlg.hpp"
+#include "FCMApp.hpp"
 
 // List of teams.
 static char* astrTeams[MAX_CLUB_TEAMS+1] =

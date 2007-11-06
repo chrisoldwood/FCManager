@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "OpponentDlg.hpp"
+#include "FCMDB.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

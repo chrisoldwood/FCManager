@@ -12,6 +12,13 @@
 #ifndef TMPSTATS_HPP
 #define TMPSTATS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+#include "StatTypes.hpp"
+
 /******************************************************************************
 ** 
 ** This is the table used to temporarily store the statistics for an item.

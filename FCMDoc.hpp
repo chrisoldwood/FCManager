@@ -12,6 +12,13 @@
 #ifndef FCMDOC_HPP
 #define FCMDOC_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/SDIDoc.hpp>
+#include "FCMDB.hpp"
+
 // Teams per club.
 enum ClubTeam
 {

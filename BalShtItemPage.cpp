@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "BalShtItemPage.hpp"
+#include "BalSheet.hpp"
+#include "BalShtTypes.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

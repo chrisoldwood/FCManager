@@ -8,9 +8,14 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "FCMCmds.hpp"
+#include "FCMApp.hpp"
 #include "AboutDlg.hpp"
 #include "ClubDetailsDlg.hpp"
+#include <WCL/Clipboard.hpp>
+#include <WCL/StreamException.hpp>
+#include <WCL/File.hpp>
 
 // The cmd ID range of the views.
 const int ID_VIEW_FIRST = ID_VIEW_MEMBERS;

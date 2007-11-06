@@ -8,7 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "ViewsBar.hpp"
+#include "FCMApp.hpp"
+#include <WCL/ScreenDC.hpp>
 
 // The number of views.
 const int NUM_VIEWS = 7;

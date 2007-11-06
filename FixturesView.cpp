@@ -8,9 +8,13 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "FixturesView.hpp"
 #include "FixtureDlg.hpp"
 #include "StatTypesDlg.hpp"
+#include "FCMApp.hpp"
+#include <time.h>
+#include <MDBL/ValueSet.hpp>
 
 // The list view columns.
 GridColumn CFixturesView::Columns[NUM_COLUMNS] =

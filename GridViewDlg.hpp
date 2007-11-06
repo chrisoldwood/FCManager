@@ -12,6 +12,13 @@
 #ifndef GRIDVIEWDLG_HPP
 #define GRIDVIEWDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "ViewDlg.hpp"
+
 /******************************************************************************
 ** 
 ** The structure used to hold the column definitions.

@@ -12,6 +12,12 @@
 #ifndef VIEWDLG_HPP
 #define VIEWDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/Dialog.hpp>
+
 /******************************************************************************
 ** 
 ** This is the base class for all data view dialogs.

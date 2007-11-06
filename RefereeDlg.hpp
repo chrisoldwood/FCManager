@@ -12,6 +12,11 @@
 #ifndef REFEREEDLG_HPP
 #define REFEREEDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "RefNamePage.hpp"
 #include "StatsPage.hpp"
 #include "NotesPage.hpp"

@@ -12,6 +12,11 @@
 #ifndef ACCOUNTDLG_HPP
 #define ACCOUNTDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "BalShtItemPage.hpp"
 #include "AccountPage.hpp"
 #include "NotesPage.hpp"

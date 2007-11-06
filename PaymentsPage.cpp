@@ -8,8 +8,10 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "PaymentsPage.hpp"
+#include "FCMDB.hpp"
+#include "FCMApp.hpp"
 
 // The list view columns.
 CTableGrid::Column CPaymentsPage::Columns[NUM_COLUMNS] =

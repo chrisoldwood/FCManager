@@ -8,9 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "StatTypesDlg.hpp"
 #include "StatTypeDlg.hpp"
+#include "StatTypes.hpp"
+#include <MDBL/ValueSet.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

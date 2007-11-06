@@ -12,6 +12,13 @@
 #ifndef FIXTURESVIEW_HPP
 #define FIXTURESVIEW_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "GridViewDlg.hpp"
+
 /******************************************************************************
 ** 
 ** This is the data view used to display the clubs fixtures.

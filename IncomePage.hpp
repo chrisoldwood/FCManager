@@ -12,6 +12,16 @@
 #ifndef INCOMEPAGE_HPP
 #define INCOMEPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CTmpSubs;
+class CMembers;
+
 /******************************************************************************
 ** 
 ** This dialog is used to enter/edit balance sheet item income details.

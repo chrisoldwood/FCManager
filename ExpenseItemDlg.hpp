@@ -12,6 +12,15 @@
 #ifndef EXPENSEITEMDLG_HPP
 #define EXPENSEITEMDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CExpenseTypes;
+
 /******************************************************************************
 ** 
 ** This dialog is used to add/edit an expense item.

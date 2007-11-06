@@ -12,6 +12,15 @@
 #ifndef TMPSUBS_HPP
 #define TMPSUBS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
+// Forward declarations.
+class CMembers;
+
 /******************************************************************************
 ** 
 ** This class is used to temporarily store the subs for a member.
