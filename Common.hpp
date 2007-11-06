@@ -1,90 +1,36 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		APPHEADERS.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	Wrapper to include all the main application headers.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   Common.hpp
+//! \brief  Wrapper include file for the most common header files.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
-#ifndef APPHEADERS_HPP
-#define APPHEADERS_HPP
+#ifndef APP_COMMON_HPP
+#define APP_COMMON_HPP
 
-/******************************************************************************
-**
-** System headers.
-**
-*******************************************************************************
-*/
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+// Application documentation.
+//
+
+////////////////////////////////////////////////////////////////////////////////
+// System headers.
 
 #include <Core/Common.hpp>		// Core library common headers.
-#include <WCL/wcl.hpp>			// Windows C++ library.
-#include <MDBL/mdbl.hpp>		// Memory Database library.
+#include <WCL/Common.hpp>		// Windows C++ library common headers.
+#include <MDBL/Common.hpp>		// Memory Database library common headers.
 
-/******************************************************************************
-**
-** Application specific headers.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+// Application common headers.
 
 #include "Resource.h"
 
-// App data classes.
-#include "ClubDetails.hpp"
-#include "Members.hpp"
-#include "Fixtures.hpp"
-#include "BalShtTypes.hpp"
-#include "BalSheet.hpp"
-#include "Subs.hpp"
-#include "ExpenseTypes.hpp"
-#include "Expenses.hpp"
-#include "Accounts.hpp"
-#include "AcctTrans.hpp"
-#include "TeamSels.hpp"
-#include "Opponents.hpp"
-#include "Referees.hpp"
-#include "StatTypes.hpp"
-#include "Stats.hpp"
-#include "MemStatTypes.hpp"
-#include "MemStats.hpp"
-#include "FixStatTypes.hpp"
-#include "FixStats.hpp"
-#include "OppStatTypes.hpp"
-#include "OppStats.hpp"
-#include "RefStatTypes.hpp"
-#include "RefStats.hpp"
-#include "TmpSubs.hpp"
-#include "TmpExps.hpp"
-#include "TmpStats.hpp"
-#include "FCMDB.hpp"
-#include "FCMDoc.hpp"
+////////////////////////////////////////////////////////////////////////////////
+// Forward declarations for the most common types.
 
-// Common dialog/ctrl classes.
-#include "NotesDlg.hpp"
-#include "PitchCtrl.hpp"
-#include "TableGrid.hpp"
+class CFCMDoc;
+class CFCMDB;
 
-// App view classes.
-#include "ViewsBar.hpp"
-#include "ViewDlg.hpp"
-#include "GridViewDlg.hpp"
-#include "MembersView.hpp"
-#include "FixturesView.hpp"
-#include "BalSheetView.hpp"
-#include "AccountsView.hpp"
-#include "TeamSelsView.hpp"
-#include "OpponentsView.hpp"
-#include "RefereesView.hpp"
-#include "ViewsMgr.hpp"
-
-// Core app classes.
-#include "FCMCmds.hpp"
-#include "FCMToolBar.hpp"
-#include "FCMMainWnd.hpp"
-#include "FCMView.hpp"
-#include "FCMApp.hpp"
-
-#endif //APPHEADERS_HPP
+#endif // APP_COMMON_HPP
