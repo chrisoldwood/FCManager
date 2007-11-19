@@ -306,7 +306,7 @@ int COpponentsView::CompareRows(CRow& oRow1, CRow& oRow2)
 
 	pszValue1 = oRow1[COpponents::CLUB_NAME];
 	pszValue2 = oRow2[COpponents::CLUB_NAME];
-	nResult   = stricmp(pszValue1, pszValue2);
+	nResult   = _stricmp(pszValue1, pszValue2);
 
 	return nResult;
 }

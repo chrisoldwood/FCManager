@@ -303,7 +303,7 @@ int CRefereesView::CompareRows(CRow& oRow1, CRow& oRow2)
 	// First compare surnames.
 	pszValue1 = oRow1[CReferees::SURNAME];
 	pszValue2 = oRow2[CReferees::SURNAME];
-	nResult   = stricmp(pszValue1, pszValue2);
+	nResult   = _stricmp(pszValue1, pszValue2);
 
 	// Not equal?
 	if (nResult != 0)
@@ -312,7 +312,7 @@ int CRefereesView::CompareRows(CRow& oRow1, CRow& oRow2)
 	// If equal, compare forenames.
 	pszValue1 = oRow1[CReferees::FORENAME];
 	pszValue2 = oRow2[CReferees::FORENAME];
-	nResult   = stricmp(pszValue1, pszValue2);
+	nResult   = _stricmp(pszValue1, pszValue2);
 
 	return nResult;
 }

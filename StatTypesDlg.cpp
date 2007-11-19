@@ -37,10 +37,10 @@ CStatTypesDlg::CStatTypesDlg(const CString& strType, CStatTypes& oTypes, CValueS
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED,		OnAdd       )
-		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED,		OnEdit      )
-		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED,		OnDelete    )
-		CMD_CTRLMSG(IDC_TYPES,	LBN_SELCHANGE,	OnSelectType)
+		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED,		&CStatTypesDlg::OnAdd       )
+		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED,		&CStatTypesDlg::OnEdit      )
+		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED,		&CStatTypesDlg::OnDelete    )
+		CMD_CTRLMSG(IDC_TYPES,	LBN_SELCHANGE,	&CStatTypesDlg::OnSelectType)
 	END_CTRLMSG_TABLE
 }
 

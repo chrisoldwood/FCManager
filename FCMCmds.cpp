@@ -63,29 +63,29 @@ CFCMCmds::CFCMCmds()
 	// Define the command table.
 	DEFINE_CMD_TABLE
 		// File menu.
-		CMD_ENTRY(ID_FILE_NEW,							OnFileNew,				NULL,					 0)
-		CMD_ENTRY(ID_FILE_OPEN,							OnFileOpen,				NULL,					 1)
-		CMD_ENTRY(ID_FILE_SAVE,							OnFileSave,				OnUIFileSave,			 2)
-		CMD_ENTRY(ID_FILE_SAVEAS,						OnFileSaveAs,			OnUIFileSaveAs,			-1)
-		CMD_ENTRY(ID_FILE_CLOSE,						OnFileClose,			OnUIFileClose,			 1)
-		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,			OnFileOpenMRU,			OnUIFileOpenMRU,		-1)
-		CMD_ENTRY(ID_FILE_EXIT,							OnFileExit,				NULL,					-1)
+		CMD_ENTRY(ID_FILE_NEW,							&CFCMCmds::OnFileNew,			NULL,								 0)
+		CMD_ENTRY(ID_FILE_OPEN,							&CFCMCmds::OnFileOpen,			NULL,								 1)
+		CMD_ENTRY(ID_FILE_SAVE,							&CFCMCmds::OnFileSave,			&CFCMCmds::OnUIFileSave,			 2)
+		CMD_ENTRY(ID_FILE_SAVEAS,						&CFCMCmds::OnFileSaveAs,		&CFCMCmds::OnUIFileSaveAs,			-1)
+		CMD_ENTRY(ID_FILE_CLOSE,						&CFCMCmds::OnFileClose,			&CFCMCmds::OnUIFileClose,			 1)
+		CMD_RANGE(ID_MRU_FIRST,	ID_MRU_LAST,			&CFCMCmds::OnFileOpenMRU,		&CFCMCmds::OnUIFileOpenMRU,			-1)
+		CMD_ENTRY(ID_FILE_EXIT,							&CFCMCmds::OnFileExit,			NULL,								-1)
 		// View menu.
-		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,			OnViewDataView,			OnUIViewDataView,		-1)
+		CMD_RANGE(ID_VIEW_FIRST, ID_VIEW_LAST,			&CFCMCmds::OnViewDataView,		&CFCMCmds::OnUIViewDataView,		-1)
 		// Club menu.
-		CMD_ENTRY(ID_CLUB_DETAILS,						OnClubDetails,			OnUIClubDetails,		-1)
+		CMD_ENTRY(ID_CLUB_DETAILS,						&CFCMCmds::OnClubDetails,		&CFCMCmds::OnUIClubDetails,			-1)
 		// Data View menu.
-		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	OnDataViewCmd,			OnUIDataViewCmds,		-1)
+		CMD_RANGE(ID_VIEW_FIRST_CMD, ID_VIEW_LAST_CMD,	&CFCMCmds::OnDataViewCmd,		&CFCMCmds::OnUIDataViewCmds,		-1)
 		// Report menu.
-		CMD_ENTRY(ID_REPORTS_MEMBERS,					OnReportMembers,		OnUIReportMembers,		-1)
-		CMD_ENTRY(ID_REPORTS_FIXTURES,					OnReportFixtures,		OnUIReportFixtures,		-1)
-		CMD_ENTRY(ID_REPORTS_OPPONENTS,					OnReportOpponents,		OnUIReportOpponents,	-1)
-		CMD_ENTRY(ID_REPORTS_REFEREES,					OnReportReferees,		OnUIReportReferees,		-1)
+		CMD_ENTRY(ID_REPORTS_MEMBERS,					&CFCMCmds::OnReportMembers,		&CFCMCmds::OnUIReportMembers,		-1)
+		CMD_ENTRY(ID_REPORTS_FIXTURES,					&CFCMCmds::OnReportFixtures,	&CFCMCmds::OnUIReportFixtures,		-1)
+		CMD_ENTRY(ID_REPORTS_OPPONENTS,					&CFCMCmds::OnReportOpponents,	&CFCMCmds::OnUIReportOpponents,		-1)
+		CMD_ENTRY(ID_REPORTS_REFEREES,					&CFCMCmds::OnReportReferees,	&CFCMCmds::OnUIReportReferees,		-1)
 		// Debug menu.
-		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					OnDebugClipboard,		OnUIDebugClipboard,		-1)
-		CMD_ENTRY(ID_DEBUG_DBFILE,						OnDebugFile,			OnUIDebugFile,			-1)
+		CMD_ENTRY(ID_DEBUG_DBCLIPBOARD,					&CFCMCmds::OnDebugClipboard,	&CFCMCmds::OnUIDebugClipboard,		-1)
+		CMD_ENTRY(ID_DEBUG_DBFILE,						&CFCMCmds::OnDebugFile,			&CFCMCmds::OnUIDebugFile,			-1)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,						OnHelpAbout,			NULL,					10)
+		CMD_ENTRY(ID_HELP_ABOUT,						&CFCMCmds::OnHelpAbout,			NULL,								10)
 	END_CMD_TABLE
 }
 

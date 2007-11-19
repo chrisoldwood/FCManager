@@ -46,7 +46,7 @@ CViewsMgr::CViewsMgr(CFCMDoc& rDoc)
 
 	// Define the control message handlers.
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_VIEW_BAR, 	LBN_SELCHANGE,	OnSelectView)
+		CMD_CTRLMSG(IDC_VIEW_BAR, 	LBN_SELCHANGE,	&CViewsMgr::OnSelectView)
 	END_CTRLMSG_TABLE
 }
 

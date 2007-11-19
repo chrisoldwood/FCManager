@@ -40,7 +40,7 @@ CExpenseItemDlg::CExpenseItemDlg(CExpenseTypes& oTypes, CRow& oRow, bool bEditin
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_EXPENSES, LBN_SELCHANGE, OnSelectType)
+		CMD_CTRLMSG(IDC_EXPENSES, LBN_SELCHANGE, &CExpenseItemDlg::OnSelectType)
 	END_CTRLMSG_TABLE
 }
 

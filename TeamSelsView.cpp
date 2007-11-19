@@ -258,5 +258,5 @@ int CTeamSelsView::CompareRows(CRow& oRow1, CRow& oRow2)
 	time_t tValue1 = oRow1[CTeamSels::DATE];
 	time_t tValue2 = oRow2[CTeamSels::DATE];
 
-	return (tValue1 - tValue2);
+	return static_cast<int>(tValue1 - tValue2);
 }

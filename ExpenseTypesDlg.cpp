@@ -36,10 +36,10 @@ CExpenseTypesDlg::CExpenseTypesDlg(CExpenseTypes& oTypes, CValueSet& oUsed)
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED,		OnAdd       )
-		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED,		OnEdit      )
-		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED,		OnDelete    )
-		CMD_CTRLMSG(IDC_TYPES,	LBN_SELCHANGE,	OnSelectType)
+		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED,		&CExpenseTypesDlg::OnAdd       )
+		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED,		&CExpenseTypesDlg::OnEdit      )
+		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED,		&CExpenseTypesDlg::OnDelete    )
+		CMD_CTRLMSG(IDC_TYPES,	LBN_SELCHANGE,	&CExpenseTypesDlg::OnSelectType)
 	END_CTRLMSG_TABLE
 }
 

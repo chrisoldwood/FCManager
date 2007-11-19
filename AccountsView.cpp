@@ -309,5 +309,5 @@ int CAccountsView::CompareRows(CRow& oRow1, CRow& oRow2)
 	const char* pszValue1 = oRow1[CAccounts::NAME];
 	const char* pszValue2 = oRow2[CAccounts::NAME];
 
-	return stricmp(pszValue1, pszValue2);
+	return _stricmp(pszValue1, pszValue2);
 }

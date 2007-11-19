@@ -53,10 +53,10 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 	END_GRAVITY_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED, OnAdd     )
-		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED, OnEdit    )
-		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED, OnDelete  )
-		NFY_CTRLMSG(IDC_STATS,  NM_DBLCLK,  OnDblClick)
+		CMD_CTRLMSG(IDC_ADD,	BN_CLICKED, &CStatsPage::OnAdd     )
+		CMD_CTRLMSG(IDC_EDIT,	BN_CLICKED, &CStatsPage::OnEdit    )
+		CMD_CTRLMSG(IDC_DELETE,	BN_CLICKED, &CStatsPage::OnDelete  )
+		NFY_CTRLMSG(IDC_STATS,  NM_DBLCLK,  &CStatsPage::OnDblClick)
 	END_CTRLMSG_TABLE
 
 	// Find the owners rows.

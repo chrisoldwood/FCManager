@@ -54,7 +54,7 @@ CGridViewDlg::CGridViewDlg(uint iRscID, CFCMDB& oDB, CTable& oTable, int nColumn
 	END_GRAVITY_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		NFY_CTRLMSG(IDC_GRID, NM_DBLCLK, OnDblClick)
+		NFY_CTRLMSG(IDC_GRID, NM_DBLCLK, &CGridViewDlg::OnDblClick)
 	END_CTRLMSG_TABLE
 }
 
