@@ -70,7 +70,7 @@ protected:
 	// From IRowHandler.
 	//
 	virtual int     CompareRows(CRow& oRow1, CRow& oRow2);
-	virtual CString RowFieldValue(CRow& oRow, int nField);
+	virtual CString RowFieldValue(CRow& oRow, size_t nField);
 };
 
 /******************************************************************************

@@ -26,12 +26,12 @@
 */
 
 CExpenses::CExpenses(CMDB& oDB, CBalSheet& oBalSheet, CExpenseTypes& oTypes)
-	: CTable(oDB, "Expenses")
+	: CTable(oDB, TXT("Expenses"))
 {
 	// Create the table schema.
-	AddColumn("ItemID", oBalSheet, CBalSheet::ID,     CColumn::FOREIGNKEY);
-	AddColumn("TypeID", oTypes,    CExpenseTypes::ID, CColumn::FOREIGNKEY);
-	AddColumn("Paid",   MDCT_INT,  0,                 CColumn::DEFAULTS  );
+	AddColumn(TXT("ItemID"), oBalSheet, CBalSheet::ID,     CColumn::FOREIGNKEY);
+	AddColumn(TXT("TypeID"), oTypes,    CExpenseTypes::ID, CColumn::FOREIGNKEY);
+	AddColumn(TXT("Paid"),   MDCT_INT,  0,                 CColumn::DEFAULTS  );
 }
 
 /******************************************************************************

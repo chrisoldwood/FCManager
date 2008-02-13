@@ -58,7 +58,7 @@ CExpenseTypesDlg::CExpenseTypesDlg(CExpenseTypes& oTypes, CValueSet& oUsed)
 void CExpenseTypesDlg::OnInitDialog()
 {
 	// Load the set of types.
-	for (int i = 0; i < m_oTypes.RowCount(); i++)
+	for (size_t i = 0; i < m_oTypes.RowCount(); i++)
 	{
 		CRow& oRow = m_oTypes[i];
 
@@ -66,7 +66,7 @@ void CExpenseTypesDlg::OnInitDialog()
 	}
 
 	// Select the first by default.
-	m_lbTypes.CurSel(0);
+	m_lbTypes.CurSel(0U);
 
 	UpdateUI();
 }
@@ -131,7 +131,7 @@ void CExpenseTypesDlg::OnAdd()
 
 		// Select if first item.
 		if (m_lbTypes.Count() == 1)
-			m_lbTypes.CurSel(0);
+			m_lbTypes.CurSel(0U);
 	}
 	else
 	{
@@ -239,7 +239,7 @@ void CExpenseTypesDlg::UpdateUI()
 
 bool CExpenseTypesDlg::IsTypeInUse(int nID)
 {
-	for (int i = 0; i < m_oUsed.Count(); i++)
+	for (size_t i = 0; i < m_oUsed.Count(); i++)
 	{
 		if (m_oUsed[i].m_iValue == nID)
 			return true;

@@ -67,8 +67,8 @@ void CAccountPage::OnInitDialog()
 	// Initialise the controls.
 	m_ebName.TextLimit(CAccounts::NAME_LEN);
 
-	m_lvTrans.InsertColumn(0, "Transaction", 150);
-	m_lvTrans.InsertColumn(1, "£ Amount",     75);
+	m_lvTrans.InsertColumn(0, TXT("Transaction"), 150);
+	m_lvTrans.InsertColumn(1, TXT("£ Amount"),     75);
 
 	m_lvTrans.FullRowSelect();
 	m_lvTrans.GridLines();
@@ -118,11 +118,11 @@ bool CAccountPage::OnValidate()
 	// At least the name supplied?
 	if (m_ebName.TextLength() == 0)
 	{
-		AlertMsg("You must provide at least a name for the account");
+		AlertMsg(TXT("You must provide at least a name for the account"));
 		return false;
 	}
 
-	m_nTotal = (int) (m_ebBalance.RealValue() * 100.0);
+	m_nTotal = static_cast<int>(m_ebBalance.RealValue() * 100.0);
 	m_nType  = CAccounts::FIXED;
 
 	if (m_rbFixed.IsChecked())

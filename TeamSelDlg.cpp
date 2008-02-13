@@ -13,21 +13,21 @@
 #include "FCMApp.hpp"
 
 // List of teams.
-static char* astrTeams[MAX_CLUB_TEAMS+1] =
+static tchar* astrTeams[MAX_CLUB_TEAMS+1] =
 {
-	"Any", "1st Team", "2nd Team", "3rd Team"
+	TXT("Any"), TXT("1st Team"), TXT("2nd Team"), TXT("3rd Team")
 };
 
 // List of positions.
-static char* astrPositions[MAX_POSITIONS+1] =
+static tchar* astrPositions[MAX_POSITIONS+1] =
 {
-	"All", "Goalkeepers", "Defenders", "Midfielders", "Attackers"
+	TXT("All"), TXT("Goalkeepers"), TXT("Defenders"), TXT("Midfielders"), TXT("Attackers")
 };
 
 // List of formations.
-static char* astrFormations[MAX_FORMATIONS] =
+static tchar* astrFormations[MAX_FORMATIONS] =
 {
-	"4-4-2", "5-3-2"
+	TXT("4-4-2"), TXT("5-3-2")
 };
 
 /******************************************************************************
@@ -100,7 +100,7 @@ CTeamSelDlg::CTeamSelDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 void CTeamSelDlg::OnInitDialog()
 {
 	// Set the dialog title.
-	Title((m_bEditing == true) ? "Edit Team Selection" : "Add A Team Selection");
+	Title((m_bEditing == true) ? TXT("Edit Team Selection") : TXT("Add A Team Selection"));
 
 	CSize dmDlg = App.m_dmTeamSelDlg;
 
@@ -116,7 +116,7 @@ void CTeamSelDlg::OnInitDialog()
 		Centre();
 	}
 
-	int i;
+	size_t i;
 
 	// Fill the opponents combo.
 	CTable& oOpponents = App.Doc()->m_oDB.m_oOpponents;
@@ -137,15 +137,15 @@ void CTeamSelDlg::OnInitDialog()
 		m_cbFormation.Add(astrFormations[i]);
 
 	// Initialise the controls limits.
-	m_dtpDate.Format("ddd' 'dd'/'MM'/'yyyy");
+	m_dtpDate.Format(TXT("ddd' 'dd'/'MM'/'yyyy"));
 	m_cbOpponent.TextLimit(CTeamSels::OPPONENTS_LEN);
 
 	// Initialise the fields.
 	m_dtpDate.SetDate(CDate(m_oRow[CTeamSels::DATE]));
 
 	// Locate or add opponents.
-	const char* pszOpponents = m_oRow[CTeamSels::OPPONENTS];
-	int         nOpponents   = m_cbOpponent.FindExact(pszOpponents);
+	const tchar* pszOpponents = m_oRow[CTeamSels::OPPONENTS];
+	int          nOpponents   = m_cbOpponent.FindExact(pszOpponents);
 	
 	if (nOpponents == LB_ERR)
 		nOpponents = m_cbOpponent.Add(pszOpponents);
@@ -321,7 +321,7 @@ void CTeamSelDlg::RefreshPlayerList()
 	m_lbPlayer.Redraw(false);
 
 	// Add members to the players listbox.
-	for (int i = 0; i < m_oDB.m_oMembers.RowCount(); i++)
+	for (size_t i = 0; i < m_oDB.m_oMembers.RowCount(); i++)
 	{
 		CRow& oRow  = m_oDB.m_oMembers[i];
 		int   nTeam = oRow[CMembers::USUAL_TEAM];

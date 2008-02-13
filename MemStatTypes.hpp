@@ -42,17 +42,17 @@ public:
 */
 
 inline CMemStatTypes::CMemStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, "MemStatTypes")
+	: CStatTypes(oDB, TXT("MemStatTypes"))
 {
 	// Add the pre-defined statistics.
-	AddPredefined("Played");
-	AddPredefined("Trained");
-	AddPredefined("Goals");
-	AddPredefined("Own Goals");
-	AddPredefined("Bookings");
-	AddPredefined("Dismisals");
-	AddPredefined("Substitutions");
-	AddPredefined("Man o/t Match");
+	AddPredefined(TXT("Played"));
+	AddPredefined(TXT("Trained"));
+	AddPredefined(TXT("Goals"));
+	AddPredefined(TXT("Own Goals"));
+	AddPredefined(TXT("Bookings"));
+	AddPredefined(TXT("Dismisals"));
+	AddPredefined(TXT("Substitutions"));
+	AddPredefined(TXT("Man o/t Match"));
 }
 
 #endif //MEMSTATTYPES_HPP

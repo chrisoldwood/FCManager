@@ -114,5 +114,5 @@ bool CNotesPage::OnOk()
 void CNotesPage::OnActivate(bool bActivating)
 {
 	if (bActivating)
-		m_ebNotes.PostMessage(EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
+		m_ebNotes.PostMessage(EM_SETSEL, static_cast<WPARAM>(-1), static_cast<WPARAM>(-1));
 }

@@ -61,7 +61,7 @@ protected:
 	//
 	// Internal methods.
 	//
-	void AddPredefined(const char* pszName, int nDefault);
+	void AddPredefined(const tchar* pszName, int nDefault);
 };
 
 /******************************************************************************

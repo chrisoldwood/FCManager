@@ -53,14 +53,12 @@ CFixturePage::CFixturePage(CFCMDB& oDB, CRow& oRow)
 
 void CFixturePage::OnInitDialog()
 {
-	int i;
-
 	// Fill the home & away team combos.
 	CTable& oOpponents = App.Doc()->m_oDB.m_oOpponents;
 
-	for (i = 0; i < oOpponents.RowCount(); i++)
+	for (size_t i = 0; i < oOpponents.RowCount(); i++)
 	{
-		const char* pszTeam = oOpponents[i][COpponents::CLUB_NAME];
+		const tchar* pszTeam = oOpponents[i][COpponents::CLUB_NAME];
 
 		m_cbHomeTeam.Add(pszTeam);
 		m_cbAwayTeam.Add(pszTeam);
@@ -69,7 +67,7 @@ void CFixturePage::OnInitDialog()
 	// Fill in the referee combo.
 	CTable& oReferees = App.Doc()->m_oDB.m_oReferees;
 
-	for (i = 0; i < oReferees.RowCount(); i++)
+	for (size_t i = 0; i < oReferees.RowCount(); i++)
 	{
 		CString strName;
 
@@ -81,12 +79,12 @@ void CFixturePage::OnInitDialog()
 	}
 
 	// Fill the match types combo.
-	m_cbType.Add("League");
-	m_cbType.Add("Cup");
-	m_cbType.Add("Friendly");
+	m_cbType.Add(TXT("League"));
+	m_cbType.Add(TXT("Cup"));
+	m_cbType.Add(TXT("Friendly"));
 
 	// Initialise the controls limits.
-	m_dtpDate.Format("ddd' 'dd'/'MM'/'yyyy");
+	m_dtpDate.Format(TXT("ddd' 'dd'/'MM'/'yyyy"));
 	m_cbHomeTeam.TextLimit(CFixtures::TEAM_LEN);
 	m_cbAwayTeam.TextLimit(CFixtures::TEAM_LEN);
 	m_cbReferee.TextLimit(CFixtures::NAME_LEN);
@@ -97,8 +95,8 @@ void CFixturePage::OnInitDialog()
 	m_ebResult.Text(m_oRow[CFixtures::RESULT]);
 
 	// Locate or add type.
-	const char* pszType = m_oRow[CFixtures::TYPE];
-	int         nType   = m_cbType.FindExact(pszType);
+	const tchar* pszType = m_oRow[CFixtures::TYPE];
+	int          nType   = m_cbType.FindExact(pszType);
 	
 	if (nType == LB_ERR)
 		nType = m_cbType.Add(pszType);
@@ -106,8 +104,8 @@ void CFixturePage::OnInitDialog()
 	m_cbType.CurSel(nType);
 
 	// Locate or add home team.
-	const char* pszHomeTeam = m_oRow[CFixtures::HOME_TEAM];
-	int         nHomeTeam   = m_cbHomeTeam.FindExact(pszHomeTeam);
+	const tchar* pszHomeTeam = m_oRow[CFixtures::HOME_TEAM];
+	int          nHomeTeam   = m_cbHomeTeam.FindExact(pszHomeTeam);
 	
 	if (nHomeTeam == LB_ERR)
 		nHomeTeam = m_cbHomeTeam.Add(pszHomeTeam);
@@ -115,8 +113,8 @@ void CFixturePage::OnInitDialog()
 	m_cbHomeTeam.CurSel(nHomeTeam);
 
 	// Locate or add away team.
-	const char* pszAwayTeam = m_oRow[CFixtures::AWAY_TEAM];
-	int         nAwayTeam   = m_cbAwayTeam.FindExact(pszAwayTeam);
+	const tchar* pszAwayTeam = m_oRow[CFixtures::AWAY_TEAM];
+	int          nAwayTeam   = m_cbAwayTeam.FindExact(pszAwayTeam);
 	
 	if (nAwayTeam == LB_ERR)
 		nAwayTeam = m_cbAwayTeam.Add(pszAwayTeam);
@@ -124,8 +122,8 @@ void CFixturePage::OnInitDialog()
 	m_cbAwayTeam.CurSel(nAwayTeam);
 
 	// Locate or add referee.
-	const char* pszReferee = m_oRow[CFixtures::REFEREE];
-	int         nReferee   = m_cbReferee.FindExact(pszReferee);
+	const tchar* pszReferee = m_oRow[CFixtures::REFEREE];
+	int          nReferee   = m_cbReferee.FindExact(pszReferee);
 	
 	if (nReferee == LB_ERR)
 		nReferee = m_cbReferee.Add(pszReferee);

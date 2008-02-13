@@ -72,9 +72,9 @@ CIncomePage::CIncomePage(CRow& oRow, CTmpSubs& oTmpSubs, CMembers& oMembers)
 void CIncomePage::OnInitDialog()
 {
 	// Initialise the controls.
-	m_lvCredits.InsertColumn(0, "Name",   125);
-	m_lvCredits.InsertColumn(1, "£ Fee",   50);
-	m_lvCredits.InsertColumn(2, "£ Paid",  50);
+	m_lvCredits.InsertColumn(0, TXT("Name"),   125);
+	m_lvCredits.InsertColumn(1, TXT("£ Fee"),   50);
+	m_lvCredits.InsertColumn(2, TXT("£ Paid"),  50);
 
 	m_lvCredits.FullRowSelect();
 	m_lvCredits.GridLines();
@@ -123,7 +123,7 @@ void CIncomePage::OnInitDialog()
 
 bool CIncomePage::OnValidate()
 {
-	m_nTotal = (int) (m_ebCredit.RealValue() * 100.0);
+	m_nTotal = static_cast<int>(m_ebCredit.RealValue() * 100.0);
 	m_nType  = CBalSheet::NONE;
 
 	if (m_rbFxdCredit.IsChecked())
@@ -224,7 +224,7 @@ void CIncomePage::OnAddCredit()
 	TArray<int> oExclusions;
 
 	// Create a list of members to exclude.
-	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpSubs.RowCount(); i++)
 		oExclusions.Add(m_oTmpSubs[i][CSubs::MEMBER_ID]);
 
 	CMemberSubsDlg Dlg(m_oMembers, oExclusions, oRow, false);
@@ -298,7 +298,7 @@ void CIncomePage::RefreshCredits()
 	m_lvCredits.DeleteAllItems();
 
 	// For all subs rows.
-	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpSubs.RowCount(); i++)
 	{
 		CRow& oSubs = m_oTmpSubs[i];
 
@@ -364,7 +364,7 @@ void CIncomePage::UpdateCreditsTotal()
 {
 	int nTotal = 0;
 
-	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpSubs.RowCount(); i++)
 		nTotal += m_oTmpSubs[i][CSubs::PAID].GetInt();
 
 	m_ebCredit.RealValue(nTotal / 100.0);

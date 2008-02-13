@@ -70,7 +70,7 @@ void CTableGrid::OnCreate(const CRect& /*rcClient*/)
 	FullRowSelect(true);
 
 	// Setup the grid columns.
-	for (int c = 0; c < m_nColumns; c++)
+	for (size_t c = 0; c < m_nColumns; c++)
 		InsertColumn(c, m_pColumns[c].m_pszName, m_pColumns[c].m_nWidth, m_pColumns[c].m_nAlign);
 }
 
@@ -87,7 +87,7 @@ void CTableGrid::OnCreate(const CRect& /*rcClient*/)
 *******************************************************************************
 */
 
-void CTableGrid::Columns(int nColumns, Column* pColumns)
+void CTableGrid::Columns(size_t nColumns, Column* pColumns)
 {
 	ASSERT(nColumns >  0);
 	ASSERT(pColumns != NULL);
@@ -101,7 +101,7 @@ void CTableGrid::Columns(int nColumns, Column* pColumns)
 		DeleteAllColumns();
 
 		// Setup the grid columns.
-		for (int c = 0; c < m_nColumns; c++)
+		for (size_t c = 0; c < m_nColumns; c++)
 			InsertColumn(c, m_pColumns[c].m_pszName, m_pColumns[c].m_nWidth, m_pColumns[c].m_nAlign);
 	}
 }
@@ -123,7 +123,7 @@ void CTableGrid::Columns(int nColumns, Column* pColumns)
 void CTableGrid::AddRows(CTable& oTable, bool bReSort, int nSel)
 {
 	// Add the rows.
-	for (int i = 0; i < oTable.RowCount(); i++)
+	for (size_t i = 0; i < oTable.RowCount(); i++)
 		AddRow(oTable[i], false);
 
 	// Needs sorting?
@@ -151,7 +151,7 @@ void CTableGrid::AddRows(CTable& oTable, bool bReSort, int nSel)
 void CTableGrid::AddRows(CResultSet& oRS, bool bReSort, int nSel)
 {
 	// Add the rows.
-	for (int i = 0; i < oRS.Count(); i++)
+	for (size_t i = 0; i < oRS.Count(); i++)
 		AddRow(oRS[i], false);
 
 	// Needs sorting?
@@ -176,9 +176,9 @@ void CTableGrid::AddRows(CResultSet& oRS, bool bReSort, int nSel)
 *******************************************************************************
 */
 
-int CTableGrid::AddRow(CRow& oRow, bool bReSort, bool bSelect)
+size_t CTableGrid::AddRow(CRow& oRow, bool bReSort, bool bSelect)
 {
-	int nRow = AppendItem(FieldValue(0, oRow));
+	size_t nRow = AppendItem(FieldValue(0, oRow));
 
 	ItemPtr(nRow, &oRow);
 
@@ -199,12 +199,12 @@ int CTableGrid::AddRow(CRow& oRow, bool bReSort, bool bSelect)
 *******************************************************************************
 */
 
-int CTableGrid::UpdateRow(int nRow, bool bReSort, bool bSelect)
+size_t CTableGrid::UpdateRow(size_t nRow, bool bReSort, bool bSelect)
 {
 	CRow& oRow = Row(nRow);
 
 	// For all grid columns.
-	for (int i = 0; i < NumColumns(); i++)
+	for (size_t i = 0; i < NumColumns(); i++)
 		ItemText(nRow, i, FieldValue(i, oRow));
 
 	// Re-sort the row?
@@ -233,7 +233,7 @@ int CTableGrid::UpdateRow(int nRow, bool bReSort, bool bSelect)
 *******************************************************************************
 */
 
-void CTableGrid::DeleteRow(int nRow)
+void CTableGrid::DeleteRow(size_t nRow)
 {
 	// Is selected row?
 	bool bSelected = (Selection() == nRow);
@@ -283,9 +283,9 @@ void CTableGrid::Sort()
 
 int CALLBACK TableGridCmpRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 {
-	CTableGrid*	pGrid = (CTableGrid*) lParamSort;
-	CRow*		pRow1 = (CRow*) lParam1;
-	CRow*		pRow2 = (CRow*) lParam2;
+	CTableGrid*	pGrid = reinterpret_cast<CTableGrid*>(lParamSort);
+	CRow*		pRow1 = reinterpret_cast<CRow*>(lParam1);
+	CRow*		pRow2 = reinterpret_cast<CRow*>(lParam2);
 
 	ASSERT(pGrid != NULL);
 	ASSERT(pRow1 != NULL);
@@ -332,7 +332,7 @@ int CTableGrid::CompareRows(CRow& oRow1, CRow& oRow2)
 *******************************************************************************
 */
 
-CString CTableGrid::FieldValue(int nColumn, CRow& oRow)
+CString CTableGrid::FieldValue(size_t nColumn, CRow& oRow)
 {
 	int nField = m_pColumns[nColumn].m_nField;
 

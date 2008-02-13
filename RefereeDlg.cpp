@@ -33,11 +33,11 @@ CRefereeDlg::CRefereeDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, CReferees::NOTES, CReferees::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Referee Details" : "Add A Referee";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Referee Details") : TXT("Add A Referee");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oNamePage,		"Name && Address")
-		PAGE(&m_oStatsPage,		"Statistics"     )
-		PAGE(&m_oNotesPage,		"Notes"          )
+		PAGE(&m_oNamePage,		TXT("Name && Address"))
+		PAGE(&m_oStatsPage,		TXT("Statistics")     )
+		PAGE(&m_oNotesPage,		TXT("Notes")          )
 	END_PAGE_TABLE
 }

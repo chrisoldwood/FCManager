@@ -40,7 +40,7 @@ public:
 */
 
 inline CFixStats::CFixStats(CMDB& oDB, CFixStatTypes& oTypes)
-	: CStats(oDB, "FixStats", oTypes)
+	: CStats(oDB, TXT("FixStats"), oTypes)
 {
 }
 

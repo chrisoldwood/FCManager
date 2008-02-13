@@ -13,21 +13,21 @@
 #include "FCMDoc.hpp"
 
 // List of teams.
-static char* astrTeams[MAX_CLUB_TEAMS+1] =
+static tchar* astrTeams[MAX_CLUB_TEAMS+1] =
 {
-	"Any", "1st Team", "2nd Team", "3rd Team"
+	TXT("Any"), TXT("1st Team"), TXT("2nd Team"), TXT("3rd Team")
 };
 
 // List of positions.
-static char* astrPositions[MAX_POSITIONS+1] =
+static tchar* astrPositions[MAX_POSITIONS+1] =
 {
-	"Any", "Goalkeeper", "Defender", "Midfielder", "Attacker"
+	TXT("Any"), TXT("Goalkeeper"), TXT("Defender"), TXT("Midfielder"), TXT("Attacker")
 };
 
 // Unavailability reasons.
-static char* astrReasons[MAX_REASONS] =
+static tchar* astrReasons[MAX_REASONS] =
 {
-	"(none)", "Injured", "On Holiday", "Transferred", "Resigned", "Uncontactable"
+	TXT("(none)"), TXT("Injured"), TXT("On Holiday"), TXT("Transferred"), TXT("Resigned"), TXT("Uncontactable")
 };
 
 /******************************************************************************
@@ -167,5 +167,5 @@ void CMemStatusPage::OnAvailable()
 	bool bAvailable = m_ckIsAvailable.IsChecked();
 
 	m_cbReason.Enable(!bAvailable);
-	m_cbReason.CurSel(0);
+	m_cbReason.CurSel(0U);
 }

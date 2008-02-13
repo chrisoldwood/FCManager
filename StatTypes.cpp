@@ -23,12 +23,12 @@
 *******************************************************************************
 */
 
-CStatTypes::CStatTypes(CMDB& oDB, const char* pszName)
+CStatTypes::CStatTypes(CMDB& oDB, const tchar* pszName)
 	: CTable(oDB, pszName)
 {
 	// Create the table schema.
-	AddColumn("ID",    MDCT_IDENTITY, 0,        CColumn::IDENTITY);
-	AddColumn("Name",  MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),    MDCT_IDENTITY, 0,        CColumn::IDENTITY);
+	AddColumn(TXT("Name"),  MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -64,7 +64,7 @@ CRow& CStatTypes::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]    = 0;
-	oRow[NAME]  = "";
+	oRow[NAME]  = TXT("");
 	
 	return oRow;
 }
@@ -81,7 +81,7 @@ CRow& CStatTypes::CreateRow()
 *******************************************************************************
 */
 
-void CStatTypes::AddPredefined(const char* pszName)
+void CStatTypes::AddPredefined(const tchar* pszName)
 {
 	CRow& oRow = CreateRow();
 

@@ -18,11 +18,11 @@
 // The list view columns.
 GridColumn CBalSheetView::Columns[NUM_COLUMNS] =
 {
-	{ "Item",     150, LVCFMT_LEFT,  CBalSheet::NAME         },
-	{ "Date",     100, LVCFMT_LEFT,  CBalSheet::DATE         },
-	{ "£ Credit",  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL },
-	{ "£ Debit",   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL  },
-	{ "£ Balance", 75, LVCFMT_RIGHT, CBalSheet::BALANCE      }
+	{ TXT("Item"),     150, LVCFMT_LEFT,  CBalSheet::NAME         },
+	{ TXT("Date"),     100, LVCFMT_LEFT,  CBalSheet::DATE         },
+	{ TXT("£ Credit"),  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL },
+	{ TXT("£ Debit"),   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL  },
+	{ TXT("£ Balance"), 75, LVCFMT_RIGHT, CBalSheet::BALANCE      }
 };
 
 /******************************************************************************
@@ -149,7 +149,7 @@ void CBalSheetView::OnEdit()
 	// Cannot edit the TOTAL row.
 	if (oRow[CBalSheet::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot edit the 'TOTAL' item.");
+		NotifyMsg(TXT("You cannot edit the 'TOTAL' item."));
 		return;
 	}
 
@@ -207,14 +207,14 @@ void CBalSheetView::OnDelete()
 	// Cannot delete the TOTAL row.
 	if (oRow[CBalSheet::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot delete the 'TOTAL' item.");
+		NotifyMsg(TXT("You cannot delete the 'TOTAL' item."));
 		return;
 	}
 
 	CString strName = oRow[CBalSheet::NAME];
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the item: %s?",  strName) != IDYES)
+	if (QueryMsg(TXT("Delete the item: %s?"),  strName) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -247,7 +247,7 @@ void CBalSheetView::OnDeleteAll()
 	ASSERT_FALSE();
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL items?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL items?")) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -281,14 +281,14 @@ void CBalSheetView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Item",     150, LVCFMT_LEFT,  CBalSheet::NAME,         true },
-		{ "Date",     100, LVCFMT_LEFT,  CBalSheet::DATE,         true },
-		{ "£ Credit",  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL, true },
-		{ "£ Debit",   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL,  true },
-		{ "£ Balance", 75, LVCFMT_RIGHT, CBalSheet::BALANCE,      true }
+		{ TXT("Item"),     150, LVCFMT_LEFT,  CBalSheet::NAME,         true },
+		{ TXT("Date"),     100, LVCFMT_LEFT,  CBalSheet::DATE,         true },
+		{ TXT("£ Credit"),  75, LVCFMT_RIGHT, CBalSheet::CREDIT_TOTAL, true },
+		{ TXT("£ Debit"),   75, LVCFMT_RIGHT, CBalSheet::DEBIT_TOTAL,  true },
+		{ TXT("£ Balance"), 75, LVCFMT_RIGHT, CBalSheet::BALANCE,      true }
 	};
 
-	PrintView("Balance Sheet", NUM_PRT_COLUMNS, aColumns);
+	PrintView(TXT("Balance Sheet"), NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
@@ -340,7 +340,7 @@ CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 	{
 		// Ignore if not applicable.
 		if (oRow[CBalSheet::CREDIT_TYPE] == CBalSheet::NONE)
-			return "";
+			return TXT("");
 
 		return App.FormatMoney(oRow, nField);
 	}
@@ -348,7 +348,7 @@ CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 	{
 		// Ignore if not applicable.
 		if (oRow[CBalSheet::DEBIT_TYPE] == CBalSheet::NONE)
-			return "";
+			return TXT("");
 
 		return App.FormatMoney(oRow, nField);
 	}
@@ -357,7 +357,7 @@ CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
 	{
 		// Don't show date for "TOTAL" row.
 		if (oRow[CBalSheet::ID].GetInt() == 1)
-			return "";
+			return TXT("");
 
 		return App.FormatDate(oRow, nField);
 	}

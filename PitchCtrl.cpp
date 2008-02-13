@@ -138,7 +138,7 @@ void CPitchCtrl::GetClassParams(WNDCLASS& rParams)
 
 	// Override any settings.
 	rParams.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-	rParams.lpszClassName = "PitchCtrl";
+	rParams.lpszClassName = TXT("PitchCtrl");
 }
 
 /******************************************************************************
@@ -159,7 +159,7 @@ void CPitchCtrl::GetCreateParams(WNDCREATE& rParams)
 	CCtrlWnd::GetCreateParams(rParams);
 
 	// Override any settings.
-	rParams.pszClassName = "PitchCtrl";
+	rParams.pszClassName = TXT("PitchCtrl");
 }
 
 /******************************************************************************
@@ -411,7 +411,7 @@ void CPitchCtrl::SetPlayer(int nPos, int nID)
 	else
 	{
 		m_aiPlayers[nPos]   = nID;
-		m_astrPlayers[nPos] = "";
+		m_astrPlayers[nPos] = TXT("");
 	}
 
 	// Repaint.

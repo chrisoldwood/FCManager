@@ -57,13 +57,13 @@ CStatisticDlg::CStatisticDlg(CStatTypes& oStatTypes, CRow& oRow, bool bEditing)
 void CStatisticDlg::OnInitDialog()
 {
 	// Set the dialog title.
-	Title((m_bEditing == true) ? "Edit Statistic" : "Add A Statistic");
+	Title((m_bEditing == true) ? TXT("Edit Statistic") : TXT("Add A Statistic"));
 
 	// Initialise controls.
-	m_dtpDate.Format("ddd' 'dd'/'MM'/'yyyy");
+	m_dtpDate.Format(TXT("ddd' 'dd'/'MM'/'yyyy"));
 
 	// Load stats types into combo box.
-	for (int i = 0; i < m_oStatTypes.RowCount(); i++)
+	for (size_t i = 0; i < m_oStatTypes.RowCount(); i++)
 	{
 		CRow& oRow = m_oStatTypes[i];
 
@@ -82,7 +82,7 @@ void CStatisticDlg::OnInitDialog()
 		m_oRow[CTmpStats::DATE] = time(NULL);
 
 		// Default to first type.
-		m_cbTypes.CurSel(0);
+		m_cbTypes.CurSel(0U);
 	}
 	// Editing entry.
 	else

@@ -72,8 +72,8 @@ CExpensesPage::CExpensesPage(CRow& oRow, CTmpExps& oTmpExps, CExpenseTypes& oTyp
 void CExpensesPage::OnInitDialog()
 {
 	// Initialise the controls.
-	m_lvDebits.InsertColumn(0, "Item",   125);
-	m_lvDebits.InsertColumn(1, "£ Paid",  50);
+	m_lvDebits.InsertColumn(0, TXT("Item"),   125);
+	m_lvDebits.InsertColumn(1, TXT("£ Paid"),  50);
 
 	m_lvDebits.FullRowSelect();
 	m_lvDebits.GridLines();
@@ -122,7 +122,7 @@ void CExpensesPage::OnInitDialog()
 
 bool CExpensesPage::OnValidate()
 {
-	m_nTotal = (int) (m_ebDebit.RealValue() * 100.0);
+	m_nTotal = static_cast<int>(m_ebDebit.RealValue() * 100.0);
 	m_nType  = CBalSheet::NONE;
 
 	if (m_rbFxdDebit.IsChecked())
@@ -291,7 +291,7 @@ void CExpensesPage::RefreshDebits()
 	m_lvDebits.DeleteAllItems();
 
 	// For all subs rows.
-	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpExps.RowCount(); i++)
 	{
 		CRow& oExps = m_oTmpExps[i];
 
@@ -355,7 +355,7 @@ void CExpensesPage::UpdateDebitsTotal()
 {
 	int nTotal = 0;
 
-	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpExps.RowCount(); i++)
 		nTotal += m_oTmpExps[i][CExpenses::PAID].GetInt();
 
 	m_ebDebit.RealValue(nTotal / 100.0);

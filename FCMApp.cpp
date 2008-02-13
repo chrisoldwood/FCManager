@@ -31,9 +31,9 @@ CFCMApp App;
 */
 
 #ifdef _DEBUG
-const char* CFCMApp::VERSION = "v1.0 Alpha #3 [Debug]";
+const tchar* CFCMApp::VERSION = TXT("v1.0 Alpha #3 [Debug]");
 #else
-const char* CFCMApp::VERSION = "v1.0 Alpha #3";
+const tchar* CFCMApp::VERSION = TXT("v1.0 Alpha #3");
 #endif
 
 /******************************************************************************
@@ -84,13 +84,13 @@ CFCMApp::~CFCMApp()
 bool CFCMApp::OnOpen()
 {
 	// Set the app title.
-	m_strTitle = "F.C. Manager";
+	m_strTitle = TXT("F.C. Manager");
 
 	// Load the toolbar bitmap.
 	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
 
 	// Set the .INI file path.
-	m_oIniFile.m_strPath = CPath::ApplicationDir() / "FCManager.ini";
+	m_oIniFile.m_strPath = CPath::ApplicationDir() / TXT("FCManager.ini");
 
 	// Load the MRUList and default settings.
 	m_MRUList.Load(m_oIniFile);
@@ -153,8 +153,8 @@ bool CFCMApp::OnClose()
 
 CString CFCMApp::FormatName(CRow& rRow, int nForename, int nSurname, bool bReverse) const
 {
-	const char* pszForename = rRow[nForename];
-	const char* pszSurname  = rRow[nSurname];
+	const tchar* pszForename = rRow[nForename];
+	const tchar* pszSurname  = rRow[nSurname];
 
 	// If one part supplied return it.
 	if (pszForename[0] == '\0')		return pszSurname;
@@ -173,7 +173,7 @@ CString CFCMApp::FormatName(CRow& rRow, int nForename, int nSurname, bool bRever
 	else
 	{
 		strFullName  = pszSurname;
-		strFullName += ", ";
+		strFullName += TXT(", ");
 		strFullName += pszForename;
 	}
 
@@ -196,9 +196,9 @@ CString CFCMApp::FormatName(CRow& rRow, int nForename, int nSurname, bool bRever
 CString CFCMApp::FormatMoney(CRow& rRow, int nColumn) const
 {
 	double dValue = rRow[nColumn].GetInt() / 100.0;
-	char   szValue[10];
+	tchar  szValue[10];
 
-	sprintf(szValue, "%.2f", dValue);
+	_stprintf(szValue, TXT("%.2f"), dValue);
 
 	return szValue;
 }
@@ -218,9 +218,9 @@ CString CFCMApp::FormatMoney(CRow& rRow, int nColumn) const
 CString CFCMApp::FormatMoney(int nAmount) const
 {
 	double dValue = nAmount / 100.0;
-	char   szValue[10];
+	tchar  szValue[10];
 
-	sprintf(szValue, "%.2f", dValue);
+	_stprintf(szValue, TXT("%.2f"), dValue);
 
 	return szValue;
 }
@@ -240,11 +240,11 @@ CString CFCMApp::FormatMoney(int nAmount) const
 
 CString CFCMApp::FormatDate(CRow& rRow, int nColumn) const
 {
-	char  szDate[20];
+	tchar szDate[20];
 
 	time_t tDate = rRow[nColumn];
 
-	strftime(szDate, sizeof(szDate), "%d/%m/%y", localtime(&tDate));
+	_tcsftime(szDate, sizeof(szDate), TXT("%d/%m/%y"), localtime(&tDate));
 
 	return szDate;
 }
@@ -266,9 +266,9 @@ CString CFCMApp::FormatDate(CRow& rRow, int nColumn) const
 CString CFCMApp::FormatDecimal(CRow& rRow, int nColumn, int nDecDigits) const
 {
 	double dValue = rRow[nColumn].GetDouble();
-	char   szValue[10];
+	tchar  szValue[10];
 
-	sprintf(szValue, "%.*f", nDecDigits, dValue);
+	_stprintf(szValue, TXT("%.*f"), nDecDigits, dValue);
 
 	return szValue;
 }
@@ -287,13 +287,13 @@ CString CFCMApp::FormatDecimal(CRow& rRow, int nColumn, int nDecDigits) const
 
 void CFCMApp::LoadDefaults()
 {
-	m_rcAppWnd.left   = m_oIniFile.ReadInt("Main", "Left",   0);
-	m_rcAppWnd.top    = m_oIniFile.ReadInt("Main", "Top",    0);
-	m_rcAppWnd.right  = m_oIniFile.ReadInt("Main", "Right",  0);
-	m_rcAppWnd.bottom = m_oIniFile.ReadInt("Main", "Bottom", 0);
+	m_rcAppWnd.left   = m_oIniFile.ReadInt(TXT("Main"), TXT("Left"),   0);
+	m_rcAppWnd.top    = m_oIniFile.ReadInt(TXT("Main"), TXT("Top"),    0);
+	m_rcAppWnd.right  = m_oIniFile.ReadInt(TXT("Main"), TXT("Right"),  0);
+	m_rcAppWnd.bottom = m_oIniFile.ReadInt(TXT("Main"), TXT("Bottom"), 0);
 
-	m_dmTeamSelDlg.cx = m_oIniFile.ReadInt("TeamDlg", "Width",  0);
-	m_dmTeamSelDlg.cy = m_oIniFile.ReadInt("TeamDlg", "Height", 0);
+	m_dmTeamSelDlg.cx = m_oIniFile.ReadInt(TXT("TeamDlg"), TXT("Width"),  0);
+	m_dmTeamSelDlg.cy = m_oIniFile.ReadInt(TXT("TeamDlg"), TXT("Height"), 0);
 }
 
 /******************************************************************************
@@ -310,11 +310,11 @@ void CFCMApp::LoadDefaults()
 
 void CFCMApp::SaveDefaults()
 {
-	m_oIniFile.WriteInt("Main", "Left",   m_rcAppWnd.left);
-	m_oIniFile.WriteInt("Main", "Top",    m_rcAppWnd.top);
-	m_oIniFile.WriteInt("Main", "Right",  m_rcAppWnd.right);
-	m_oIniFile.WriteInt("Main", "Bottom", m_rcAppWnd.bottom);
+	m_oIniFile.WriteInt(TXT("Main"), TXT("Left"),   m_rcAppWnd.left);
+	m_oIniFile.WriteInt(TXT("Main"), TXT("Top"),    m_rcAppWnd.top);
+	m_oIniFile.WriteInt(TXT("Main"), TXT("Right"),  m_rcAppWnd.right);
+	m_oIniFile.WriteInt(TXT("Main"), TXT("Bottom"), m_rcAppWnd.bottom);
 
-	m_oIniFile.WriteInt("TeamDlg", "Width",  m_dmTeamSelDlg.cx);
-	m_oIniFile.WriteInt("TeamDlg", "Height", m_dmTeamSelDlg.cy);
+	m_oIniFile.WriteInt(TXT("TeamDlg"), TXT("Width"),  m_dmTeamSelDlg.cx);
+	m_oIniFile.WriteInt(TXT("TeamDlg"), TXT("Height"), m_dmTeamSelDlg.cy);
 }

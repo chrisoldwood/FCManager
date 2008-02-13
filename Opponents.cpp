@@ -24,21 +24,21 @@
 */
 
 COpponents::COpponents(CMDB& oDB)
-	: CTable(oDB, "Opponents")
+	: CTable(oDB, TXT("Opponents"))
 {
 	// Create the table schema.
-	AddColumn("ID",         MDCT_IDENTITY, 0,             CColumn::IDENTITY);	// ID
-	AddColumn("Ground",     MDCT_FXDSTR,   GROUND_LEN,    CColumn::DEFAULTS);	// GROUND
-	AddColumn("StdColours", MDCT_FXDSTR,   COLOURS_LEN,   CColumn::DEFAULTS);	// STANDARD_CLRS
-	AddColumn("AltColours", MDCT_FXDSTR,   COLOURS_LEN,   CColumn::DEFAULTS);	// ALTERNATE_CLRS
-	AddColumn("Name",       MDCT_FXDSTR,   CLUB_NAME_LEN, CColumn::DEFAULTS);	// CLUB_NAME
-	AddColumn("Surname",    MDCT_FXDSTR,   SURNAME_LEN,   CColumn::DEFAULTS);	// SURNAME
-	AddColumn("Forename",   MDCT_FXDSTR,   FORENAME_LEN,  CColumn::DEFAULTS);	// FORENAME
-	AddColumn("PostalAddr", MDCT_VARSTR,   POSTAL_LEN,    CColumn::DEFAULTS);	// POSTAL_ADDRESS
-	AddColumn("StdPhone",   MDCT_FXDSTR,   PHONE_LEN,     CColumn::DEFAULTS);	// STANDARD_PHONE
-	AddColumn("AltPhone",   MDCT_FXDSTR,   PHONE_LEN,     CColumn::DEFAULTS);	// ALTERNATE_PHONE
-	AddColumn("EmailAddr",  MDCT_FXDSTR,   EMAIL_LEN,     CColumn::DEFAULTS);	// EMAIL_ADDRESS
-	AddColumn("Notes",      MDCT_VARSTR,   NOTES_LEN,     CColumn::DEFAULTS);	// NOTES           
+	AddColumn(TXT("ID"),         MDCT_IDENTITY, 0,             CColumn::IDENTITY);	// ID
+	AddColumn(TXT("Ground"),     MDCT_FXDSTR,   GROUND_LEN,    CColumn::DEFAULTS);	// GROUND
+	AddColumn(TXT("StdColours"), MDCT_FXDSTR,   COLOURS_LEN,   CColumn::DEFAULTS);	// STANDARD_CLRS
+	AddColumn(TXT("AltColours"), MDCT_FXDSTR,   COLOURS_LEN,   CColumn::DEFAULTS);	// ALTERNATE_CLRS
+	AddColumn(TXT("Name"),       MDCT_FXDSTR,   CLUB_NAME_LEN, CColumn::DEFAULTS);	// CLUB_NAME
+	AddColumn(TXT("Surname"),    MDCT_FXDSTR,   SURNAME_LEN,   CColumn::DEFAULTS);	// SURNAME
+	AddColumn(TXT("Forename"),   MDCT_FXDSTR,   FORENAME_LEN,  CColumn::DEFAULTS);	// FORENAME
+	AddColumn(TXT("PostalAddr"), MDCT_VARSTR,   POSTAL_LEN,    CColumn::DEFAULTS);	// POSTAL_ADDRESS
+	AddColumn(TXT("StdPhone"),   MDCT_FXDSTR,   PHONE_LEN,     CColumn::DEFAULTS);	// STANDARD_PHONE
+	AddColumn(TXT("AltPhone"),   MDCT_FXDSTR,   PHONE_LEN,     CColumn::DEFAULTS);	// ALTERNATE_PHONE
+	AddColumn(TXT("EmailAddr"),  MDCT_FXDSTR,   EMAIL_LEN,     CColumn::DEFAULTS);	// EMAIL_ADDRESS
+	AddColumn(TXT("Notes"),      MDCT_VARSTR,   NOTES_LEN,     CColumn::DEFAULTS);	// NOTES           
 
 	// Add the indexes.
 }
@@ -76,17 +76,17 @@ CRow& COpponents::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID             ] = 0;
-	oRow[CLUB_NAME      ] = "";
-	oRow[GROUND         ] = "";
-	oRow[STANDARD_CLRS  ] = "",
-	oRow[ALTERNATE_CLRS ] = "",
-	oRow[SURNAME        ] = "";
-	oRow[FORENAME       ] = "";
-	oRow[POSTAL_ADDRESS ] = "";
-	oRow[STANDARD_PHONE ] = "";
-	oRow[ALTERNATE_PHONE] = "";
-	oRow[EMAIL_ADDRESS  ] = "";
-	oRow[NOTES          ] = "";
+	oRow[CLUB_NAME      ] = TXT("");
+	oRow[GROUND         ] = TXT("");
+	oRow[STANDARD_CLRS  ] = TXT(""),
+	oRow[ALTERNATE_CLRS ] = TXT(""),
+	oRow[SURNAME        ] = TXT("");
+	oRow[FORENAME       ] = TXT("");
+	oRow[POSTAL_ADDRESS ] = TXT("");
+	oRow[STANDARD_PHONE ] = TXT("");
+	oRow[ALTERNATE_PHONE] = TXT("");
+	oRow[EMAIL_ADDRESS  ] = TXT("");
+	oRow[NOTES          ] = TXT("");
 	
 	return oRow;
 }

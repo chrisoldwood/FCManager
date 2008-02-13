@@ -26,13 +26,13 @@
 */
 
 CSubs::CSubs(CMDB& oDB, CBalSheet& oBalSheet, CMembers& oMembers)
-	: CTable(oDB, "Subs")
+	: CTable(oDB, TXT("Subs"))
 {
 	// Create the table schema.
-	AddColumn("ItemID",   oBalSheet, CBalSheet::ID);		// ITEM_ID
-	AddColumn("MemberID", oMembers,  CMembers::ID );		// MEMBER_ID
-	AddColumn("Fee",      MDCT_INT,	 0            );		// FEE
-	AddColumn("Paid",     MDCT_INT,  0            );		// PAID
+	AddColumn(TXT("ItemID"),   oBalSheet, CBalSheet::ID);		// ITEM_ID
+	AddColumn(TXT("MemberID"), oMembers,  CMembers::ID );		// MEMBER_ID
+	AddColumn(TXT("Fee"),      MDCT_INT,	 0            );		// FEE
+	AddColumn(TXT("Paid"),     MDCT_INT,  0            );		// PAID
 }
 
 /******************************************************************************

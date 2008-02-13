@@ -61,8 +61,8 @@ public:
 	//
 	virtual CSDIDoc*    CreateDoc() const;
 	virtual CView*      CreateView(CDoc& rDoc) const;
-	virtual const char* FileExts() const;
-	virtual const char* DefFileExt() const;
+	virtual const tchar* FileExts() const;
+	virtual const tchar* DefFileExt() const;
 
 	//
 	// Misc helper functions.
@@ -76,7 +76,7 @@ public:
 	//
 	// Constants.
 	//
-	static const char* VERSION;
+	static const tchar* VERSION;
 
 protected:
 	//
@@ -133,18 +133,18 @@ inline CView* CFCMApp::CreateView(CDoc& rDoc) const
 	return new CFCMView(static_cast<CFCMDoc&>(rDoc));
 }
 
-inline const char* CFCMApp::FileExts() const
+inline const tchar* CFCMApp::FileExts() const
 {
-	static char szExts[] = {	"F.C. Manager Files (*.fcm)\0*.fcm\0"
-								"All Files (*.*)\0*.*\0"
-								"\0\0"							};
+	static tchar szExts[] = {	TXT("F.C. Manager Files (*.fcm)\0*.fcm\0")
+								TXT("All Files (*.*)\0*.*\0")
+								TXT("\0\0")							};
 
 	return szExts;
 }
 
-inline const char* CFCMApp::DefFileExt() const
+inline const tchar* CFCMApp::DefFileExt() const
 {
-	static char szDefExt[] = { "fcm" };
+	static tchar szDefExt[] = { TXT("fcm") };
 
 	return szDefExt;
 }

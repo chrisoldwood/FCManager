@@ -16,8 +16,8 @@
 // The list view columns.
 GridColumn CAccountsView::Columns[NUM_COLUMNS] =
 {
-	{ "Name",      150, LVCFMT_LEFT, CAccounts::NAME    },
-	{ "£ Balance",  75, LVCFMT_LEFT, CAccounts::BALANCE }
+	{ TXT("Name"),      150, LVCFMT_LEFT, CAccounts::NAME    },
+	{ TXT("£ Balance"),  75, LVCFMT_LEFT, CAccounts::BALANCE }
 };
 
 /******************************************************************************
@@ -135,7 +135,7 @@ void CAccountsView::OnEdit()
 	// Cannot edit the TOTAL row.
 	if (oRow[CAccounts::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot edit the 'TOTAL' item.");
+		NotifyMsg(TXT("You cannot edit the 'TOTAL' item."));
 		return;
 	}
 
@@ -185,14 +185,14 @@ void CAccountsView::OnDelete()
 	// Cannot delete the TOTAL row.
 	if (oRow[CAccounts::ID].GetInt() == 1)
 	{
-		NotifyMsg("You cannot delete the 'TOTAL' item.");
+		NotifyMsg(TXT("You cannot delete the 'TOTAL' item."));
 		return;
 	}
 
 	CString strName = oRow[CAccounts::NAME];
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the account: %s?",  strName) != IDYES)
+	if (QueryMsg(TXT("Delete the account: %s?"),  strName) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -225,7 +225,7 @@ void CAccountsView::OnDeleteAll()
 	ASSERT_FALSE();
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL items?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL items?")) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -259,11 +259,11 @@ void CAccountsView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",      150, LVCFMT_LEFT, CAccounts::NAME,    true },
-		{ "£ Balance",  75, LVCFMT_LEFT, CAccounts::BALANCE, true }
+		{ TXT("Name"),      150, LVCFMT_LEFT, CAccounts::NAME,    true },
+		{ TXT("£ Balance"),  75, LVCFMT_LEFT, CAccounts::BALANCE, true }
 	};
 
-	PrintView("Accounts", NUM_PRT_COLUMNS, aColumns);
+	PrintView(TXT("Accounts"), NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
@@ -306,8 +306,8 @@ CString CAccountsView::GetCellData(int nColumn, CRow& oRow, int nField)
 
 int CAccountsView::CompareRows(CRow& oRow1, CRow& oRow2)
 {
-	const char* pszValue1 = oRow1[CAccounts::NAME];
-	const char* pszValue2 = oRow2[CAccounts::NAME];
+	const tchar* pszValue1 = oRow1[CAccounts::NAME];
+	const tchar* pszValue2 = oRow2[CAccounts::NAME];
 
-	return _stricmp(pszValue1, pszValue2);
+	return tstricmp(pszValue1, pszValue2);
 }

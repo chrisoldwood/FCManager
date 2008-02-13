@@ -34,12 +34,12 @@ COpponentDlg::COpponentDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, COpponents::NOTES, COpponents::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Opponent Details" : "Add An Opponent";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Opponent Details") : TXT("Add An Opponent");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oOpponentPage,	"Club Details"     )
-		PAGE(&m_oSecretaryPage,	"Secretary Details")
-		PAGE(&m_oStatsPage,		"Statistics"       )
-		PAGE(&m_oNotesPage,		"Notes"            )
+		PAGE(&m_oOpponentPage,	TXT("Club Details")     )
+		PAGE(&m_oSecretaryPage,	TXT("Secretary Details"))
+		PAGE(&m_oStatsPage,		TXT("Statistics")       )
+		PAGE(&m_oNotesPage,		TXT("Notes")            )
 	END_PAGE_TABLE
 }

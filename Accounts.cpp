@@ -24,19 +24,19 @@
 */
 
 CAccounts::CAccounts(CMDB& oDB)
-	: CTable(oDB, "Accounts")
+	: CTable(oDB, TXT("Accounts"))
 {
 	// Create the table schema.
-	AddColumn("ID",      MDCT_IDENTITY, 0,         CColumn::IDENTITY);
-	AddColumn("Name",    MDCT_FXDSTR,   NAME_LEN,  CColumn::DEFAULTS);
-	AddColumn("Type",    MDCT_INT,      0,         CColumn::DEFAULTS);
-	AddColumn("Balance", MDCT_INT,	    0,         CColumn::DEFAULTS);
-	AddColumn("Notes",   MDCT_VARSTR,   NOTES_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),      MDCT_IDENTITY, 0,         CColumn::IDENTITY);
+	AddColumn(TXT("Name"),    MDCT_FXDSTR,   NAME_LEN,  CColumn::DEFAULTS);
+	AddColumn(TXT("Type"),    MDCT_INT,      0,         CColumn::DEFAULTS);
+	AddColumn(TXT("Balance"), MDCT_INT,	    0,         CColumn::DEFAULTS);
+	AddColumn(TXT("Notes"),   MDCT_VARSTR,   NOTES_LEN, CColumn::DEFAULTS);
 
 	// Add the "TOTAL" row.
 	CRow& oRow = CreateRow();
 
-	oRow[NAME] = "TOTAL";
+	oRow[NAME] = TXT("TOTAL");
 
 	InsertRow(oRow, false);
 }
@@ -74,10 +74,10 @@ CRow& CAccounts::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]      = 0;
-	oRow[NAME]    = "";
+	oRow[NAME]    = TXT("");
 	oRow[TYPE]    = FIXED;
 	oRow[BALANCE] = 0;
-	oRow[NOTES]   = "";
+	oRow[NOTES]   = TXT("");
 	
 	return oRow;
 }
@@ -100,7 +100,7 @@ void CAccounts::UpdateTotalRow()
 	int   nTotal = 0;
 
 	// For all rows...
-	for (int i  = 0; i < RowCount(); i++)
+	for (size_t i  = 0; i < RowCount(); i++)
 	{
 		CRow& oRow = Row(i);
 

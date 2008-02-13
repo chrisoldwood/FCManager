@@ -38,11 +38,11 @@ CAccountDlg::CAccountDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, CAccounts::NOTES, CAccounts::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Account" : "Add An Account";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Account") : TXT("Add An Account");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oAccountPage,	"Name && Transactions")
-		PAGE(&m_oNotesPage,		"Notes"               )
+		PAGE(&m_oAccountPage,	TXT("Name && Transactions"))
+		PAGE(&m_oNotesPage,		TXT("Notes")               )
 	END_PAGE_TABLE
 
 	// Editing existing item?

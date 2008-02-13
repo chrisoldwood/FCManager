@@ -73,12 +73,12 @@ bool CExpenseTypeDlg::OnOk()
 {
 	// Get the controls data.
 	CString strName  = m_ebName.Text();
-	int     nDefault = (int) (m_ebDefault.RealValue() * 100.0);
+	int     nDefault = static_cast<int>(m_ebDefault.RealValue() * 100.0);
 
 	// Validate it.
 	if (strName.Length() == 0)
 	{
-		AlertMsg("You must provide a name.");
+		AlertMsg(TXT("You must provide a name."));
 		return false;
 	}
 

@@ -39,11 +39,11 @@ public:
 
 	struct Column
 	{
-		const char*	m_pszName;		// The name.
-		int			m_nWidth;		// The width in pixels.
-		int			m_nAlign;		// The alignment of the text.
-		int			m_nField;		// The row field.
-		const char*	m_pszFormat;	// The field format.
+		const tchar*	m_pszName;		// The name.
+		uint			m_nWidth;		// The width in pixels.
+		uint			m_nAlign;		// The alignment of the text.
+		size_t			m_nField;		// The row field.
+		const tchar*	m_pszFormat;	// The field format.
 	};
 
 	//
@@ -52,16 +52,16 @@ public:
 	CTableGrid(IRowHandler* pRowHandler = NULL);
 	~CTableGrid();
 
-	void  Columns(int nColumns, Column* pColumns);
+	void  Columns(size_t nColumns, Column* pColumns);
 
-	int   RowCount();
-	CRow& Row(int nRow);
+	size_t RowCount();
+	CRow& Row(size_t nRow);
 
 	void  AddRows  (CTable& oTable,  bool bReSort = true, int nSel = 0);
 	void  AddRows  (CResultSet& oRS, bool bReSort = true, int nSel = 0);
-	int   AddRow   (CRow& oRow,      bool bReSort = true, bool bSelect = true);
-	int   UpdateRow(int nRow,        bool bReSort = true, bool bSelect = true);
-	void  DeleteRow(int nRow);
+	size_t AddRow   (CRow& oRow,      bool bReSort = true, bool bSelect = true);
+	size_t UpdateRow(size_t nRow,     bool bReSort = true, bool bSelect = true);
+	void  DeleteRow(size_t nRow);
 
 	void  Sort();
 
@@ -69,7 +69,7 @@ protected:
 	//
 	// Members.
 	//
-	int				m_nColumns;
+	size_t			m_nColumns;
 	Column*			m_pColumns;
 	IRowHandler*	m_pRowHandler;
 
@@ -83,7 +83,7 @@ protected:
 	//
 	friend int  CALLBACK TableGridCmpRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 	virtual int CompareRows(CRow& oRow1, CRow& oRow2);
-	virtual CString FieldValue(int nColumn, CRow& oRow);
+	virtual CString FieldValue(size_t nColumn, CRow& oRow);
 };
 
 /******************************************************************************
@@ -97,7 +97,7 @@ class IRowHandler
 {
 public:
 	virtual int     CompareRows(CRow& oRow1, CRow& oRow2) = 0;
-	virtual CString RowFieldValue(CRow& oRow, int nField) = 0;
+	virtual CString RowFieldValue(CRow& oRow, size_t nField) = 0;
 };
 
 /******************************************************************************
@@ -107,16 +107,16 @@ public:
 *******************************************************************************
 */
 
-inline int CTableGrid::RowCount()
+inline size_t CTableGrid::RowCount()
 {
 	return ItemCount();
 }
 
-inline CRow& CTableGrid::Row(int nRow)
+inline CRow& CTableGrid::Row(size_t nRow)
 {
-	ASSERT((nRow >= 0) && (nRow < RowCount()));
+	ASSERT(nRow < RowCount());
 
-	return *((CRow*)ItemPtr(nRow));
+	return *(static_cast<CRow*>(ItemPtr(nRow)));
 }
 
 #endif //TABLEGRID_HPP

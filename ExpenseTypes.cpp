@@ -24,17 +24,17 @@
 */
 
 CExpenseTypes::CExpenseTypes(CMDB& oDB)
-	: CTable(oDB, "ExpenseTypes")
+	: CTable(oDB, TXT("ExpenseTypes"))
 {
 	// Create the table schema.
-	AddColumn("ID",      MDCT_IDENTITY, 0,        CColumn::IDENTITY);
-	AddColumn("Name",    MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
-	AddColumn("Default", MDCT_INT,      0,        CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),      MDCT_IDENTITY, 0,        CColumn::IDENTITY);
+	AddColumn(TXT("Name"),    MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("Default"), MDCT_INT,      0,        CColumn::DEFAULTS);
 
 	// Add the predfined types.
-	AddPredefined("Pitch Hire",   0);
-	AddPredefined("Referees Fee", 0);
-	AddPredefined("Clean Kit",    0);
+	AddPredefined(TXT("Pitch Hire"),   0);
+	AddPredefined(TXT("Referees Fee"), 0);
+	AddPredefined(TXT("Clean Kit"),    0);
 }
 
 /******************************************************************************
@@ -70,7 +70,7 @@ CRow& CExpenseTypes::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]      = 0;
-	oRow[NAME]    = "";
+	oRow[NAME]    = TXT("");
 	oRow[DEFAULT] = 0;
 	
 	return oRow;
@@ -89,7 +89,7 @@ CRow& CExpenseTypes::CreateRow()
 *******************************************************************************
 */
 
-void CExpenseTypes::AddPredefined(const char* pszName, int nDefault)
+void CExpenseTypes::AddPredefined(const tchar* pszName, int nDefault)
 {
 	CRow& oRow = CreateRow();
 

@@ -67,7 +67,7 @@ bool CRefNamePage::OnValidate()
 	// At least part of the name supplied?
 	if ( (m_ebSurname.TextLength() == 0) && (m_ebForename.TextLength() == 0) )
 	{
-		AlertMsg("You must provide either the first or last names");
+		AlertMsg(TXT("You must provide either the first or last names"));
 		return false;
 	}
 
@@ -81,7 +81,7 @@ bool CRefNamePage::OnValidate()
 	// Referee already exists?
 	if (oRS.Count() > 0)
 	{
-		AlertMsg("A referee with that name already exists");
+		AlertMsg(TXT("A referee with that name already exists"));
 		return false;
 	}
 

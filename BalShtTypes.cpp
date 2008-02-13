@@ -24,16 +24,16 @@
 */
 
 CBalShtTypes::CBalShtTypes(CMDB& oDB)
-	: CTable(oDB, "BalanceSheetItemTypes")
+	: CTable(oDB, TXT("BalanceSheetItemTypes"))
 {
 	// Create the table schema.
-	AddColumn("ID",    MDCT_IDENTITY, 0,        CColumn::IDENTITY);
-	AddColumn("Name",  MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),    MDCT_IDENTITY, 0,        CColumn::IDENTITY);
+	AddColumn(TXT("Name"),  MDCT_FXDSTR,   NAME_LEN, CColumn::DEFAULTS);
 
 	// Add the predfined types.
-	AddPredefined("Other");
-	AddPredefined("Match");
-	AddPredefined("Training");
+	AddPredefined(TXT("Other"));
+	AddPredefined(TXT("Match"));
+	AddPredefined(TXT("Training"));
 }
 
 /******************************************************************************
@@ -69,7 +69,7 @@ CRow& CBalShtTypes::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]    = 0;
-	oRow[NAME]  = "";
+	oRow[NAME]  = TXT("");
 	
 	return oRow;
 }
@@ -86,7 +86,7 @@ CRow& CBalShtTypes::CreateRow()
 *******************************************************************************
 */
 
-void CBalShtTypes::AddPredefined(const char* pszName)
+void CBalShtTypes::AddPredefined(const tchar* pszName)
 {
 	CRow& oRow = CreateRow();
 

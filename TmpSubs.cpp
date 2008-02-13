@@ -26,17 +26,17 @@
 */
 
 CTmpSubs::CTmpSubs(CMDB& oDB, CMembers& oMembers, bool bSameMember)
-	: CTable(oDB, "#TmpSubs")
+	: CTable(oDB, TXT("#TmpSubs"))
 {
 	int nUniqFlag = (bSameMember) ? CColumn::NOT_UNIQUE : CColumn::UNIQUE;
 
 	// Create the table schema.
-	AddColumn("ItemID",   MDCT_INT,    0,                   CColumn::DEFAULTS);
-	AddColumn("MemberID", oMembers,    CMembers::ID,        CColumn::FOREIGN_KEY | nUniqFlag);
-	AddColumn("Fee",      MDCT_INT,	   0,                   CColumn::DEFAULTS);
-	AddColumn("Paid",     MDCT_INT,    0,                   CColumn::DEFAULTS);
-	AddColumn("ItemDate", MDCT_DATE,   0,                   CColumn::DEFAULTS | CColumn::NULLABLE);
-	AddColumn("ItemName", MDCT_FXDSTR, CBalSheet::NAME_LEN, CColumn::DEFAULTS | CColumn::NULLABLE);
+	AddColumn(TXT("ItemID"),   MDCT_INT,    0,                   CColumn::DEFAULTS);
+	AddColumn(TXT("MemberID"), oMembers,    CMembers::ID,        CColumn::FOREIGN_KEY | nUniqFlag);
+	AddColumn(TXT("Fee"),      MDCT_INT,	   0,                   CColumn::DEFAULTS);
+	AddColumn(TXT("Paid"),     MDCT_INT,    0,                   CColumn::DEFAULTS);
+	AddColumn(TXT("ItemDate"), MDCT_DATE,   0,                   CColumn::DEFAULTS | CColumn::NULLABLE);
+	AddColumn(TXT("ItemName"), MDCT_FXDSTR, CBalSheet::NAME_LEN, CColumn::DEFAULTS | CColumn::NULLABLE);
 }
 
 /******************************************************************************

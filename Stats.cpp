@@ -25,14 +25,14 @@
 *******************************************************************************
 */
 
-CStats::CStats(CMDB& oDB, const char* pszName, CStatTypes& oTypes)
+CStats::CStats(CMDB& oDB, const tchar* pszName, CStatTypes& oTypes)
 	: CTable(oDB, pszName)
 {
 	// Create the table schema.
-	AddColumn("OwnerID", MDCT_INT,    0,              CColumn::DEFAULTS   );
-	AddColumn("Date",    MDCT_DATE,   0,              CColumn::DEFAULTS   );
-	AddColumn("TypeID",  oTypes,      CStatTypes::ID, CColumn::FOREIGN_KEY);
-	AddColumn("Value",   MDCT_DOUBLE, 0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("OwnerID"), MDCT_INT,    0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("Date"),    MDCT_DATE,   0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("TypeID"),  oTypes,      CStatTypes::ID, CColumn::FOREIGN_KEY);
+	AddColumn(TXT("Value"),   MDCT_DOUBLE, 0,              CColumn::DEFAULTS   );
 }
 
 /******************************************************************************

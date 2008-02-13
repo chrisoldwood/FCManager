@@ -25,14 +25,14 @@
 */
 
 CTmpStats::CTmpStats(CMDB& oDB, CStatTypes& oTypes)
-	: CTable(oDB, "#TmpStats")
+	: CTable(oDB, TXT("#TmpStats"))
 {
 	// Create the table schema.
-	AddColumn("OwnerID", MDCT_INT,    0,              CColumn::DEFAULTS   );
-	AddColumn("Date",    MDCT_DATE,   0,              CColumn::DEFAULTS   );
-	AddColumn("TypeID",  oTypes,      CStatTypes::ID, CColumn::FOREIGN_KEY);
-	AddColumn("Value",   MDCT_DOUBLE, 0,              CColumn::DEFAULTS   );
-	AddColumn("Name",    MDCT_FXDSTR, NAME_LEN,       CColumn::DEFAULTS   );
+	AddColumn(TXT("OwnerID"), MDCT_INT,    0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("Date"),    MDCT_DATE,   0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("TypeID"),  oTypes,      CStatTypes::ID, CColumn::FOREIGN_KEY);
+	AddColumn(TXT("Value"),   MDCT_DOUBLE, 0,              CColumn::DEFAULTS   );
+	AddColumn(TXT("Name"),    MDCT_FXDSTR, NAME_LEN,       CColumn::DEFAULTS   );
 }
 
 /******************************************************************************
@@ -71,7 +71,7 @@ CRow& CTmpStats::CreateRow()
 	oRow[DATE]     = time(NULL);
 //	oRow[TYPE_ID]  = 0;
 	oRow[VALUE]    = 0.0;
-	oRow[NAME]     = "";
+	oRow[NAME]     = TXT("");
 	
 	return oRow;
 }

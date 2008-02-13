@@ -92,7 +92,7 @@ bool COpponentPage::OnValidate()
 	// At least the club name supplied?
 	if (m_ebClubName.TextLength() == 0)
 	{
-		AlertMsg("You must provide at least the Club Name");
+		AlertMsg(TXT("You must provide at least the Club Name"));
 		return false;
 	}
 
@@ -105,7 +105,7 @@ bool COpponentPage::OnValidate()
 	// Club already exists?
 	if (oRS.Count() > 0)
 	{
-		AlertMsg("A club with that name already exists");
+		AlertMsg(TXT("A club with that name already exists"));
 		return false;
 	}
 

@@ -36,13 +36,13 @@ CMemberDlg::CMemberDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, CMembers::NOTES, CMembers::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Member Details" : "Add A Member";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Member Details") : TXT("Add A Member");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oNamePage,		"Name && Address" )
-		PAGE(&m_oStatusPage,	"Status"          )
-		PAGE(&m_oPaymentsPage,	"Payments"        )
-		PAGE(&m_oStatsPage,		"Statistics"      )
-		PAGE(&m_oNotesPage,		"Notes"           )
+		PAGE(&m_oNamePage,		TXT("Name && Address") )
+		PAGE(&m_oStatusPage,	TXT("Status")          )
+		PAGE(&m_oPaymentsPage,	TXT("Payments")        )
+		PAGE(&m_oStatsPage,		TXT("Statistics")      )
+		PAGE(&m_oNotesPage,		TXT("Notes")           )
 	END_PAGE_TABLE
 }

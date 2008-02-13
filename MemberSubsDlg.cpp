@@ -58,13 +58,13 @@ CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, TArray<int>& oExclusions, CRo
 void CMemberSubsDlg::OnInitDialog()
 {
 	// Set the dialog title.
-	Title((m_bEditing == true) ? "Edit Members Subs" : "Add A Members Subs");
+	Title((m_bEditing == true) ? TXT("Edit Members Subs") : TXT("Add A Members Subs"));
 
 	// Adding an entry?
 	if (!m_bEditing)
 	{
 		// Load unused members into combo box.
-		for (int i = 0; i < m_oMembers.RowCount(); i++)
+		for (size_t i = 0; i < m_oMembers.RowCount(); i++)
 		{
 			CRow& oRow = m_oMembers[i];
 
@@ -94,7 +94,7 @@ void CMemberSubsDlg::OnInitDialog()
 	}
 
 	// Default to first member.
-	m_cbMembers.CurSel(0);
+	m_cbMembers.CurSel(0U);
 	m_cbMembers.Enable(!m_bEditing);
 
 	// Initialise the fields with data.
@@ -118,8 +118,8 @@ bool CMemberSubsDlg::OnOk()
 {
 	// Fetch field data.
 	int nRow = m_cbMembers.ItemData(m_cbMembers.CurSel());
-	int nFee  = (int) (m_ebFee.RealValue()  * 100.0);
-	int nPaid = (int) (m_ebPaid.RealValue() * 100.0);
+	int nFee  = static_cast<int>(m_ebFee.RealValue()  * 100.0);
+	int nPaid = static_cast<int>(m_ebPaid.RealValue() * 100.0);
 
 	// Save member, if not editing.
 	if (!m_bEditing)

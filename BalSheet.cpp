@@ -27,24 +27,24 @@
 */
 
 CBalSheet::CBalSheet(CMDB& oDB, CBalShtTypes& oTypes)
-	: CTable(oDB, "BalanceSheet")
+	: CTable(oDB, TXT("BalanceSheet"))
 {
 	// Create the table schema.
-	AddColumn("ID",          MDCT_IDENTITY, 0,					CColumn::IDENTITY);
-	AddColumn("Name",        MDCT_FXDSTR,   NAME_LEN,			CColumn::DEFAULTS);
-	AddColumn("Date",        MDCT_DATETIME, 0,					CColumn::DEFAULTS);
-	AddColumn("TypeID",      oTypes,		CBalShtTypes::ID,	CColumn::FOREIGNKEY);
-	AddColumn("CreditType",  MDCT_INT,		0,					CColumn::DEFAULTS);
-	AddColumn("CreditTotal", MDCT_INT,	    0,					CColumn::DEFAULTS);
-	AddColumn("DebitType",   MDCT_INT,		0,					CColumn::DEFAULTS);
-	AddColumn("DebitTotal",  MDCT_INT,      0,					CColumn::DEFAULTS);
-	AddColumn("Balance",     MDCT_INT,      0,					CColumn::DEFAULTS);
-	AddColumn("Notes",       MDCT_VARSTR,   NOTES_LEN,			CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),          MDCT_IDENTITY, 0,					CColumn::IDENTITY);
+	AddColumn(TXT("Name"),        MDCT_FXDSTR,   NAME_LEN,			CColumn::DEFAULTS);
+	AddColumn(TXT("Date"),        MDCT_DATETIME, 0,					CColumn::DEFAULTS);
+	AddColumn(TXT("TypeID"),      oTypes,		CBalShtTypes::ID,	CColumn::FOREIGNKEY);
+	AddColumn(TXT("CreditType"),  MDCT_INT,		0,					CColumn::DEFAULTS);
+	AddColumn(TXT("CreditTotal"), MDCT_INT,	    0,					CColumn::DEFAULTS);
+	AddColumn(TXT("DebitType"),   MDCT_INT,		0,					CColumn::DEFAULTS);
+	AddColumn(TXT("DebitTotal"),  MDCT_INT,      0,					CColumn::DEFAULTS);
+	AddColumn(TXT("Balance"),     MDCT_INT,      0,					CColumn::DEFAULTS);
+	AddColumn(TXT("Notes"),       MDCT_VARSTR,   NOTES_LEN,			CColumn::DEFAULTS);
 
 	// Add the "TOTAL" row.
 	CRow& oRow = CreateRow();
 
-	oRow[NAME]        = "TOTAL";
+	oRow[NAME]        = TXT("TOTAL");
 	oRow[DATE]        = CDate::Max().GetDateInSecs();
 	oRow[CREDIT_TYPE] = FIXED;
 	oRow[DEBIT_TYPE]  = FIXED;
@@ -85,7 +85,7 @@ CRow& CBalSheet::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]            = 0;
-	oRow[NAME]          = "";
+	oRow[NAME]          = TXT("");
 	oRow[DATE]          = time(NULL);
 	oRow[TYPE_ID]       = CBalShtTypes::OTHER;
 	oRow[CREDIT_TYPE]   = NONE;
@@ -93,7 +93,7 @@ CRow& CBalSheet::CreateRow()
 	oRow[DEBIT_TYPE]    = NONE;
 	oRow[DEBIT_TOTAL]   = 0;
 	oRow[BALANCE]       = 0;
-	oRow[NOTES]         = "";
+	oRow[NOTES]         = TXT("");
 	
 	return oRow;
 }
@@ -118,7 +118,7 @@ void CBalSheet::UpdateTotalsRow()
 	int   nTotal  = 0;
 
 	// For all rows...
-	for (int i  = 0; i < RowCount(); i++)
+	for (size_t i  = 0; i < RowCount(); i++)
 	{
 		CRow& oRow = Row(i);
 

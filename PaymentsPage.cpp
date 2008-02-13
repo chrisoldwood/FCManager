@@ -16,10 +16,10 @@
 // The list view columns.
 CTableGrid::Column CPaymentsPage::Columns[NUM_COLUMNS] =
 {
-	{ "Date",   75, LVCFMT_LEFT,  CTmpSubs::ITEM_DATE },
-	{ "Item",  175, LVCFMT_LEFT,  CTmpSubs::ITEM_NAME },
-	{ "£ Fee",  50, LVCFMT_RIGHT, CTmpSubs::FEE       },
-	{ "£ Paid", 50, LVCFMT_RIGHT, CTmpSubs::PAID      }
+	{ TXT("Date"),   75, LVCFMT_LEFT,  CTmpSubs::ITEM_DATE },
+	{ TXT("Item"),  175, LVCFMT_LEFT,  CTmpSubs::ITEM_NAME },
+	{ TXT("£ Fee"),  50, LVCFMT_RIGHT, CTmpSubs::FEE       },
+	{ TXT("£ Paid"), 50, LVCFMT_RIGHT, CTmpSubs::PAID      }
 };
 
 /******************************************************************************
@@ -52,7 +52,7 @@ CPaymentsPage::CPaymentsPage(CFCMDB& oDB, int nMemberID)
 	// Find all the payments for this member.
 	CResultSet oRS = m_oDB.m_oSubs.Select(CWhereCmp(CSubs::MEMBER_ID, CWhereCmp::EQUALS, m_nMemberID));
 
-	for (int i = 0; i < oRS.Count(); i++)
+	for (size_t i = 0; i < oRS.Count(); i++)
 	{
 		CRow& oCurRow = oRS[i];
 		CRow& oCpyRow = m_oTmpSubs.CreateRow();
@@ -124,7 +124,7 @@ int CPaymentsPage::CompareRows(CRow& oRow1, CRow& oRow2)
 *******************************************************************************
 */
 
-CString CPaymentsPage::RowFieldValue(CRow& oRow, int nField)
+CString CPaymentsPage::RowFieldValue(CRow& oRow, size_t nField)
 {
 	// Format FEE?
 	if (nField == CTmpSubs::FEE)

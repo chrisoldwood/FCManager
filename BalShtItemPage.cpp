@@ -56,9 +56,9 @@ void CBalShtItemPage::OnInitDialog()
 {
 	// Initialise the controls.
 	m_ebName.TextLimit(CBalSheet::NAME_LEN);
-	m_dtpDate.Format("ddd' 'dd'/'MM'/'yyyy");
+	m_dtpDate.Format(TXT("ddd' 'dd'/'MM'/'yyyy"));
 
-	for (int i = 0; i < m_oTypes.RowCount(); i++)
+	for (size_t i = 0; i < m_oTypes.RowCount(); i++)
 		m_cbType.Add(m_oTypes[i][CBalShtTypes::NAME]);
 
 	// Initialise the fields with data.
@@ -88,7 +88,7 @@ bool CBalShtItemPage::OnValidate()
 	// At least the name supplied?
 	if (m_ebName.TextLength() == 0)
 	{
-		AlertMsg("You must provide at least a name for the item");
+		AlertMsg(TXT("You must provide at least a name for the item"));
 		return false;
 	}
 

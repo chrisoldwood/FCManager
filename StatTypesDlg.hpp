@@ -61,7 +61,7 @@ protected:
 	// Internal methods.
 	//
 	void  UpdateUI();
-	CRow& ItemData(int nItem);
+	CRow& ItemData(size_t nItem);
 	bool  IsTypeInUse(int nID);
 };
 
@@ -72,11 +72,11 @@ protected:
 *******************************************************************************
 */
 
-inline CRow& CStatTypesDlg::ItemData(int nItem)
+inline CRow& CStatTypesDlg::ItemData(size_t nItem)
 {
-	ASSERT( (nItem >= 0) && (nItem < m_lbTypes.Count()) );
+	ASSERT(nItem < m_lbTypes.Count());
 
-	return *((CRow*)m_lbTypes.ItemPtr(nItem));
+	return *(static_cast<CRow*>(m_lbTypes.ItemPtr(nItem)));
 }
 
 #endif //STATTYPESDLG_HPP

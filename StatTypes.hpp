@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CStatTypes(CMDB& oDB, const char* pszName);
+	CStatTypes(CMDB& oDB, const tchar* pszName);
 	~CStatTypes();
 	
 	//
@@ -60,7 +60,7 @@ protected:
 	//
 	// Internal methods.
 	//
-	void AddPredefined(const char* pszName);
+	void AddPredefined(const tchar* pszName);
 };
 
 /******************************************************************************

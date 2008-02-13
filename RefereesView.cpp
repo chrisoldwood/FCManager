@@ -18,9 +18,9 @@
 // The list view columns.
 GridColumn CRefereesView::Columns[NUM_COLUMNS] =
 {
-	{ "Name",       150, LVCFMT_LEFT, 0                          },
-	{ "Phone #1",   150, LVCFMT_LEFT, CReferees::STANDARD_PHONE  },
-	{ "Phone #2",   150, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE },
+	{ TXT("Name"),       150, LVCFMT_LEFT, 0                          },
+	{ TXT("Phone #1"),   150, LVCFMT_LEFT, CReferees::STANDARD_PHONE  },
+	{ TXT("Phone #2"),   150, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE },
 };
 
 /******************************************************************************
@@ -137,7 +137,7 @@ void CRefereesView::OnDelete()
 	CString strName = App.FormatName(oRow, CReferees::FORENAME, CReferees::SURNAME);
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the referee: %s?",  strName) != IDYES)
+	if (QueryMsg(TXT("Delete the referee: %s?"), strName) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -162,7 +162,7 @@ void CRefereesView::OnDelete()
 void CRefereesView::OnDeleteAll()
 {
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL referees?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL referees?")) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -190,12 +190,12 @@ void CRefereesView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",       33, LVCFMT_LEFT, 0,                          true },
-		{ "Phone #1",   33, LVCFMT_LEFT, CReferees::STANDARD_PHONE,  true },
-		{ "Phone #2",   33, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE, true },
+		{ TXT("Name"),       33, LVCFMT_LEFT, 0,                          true },
+		{ TXT("Phone #1"),   33, LVCFMT_LEFT, CReferees::STANDARD_PHONE,  true },
+		{ TXT("Phone #2"),   33, LVCFMT_LEFT, CReferees::ALTERNATE_PHONE, true },
 	};
 
-	PrintView("Referees", NUM_PRT_COLUMNS, aColumns);
+	PrintView(TXT("Referees"), NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
@@ -251,7 +251,7 @@ void CRefereesView::OnMiscCmd1()
 	CRefStats&     oStats = m_oDB.m_oRefStats;
 	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
 
-	CStatTypesDlg Dlg("Referee", oTypes, oUsed);
+	CStatTypesDlg Dlg(TXT("Referee"), oTypes, oUsed);
 
 	Dlg.RunModal(*this);
 }
@@ -296,14 +296,14 @@ CString CRefereesView::GetCellData(int nColumn, CRow& oRow, int nField)
 
 int CRefereesView::CompareRows(CRow& oRow1, CRow& oRow2)
 {
-	const char* pszValue1;
-	const char* pszValue2;
-	int			nResult;
+	const tchar* pszValue1;
+	const tchar* pszValue2;
+	int			 nResult;
 
 	// First compare surnames.
 	pszValue1 = oRow1[CReferees::SURNAME];
 	pszValue2 = oRow2[CReferees::SURNAME];
-	nResult   = _stricmp(pszValue1, pszValue2);
+	nResult   = tstricmp(pszValue1, pszValue2);
 
 	// Not equal?
 	if (nResult != 0)
@@ -312,7 +312,7 @@ int CRefereesView::CompareRows(CRow& oRow1, CRow& oRow2)
 	// If equal, compare forenames.
 	pszValue1 = oRow1[CReferees::FORENAME];
 	pszValue2 = oRow2[CReferees::FORENAME];
-	nResult   = _stricmp(pszValue1, pszValue2);
+	nResult   = tstricmp(pszValue1, pszValue2);
 
 	return nResult;
 }

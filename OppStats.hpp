@@ -40,7 +40,7 @@ public:
 */
 
 inline COppStats::COppStats(CMDB& oDB, COppStatTypes& oTypes)
-	: CStats(oDB, "OppStats", oTypes)
+	: CStats(oDB, TXT("OppStats"), oTypes)
 {
 }
 

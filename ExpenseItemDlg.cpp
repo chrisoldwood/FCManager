@@ -59,13 +59,13 @@ CExpenseItemDlg::CExpenseItemDlg(CExpenseTypes& oTypes, CRow& oRow, bool bEditin
 void CExpenseItemDlg::OnInitDialog()
 {
 	// Set the dialog title.
-	Title((m_bEditing == true) ? "Edit Expense" : "Add An Expense");
+	Title((m_bEditing == true) ? TXT("Edit Expense") : TXT("Add An Expense"));
 
 	// Adding an entry?
 	if (!m_bEditing)
 	{
 		// Load types into combo box.
-		for (int i = 0; i < m_oTypes.RowCount(); i++)
+		for (size_t i = 0; i < m_oTypes.RowCount(); i++)
 		{
 			CRow& oRow = m_oTypes[i];
 
@@ -88,7 +88,7 @@ void CExpenseItemDlg::OnInitDialog()
 	}
 
 	// Default to first member.
-	m_cbTypes.CurSel(0);
+	m_cbTypes.CurSel(0U);
 	m_cbTypes.Enable(!m_bEditing);
 
 
@@ -115,7 +115,7 @@ bool CExpenseItemDlg::OnOk()
 {
 	// Fetch field data.
 	int nRow  = m_cbTypes.ItemData(m_cbTypes.CurSel());
-	int nPaid = (int) (m_ebPaid.RealValue() * 100.0);
+	int nPaid = static_cast<int>(m_ebPaid.RealValue() * 100.0);
 
 	// Save type, if not editing.
 	if (!m_bEditing)

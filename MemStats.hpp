@@ -50,7 +50,7 @@ public:
 */
 
 inline CMemStats::CMemStats(CMDB& oDB, CMemStatTypes& oTypes)
-	: CStats(oDB, "MemStats", oTypes)
+	: CStats(oDB, TXT("MemStats"), oTypes)
 {
 }
 

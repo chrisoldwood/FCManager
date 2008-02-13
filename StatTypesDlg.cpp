@@ -59,10 +59,10 @@ CStatTypesDlg::CStatTypesDlg(const CString& strType, CStatTypes& oTypes, CValueS
 void CStatTypesDlg::OnInitDialog()
 {
 	// Set the dialog title.
-	Title(m_strType + " Statistic Types");
+	Title(m_strType + TXT(" Statistic Types"));
 
 	// Load the set of types.
-	for (int i = 0; i < m_oTypes.RowCount(); i++)
+	for (size_t i = 0; i < m_oTypes.RowCount(); i++)
 	{
 		CRow& oRow = m_oTypes[i];
 
@@ -70,7 +70,7 @@ void CStatTypesDlg::OnInitDialog()
 	}
 
 	// Select the first by default.
-	m_lbTypes.CurSel(0);
+	m_lbTypes.CurSel(0U);
 
 	UpdateUI();
 }
@@ -135,7 +135,7 @@ void CStatTypesDlg::OnAdd()
 
 		// Select if first item.
 		if (m_lbTypes.Count() == 1)
-			m_lbTypes.CurSel(0);
+			m_lbTypes.CurSel(0U);
 	}
 	else
 	{
@@ -243,7 +243,7 @@ void CStatTypesDlg::UpdateUI()
 
 bool CStatTypesDlg::IsTypeInUse(int nID)
 {
-	for (int i = 0; i < m_oUsed.Count(); i++)
+	for (size_t i = 0; i < m_oUsed.Count(); i++)
 	{
 		if (m_oUsed[i].m_iValue == nID)
 			return true;

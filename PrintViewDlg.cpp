@@ -76,7 +76,7 @@ void CPrintViewDlg::OnInitDialog()
 	CString strTitle;
 
 	// Set the dialogs title.
-	strTitle.Format("Print %s", m_strViewName);
+	strTitle.Format(TXT("Print %s"), m_strViewName);
 	Title(strTitle);
 
 	// Show printer details.
@@ -84,10 +84,10 @@ void CPrintViewDlg::OnInitDialog()
 	m_txtPort.Text(App.m_oPrinter.m_strPort);
 
 	// Add the single column.
-	m_lvColumns.InsertColumn(0, "Column Name", 100);
+	m_lvColumns.InsertColumn(0, TXT("Column Name"), 100);
 
 	// Add the columns.
-	for (int i = 0; i < m_aoColumns.Size(); i++)
+	for (size_t i = 0; i < m_aoColumns.Size(); i++)
 	{
 		m_lvColumns.AppendItem(m_aoColumns[i].m_pszName);
 		m_lvColumns.ItemCheck(i, m_aoColumns[i].m_bShow);
@@ -111,11 +111,11 @@ void CPrintViewDlg::OnInitDialog()
 bool CPrintViewDlg::OnOk()
 {
 	// Check printer selection.
-	if ( (App.m_oPrinter.m_strName   == "")
-	  || (App.m_oPrinter.m_strDriver == "") 
-	  || (App.m_oPrinter.m_strPort   == "") )
+	if ( (App.m_oPrinter.m_strName   == TXT(""))
+	  || (App.m_oPrinter.m_strDriver == TXT("")) 
+	  || (App.m_oPrinter.m_strPort   == TXT("")) )
 	{
-		AlertMsg("You must select a printer.");
+		AlertMsg(TXT("You must select a printer."));
 		return false;
 	}
 
@@ -136,7 +136,7 @@ bool CPrintViewDlg::OnOk()
 	// Must have at least 1.
 	if (nChecked < 1)
 	{
-		AlertMsg("You must include at least one column.");
+		AlertMsg(TXT("You must include at least one column."));
 		return false;
 	}
 
@@ -222,7 +222,7 @@ void CPrintViewDlg::OnMoveDown()
 	if (!m_lvColumns.IsSelection())
 		return;
 
-	int nSel = m_lvColumns.Selection();
+	size_t nSel = m_lvColumns.Selection();
 
 	// If last, can't move down.
 	if (nSel >= (m_lvColumns.ItemCount() - 1))

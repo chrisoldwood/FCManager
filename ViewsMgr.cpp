@@ -121,7 +121,7 @@ void CViewsMgr::SelectView(DataView eNewView)
 	Pane(RIGHT_PANE, m_pDataViews[m_eCurrView]);
 
 	// Update the view bar selection, if different.
-	if (m_oViewsBar.CurSel() != eNewView)
+	if (m_oViewsBar.CurSel() != static_cast<size_t>(eNewView))
 		m_oViewsBar.CurSel(eNewView);
 
 	// Load the options menus.

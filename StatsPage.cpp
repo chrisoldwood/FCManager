@@ -16,9 +16,9 @@
 // The list view columns.
 CTableGrid::Column CStatsPage::Columns[NUM_COLUMNS] =
 {
-	{ "Date",       75, LVCFMT_LEFT,  CTmpStats::DATE  },
-	{ "Statistic", 150, LVCFMT_LEFT,  CTmpStats::NAME  },
-	{ "Value",      50, LVCFMT_RIGHT, CTmpStats::VALUE }
+	{ TXT("Date"),       75, LVCFMT_LEFT,  CTmpStats::DATE  },
+	{ TXT("Statistic"), 150, LVCFMT_LEFT,  CTmpStats::NAME  },
+	{ TXT("Value"),      50, LVCFMT_RIGHT, CTmpStats::VALUE }
 };
 
 /******************************************************************************
@@ -62,7 +62,7 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 	// Find the owners rows.
 	CResultSet oRS = m_oStats.Select(CWhereCmp(CStats::OWNER_ID, CWhereCmp::EQUALS, m_nOwnerID));
 
-	for (int i = 0; i < oRS.Count(); i++)
+	for (size_t i = 0; i < oRS.Count(); i++)
 	{
 		CRow& oCurRow = oRS[i];
 		CRow& oCpyRow = m_oTmpStats.CreateRow();
@@ -123,11 +123,11 @@ bool CStatsPage::OnOk()
 		// Delete the existing rows for this owner and group.
 		CResultSet oRS = m_oStats.Select(CWhereCmp(CStats::OWNER_ID, CWhereCmp::EQUALS, m_nOwnerID));
 
-		for (int i = 0; i < oRS.Count(); i++)
+		for (size_t i = 0; i < oRS.Count(); i++)
 			m_oStats.DeleteRow(oRS[i]);
 
 		// Copy the rows back from the tmp table.
-		for (int i = 0; i < m_oTmpStats.RowCount(); i++)
+		for (size_t i = 0; i < m_oTmpStats.RowCount(); i++)
 		{
 			CRow& oCurRow = m_oTmpStats[i];
 			CRow& oCpyRow = m_oStats.CreateRow();

@@ -378,7 +378,7 @@ void CFCMCmds::OnDebugClipboard()
 	catch(CStreamException& e)
 	{
 		// Notify user.
-		App.m_AppWnd.AlertMsg(e.ErrorText());
+		App.m_AppWnd.AlertMsg(TXT("%s"), e.ErrorText());
 	}
 }
 
@@ -399,10 +399,11 @@ void CFCMCmds::OnDebugFile()
 	CPath strPath;
 
 	// The file extensions.
-	static char szExts[]   = {	"Text Files (*.txt)\0*.txt\0"
-								"All Files (*.*)\0*.*\0"
-								"\0\0"							};
-	static char szDefExt[] = {	"txt"							};
+	static tchar szExts[]   = {	TXT("Text Files (*.txt)\0*.txt\0")
+								TXT("All Files (*.*)\0*.*\0")
+								TXT("\0\0")							};
+
+	static tchar szDefExt[] = {	TXT("txt")							};
 
 
 	// Get the output filename.
@@ -431,7 +432,7 @@ void CFCMCmds::OnDebugFile()
 		catch(CStreamException& e)
 		{
 			// Notify user.
-			App.m_AppWnd.AlertMsg(e.ErrorText());
+			App.m_AppWnd.AlertMsg(TXT("%s"), e.ErrorText());
 		}
 	}
 }

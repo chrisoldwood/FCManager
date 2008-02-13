@@ -17,11 +17,11 @@
 #include <WCL/FileException.hpp>
 
 // The file extension for importing/exporting.
-static char szExts[] = {	"Data Files (*.dat)\0*.dat\0"
-							"All Files (*.*)\0*.*\0"
-							"\0\0"							};
+static tchar szExts[] = {	TXT("Data Files (*.dat)\0*.dat\0")
+							TXT("All Files (*.*)\0*.*\0")
+							TXT("\0\0")							};
 
-static char szDefExt[] = { "dat" };
+static tchar szDefExt[] = { TXT("dat") };
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -38,7 +38,7 @@ static char szDefExt[] = { "dat" };
 *******************************************************************************
 */
 
-CGridViewDlg::CGridViewDlg(uint iRscID, CFCMDB& oDB, CTable& oTable, int nColumns, GridColumn* pColumns)
+CGridViewDlg::CGridViewDlg(uint iRscID, CFCMDB& oDB, CTable& oTable, size_t nColumns, GridColumn* pColumns)
 	: CViewDlg(iRscID)
 	, m_oDB(oDB)
 	, m_oTable(oTable)
@@ -93,11 +93,11 @@ void CGridViewDlg::OnInitDialog()
 	m_lvGrid.FullRowSelect(true);
 
 	// Setup the grid columns.
-	for (int c = 0; c < m_nColumns; c++)
+	for (size_t c = 0; c < m_nColumns; c++)
 		m_lvGrid.InsertColumn(c, m_pColumns[c].m_pszName, m_pColumns[c].m_nWidth, m_pColumns[c].m_nFormat);
 
 	// Fill the grid with data.
-	for (int r = 0; r < m_oTable.RowCount(); r++)
+	for (size_t r = 0; r < m_oTable.RowCount(); r++)
 		AddRow(m_oTable[r], false);
 
 	SortGrid();
@@ -261,9 +261,9 @@ LRESULT CGridViewDlg::OnDblClick(NMHDR&)
 *******************************************************************************
 */
 
-int CGridViewDlg::AddRow(CRow& oRow, bool bReSort)
+size_t CGridViewDlg::AddRow(CRow& oRow, bool bReSort)
 {
-	int nGridRow = m_lvGrid.AppendItem(GetCellData(0, oRow, m_pColumns[0].m_nField));
+	size_t nGridRow = m_lvGrid.AppendItem(GetCellData(0, oRow, m_pColumns[0].m_nField));
 
 	m_lvGrid.ItemPtr(nGridRow, &oRow);
 
@@ -283,12 +283,12 @@ int CGridViewDlg::AddRow(CRow& oRow, bool bReSort)
 *******************************************************************************
 */
 
-int CGridViewDlg::UpdateRow(int nGridRow, bool bReSort)
+size_t CGridViewDlg::UpdateRow(size_t nGridRow, bool bReSort)
 {
 	CRow& oRow = Row(nGridRow);
 
 	// For all grid columns.
-	for (int i = 0; i < m_nColumns; i++)
+	for (size_t i = 0; i < m_nColumns; i++)
 		m_lvGrid.ItemText(nGridRow, i, GetCellData(i, oRow, m_pColumns[i].m_nField));
 
 	if (bReSort)
@@ -312,7 +312,7 @@ int CGridViewDlg::UpdateRow(int nGridRow, bool bReSort)
 *******************************************************************************
 */
 
-void CGridViewDlg::DeleteRow(int nGridRow)
+void CGridViewDlg::DeleteRow(size_t nGridRow)
 {
 	m_lvGrid.DeleteItem(nGridRow);
 }
@@ -348,7 +348,7 @@ void CGridViewDlg::DeleteAllRows()
 *******************************************************************************
 */
 
-CString CGridViewDlg::GetCellData(int /*nColumn*/, CRow& oRow, int nField)
+CString CGridViewDlg::GetCellData(size_t /*nColumn*/, CRow& oRow, size_t nField)
 {
 	return oRow[nField].GetString();
 }
@@ -367,16 +367,16 @@ CString CGridViewDlg::GetCellData(int /*nColumn*/, CRow& oRow, int nField)
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColumn* pColumnsX)
+void CGridViewDlg::PrintView(const CString& strViewName, size_t nColumns, GridColumn* pColumns)
 {
-	ASSERT(nColumnsX >  0);
-	ASSERT(pColumnsX != NULL);
+	ASSERT(nColumns >  0);
+	ASSERT(pColumns != NULL);
 
 	CPrintViewDlg Dlg(strViewName);
 
 	// Setup the printable columns.
-	for (int i = 0; i < nColumnsX; i++)
-		Dlg.m_aoColumns.Add(new GridColumn(pColumnsX[i]));
+	for (size_t i = 0; i < nColumns; i++)
+		Dlg.m_aoColumns.Add(new GridColumn(pColumns[i]));
 
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
@@ -386,7 +386,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 
 		// Get printer attributes.
 		CRect rcRect = oDC.PrintableArea();
-		CSize dmFont = oDC.TextExtents("Wy");
+		CSize dmFont = oDC.TextExtents(TXT("Wy"));
 
 		// Calculate number of pages.
 		// NB: Page always includes column headers.
@@ -404,10 +404,10 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 		int			nPageWidth = rcRect.Width();
 		int			nRatioWidth = 0;
 
-		for (int i = 0; i < Dlg.m_aoColumns.Size(); i++)
+		for (size_t i = 0; i < Dlg.m_aoColumns.Size(); i++)
 			nRatioWidth += Dlg.m_aoColumns[i].m_nWidth;
 
-		for (int i = 0; i < Dlg.m_aoColumns.Size(); i++)
+		for (size_t i = 0; i < Dlg.m_aoColumns.Size(); i++)
 			aiWidths.Add((nPageWidth * Dlg.m_aoColumns[i].m_nWidth) / nRatioWidth);
 
 		// Create GDI objects.
@@ -442,7 +442,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 			rcCell.bottom = rcCell.top + dmFont.cy;
 
 			// Print column headers.
-			for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
+			for (size_t c = 0; c < Dlg.m_aoColumns.Size(); c++)
 			{
 				GridColumn& oColumn = Dlg.m_aoColumns[c];
 
@@ -473,7 +473,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 			// For all rows on the page.
 			for (int r = nFirstRow; r < nLastRow; r++)
 			{
-				CRow& oRow = *((CRow*)m_lvGrid.ItemPtr(r));
+				CRow& oRow = *(static_cast<CRow*>(m_lvGrid.ItemPtr(r)));
 
 				// Initialise cell to first in row.
 				rcCell = rcRow;
@@ -481,7 +481,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 				rcCell.bottom = rcCell.top + dmFont.cy;
 
 				// For all columns in the row.
-				for (int c = 0; c < Dlg.m_aoColumns.Size(); c++)
+				for (size_t c = 0; c < Dlg.m_aoColumns.Size(); c++)
 				{
 					GridColumn& oColumn = Dlg.m_aoColumns[c];
 
@@ -522,7 +522,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, int nColumnsX, GridColu
 *******************************************************************************
 */
 
-void CGridViewDlg::PrintCell(CDC& /*oDC*/, const CRect& /*rcCell*/, const char* pszText, int nAlignment, bool /*bBorder*/)
+void CGridViewDlg::PrintCell(CDC& /*oDC*/, const CRect& /*rcCell*/, const tchar* pszText, uint nAlignment, bool /*bBorder*/)
 {
 	ASSERT( (nAlignment == LVCFMT_LEFT) || (nAlignment == LVCFMT_CENTER) || (nAlignment == LVCFMT_RIGHT) );
 
@@ -601,7 +601,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 		oFile.Close();
 
 		// Fill the grid with data.
-		for (int r = 0; r < m_oTable.RowCount(); r++)
+		for (size_t r = 0; r < m_oTable.RowCount(); r++)
 			AddRow(m_oTable[r], false);
 
 		SortGrid();
@@ -615,7 +615,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(rException.ErrorText());
+		AlertMsg(TXT("%s"), rException.ErrorText());
 		return false;
 	}
 
@@ -647,7 +647,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 			return false;
 
 		// Warn user if file exists.
-		if ( (oPath.Exists()) && (QueryMsg("The file already exists:\n\n%s\n\nOverwrite?", oPath) != IDYES) )
+		if ( (oPath.Exists()) && (QueryMsg(TXT("The file already exists:\n\n%s\n\nOverwrite?"), oPath) != IDYES) )
 			return false;
 
 		// Open, write and close.
@@ -665,7 +665,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(rException.ErrorText());
+		AlertMsg(TXT("%s"), rException.ErrorText());
 		return false;
 	}
 
@@ -705,9 +705,9 @@ void CGridViewDlg::SortGrid()
 
 int CALLBACK GridCompareRows(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 {
-	CGridViewDlg*	pDlg  = (CGridViewDlg*) lParamSort;
-	CRow*			pRow1 = (CRow*) lParam1;
-	CRow*			pRow2 = (CRow*) lParam2;
+	CGridViewDlg*	pDlg  = reinterpret_cast<CGridViewDlg*>(lParamSort);
+	CRow*			pRow1 = reinterpret_cast<CRow*>(lParam1);
+	CRow*			pRow2 = reinterpret_cast<CRow*>(lParam2);
 
 	ASSERT(pDlg  != NULL);
 	ASSERT(pRow1 != NULL);

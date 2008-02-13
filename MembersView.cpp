@@ -18,19 +18,19 @@
 // The list view columns.
 GridColumn CMembersView::Columns[NUM_COLUMNS] =
 {
-	{ "Name",       150, LVCFMT_LEFT,  0                         },
-	{ "Phone #1",   150, LVCFMT_LEFT,  CMembers::STANDARD_PHONE  },
-	{ "Phone #2",   150, LVCFMT_LEFT,  CMembers::ALTERNATE_PHONE },
-	{ "Registered?", 75, LVCFMT_LEFT,  CMembers::IS_REGISTERED   },
-	{ "Senior?",     75, LVCFMT_LEFT,  CMembers::IS_SENIOR       },
-	{ "Available?",  75, LVCFMT_LEFT,  CMembers::IS_AVAILABLE    },
-	{ "£ Balance",   75, LVCFMT_RIGHT, CMembers::BALANCE         }
+	{ TXT("Name"),       150, LVCFMT_LEFT,  0                         },
+	{ TXT("Phone #1"),   150, LVCFMT_LEFT,  CMembers::STANDARD_PHONE  },
+	{ TXT("Phone #2"),   150, LVCFMT_LEFT,  CMembers::ALTERNATE_PHONE },
+	{ TXT("Registered?"), 75, LVCFMT_LEFT,  CMembers::IS_REGISTERED   },
+	{ TXT("Senior?"),     75, LVCFMT_LEFT,  CMembers::IS_SENIOR       },
+	{ TXT("Available?"),  75, LVCFMT_LEFT,  CMembers::IS_AVAILABLE    },
+	{ TXT("£ Balance"),   75, LVCFMT_RIGHT, CMembers::BALANCE         }
 };
 
 // Unavailability reasons.
-static char* astrReasons[MAX_REASONS] =
+static tchar* astrReasons[MAX_REASONS] =
 {
-	"Unavailable", "Injured", "On Holiday", "Transferred", "Resigned", "Uncontactable"
+	TXT("Unavailable"), TXT("Injured"), TXT("On Holiday"), TXT("Transferred"), TXT("Resigned"), TXT("Uncontactable")
 };
 
 /******************************************************************************
@@ -166,9 +166,9 @@ void CMembersView::OnEdit()
 
 void CMembersView::OnDelete()
 {
-	static const char* pszMsg = "Delete the member: %s?\n\n"
-								"This will also delete their stats, any\n"
-								"income and their place in any team sheets.";
+	static const tchar* pszMsg = TXT("Delete the member: %s?\n\n")
+								 TXT("This will also delete their stats, any\n")
+								 TXT("income and their place in any team sheets.");
 
 	// Ignore if no selection.
 	if (!m_lvGrid.IsSelection())
@@ -211,12 +211,12 @@ void CMembersView::OnDelete()
 
 void CMembersView::OnDeleteAll()
 {
-//	static const char* pszMsg = "Delete the member: %s?\n\n"
-//								"This will also delete their stats, any\n"
-//								"income and their place in any team sheets.";
+//	static const tchar* pszMsg = TXT("Delete the member: %s?\n\n")
+//								 TXT("This will also delete their stats, any\n")
+//								 TXT("income and their place in any team sheets.");
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL members?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL members?")) != IDYES)
 		return;
 
 	// Remove any stats, income and team sheet places.
@@ -249,18 +249,18 @@ void CMembersView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Name",        30, LVCFMT_LEFT, 0,                         true  },
-		{ "Phone #1",    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE,  true  },
-		{ "Phone #2",    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE, true  },
-//		{ "Address",     20, LVCFMT_LEFT, CMembers::POSTAL_ADDRESS,  false },
-//		{ "Email",       20, LVCFMT_LEFT, CMembers::EMAIL_ADDRESS,   false },
-		{ "Registered?", 10, LVCFMT_LEFT, CMembers::IS_REGISTERED,   true  },
-		{ "Senior?",     10, LVCFMT_LEFT, CMembers::IS_SENIOR,       true  },
-		{ "Available?",  10, LVCFMT_LEFT, CMembers::IS_AVAILABLE,    true  },
-	    { "£ Balance",   10, LVCFMT_LEFT, CMembers::BALANCE,         true  }
+		{ TXT("Name"),        30, LVCFMT_LEFT, 0,                         true  },
+		{ TXT("Phone #1"),    20, LVCFMT_LEFT, CMembers::STANDARD_PHONE,  true  },
+		{ TXT("Phone #2"),    20, LVCFMT_LEFT, CMembers::ALTERNATE_PHONE, true  },
+//		{ TXT("Address"),     20, LVCFMT_LEFT, CMembers::POSTAL_ADDRESS,  false },
+//		{ TXT("Email"),       20, LVCFMT_LEFT, CMembers::EMAIL_ADDRESS,   false },
+		{ TXT("Registered?"), 10, LVCFMT_LEFT, CMembers::IS_REGISTERED,   true  },
+		{ TXT("Senior?"),     10, LVCFMT_LEFT, CMembers::IS_SENIOR,       true  },
+		{ TXT("Available?"),  10, LVCFMT_LEFT, CMembers::IS_AVAILABLE,    true  },
+	    { TXT("£ Balance"),   10, LVCFMT_LEFT, CMembers::BALANCE,         true  }
 	};
 
-	PrintView("Members", NUM_PRT_COLUMNS, aColumns);
+	PrintView(TXT("Members"), NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
@@ -316,7 +316,7 @@ void CMembersView::OnMiscCmd1()
 	CMemStats&     oStats = m_oDB.m_oMemStats;
 	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
 
-	CStatTypesDlg Dlg("Member", oTypes, oUsed);
+	CStatTypesDlg Dlg(TXT("Member"), oTypes, oUsed);
 
 	Dlg.RunModal(*this);
 }
@@ -347,14 +347,14 @@ CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
 	{
 		bool bFlag = oRow[nField];
 
-		return (bFlag == true) ? "Yes" : "No";
+		return (bFlag == true) ? TXT("Yes") : TXT("No");
 	}
 	// Set availability.
 	else if (nColumn == IS_AVAILABLE)
 	{
 		bool bFlag = oRow[nField];
 
-		return (bFlag == true) ? "Yes" : astrReasons[oRow[CMembers::UNAVAIL_REASON].GetInt()];
+		return (bFlag == true) ? TXT("Yes") : astrReasons[oRow[CMembers::UNAVAIL_REASON].GetInt()];
 	}
 	// Balance.
 	else if (nColumn == BALANCE)
@@ -380,14 +380,14 @@ CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
 
 int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
 {
-	const char* pszValue1;
-	const char* pszValue2;
-	int			nResult;
+	const tchar* pszValue1;
+	const tchar* pszValue2;
+	int			 nResult;
 
 	// First compare surnames.
 	pszValue1 = oRow1[CMembers::SURNAME];
 	pszValue2 = oRow2[CMembers::SURNAME];
-	nResult   = _stricmp(pszValue1, pszValue2);
+	nResult   = tstricmp(pszValue1, pszValue2);
 
 	// Not equal?
 	if (nResult != 0)
@@ -396,7 +396,7 @@ int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
 	// If equal, compare forenames.
 	pszValue1 = oRow1[CMembers::FORENAME];
 	pszValue2 = oRow2[CMembers::FORENAME];
-	nResult   = _stricmp(pszValue1, pszValue2);
+	nResult   = tstricmp(pszValue1, pszValue2);
 
 	return nResult;
 }
@@ -416,6 +416,6 @@ int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
 void CMembersView::RefreshRows(const TRefArray<CRow>& aoRows)
 {
 	// For all data rows, update grid row.
-	for (int i = 0; i < aoRows.Size(); i++)
+	for (size_t i = 0; i < aoRows.Size(); i++)
 		UpdateRow(FindRow(aoRows[i]), false);
 }

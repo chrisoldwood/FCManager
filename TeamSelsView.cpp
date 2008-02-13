@@ -16,8 +16,8 @@
 // The list view columns.
 GridColumn CTeamSelsView::Columns[NUM_COLUMNS] =
 {
-	{ "Date",      100, LVCFMT_LEFT,  CTeamSels::DATE      },
-	{ "Opponents", 150, LVCFMT_LEFT,  CTeamSels::OPPONENTS }
+	{ TXT("Date"),      100, LVCFMT_LEFT,  CTeamSels::DATE      },
+	{ TXT("Opponents"), 150, LVCFMT_LEFT,  CTeamSels::OPPONENTS }
 };
 
 /******************************************************************************
@@ -166,7 +166,7 @@ void CTeamSelsView::OnDelete()
 	CString strName = App.FormatDate(oRow, CTeamSels::DATE);
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the team selection for: %s?",  strName) != IDYES)
+	if (QueryMsg(TXT("Delete the team selection for: %s?"),  strName) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -191,7 +191,7 @@ void CTeamSelsView::OnDelete()
 void CTeamSelsView::OnDeleteAll()
 {
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL team selections?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL team selections?")) != IDYES)
 		return;
 
 	// Remove from the list view and collection.

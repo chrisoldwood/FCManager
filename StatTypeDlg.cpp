@@ -74,7 +74,7 @@ bool CStatTypeDlg::OnOk()
 	// Validate it.
 	if (strName.Length() == 0)
 	{
-		AlertMsg("You must provide a name.");
+		AlertMsg(TXT("You must provide a name."));
 		return false;
 	}
 

@@ -42,13 +42,13 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, CBalSheet::NOTES, CBalSheet::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Balance Sheet Item" : "Add A Balance Sheet Item";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Balance Sheet Item") : TXT("Add A Balance Sheet Item");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oItemPage,		"Item Details")
-		PAGE(&m_oIncomePage,	"Income"      )
-		PAGE(&m_oExpensesPage,	"Expenses"    )
-		PAGE(&m_oNotesPage,		"Notes"       )
+		PAGE(&m_oItemPage,		TXT("Item Details"))
+		PAGE(&m_oIncomePage,	TXT("Income")      )
+		PAGE(&m_oExpensesPage,	TXT("Expenses")    )
+		PAGE(&m_oNotesPage,		TXT("Notes")       )
 	END_PAGE_TABLE
 
 	// Editing existing item?
@@ -60,7 +60,7 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 		CResultSet oSubsRS = oSubsTable.Select(CWhereCmp(CSubs::ITEM_ID, CWhereCmp::EQUALS, m_nItemID));
 
 		// Copy to temporary table.
-		for (int i = 0; i < oSubsRS.Count(); i++)
+		for (size_t i = 0; i < oSubsRS.Count(); i++)
 		{
 			CRow& oOrig = oSubsRS[i];
 			CRow& oCopy = m_oTmpSubs.CreateRow();
@@ -81,7 +81,7 @@ CBalShtItemDlg::CBalShtItemDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 		CResultSet oExpsRS = oExpsTable.Select(CWhereCmp(CExpenses::ITEM_ID, CWhereCmp::EQUALS, m_nItemID));
 
 		// Copy to temporary table.
-		for (int i = 0; i < oExpsRS.Count(); i++)
+		for (size_t i = 0; i < oExpsRS.Count(); i++)
 		{
 			CRow& oOrig = oExpsRS[i];
 			CRow& oCopy = m_oTmpExps.CreateRow();
@@ -126,12 +126,12 @@ void CBalShtItemDlg::UpdateSubsTable()
 		CResultSet oRS = oSubs.Select(CWhereCmp(CSubs::ITEM_ID, CWhereCmp::EQUALS, nItemID));
 
 		// Delete all rows for the item.
-		for (int i = 0; i < oRS.Count(); i++)
+		for (size_t i = 0; i < oRS.Count(); i++)
 			oSubs.DeleteRow(oRS[i]);
 	}
 
 	// Copy from temporary table to real table.
-	for (int i = 0; i < m_oTmpSubs.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpSubs.RowCount(); i++)
 	{
 		CRow& oTmp = m_oTmpSubs[i];
 		CRow& oNew = oSubs.CreateRow();
@@ -161,12 +161,12 @@ void CBalShtItemDlg::UpdateExpsTable()
 		CResultSet oRS = oExps.Select(CWhereCmp(CExpenses::ITEM_ID, CWhereCmp::EQUALS, nItemID));
 
 		// Delete all rows for the item.
-		for (int i = 0; i < oRS.Count(); i++)
+		for (size_t i = 0; i < oRS.Count(); i++)
 			oExps.DeleteRow(oRS[i]);
 	}
 
 	// Copy from temporary table to real table.
-	for (int i = 0; i < m_oTmpExps.RowCount(); i++)
+	for (size_t i = 0; i < m_oTmpExps.RowCount(); i++)
 	{
 		CRow& oTmp = m_oTmpExps[i];
 		CRow& oNew = oExps.CreateRow();

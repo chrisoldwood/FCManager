@@ -26,14 +26,14 @@
 */
 
 CTmpExps::CTmpExps(CMDB& oDB, CExpenseTypes& oTypes)
-	: CTable(oDB, "#TmpExps")
+	: CTable(oDB, TXT("#TmpExps"))
 {
 	// Create the table schema.
-	AddColumn("ItemID",   MDCT_INT,    0,                   CColumn::DEFAULTS   );
-	AddColumn("TypeID",   oTypes,      CExpenseTypes::ID,   CColumn::FOREIGN_KEY);
-	AddColumn("Paid",     MDCT_INT,    0,                   CColumn::DEFAULTS   );
-	AddColumn("ItemDate", MDCT_DATE,   0,                   CColumn::DEFAULTS | CColumn::NULLABLE);
-	AddColumn("ItemName", MDCT_FXDSTR, CBalSheet::NAME_LEN, CColumn::DEFAULTS | CColumn::NULLABLE);
+	AddColumn(TXT("ItemID"),   MDCT_INT,    0,                   CColumn::DEFAULTS   );
+	AddColumn(TXT("TypeID"),   oTypes,      CExpenseTypes::ID,   CColumn::FOREIGN_KEY);
+	AddColumn(TXT("Paid"),     MDCT_INT,    0,                   CColumn::DEFAULTS   );
+	AddColumn(TXT("ItemDate"), MDCT_DATE,   0,                   CColumn::DEFAULTS | CColumn::NULLABLE);
+	AddColumn(TXT("ItemName"), MDCT_FXDSTR, CBalSheet::NAME_LEN, CColumn::DEFAULTS | CColumn::NULLABLE);
 }
 
 /******************************************************************************

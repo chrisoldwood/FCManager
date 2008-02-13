@@ -19,12 +19,12 @@
 // The list view columns.
 GridColumn CFixturesView::Columns[NUM_COLUMNS] =
 {
-	{ "Date",       75, LVCFMT_LEFT,   CFixtures::DATE      },
-	{ "Type",       75, LVCFMT_LEFT,   CFixtures::TYPE      },
-	{ "Home Team", 150, LVCFMT_LEFT,   CFixtures::HOME_TEAM },
-	{ "Result",     75, LVCFMT_CENTER, CFixtures::RESULT    },
-	{ "Away Team", 150, LVCFMT_LEFT,   CFixtures::AWAY_TEAM },
-	{ "Referee",   125, LVCFMT_LEFT,   CFixtures::REFEREE   },
+	{ TXT("Date"),       75, LVCFMT_LEFT,   CFixtures::DATE      },
+	{ TXT("Type"),       75, LVCFMT_LEFT,   CFixtures::TYPE      },
+	{ TXT("Home Team"), 150, LVCFMT_LEFT,   CFixtures::HOME_TEAM },
+	{ TXT("Result"),     75, LVCFMT_CENTER, CFixtures::RESULT    },
+	{ TXT("Away Team"), 150, LVCFMT_LEFT,   CFixtures::AWAY_TEAM },
+	{ TXT("Referee"),   125, LVCFMT_LEFT,   CFixtures::REFEREE   },
 };
 
 /******************************************************************************
@@ -142,7 +142,7 @@ void CFixturesView::OnDelete()
 	strRow  = oRow[CFixtures::DATE].GetString();
 
 	// Get user to confirm action.
-	if (QueryMsg("Delete the fixture: %s",  strRow) != IDYES)
+	if (QueryMsg(TXT("Delete the fixture: %s"),  strRow) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -167,7 +167,7 @@ void CFixturesView::OnDelete()
 void CFixturesView::OnDeleteAll()
 {
 	// Get user to confirm action.
-	if (QueryMsg("Delete ALL fixtures?") != IDYES)
+	if (QueryMsg(TXT("Delete ALL fixtures?")) != IDYES)
 		return;
 
 	// Remove from the list view and collection.
@@ -195,15 +195,15 @@ void CFixturesView::OnPrint()
 
 	GridColumn aColumns[NUM_PRT_COLUMNS] =
 	{
-		{ "Date",       75, LVCFMT_LEFT,   CFixtures::DATE,      true },
-		{ "Type",       75, LVCFMT_LEFT,   CFixtures::TYPE,      true },
-		{ "Home Team", 150, LVCFMT_LEFT,   CFixtures::HOME_TEAM, true },
-		{ "Result",     75, LVCFMT_CENTER, CFixtures::RESULT,    true },
-		{ "Away Team", 150, LVCFMT_LEFT,   CFixtures::AWAY_TEAM, true },
-		{ "Referee",   125, LVCFMT_LEFT,   CFixtures::REFEREE,   true },
+		{ TXT("Date"),       75, LVCFMT_LEFT,   CFixtures::DATE,      true },
+		{ TXT("Type"),       75, LVCFMT_LEFT,   CFixtures::TYPE,      true },
+		{ TXT("Home Team"), 150, LVCFMT_LEFT,   CFixtures::HOME_TEAM, true },
+		{ TXT("Result"),     75, LVCFMT_CENTER, CFixtures::RESULT,    true },
+		{ TXT("Away Team"), 150, LVCFMT_LEFT,   CFixtures::AWAY_TEAM, true },
+		{ TXT("Referee"),   125, LVCFMT_LEFT,   CFixtures::REFEREE,   true },
 	};
 
-	PrintView("Fixtures", NUM_PRT_COLUMNS, aColumns);
+	PrintView(TXT("Fixtures"), NUM_PRT_COLUMNS, aColumns);
 }
 
 /******************************************************************************
@@ -259,7 +259,7 @@ void CFixturesView::OnMiscCmd1()
 	CFixStats&     oStats = m_oDB.m_oFixStats;
 	CValueSet      oUsed  = oStats.SelectAll().Distinct(CStats::TYPE_ID);
 
-	CStatTypesDlg Dlg("Fixture", oTypes, oUsed);
+	CStatTypesDlg Dlg(TXT("Fixture"), oTypes, oUsed);
 
 	Dlg.RunModal(*this);
 }
@@ -282,10 +282,10 @@ CString CFixturesView::GetCellData(int nColumn, CRow& oRow, int nField)
 {
 	if (nColumn == DATE)
 	{
-		char   szDate[20] = { 0 };
+		tchar  szDate[20] = { 0 };
 		time_t tDate = oRow[CFixtures::DATE];
 
-		strftime(szDate, sizeof(szDate), "%d/%m/%y", localtime(&tDate));
+		_tcsftime(szDate, sizeof(szDate), TXT("%d/%m/%y"), localtime(&tDate));
 
 		return szDate;
 	}

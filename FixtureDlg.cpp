@@ -33,11 +33,11 @@ CFixtureDlg::CFixtureDlg(CFCMDB& oDB, CRow& oRow, bool bEditing)
 	, m_oNotesPage(oRow, CFixtures::NOTES, CFixtures::NOTES_LEN)
 {
 	// Set the title.
-	m_strTitle = (m_bEditing == true) ? "Edit Fixture Details" : "Add A Fixture";
+	m_strTitle = (m_bEditing == true) ? TXT("Edit Fixture Details") : TXT("Add A Fixture");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oDetailsPage,	"Details"   )
-		PAGE(&m_oStatsPage,		"Statistics")
-		PAGE(&m_oNotesPage,		"Notes"     )
+		PAGE(&m_oDetailsPage,	TXT("Details")   )
+		PAGE(&m_oStatsPage,		TXT("Statistics"))
+		PAGE(&m_oNotesPage,		TXT("Notes")     )
 	END_PAGE_TABLE
 }

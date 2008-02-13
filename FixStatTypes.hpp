@@ -40,11 +40,11 @@ public:
 */
 
 inline CFixStatTypes::CFixStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, "FixStatTypes")
+	: CStatTypes(oDB, TXT("FixStatTypes"))
 {
 	// Add the pre-defined statistics.
-	AddPredefined("Goals For");
-	AddPredefined("Goals Against");
+	AddPredefined(TXT("Goals For"));
+	AddPredefined(TXT("Goals Against"));
 }
 
 #endif //FIXSTATTYPES_HPP

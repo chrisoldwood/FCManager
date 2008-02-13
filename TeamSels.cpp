@@ -26,29 +26,29 @@
 */
 
 CTeamSels::CTeamSels(CMDB& oDB, CMembers& oMembers)
-	: CTable(oDB, "TeamSels")
+	: CTable(oDB, TXT("TeamSels"))
 {
 	// Create the table schema.
-	AddColumn("ID",        MDCT_IDENTITY, 0,             CColumn::IDENTITY);
-	AddColumn("Date",      MDCT_DATETIME, 0,             CColumn::DEFAULTS);
-	AddColumn("Opponents", MDCT_FXDSTR,   OPPONENTS_LEN, CColumn::DEFAULTS);
-	AddColumn("Player1",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player2",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player3",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player4",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player5",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player6",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player7",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player8",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player9",   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player10",  oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Player11",  oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Subs1",     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Subs2",     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Subs3",     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Subs4",     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Subs5",     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
-	AddColumn("Notes",     MDCT_VARSTR,   NOTES_LEN,     CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),        MDCT_IDENTITY, 0,             CColumn::IDENTITY);
+	AddColumn(TXT("Date"),      MDCT_DATETIME, 0,             CColumn::DEFAULTS);
+	AddColumn(TXT("Opponents"), MDCT_FXDSTR,   OPPONENTS_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("Player1"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player2"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player3"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player4"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player5"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player6"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player7"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player8"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player9"),   oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player10"),  oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Player11"),  oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Subs1"),     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Subs2"),     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Subs3"),     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Subs4"),     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Subs5"),     oMembers,      CMembers::ID,  CColumn::FOREIGN_KEY | CColumn::NULLABLE);
+	AddColumn(TXT("Notes"),     MDCT_VARSTR,   NOTES_LEN,     CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -85,7 +85,7 @@ CRow& CTeamSels::CreateRow()
 
 //	oRow[ID]        = 0;
 	oRow[DATE]      = time(NULL);
-	oRow[OPPONENTS] = "";
+	oRow[OPPONENTS] = TXT("");
 	oRow[PLAYER_1]  = null;
 	oRow[PLAYER_2]  = null;
 	oRow[PLAYER_3]  = null;
@@ -102,7 +102,7 @@ CRow& CTeamSels::CreateRow()
 	oRow[SUB_3]     = null;
 	oRow[SUB_4]     = null;
 	oRow[SUB_5]     = null;
-	oRow[NOTES]     = "";
+	oRow[NOTES]     = TXT("");
 	
 	return oRow;
 }

@@ -40,7 +40,7 @@ public:
 */
 
 inline CRefStats::CRefStats(CMDB& oDB, CRefStatTypes& oTypes)
-	: CStats(oDB, "RefStats", oTypes)
+	: CStats(oDB, TXT("RefStats"), oTypes)
 {
 }
 

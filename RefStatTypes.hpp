@@ -40,7 +40,7 @@ public:
 */
 
 inline CRefStatTypes::CRefStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, "RefStatTypes")
+	: CStatTypes(oDB, TXT("RefStatTypes"))
 {
 	// Add the pre-defined statistics.
 }

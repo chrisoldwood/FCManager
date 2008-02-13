@@ -17,9 +17,9 @@
 const int NUM_VIEWS = 7;
 
 // The list of views.
-static const char* apszViewNames[NUM_VIEWS] = 
+static const tchar* apszViewNames[NUM_VIEWS] = 
 {
-	"Members", "Fixtures", "Balance Sheet", "Accounts", "Team Sheets", "Opponents", "Referees"
+	TXT("Members"), TXT("Fixtures"), TXT("Balance Sheet"), TXT("Accounts"), TXT("Team Sheets"), TXT("Opponents"), TXT("Referees")
 };
 
 /******************************************************************************
@@ -73,7 +73,7 @@ void CViewsBar::GetCreateParams(WNDCREATE& rParams)
 	CCtrlWnd::GetCreateParams(rParams);
 
 	// Override any settings.
-	rParams.pszClassName = "LISTBOX";
+	rParams.pszClassName = TXT("LISTBOX");
 	rParams.dwExStyle   |= WS_EX_CLIENTEDGE;
 	rParams.dwStyle     |= LBS_OWNERDRAWFIXED | LBS_NOINTEGRALHEIGHT;
 	rParams.dwStyle     |= LBS_NOTIFY | WS_VSCROLL;
@@ -100,7 +100,7 @@ void CViewsBar::OnCreate(const CRect& /*rcClient*/)
     
     // Get the height of the default font.
     DC.Select(App.DefaultFont());
-    CSize FontSize = DC.TextExtents("Ly");
+    CSize FontSize = DC.TextExtents(TXT("Ly"));
 
 	// Set the height of all items.
 	ItemHeight(0, m_bmpIcons.Size().cy + FontSize.cy + (2*BORDER));
@@ -156,7 +156,7 @@ void CViewsBar::OnDrawItem(uint /*iID*/, uint iAction, uint iState, CDC& rDC,
 		rDC.BkMode(TRANSPARENT);
 
 		// Get the label.
-		const char* pszLabel = apszViewNames[iItem];
+		const tchar* pszLabel = apszViewNames[iItem];
 
 		// Calculate its position.
 		CSize  szText  = rDC.TextExtents(pszLabel);
