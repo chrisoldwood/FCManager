@@ -15,6 +15,7 @@
 #include "FCMApp.hpp"
 #include <time.h>
 #include <MDBL/ValueSet.hpp>
+#include <tchar.h>
 
 // The list view columns.
 GridColumn CFixturesView::Columns[NUM_COLUMNS] =

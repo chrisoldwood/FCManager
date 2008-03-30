@@ -12,6 +12,7 @@
 #include "FCMApp.hpp"
 #include <stdio.h>
 #include <time.h>
+#include <tchar.h>
 
 /******************************************************************************
 **
