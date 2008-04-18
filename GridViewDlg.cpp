@@ -585,10 +585,10 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 
 		// Check the format and version.
 		if (iFileFormat != iFormat)
-			throw CFileException(CStreamException::E_FORMAT_INVALID, oPath);
+			throw CFileException(CStreamException::E_FORMAT_INVALID, oPath, ERROR_FILE_CORRUPT);
 
 		if (iFileVersion != iVersion)
-			throw CFileException(CStreamException::E_VERSION_INVALID, oPath);
+			throw CFileException(CStreamException::E_VERSION_INVALID, oPath, NO_ERROR);
 
 		// Truncate the table and view.
 		m_oTable.Truncate();
