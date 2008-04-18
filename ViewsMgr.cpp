@@ -25,7 +25,7 @@
 */
 
 CViewsMgr::CViewsMgr(CFCMDoc& rDoc)
-	: CSplitWnd(true, true)
+	: CSplitWnd(CSplitWnd::VERTICAL, CSplitWnd::FIXED)
 	, m_eCurrView(NO_VIEW)
 	, m_oMembersView(rDoc)
 	, m_oFixturesView(rDoc)
@@ -82,8 +82,8 @@ void CViewsMgr::OnCreate(const CRect& /*rcClient*/)
 {
 	// Create the data view bar
 	m_oViewsBar.Create(*this, IDC_VIEW_BAR, CRect(0, 0, 0, 0));
-	Pane(LEFT_PANE, &m_oViewsBar);
-	BarPos(100);
+	SetPane(LEFT_PANE, &m_oViewsBar);
+	SetSizingBarPos(100);
 
 	// Create the data views.
 	for (int i = 0; i < NUM_DATAVIEWS; i++)
@@ -118,7 +118,7 @@ void CViewsMgr::SelectView(DataView eNewView)
 	m_eCurrView = eNewView;
 
 	// Show the new view.
-	Pane(RIGHT_PANE, m_pDataViews[m_eCurrView]);
+	SetPane(RIGHT_PANE, m_pDataViews[m_eCurrView]);
 
 	// Update the view bar selection, if different.
 	if (m_oViewsBar.CurSel() != static_cast<size_t>(eNewView))
