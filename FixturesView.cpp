@@ -279,7 +279,7 @@ void CFixturesView::OnMiscCmd1()
 *******************************************************************************
 */
 
-CString CFixturesView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CFixturesView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	if (nColumn == DATE)
 	{

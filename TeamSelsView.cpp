@@ -231,7 +231,7 @@ void CTeamSelsView::OnPrint()
 *******************************************************************************
 */
 
-CString CTeamSelsView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CTeamSelsView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	// Format dates.
 	if (nColumn == DATE)

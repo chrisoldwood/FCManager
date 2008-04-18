@@ -335,7 +335,7 @@ void CMembersView::OnMiscCmd1()
 *******************************************************************************
 */
 
-CString CMembersView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CMembersView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	// Compose full name if name column.
 	if (nColumn == NAME)

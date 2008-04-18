@@ -280,7 +280,7 @@ void CAccountsView::OnPrint()
 *******************************************************************************
 */
 
-CString CAccountsView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CAccountsView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	// Compose full name if name column.
 	if (nColumn == BALANCE)

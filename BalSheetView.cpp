@@ -329,7 +329,7 @@ void CBalSheetView::OnMiscCmd1()
 *******************************************************************************
 */
 
-CString CBalSheetView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CBalSheetView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	// Format money values.
 	if (nColumn == BALANCE)

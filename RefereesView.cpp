@@ -270,7 +270,7 @@ void CRefereesView::OnMiscCmd1()
 *******************************************************************************
 */
 
-CString CRefereesView::GetCellData(int nColumn, CRow& oRow, int nField)
+CString CRefereesView::GetCellData(size_t nColumn, CRow& oRow, size_t nField)
 {
 	// Compose full name if name column.
 	if (nColumn == NAME)

@@ -67,7 +67,7 @@ protected:
 	//
 	// Overriden data methods.
 	//
-	virtual CString GetCellData(int nColumn, CRow& oRow, int nField);
+	virtual CString GetCellData(size_t nColumn, CRow& oRow, size_t nField);
 	virtual int     CompareRows(CRow& oRow1, CRow& oRow2);
 };
 
