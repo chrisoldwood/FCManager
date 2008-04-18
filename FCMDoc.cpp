@@ -82,10 +82,10 @@ void CFCMDoc::Read(WCL::IInputStream& rStream)
 
 	// Check the format and version.
 	if (iFormat != FILE_FORMAT)
-		rStream.Throw(CStreamException::E_FORMAT_INVALID);
+		rStream.Throw(CStreamException::E_FORMAT_INVALID, ERROR_FILE_CORRUPT);
 
 	if (iVersion != FILE_VERSION)
-		rStream.Throw(CStreamException::E_VERSION_INVALID);
+		rStream.Throw(CStreamException::E_VERSION_INVALID, NO_ERROR);
 
 	// Read the database data.
 	m_oDB.Read(rStream);
