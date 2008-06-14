@@ -378,7 +378,7 @@ void CFCMCmds::OnDebugClipboard()
 	catch(CStreamException& e)
 	{
 		// Notify user.
-		App.m_AppWnd.AlertMsg(TXT("%s"), e.ErrorText());
+		App.m_AppWnd.AlertMsg(TXT("%s"), e.What());
 	}
 }
 
@@ -432,7 +432,7 @@ void CFCMCmds::OnDebugFile()
 		catch(CStreamException& e)
 		{
 			// Notify user.
-			App.m_AppWnd.AlertMsg(TXT("%s"), e.ErrorText());
+			App.m_AppWnd.AlertMsg(TXT("%s"), e.What());
 		}
 	}
 }

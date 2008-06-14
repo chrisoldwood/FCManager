@@ -615,7 +615,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(TXT("%s"), rException.ErrorText());
+		AlertMsg(TXT("%s"), rException.What());
 		return false;
 	}
 
@@ -665,7 +665,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(TXT("%s"), rException.ErrorText());
+		AlertMsg(TXT("%s"), rException.What());
 		return false;
 	}
 
