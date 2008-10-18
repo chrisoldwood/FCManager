@@ -75,7 +75,7 @@ CRow& CClubDetails::CreateRow()
 	int   nYear  = (tToday.Month() > 6) ? tToday.Year() : (tToday.Year()-1);
 	tchar szSeason[10];
 
-	_stprintf(szSeason, TXT("%04d/%02d"), nYear, ((nYear+1) % 10));
+	_sntprintf(szSeason, ARRAYSIZE(szSeason)-1, TXT("%04d/%02d"), nYear, ((nYear+1) % 10));
 
 	// Create and initialise row.
 	CRow& oRow = CTable::CreateRow();

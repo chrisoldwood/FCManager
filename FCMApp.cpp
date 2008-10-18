@@ -199,7 +199,7 @@ CString CFCMApp::FormatMoney(CRow& rRow, int nColumn) const
 	double dValue = rRow[nColumn].GetInt() / 100.0;
 	tchar  szValue[10];
 
-	_stprintf(szValue, TXT("%.2f"), dValue);
+	_sntprintf(szValue, ARRAYSIZE(szValue)-1, TXT("%.2f"), dValue);
 
 	return szValue;
 }
@@ -221,7 +221,7 @@ CString CFCMApp::FormatMoney(int nAmount) const
 	double dValue = nAmount / 100.0;
 	tchar  szValue[10];
 
-	_stprintf(szValue, TXT("%.2f"), dValue);
+	_sntprintf(szValue, ARRAYSIZE(szValue)-1, TXT("%.2f"), dValue);
 
 	return szValue;
 }
@@ -269,7 +269,7 @@ CString CFCMApp::FormatDecimal(CRow& rRow, int nColumn, int nDecDigits) const
 	double dValue = rRow[nColumn].GetDouble();
 	tchar  szValue[10];
 
-	_stprintf(szValue, TXT("%.*f"), nDecDigits, dValue);
+	_sntprintf(szValue, ARRAYSIZE(szValue)-1, TXT("%.*f"), nDecDigits, dValue);
 
 	return szValue;
 }
