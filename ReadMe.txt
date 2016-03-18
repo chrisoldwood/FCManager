@@ -1,8 +1,8 @@
 F.C. Manager v1.0 Aplha #3
 ==========================
 
-
-1. What is it?
+Introduction
+------------
 
 This is an application designed for secretaries/managers of
 football teams to use to manage their affairs. It is really
@@ -19,8 +19,17 @@ The only "feature" which you couldn't do with Access or Excel
 is the team sheet, which is a graphical way of selecting a
 team and visualising your game plan, not that we ever had one!
 
+Releases
+--------
 
-2. Licence.
+Stable releases are formally packaged and made available from my Win32 tools page:
+http://www.chrisoldwood.com/win32.htm
+
+The latest code is available from my GitHub repo:
+https://github.com/chrisoldwood/FCManager
+
+Licence
+-------
 
 This is freeware, i.e. no charge, pass it onto who you like etc.
 This also means that you use it entirely at your own risk! I
@@ -29,8 +38,8 @@ machine, limbs etc. That said, I hope that I have developed it
 well enough that you'll not have any problems, but with software
 you never know, lets be careful out there.
 
-
-3. The state of development.
+Project Status
+--------------
 
 This is (as you should gather from its alpha status) really only
 the early stages, it is very much work in progress. It is very
@@ -72,8 +81,8 @@ is only developed in my spare time, however if enough people seem
 interested it will give me more of an incentive to actually get it
 done.
 
-
-4. The manual.
+Documentation
+-------------
 
 There isn't one...yet. I have supplied a sample file to play with,
 but I'm afraid you'll have to work out how to use the app yourself.
@@ -83,10 +92,16 @@ and associated with an item on the balance sheet. You can only edit
 them this way, not through the 'subs' view, but I hope to make it
 more user-friendly.
 
-5. Contact details.
+Development
+-----------
 
-EMail: gort@cix.co.uk
-Web:   http://www.cix.co.uk/~gort
+See DevNotes.txt
+
+Contact Details
+---------------
+
+Email: gort@cix.co.uk
+Web:   http://www.chrisoldwood.com
 
 Chris Oldwood
-18 Sep 2002
+18th September 2002
