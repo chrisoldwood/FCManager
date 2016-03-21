@@ -56,7 +56,7 @@ CPrintViewDlg::CPrintViewDlg(const CString& strViewName)
 
 CPrintViewDlg::~CPrintViewDlg()
 {
-	m_aoColumns.DeleteAll();
+	Core::deleteAll(m_aoColumns);
 }
 
 /******************************************************************************
@@ -87,10 +87,10 @@ void CPrintViewDlg::OnInitDialog()
 	m_lvColumns.InsertColumn(0, TXT("Column Name"), 100);
 
 	// Add the columns.
-	for (size_t i = 0; i < m_aoColumns.Size(); i++)
+	for (size_t i = 0; i < m_aoColumns.size(); i++)
 	{
-		m_lvColumns.AppendItem(m_aoColumns[i].m_pszName);
-		m_lvColumns.ItemCheck(i, m_aoColumns[i].m_bShow);
+		m_lvColumns.AppendItem(m_aoColumns[i]->m_pszName);
+		m_lvColumns.ItemCheck(i, m_aoColumns[i]->m_bShow);
 	}
 
 	m_lvColumns.Select(0);
@@ -127,7 +127,7 @@ bool CPrintViewDlg::OnOk()
 	{
 		bool bChecked = m_lvColumns.IsItemChecked(i);
 
-		m_aoColumns[i].m_bShow = bChecked;
+		m_aoColumns[i]->m_bShow = bChecked;
 
 		if (bChecked)
 			nChecked++;
@@ -141,10 +141,10 @@ bool CPrintViewDlg::OnOk()
 	}
 
 	// Remove unselected columns.
-	for (int i = m_aoColumns.Size()-1; i >= 0; i--)
+	for (int i = m_aoColumns.size()-1; i >= 0; i--)
 	{
-		if (!m_aoColumns[i].m_bShow)
-			m_aoColumns.Delete(i);
+		if (!m_aoColumns[i]->m_bShow)
+			Core::deleteAt(m_aoColumns, i);
 	}
 
 	return true;
@@ -213,7 +213,7 @@ void CPrintViewDlg::OnMoveUp()
 	m_lvColumns.Select(nSel-1);
 
 	// Swap array items.
-	m_aoColumns.Swap(nSel, nSel-1);
+	std::swap(m_aoColumns[nSel], m_aoColumns[nSel-1]);
 }
 
 void CPrintViewDlg::OnMoveDown()
@@ -241,5 +241,5 @@ void CPrintViewDlg::OnMoveDown()
 	m_lvColumns.Select(nSel+1);
 
 	// Swap array items.
-	m_aoColumns.Swap(nSel, nSel+1);
+	std::swap(m_aoColumns[nSel], m_aoColumns[nSel+1]);
 }

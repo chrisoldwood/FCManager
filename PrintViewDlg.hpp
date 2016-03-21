@@ -17,7 +17,7 @@
 #endif
 
 #include <WCL/CommonUI.hpp>
-#include <Legacy/TArray.hpp>
+#include <vector>
 
 // Forward declarations.
 struct GridColumn;
@@ -41,7 +41,7 @@ public:
 	//
 	// Members.
 	//
-	TRefArray<GridColumn>	m_aoColumns;
+	std::vector<GridColumn*>	m_aoColumns;
 
 protected:
 	//

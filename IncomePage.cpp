@@ -16,6 +16,7 @@
 #include "Subs.hpp"
 #include "Members.hpp"
 #include "FCMApp.hpp"
+#include <vector>
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -221,11 +222,11 @@ void CIncomePage::OnAddCredit()
 {
 	// Allocate a new Subs table row.
 	CRow&       oRow = m_oTmpSubs.CreateRow();
-	TArray<int> oExclusions;
+	std::vector<int> oExclusions;
 
 	// Create a list of members to exclude.
 	for (size_t i = 0; i < m_oTmpSubs.RowCount(); i++)
-		oExclusions.Add(m_oTmpSubs[i][CSubs::MEMBER_ID]);
+		oExclusions.push_back(m_oTmpSubs[i][CSubs::MEMBER_ID]);
 
 	CMemberSubsDlg Dlg(m_oMembers, oExclusions, oRow, false);
 
@@ -246,7 +247,7 @@ void CIncomePage::OnEditCredit()
 {
 	// Get subs row.
 	CRow&       oRow = m_oTmpSubs[m_lvCredits.ItemData(m_lvCredits.Selection())];
-	TArray<int> oExclusions;
+	std::vector<int> oExclusions;
 
 	CMemberSubsDlg Dlg(m_oMembers, oExclusions, oRow, true);
 

@@ -18,7 +18,6 @@
 
 #include <WCL/CommonUI.hpp>
 #include "GridViewDlg.hpp"
-#include <Legacy/TArray.hpp>
 #include "Members.hpp"
 
 /******************************************************************************

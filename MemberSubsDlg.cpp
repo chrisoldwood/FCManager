@@ -27,7 +27,7 @@
 *******************************************************************************
 */
 
-CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, TArray<int>& oExclusions, CRow& oRow, bool bEditing)
+CMemberSubsDlg::CMemberSubsDlg(CMembers& oMembers, std::vector<int>& oExclusions, CRow& oRow, bool bEditing)
 	: CDialog(IDD_MEMBER_SUBS)
 	, m_oRow(oRow)
 	, m_bEditing(bEditing)
@@ -69,7 +69,7 @@ void CMemberSubsDlg::OnInitDialog()
 			CRow& oRow = m_oMembers[i];
 
 			// Member already used?
-			if (m_oExclusions.Find(oRow[CMembers::ID]) != -1)
+			if (Core::exists<int>(m_oExclusions, oRow[CMembers::ID]))
 				continue;
 
 			// Create the combo string.

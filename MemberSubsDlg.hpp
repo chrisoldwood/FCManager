@@ -17,10 +17,10 @@
 #endif
 
 #include <WCL/CommonUI.hpp>
+#include <vector>
 
 // Forward declarations.
 class CMembers;
-template<typename T> class TArray;
 
 /******************************************************************************
 ** 
@@ -35,7 +35,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemberSubsDlg(CMembers& oMembers, TArray<int>& oExclusions, CRow& oRow, bool bEditing);
+	CMemberSubsDlg(CMembers& oMembers, std::vector<int>& oExclusions, CRow& oRow, bool bEditing);
 	
 	//
 	// Members.
@@ -53,7 +53,7 @@ protected:
 	CDecimalBox		m_ebPaid;
 
 	CMembers&		m_oMembers;
-	TArray<int>&	m_oExclusions;
+	std::vector<int>&	m_oExclusions;
 
 	//
 	// Message processors.

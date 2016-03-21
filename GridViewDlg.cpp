@@ -15,6 +15,7 @@
 #include <WCL/PrinterDC.hpp>
 #include <WCL/File.hpp>
 #include <WCL/FileException.hpp>
+#include <vector>
 
 // The file extension for importing/exporting.
 static tchar szExts[] = {	TXT("Data Files (*.dat)\0*.dat\0")
@@ -376,7 +377,7 @@ void CGridViewDlg::PrintView(const CString& strViewName, size_t nColumns, GridCo
 
 	// Setup the printable columns.
 	for (size_t i = 0; i < nColumns; i++)
-		Dlg.m_aoColumns.Add(new GridColumn(pColumns[i]));
+		Dlg.m_aoColumns.push_back(new GridColumn(pColumns[i]));
 
 	// Query for the printer and print parameters.
 	if (Dlg.RunModal(*this) == IDOK)
@@ -400,15 +401,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, size_t nColumns, GridCo
 			nPages++;
 
 		// Calculate column widths.
-		TArray<int>	aiWidths;
+		std::vector<int> aiWidths;
 		int			nPageWidth = rcRect.Width();
 		int			nRatioWidth = 0;
 
-		for (size_t i = 0; i < Dlg.m_aoColumns.Size(); i++)
-			nRatioWidth += Dlg.m_aoColumns[i].m_nWidth;
+		for (size_t i = 0; i < Dlg.m_aoColumns.size(); i++)
+			nRatioWidth += Dlg.m_aoColumns[i]->m_nWidth;
 
-		for (size_t i = 0; i < Dlg.m_aoColumns.Size(); i++)
-			aiWidths.Add((nPageWidth * Dlg.m_aoColumns[i].m_nWidth) / nRatioWidth);
+		for (size_t i = 0; i < Dlg.m_aoColumns.size(); i++)
+			aiWidths.push_back((nPageWidth * Dlg.m_aoColumns[i]->m_nWidth) / nRatioWidth);
 
 		// Create GDI objects.
 		CBrush	oHdrBrush(BLACK_BRUSH);
@@ -442,15 +443,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, size_t nColumns, GridCo
 			rcCell.bottom = rcCell.top + dmFont.cy;
 
 			// Print column headers.
-			for (size_t c = 0; c < Dlg.m_aoColumns.Size(); c++)
+			for (size_t c = 0; c < Dlg.m_aoColumns.size(); c++)
 			{
-				GridColumn& oColumn = Dlg.m_aoColumns[c];
+				GridColumn* column = Dlg.m_aoColumns[c];
 
 				// Calculate cell border.
 				rcCell.left  = rcCell.right;
 				rcCell.right = rcCell.left + aiWidths[c];
 
-				PrintCell(oDC, rcCell, oColumn.m_pszName, oColumn.m_nFormat, false);
+				PrintCell(oDC, rcCell, column->m_pszName, column->m_nFormat, false);
 			}
 
 			// Calculate rows on this page.
@@ -481,15 +482,15 @@ void CGridViewDlg::PrintView(const CString& strViewName, size_t nColumns, GridCo
 				rcCell.bottom = rcCell.top + dmFont.cy;
 
 				// For all columns in the row.
-				for (size_t c = 0; c < Dlg.m_aoColumns.Size(); c++)
+				for (size_t c = 0; c < Dlg.m_aoColumns.size(); c++)
 				{
-					GridColumn& oColumn = Dlg.m_aoColumns[c];
+					GridColumn* column = Dlg.m_aoColumns[c];
 
 					// Calculate cell border.
 					rcCell.left  = rcCell.right;
 					rcCell.right = rcCell.left + aiWidths[c];
 
-					PrintCell(oDC, rcCell, GetCellData(c, oRow, oColumn.m_nField), oColumn.m_nFormat, true);
+					PrintCell(oDC, rcCell, GetCellData(c, oRow, column->m_nField), column->m_nFormat, true);
 				}
 
 				// Update row cell to start of next row.
