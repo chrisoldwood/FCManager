@@ -17,6 +17,7 @@
 #endif
 
 #include <MDBL/Table.hpp>
+#include <vector>
 
 // Forward declarations.
 class CSubs;
@@ -31,10 +32,13 @@ class CSubs;
 class CMembers : public CTable
 {
 public:
+	//! A list of rows.
+	typedef std::vector<CRow*> RowList;
+
 	//
 	// Constructors/Destructor.
 	//
-	CMembers(CMDB& oDB);
+	CMembers();
 	~CMembers();
 
 	//
@@ -84,7 +88,7 @@ public:
 	//
 	// Methods.
 	//
-	void UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified);
+	void UpdateBalances(CSubs& oSubs, RowList& aoModified);
 
 	//
 	// Methods (overriden).

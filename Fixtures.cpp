@@ -24,8 +24,8 @@
 *******************************************************************************
 */
 
-CFixtures::CFixtures(CMDB& oDB)
-	: CTable(oDB, TXT("Fixtures"))
+CFixtures::CFixtures()
+	: CTable(TXT("Fixtures"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),            MDCT_IDENTITY,	0,          CColumn::IDENTITY);		// ID

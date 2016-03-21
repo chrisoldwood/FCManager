@@ -29,7 +29,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	COppStatTypes(CMDB& oDB);
+	COppStatTypes();
 };
 
 /******************************************************************************
@@ -39,8 +39,8 @@ public:
 *******************************************************************************
 */
 
-inline COppStatTypes::COppStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, TXT("OppStatTypes"))
+inline COppStatTypes::COppStatTypes()
+	: CStatTypes(TXT("OppStatTypes"))
 {
 	// Add the pre-defined statistics.
 }

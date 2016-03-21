@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-COpponents::COpponents(CMDB& oDB)
-	: CTable(oDB, TXT("Opponents"))
+COpponents::COpponents()
+	: CTable(TXT("Opponents"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),         MDCT_IDENTITY, 0,             CColumn::IDENTITY);	// ID

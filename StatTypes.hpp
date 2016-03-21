@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CStatTypes(CMDB& oDB, const tchar* pszName);
+	CStatTypes(const tchar* pszName);
 	~CStatTypes();
 	
 	//

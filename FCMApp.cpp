@@ -51,6 +51,8 @@ const tchar* CFCMApp::VERSION = TXT("v1.0 Alpha #3");
 
 CFCMApp::CFCMApp()
 	: CSDIApp(m_AppWnd, m_AppCmds, ID_FILE_MRU_4-ID_FILE_MRU_1+1)
+	, m_AppWnd(m_MainThread, m_AppCmds)
+	, m_AppCmds(m_AppWnd)
 {
 }
 
@@ -87,9 +89,6 @@ bool CFCMApp::OnOpen()
 	// Set the app title.
 	m_strTitle = TXT("F.C. Manager");
 
-	// Load the toolbar bitmap.
-	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
-
 	// Set the .INI file path.
 	m_oIniFile.m_strPath = CPath::ApplicationDir() / TXT("FCManager.ini");
 
@@ -102,13 +101,13 @@ bool CFCMApp::OnOpen()
 		return false;
 
 	// Show it.
-	if (ShowNormal() && !m_rcAppWnd.Empty())
+	if (!m_rcAppWnd.Empty())
 		m_AppWnd.Move(m_rcAppWnd);
 
 	m_AppWnd.Show(m_iCmdShow);
 
 	// Initialise UI.
-	m_AppCmds.UpdateUI();
+	m_AppCmds.InitialiseUI();
 
 	return CSDIApp::OnOpen();
 }

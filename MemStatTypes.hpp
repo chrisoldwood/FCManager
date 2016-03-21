@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemStatTypes(CMDB& oDB);
+	CMemStatTypes();
 };
 
 /******************************************************************************
@@ -41,8 +41,8 @@ public:
 *******************************************************************************
 */
 
-inline CMemStatTypes::CMemStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, TXT("MemStatTypes"))
+inline CMemStatTypes::CMemStatTypes()
+	: CStatTypes(TXT("MemStatTypes"))
 {
 	// Add the pre-defined statistics.
 	AddPredefined(TXT("Played"));

@@ -32,7 +32,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CClubDetails(CMDB& oDB);
+	CClubDetails();
 	~CClubDetails();
 	
 	//

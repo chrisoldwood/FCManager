@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CReferees::CReferees(CMDB& oDB)
-	: CTable(oDB, TXT("Referees"))
+CReferees::CReferees()
+	: CTable(TXT("Referees"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),         MDCT_IDENTITY,	0);				// ID             

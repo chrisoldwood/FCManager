@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CExpenseTypes(CMDB& oDB);
+	CExpenseTypes();
 	~CExpenseTypes();
 	
 	//

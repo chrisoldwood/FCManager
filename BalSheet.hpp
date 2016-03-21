@@ -34,7 +34,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CBalSheet(CMDB& oDB, CBalShtTypes& oTypes);
+	CBalSheet(CBalShtTypes& oTypes);
 	~CBalSheet();
 	
 	//

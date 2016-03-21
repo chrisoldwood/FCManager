@@ -35,7 +35,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CSubs(CMDB& oDB, CBalSheet& oBalSheet, CMembers& oMembers);
+	CSubs(CBalSheet& oBalSheet, CMembers& oMembers);
 	~CSubs();
 	
 	//

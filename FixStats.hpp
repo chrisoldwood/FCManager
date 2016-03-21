@@ -29,7 +29,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFixStats(CMDB& oDB, CFixStatTypes& oTypes);
+	CFixStats(CFixStatTypes& oTypes);
 };
 
 /******************************************************************************
@@ -39,8 +39,8 @@ public:
 *******************************************************************************
 */
 
-inline CFixStats::CFixStats(CMDB& oDB, CFixStatTypes& oTypes)
-	: CStats(oDB, TXT("FixStats"), oTypes)
+inline CFixStats::CFixStats(CFixStatTypes& oTypes)
+	: CStats(TXT("FixStats"), oTypes)
 {
 }
 

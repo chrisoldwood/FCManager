@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CExpenseTypes::CExpenseTypes(CMDB& oDB)
-	: CTable(oDB, TXT("ExpenseTypes"))
+CExpenseTypes::CExpenseTypes()
+	: CTable(TXT("ExpenseTypes"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),      MDCT_IDENTITY, 0,        CColumn::IDENTITY);

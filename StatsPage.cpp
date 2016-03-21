@@ -39,7 +39,7 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 	, m_oStatTypes(oStatTypes)
 	, m_oStats(oStats)
 	, m_nOwnerID(nOwnerID)
-	, m_oTmpStats(oDB, oStatTypes)
+	, m_oTmpStats(oStatTypes)
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_STATS,	&m_lvGrid)
@@ -66,7 +66,7 @@ CStatsPage::CStatsPage(CFCMDB& oDB, CStatTypes& oStatTypes, CStats& oStats, int 
 	{
 		CRow& oCurRow = oRS[i];
 		CRow& oCpyRow = m_oTmpStats.CreateRow();
-		CRow* pTypRow = m_oStatTypes.SelectRow(CStatTypes::ID, oCurRow[CStats::TYPE_ID]);
+		CRow* pTypRow = m_oStatTypes.SelectRow(CStatTypes::ID, oCurRow[CStats::TYPE_ID].ToValue());
 
 		ASSERT(pTypRow != NULL);
 

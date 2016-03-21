@@ -33,7 +33,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMemStats(CMDB& oDB, CMemStatTypes& oTypes);
+	CMemStats(CMemStatTypes& oTypes);
 
 	//
 	// Methods.
@@ -49,8 +49,8 @@ public:
 *******************************************************************************
 */
 
-inline CMemStats::CMemStats(CMDB& oDB, CMemStatTypes& oTypes)
-	: CStats(oDB, TXT("MemStats"), oTypes)
+inline CMemStats::CMemStats(CMemStatTypes& oTypes)
+	: CStats(TXT("MemStats"), oTypes)
 {
 }
 

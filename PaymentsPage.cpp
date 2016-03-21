@@ -38,7 +38,7 @@ CPaymentsPage::CPaymentsPage(CFCMDB& oDB, int nMemberID)
 	: CPropertyPage(IDD_PAYMENTS_PAGE)
 	, m_oDB(oDB)
 	, m_nMemberID(nMemberID)
-	, m_oTmpSubs(oDB, m_oDB.m_oMembers, true)
+	, m_oTmpSubs(m_oDB.m_oMembers, true)
 	, m_lvGrid(this)
 {
 	DEFINE_CTRL_TABLE
@@ -56,7 +56,7 @@ CPaymentsPage::CPaymentsPage(CFCMDB& oDB, int nMemberID)
 	{
 		CRow& oCurRow = oRS[i];
 		CRow& oCpyRow = m_oTmpSubs.CreateRow();
-		CRow* pItmRow = m_oDB.m_oBalSheet.SelectRow(CBalSheet::ID, oCurRow[CSubs::ITEM_ID]);
+		CRow* pItmRow = m_oDB.m_oBalSheet.SelectRow(CBalSheet::ID, oCurRow[CSubs::ITEM_ID].ToValue());
 
 		ASSERT(pItmRow != NULL);
 

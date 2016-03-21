@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CAccounts::CAccounts(CMDB& oDB)
-	: CTable(oDB, TXT("Accounts"))
+CAccounts::CAccounts()
+	: CTable(TXT("Accounts"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),      MDCT_IDENTITY, 0,         CColumn::IDENTITY);

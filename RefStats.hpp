@@ -29,7 +29,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CRefStats(CMDB& oDB, CRefStatTypes& oTypes);
+	CRefStats(CRefStatTypes& oTypes);
 };
 
 /******************************************************************************
@@ -39,8 +39,8 @@ public:
 *******************************************************************************
 */
 
-inline CRefStats::CRefStats(CMDB& oDB, CRefStatTypes& oTypes)
-	: CStats(oDB, TXT("RefStats"), oTypes)
+inline CRefStats::CRefStats(CRefStatTypes& oTypes)
+	: CStats(TXT("RefStats"), oTypes)
 {
 }
 

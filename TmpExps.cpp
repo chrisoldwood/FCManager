@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CTmpExps::CTmpExps(CMDB& oDB, CExpenseTypes& oTypes)
-	: CTable(oDB, TXT("#TmpExps"))
+CTmpExps::CTmpExps(CExpenseTypes& oTypes)
+	: CTable(TXT("#TmpExps"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ItemID"),   MDCT_INT,    0,                   CColumn::DEFAULTS   );

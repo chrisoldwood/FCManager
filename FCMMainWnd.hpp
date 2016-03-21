@@ -35,7 +35,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFCMMainWnd();
+	CFCMMainWnd(WCL::IMsgThread& thread, WCL::ICmdController& controller);
 	~CFCMMainWnd();
 
 	//

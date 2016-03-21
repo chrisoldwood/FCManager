@@ -303,7 +303,7 @@ void CIncomePage::RefreshCredits()
 		CRow& oSubs = m_oTmpSubs[i];
 
 		// Find the members entry.
-		CRow* pMember = m_oMembers.SelectRow(CMembers::ID, oSubs[CSubs::MEMBER_ID]);
+		CRow* pMember = m_oMembers.SelectRow(CMembers::ID, oSubs[CSubs::MEMBER_ID].ToValue());
 		ASSERT(pMember != NULL);
 
 		// Create ListView fields.

@@ -110,7 +110,7 @@ void CBalSheetView::OnAdd()
 		oTable.UpdateTotalsRow();
 		UpdateRow(m_lvGrid.ItemCount()-1, false);
 
-		TRefArray<CRow> aoModified;
+		CMembers::RowList aoModified;
 
 		// Update members balances.
 		m_oDB.m_oMembers.UpdateBalances(m_oDB.m_oSubs, aoModified);
@@ -169,7 +169,7 @@ void CBalSheetView::OnEdit()
 		oTable.UpdateTotalsRow();
 		UpdateRow(m_lvGrid.ItemCount()-1, false);
 
-		TRefArray<CRow> aoModified;
+		CMembers::RowList aoModified;
 
 		// Update members balances.
 		m_oDB.m_oMembers.UpdateBalances(m_oDB.m_oSubs, aoModified);

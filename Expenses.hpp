@@ -35,7 +35,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CExpenses(CMDB& oDB, CBalSheet& oBalSheet, CExpenseTypes& oTypes);
+	CExpenses(CBalSheet& oBalSheet, CExpenseTypes& oTypes);
 	~CExpenses();
 	
 	//

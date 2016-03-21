@@ -34,7 +34,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CTeamSels(CMDB& oDB, CMembers& oMembers);
+	CTeamSels(CMembers& oMembers);
 	~CTeamSels();
 	
 	//

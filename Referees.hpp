@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CReferees(CMDB& oDB);
+	CReferees();
 	~CReferees();
 	
 	//

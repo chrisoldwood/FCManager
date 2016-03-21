@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CExpenses::CExpenses(CMDB& oDB, CBalSheet& oBalSheet, CExpenseTypes& oTypes)
-	: CTable(oDB, TXT("Expenses"))
+CExpenses::CExpenses(CBalSheet& oBalSheet, CExpenseTypes& oTypes)
+	: CTable(TXT("Expenses"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ItemID"), oBalSheet, CBalSheet::ID,     CColumn::FOREIGNKEY);

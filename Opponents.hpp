@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	COpponents(CMDB& oDB);
+	COpponents();
 	~COpponents();
 	
 	//

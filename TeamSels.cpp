@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CTeamSels::CTeamSels(CMDB& oDB, CMembers& oMembers)
-	: CTable(oDB, TXT("TeamSels"))
+CTeamSels::CTeamSels(CMembers& oMembers)
+	: CTable(TXT("TeamSels"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),        MDCT_IDENTITY, 0,             CColumn::IDENTITY);

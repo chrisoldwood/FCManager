@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CBalShtTypes(CMDB& oDB);
+	CBalShtTypes();
 	~CBalShtTypes();
 	
 	//

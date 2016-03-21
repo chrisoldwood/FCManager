@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CAcctTrans::CAcctTrans(CMDB& oDB)
-	: CTable(oDB, TXT("AcctTrans"))
+CAcctTrans::CAcctTrans()
+	: CTable(TXT("AcctTrans"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),      MDCT_IDENTITY, 0,         CColumn::IDENTITY);

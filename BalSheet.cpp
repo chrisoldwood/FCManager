@@ -26,8 +26,8 @@
 *******************************************************************************
 */
 
-CBalSheet::CBalSheet(CMDB& oDB, CBalShtTypes& oTypes)
-	: CTable(oDB, TXT("BalanceSheet"))
+CBalSheet::CBalSheet(CBalShtTypes& oTypes)
+	: CTable(TXT("BalanceSheet"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),          MDCT_IDENTITY, 0,					CColumn::IDENTITY);

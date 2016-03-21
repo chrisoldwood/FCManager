@@ -32,7 +32,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CTmpStats(CMDB& oDB, CStatTypes& oTypes);
+	CTmpStats(CStatTypes& oTypes);
 	~CTmpStats();
 	
 	//

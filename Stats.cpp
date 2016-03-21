@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CStats::CStats(CMDB& oDB, const tchar* pszName, CStatTypes& oTypes)
-	: CTable(oDB, pszName)
+CStats::CStats(const tchar* pszName, CStatTypes& oTypes)
+	: CTable(pszName)
 {
 	// Create the table schema.
 	AddColumn(TXT("OwnerID"), MDCT_INT,    0,              CColumn::DEFAULTS   );

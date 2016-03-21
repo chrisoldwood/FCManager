@@ -34,7 +34,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CTmpSubs(CMDB& oDB, CMembers& oMembers, bool bSameMember);
+	CTmpSubs(CMembers& oMembers, bool bSameMember);
 	~CTmpSubs();
 	
 	//

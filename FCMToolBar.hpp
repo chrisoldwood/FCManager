@@ -32,7 +32,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFCMToolBar();
+	CFCMToolBar(WCL::IMsgThread& thread, WCL::ICmdController& controller);
 	~CFCMToolBar();
 	
 	//

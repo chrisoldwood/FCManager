@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CSubs::CSubs(CMDB& oDB, CBalSheet& oBalSheet, CMembers& oMembers)
-	: CTable(oDB, TXT("Subs"))
+CSubs::CSubs(CBalSheet& oBalSheet, CMembers& oMembers)
+	: CTable(TXT("Subs"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ItemID"),   oBalSheet, CBalSheet::ID);		// ITEM_ID

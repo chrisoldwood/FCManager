@@ -413,9 +413,9 @@ int CMembersView::CompareRows(CRow& oRow1, CRow& oRow2)
 *******************************************************************************
 */
 
-void CMembersView::RefreshRows(const TRefArray<CRow>& aoRows)
+void CMembersView::RefreshRows(const CMembers::RowList& aoRows)
 {
 	// For all data rows, update grid row.
-	for (size_t i = 0; i < aoRows.Size(); i++)
-		UpdateRow(FindRow(aoRows[i]), false);
+	for (size_t i = 0; i != aoRows.size(); i++)
+		UpdateRow(FindRow(*aoRows[i]), false);
 }

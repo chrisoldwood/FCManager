@@ -19,6 +19,9 @@
 #include <WCL/SDICmds.hpp>
 #include "ViewsMgr.hpp"
 
+// Forward declarations.
+class CFCMMainWnd;
+
 /******************************************************************************
 ** 
 ** Application command controller.
@@ -32,7 +35,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFCMCmds();
+	CFCMCmds(CFCMMainWnd& appWnd);
 	~CFCMCmds();
 
 	//

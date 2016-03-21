@@ -29,7 +29,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFixStatTypes(CMDB& oDB);
+	CFixStatTypes();
 };
 
 /******************************************************************************
@@ -39,8 +39,8 @@ public:
 *******************************************************************************
 */
 
-inline CFixStatTypes::CFixStatTypes(CMDB& oDB)
-	: CStatTypes(oDB, TXT("FixStatTypes"))
+inline CFixStatTypes::CFixStatTypes()
+	: CStatTypes(TXT("FixStatTypes"))
 {
 	// Add the pre-defined statistics.
 	AddPredefined(TXT("Goals For"));

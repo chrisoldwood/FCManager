@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CBalShtTypes::CBalShtTypes(CMDB& oDB)
-	: CTable(oDB, TXT("BalanceSheetItemTypes"))
+CBalShtTypes::CBalShtTypes()
+	: CTable(TXT("BalanceSheetItemTypes"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),    MDCT_IDENTITY, 0,        CColumn::IDENTITY);

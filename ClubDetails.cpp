@@ -26,8 +26,8 @@
 *******************************************************************************
 */
 
-CClubDetails::CClubDetails(CMDB& oDB)
-	: CTable(oDB, TXT("ClubDetails"))
+CClubDetails::CClubDetails()
+	: CTable(TXT("ClubDetails"))
 {
 	// Create the table schema.
 	AddColumn(TXT("Name"),   MDCT_FXDSTR, NAME_LEN,   CColumn::DEFAULTS);

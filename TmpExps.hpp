@@ -34,7 +34,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CTmpExps(CMDB& oDB, CExpenseTypes& oTypes);
+	CTmpExps(CExpenseTypes& oTypes);
 	~CTmpExps();
 	
 	//

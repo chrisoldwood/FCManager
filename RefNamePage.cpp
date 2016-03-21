@@ -76,7 +76,7 @@ bool CRefNamePage::OnValidate()
 	// Find referees with the same name but different ID.
 	CResultSet oRS = oTable.Select(CWhereCmp(CReferees::FORENAME, CWhereCmp::EQUALS,     m_ebForename.Text())
 								&& CWhereCmp(CReferees::SURNAME,  CWhereCmp::EQUALS,     m_ebSurname.Text())
-								&& CWhereCmp(CReferees::ID,       CWhereCmp::NOT_EQUALS, m_oRow[CReferees::ID]));
+								&& CWhereCmp(CReferees::ID,       CWhereCmp::NOT_EQUALS, m_oRow[CReferees::ID].ToValue()));
 
 	// Referee already exists?
 	if (oRS.Count() > 0)

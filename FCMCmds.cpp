@@ -58,7 +58,8 @@ const int HELP_MENU_POS    = 6;
 *******************************************************************************
 */
 
-CFCMCmds::CFCMCmds()
+CFCMCmds::CFCMCmds(CFCMMainWnd& appWnd)
+	: CSDICmds(appWnd, IDR_APPTOOLBAR)
 {
 	// Define the command table.
 	DEFINE_CMD_TABLE
@@ -378,7 +379,7 @@ void CFCMCmds::OnDebugClipboard()
 	catch(CStreamException& e)
 	{
 		// Notify user.
-		App.m_AppWnd.AlertMsg(TXT("%s"), e.What());
+		App.m_AppWnd.AlertMsg(TXT("%s"), e.twhat());
 	}
 }
 
@@ -432,7 +433,7 @@ void CFCMCmds::OnDebugFile()
 		catch(CStreamException& e)
 		{
 			// Notify user.
-			App.m_AppWnd.AlertMsg(TXT("%s"), e.What());
+			App.m_AppWnd.AlertMsg(TXT("%s"), e.twhat());
 		}
 	}
 }

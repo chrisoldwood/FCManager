@@ -100,7 +100,7 @@ bool COpponentPage::OnValidate()
 
 	// Find clubs with the same name but different ID.
 	CResultSet oRS = oTable.Select(CWhereCmp(COpponents::CLUB_NAME, CWhereCmp::EQUALS,     m_ebClubName.Text())
-								&& CWhereCmp(COpponents::ID,        CWhereCmp::NOT_EQUALS, m_oRow[COpponents::ID]));
+								&& CWhereCmp(COpponents::ID,        CWhereCmp::NOT_EQUALS, m_oRow[COpponents::ID].ToValue()));
 
 	// Club already exists?
 	if (oRS.Count() > 0)

@@ -610,12 +610,12 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 		if (m_lvGrid.ItemCount())
 			m_lvGrid.Select(0);
 
-		App.m_rCmdControl.UpdateUI();
+		App.m_controller.UpdateUI();
 	}
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(TXT("%s"), rException.What());
+		AlertMsg(TXT("%s"), rException.twhat());
 		return false;
 	}
 
@@ -665,7 +665,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 	catch(CFileException& rException)
 	{
 		// Notify user.
-		AlertMsg(TXT("%s"), rException.What());
+		AlertMsg(TXT("%s"), rException.twhat());
 		return false;
 	}
 

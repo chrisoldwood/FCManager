@@ -296,7 +296,7 @@ void CExpensesPage::RefreshDebits()
 		CRow& oExps = m_oTmpExps[i];
 
 		// Find the types entry.
-		CRow* pType = m_oTypes.SelectRow(CExpenseTypes::ID, oExps[CExpenses::TYPE_ID]);
+		CRow* pType = m_oTypes.SelectRow(CExpenseTypes::ID, oExps[CExpenses::TYPE_ID].ToValue());
 		ASSERT(pType != NULL);
 
 		// Create ListView fields.

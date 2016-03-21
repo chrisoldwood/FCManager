@@ -24,7 +24,9 @@
 *******************************************************************************
 */
 
-CFCMMainWnd::CFCMMainWnd() : CSDIFrame(IDR_APPICON)
+CFCMMainWnd::CFCMMainWnd(WCL::IMsgThread& thread, WCL::ICmdController& controller)
+	: CSDIFrame(IDR_APPICON)
+	, m_ToolBar(thread, controller)
 {
 }
 

@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CStatTypes::CStatTypes(CMDB& oDB, const tchar* pszName)
-	: CTable(oDB, pszName)
+CStatTypes::CStatTypes(const tchar* pszName)
+	: CTable(pszName)
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),    MDCT_IDENTITY, 0,        CColumn::IDENTITY);

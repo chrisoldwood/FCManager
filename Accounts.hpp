@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CAccounts(CMDB& oDB);
+	CAccounts();
 	~CAccounts();
 
 	//

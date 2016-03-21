@@ -19,6 +19,7 @@
 #include <WCL/CommonUI.hpp>
 #include "GridViewDlg.hpp"
 #include <Legacy/TArray.hpp>
+#include "Members.hpp"
 
 /******************************************************************************
 ** 
@@ -52,7 +53,7 @@ public:
 	virtual void OnExport();
 	virtual void OnMiscCmd1();
 
-	void RefreshRows(const TRefArray<CRow>& aoRows);
+	void RefreshRows(const CMembers::RowList& aoRows);
 
 protected:
 	//

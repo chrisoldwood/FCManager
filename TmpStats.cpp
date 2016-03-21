@@ -24,8 +24,8 @@
 *******************************************************************************
 */
 
-CTmpStats::CTmpStats(CMDB& oDB, CStatTypes& oTypes)
-	: CTable(oDB, TXT("#TmpStats"))
+CTmpStats::CTmpStats(CStatTypes& oTypes)
+	: CTable(TXT("#TmpStats"))
 {
 	// Create the table schema.
 	AddColumn(TXT("OwnerID"), MDCT_INT,    0,              CColumn::DEFAULTS   );

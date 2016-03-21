@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-CTmpSubs::CTmpSubs(CMDB& oDB, CMembers& oMembers, bool bSameMember)
-	: CTable(oDB, TXT("#TmpSubs"))
+CTmpSubs::CTmpSubs(CMembers& oMembers, bool bSameMember)
+	: CTable(TXT("#TmpSubs"))
 {
 	int nUniqFlag = (bSameMember) ? CColumn::NOT_UNIQUE : CColumn::UNIQUE;
 

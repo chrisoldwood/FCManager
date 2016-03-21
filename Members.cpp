@@ -26,8 +26,8 @@
 *******************************************************************************
 */
 
-CMembers::CMembers(CMDB& oDB)
-	: CTable(oDB, TXT("Members"))
+CMembers::CMembers()
+	: CTable(TXT("Members"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),            MDCT_IDENTITY,	0,            CColumn::IDENTITY);
@@ -111,17 +111,17 @@ CRow& CMembers::CreateRow()
 *******************************************************************************
 */
 
-void CMembers::UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified)
+void CMembers::UpdateBalances(CSubs& oSubs, RowList& aoModified)
 {
 	// Clear the output vector.	
-	aoModified.RemoveAll();
+	aoModified.clear();
 
 	// For all members.
 	for (size_t i = 0; i < RowCount(); i++)
 	{
 		// Find all subs for the member.
 		CRow&		oRow = Row(i);
-		CResultSet	oRS  = oSubs.Select(CWhereCmp(CSubs::MEMBER_ID, CWhereCmp::EQUALS, oRow[ID]));
+		CResultSet	oRS  = oSubs.Select(CWhereCmp(CSubs::MEMBER_ID, CWhereCmp::EQUALS, oRow[ID].ToValue()));
 
 		// Calculate the fees, paid and balance.
 		int nFees   = oRS.Sum(CSubs::FEE ).m_iValue;
@@ -133,7 +133,7 @@ void CMembers::UpdateBalances(CSubs& oSubs, TRefArray<CRow>& aoModified)
 		if (nNewBal != nCurBal)
 		{
 			oRow[BALANCE] = nNewBal;
-			aoModified.Add(oRow);
+			aoModified.push_back(&oRow);
 		}
 	}
 }

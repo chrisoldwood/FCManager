@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFixtures(CMDB& oDB);
+	CFixtures();
 	~CFixtures();
 	
 	//

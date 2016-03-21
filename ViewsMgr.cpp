@@ -128,7 +128,7 @@ void CViewsMgr::SelectView(DataView eNewView)
 	m_oOptionsMenus.LoadRsc(IDR_OPTIONS_MENUS);
 
 	// Set the options menu in the frame window.
-	App.m_AppWnd.m_Menu.SetItemPopup(3, m_oOptionsMenus.Popup(eNewView), m_oOptionsMenus.GetItemText(eNewView));
+	App.m_AppWnd.m_Menu.SetItemPopup(3, m_oOptionsMenus.GetItemPopup(eNewView), m_oOptionsMenus.GetItemText(eNewView));
 	App.m_AppWnd.DrawMenuBar();
 
 	// Update the UI.

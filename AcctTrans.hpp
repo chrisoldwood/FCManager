@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CAcctTrans(CMDB& oDB);
+	CAcctTrans();
 	~CAcctTrans();
 
 	//
