@@ -613,7 +613,7 @@ bool CGridViewDlg::ImportTable(uint32 iFormat, uint32 iVersion)
 
 		App.m_controller.UpdateUI();
 	}
-	catch(CFileException& rException)
+	catch(const CFileException& rException)
 	{
 		// Notify user.
 		AlertMsg(TXT("%s"), rException.twhat());
@@ -663,7 +663,7 @@ bool CGridViewDlg::ExportTable(uint32 iFormat, uint32 iVersion)
 
 		oFile.Close();
 	}
-	catch(CFileException& rException)
+	catch(const CFileException& rException)
 	{
 		// Notify user.
 		AlertMsg(TXT("%s"), rException.twhat());
